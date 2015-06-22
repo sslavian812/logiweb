@@ -9,6 +9,11 @@
         <class>ru.tsystems.shalamov.entities.OrdersEntity</class>
         <class>ru.tsystems.shalamov.entities.TruckStatusesEntity</class>
         <class>ru.tsystems.shalamov.entities.TrucksEntity</class>
+        <class>ru.tsystems.shalamov.entities.CargoEntity</class>
+        <class>ru.tsystems.shalamov.entities.DriverSatusEntity</class>
+        <class>ru.tsystems.shalamov.entities.DriverEntity</class>
+        <class>ru.tsystems.shalamov.entities.OrderEntity</class>
+        <class>ru.tsystems.shalamov.entities.TruckEntity</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>

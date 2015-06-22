@@ -1,18 +1,19 @@
 package ru.tsystems.shalamov.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
- * Created by viacheslav on 21.06.2015.
+ * Created by viacheslav on 22.06.2015.
  */
 @Entity
 @Table(name = "trucks", schema = "", catalog = "logiweb")
-public class TrucksEntity {
+public class TruckEntity {
     private int id;
     private Integer crewSize;
     private String registrationNumber;
     private Integer capacity;
-    private Integer truckStatusId;
+    private Integer truckStatus;
 
     @Id
     @Column(name = "id")
@@ -55,29 +56,36 @@ public class TrucksEntity {
     }
 
     @Basic
-    @Column(name = "truck_status_id")
-    public Integer getTruckStatusId() {
-        return truckStatusId;
+    @Column(name = "truck_status")
+    public Integer getTruckStatus() {
+        return truckStatus;
     }
 
-    public void setTruckStatusId(Integer truckStatusId) {
-        this.truckStatusId = truckStatusId;
+    public void setTruckStatus(Integer truckStatus) {
+        this.truckStatus = truckStatus;
     }
+
+    @OneToMany(mappedBy="truckEntity",targetEntity=OrderEntity.class,
+            fetch=FetchType.EAGER)
+    private Collection orderEntities;
+
+    @OneToMany(mappedBy="truckEntity",targetEntity=DriverStatusEntity.class,
+            fetch=FetchType.EAGER)
+    private Collection driverStatusEntities;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        TrucksEntity that = (TrucksEntity) o;
+        TruckEntity that = (TruckEntity) o;
 
         if (id != that.id) return false;
         if (capacity != null ? !capacity.equals(that.capacity) : that.capacity != null) return false;
         if (crewSize != null ? !crewSize.equals(that.crewSize) : that.crewSize != null) return false;
         if (registrationNumber != null ? !registrationNumber.equals(that.registrationNumber) : that.registrationNumber != null)
             return false;
-        if (truckStatusId != null ? !truckStatusId.equals(that.truckStatusId) : that.truckStatusId != null)
-            return false;
+        if (truckStatus != null ? !truckStatus.equals(that.truckStatus) : that.truckStatus != null) return false;
 
         return true;
     }
@@ -88,7 +96,7 @@ public class TrucksEntity {
         result = 31 * result + (crewSize != null ? crewSize.hashCode() : 0);
         result = 31 * result + (registrationNumber != null ? registrationNumber.hashCode() : 0);
         result = 31 * result + (capacity != null ? capacity.hashCode() : 0);
-        result = 31 * result + (truckStatusId != null ? truckStatusId.hashCode() : 0);
+        result = 31 * result + (truckStatus != null ? truckStatus.hashCode() : 0);
         return result;
     }
 }

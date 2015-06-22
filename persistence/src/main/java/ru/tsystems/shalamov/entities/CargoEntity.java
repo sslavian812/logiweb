@@ -3,11 +3,11 @@ package ru.tsystems.shalamov.entities;
 import javax.persistence.*;
 
 /**
- * Created by viacheslav on 21.06.2015.
+ * Created by viacheslav on 22.06.2015.
  */
 @Entity
 @Table(name = "cargos", schema = "", catalog = "logiweb")
-public class CargosEntity {
+public class CargoEntity {
     private int id;
     private Integer orderId;
     private String denomination;
@@ -64,12 +64,17 @@ public class CargosEntity {
         this.state = state;
     }
 
+
+    @ManyToOne(optional=false)
+    @JoinColumn(name="order_id",referencedColumnName="id")
+    private OrderEntity orderEntity;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CargosEntity that = (CargosEntity) o;
+        CargoEntity that = (CargoEntity) o;
 
         if (id != that.id) return false;
         if (denomination != null ? !denomination.equals(that.denomination) : that.denomination != null) return false;

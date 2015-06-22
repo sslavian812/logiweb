@@ -1,13 +1,14 @@
 package ru.tsystems.shalamov.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
- * Created by viacheslav on 21.06.2015.
+ * Created by viacheslav on 22.06.2015.
  */
 @Entity
 @Table(name = "orders", schema = "", catalog = "logiweb")
-public class OrdersEntity {
+public class OrderEntity {
     private int id;
     private String orderIdentifier;
     private Integer completed;
@@ -53,12 +54,20 @@ public class OrdersEntity {
         this.truck = truck;
     }
 
+    @OneToMany(mappedBy="orderEntity",targetEntity=CargoEntity.class,
+            fetch=FetchType.EAGER)
+    private Collection cargoEntities;
+
+    @ManyToOne(optional=false)
+    @JoinColumn(name="truck",referencedColumnName="id")
+    private TruckEntity truckEntity;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        OrdersEntity that = (OrdersEntity) o;
+        OrderEntity that = (OrderEntity) o;
 
         if (id != that.id) return false;
         if (completed != null ? !completed.equals(that.completed) : that.completed != null) return false;

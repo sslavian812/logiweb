@@ -3,11 +3,11 @@ package ru.tsystems.shalamov.entities;
 import javax.persistence.*;
 
 /**
- * Created by viacheslav on 21.06.2015.
+ * Created by viacheslav on 22.06.2015.
  */
 @Entity
 @Table(name = "driver_satuses", schema = "", catalog = "logiweb")
-public class DriverSatusesEntity {
+public class DriverStatusEntity {
     private int id;
     private Integer hoursOfWork;
     private Integer status;
@@ -53,12 +53,20 @@ public class DriverSatusesEntity {
         this.currentTruck = currentTruck;
     }
 
+    @OneToOne(optional=false,cascade=CascadeType.ALL,
+            mappedBy="driverStatusEntity",targetEntity=DriverEntity.class)
+    private DriverEntity driverEntity;
+
+    @ManyToOne(optional=false)
+    @JoinColumn(name="current_truck",referencedColumnName="id")
+    private TruckEntity truckEntity;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        DriverSatusesEntity that = (DriverSatusesEntity) o;
+        DriverStatusEntity that = (DriverStatusEntity) o;
 
         if (id != that.id) return false;
         if (currentTruck != null ? !currentTruck.equals(that.currentTruck) : that.currentTruck != null) return false;

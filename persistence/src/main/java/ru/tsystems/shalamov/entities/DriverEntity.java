@@ -3,16 +3,15 @@ package ru.tsystems.shalamov.entities;
 import javax.persistence.*;
 
 /**
- * Created by viacheslav on 21.06.2015.
+ * Created by viacheslav on 22.06.2015.
  */
 @Entity
 @Table(name = "drivers", schema = "", catalog = "logiweb")
-public class DriversEntity {
+public class DriverEntity {
     private int id;
     private String firstName;
     private String lastName;
     private String personalNumber;
-    private Integer driverStatusId;
 
     @Id
     @Column(name = "id")
@@ -54,26 +53,19 @@ public class DriversEntity {
         this.personalNumber = personalNumber;
     }
 
-    @Basic
-    @Column(name = "driver_status_id")
-    public Integer getDriverStatusId() {
-        return driverStatusId;
-    }
 
-    public void setDriverStatusId(Integer driverStatusId) {
-        this.driverStatusId = driverStatusId;
-    }
+    @OneToOne(optional=false)
+    @JoinColumn(name = "id")
+    private DriverStatusEntity driverStatusEntity;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        DriversEntity that = (DriversEntity) o;
+        DriverEntity that = (DriverEntity) o;
 
         if (id != that.id) return false;
-        if (driverStatusId != null ? !driverStatusId.equals(that.driverStatusId) : that.driverStatusId != null)
-            return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
         if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
         if (personalNumber != null ? !personalNumber.equals(that.personalNumber) : that.personalNumber != null)
@@ -88,7 +80,6 @@ public class DriversEntity {
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (personalNumber != null ? personalNumber.hashCode() : 0);
-        result = 31 * result + (driverStatusId != null ? driverStatusId.hashCode() : 0);
         return result;
     }
 }
