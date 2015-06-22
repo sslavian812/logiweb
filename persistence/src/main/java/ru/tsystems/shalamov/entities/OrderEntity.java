@@ -58,7 +58,7 @@ public class OrderEntity {
             fetch=FetchType.EAGER)
     private Collection cargoEntities;
 
-    @ManyToOne(optional=false)
+    @ManyToOne(optional=true)
     @JoinColumn(name="truck",referencedColumnName="id")
     private TruckEntity truckEntity;
 
