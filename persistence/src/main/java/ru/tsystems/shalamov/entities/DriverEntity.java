@@ -1,6 +1,7 @@
 package ru.tsystems.shalamov.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by viacheslav on 22.06.2015.
@@ -54,9 +55,13 @@ public class DriverEntity {
     }
 
 
-    @OneToOne(optional=false)
+    @OneToOne(optional = false)
     @JoinColumn(name = "id")
     private DriverStatusEntity driverStatusEntity;
+
+    @OneToMany(mappedBy = "driverEntity", targetEntity = ShiftEntity.class,
+            fetch = FetchType.EAGER)
+    private Collection<ShiftEntity> cargoEntities;
 
     @Override
     public boolean equals(Object o) {
