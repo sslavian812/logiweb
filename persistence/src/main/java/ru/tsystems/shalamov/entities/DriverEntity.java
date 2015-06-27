@@ -9,13 +9,42 @@ import java.util.Collection;
 @Entity
 @Table(name = "drivers", schema = "", catalog = "logiweb")
 public class DriverEntity {
-    private int id;
-    private String firstName;
-    private String lastName;
-    private String personalNumber;
-
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private int id;
+
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
+    @Column(name = "personal_number", nullable = false)
+    private String personalNumber;
+
+    @OneToOne(optional = true)
+    @JoinColumn(name = "id")
+    private DriverStatusEntity driverStatusEntity;
+
+    @OneToMany(mappedBy = "driverEntity", targetEntity = ShiftEntity.class,
+            fetch = FetchType.EAGER)
+    private Collection<ShiftEntity> shiftEntities;
+
+
+    public DriverEntity() {
+        firstName = "";
+        lastName = "";
+        personalNumber = "";
+    }
+
+    public DriverEntity(String firstName, String lastName, String personalNumber)
+    {
+        this.firstName      = firstName     ;
+        this.lastName       = lastName      ;
+        this.personalNumber = personalNumber;
+    }
+
     public int getId() {
         return id;
     }
@@ -24,8 +53,6 @@ public class DriverEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "first_name")
     public String getFirstName() {
         return firstName;
     }
@@ -34,8 +61,6 @@ public class DriverEntity {
         this.firstName = firstName;
     }
 
-    @Basic
-    @Column(name = "last_name")
     public String getLastName() {
         return lastName;
     }
@@ -44,8 +69,6 @@ public class DriverEntity {
         this.lastName = lastName;
     }
 
-    @Basic
-    @Column(name = "personal_number")
     public String getPersonalNumber() {
         return personalNumber;
     }
@@ -53,15 +76,6 @@ public class DriverEntity {
     public void setPersonalNumber(String personalNumber) {
         this.personalNumber = personalNumber;
     }
-
-
-    @OneToOne(optional = false)
-    @JoinColumn(name = "id")
-    private DriverStatusEntity driverStatusEntity;
-
-    @OneToMany(mappedBy = "driverEntity", targetEntity = ShiftEntity.class,
-            fetch = FetchType.EAGER)
-    private Collection<ShiftEntity> cargoEntities;
 
     @Override
     public boolean equals(Object o) {

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+<session-factory>
+    <property name="hibernate.dialect">
+        org.hibernate.dialect.MySQLDialect
+    </property>
+    <property name="hibernate.connection.driver_class">
+        com.mysql.jdbc.Driver
+    </property>
+
+    <property name="hibernate.connection.url">
+        jdbc:mysql://localhost/logiweb
+    </property>
+    <property name="hibernate.connection.username">
+        root
+    </property>
+    <property name="hibernate.connection.password">
+        root
+    </property>
+
+    <property name="show_sql">
+        true
+    </property>
+
+    <mapping class="ru.tsystems.shalamov.entities.CargoEntity" />
+    <mapping class="ru.tsystems.shalamov.entities.DriverEntity" />
+    <mapping class="ru.tsystems.shalamov.entities.DriverStatusEntity" />
+    <mapping class="ru.tsystems.shalamov.entities.OrderEntity" />
+    <mapping class="ru.tsystems.shalamov.entities.ShiftEntity" />
+    <mapping class="ru.tsystems.shalamov.entities.TruckEntity" />
+</session-factory>
+</hibernate-configuration>

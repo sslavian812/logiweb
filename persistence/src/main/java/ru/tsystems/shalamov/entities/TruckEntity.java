@@ -9,14 +9,48 @@ import java.util.Collection;
 @Entity
 @Table(name = "trucks", schema = "", catalog = "logiweb")
 public class TruckEntity {
-    private int id;
-    private Integer crewSize;
-    private String registrationNumber;
-    private Integer capacity;
-    private Integer truckStatus;
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @Column(name = "crew_size", nullable = false)
+    private int crewSize;
+
+    @Column(name = "registration_number", nullable = false)
+    private String registrationNumber;
+
+    @Column(nullable = false)
+    private int capacity;
+
+    @Column(name = "truck_status", nullable = false)
+    private int truckStatus;
+
+    @OneToMany(mappedBy = "truckEntity", targetEntity = OrderEntity.class,
+            fetch = FetchType.EAGER)
+    private Collection orderEntities;
+
+    @OneToMany(mappedBy = "truckEntity", targetEntity = DriverStatusEntity.class,
+            fetch = FetchType.EAGER)
+    private Collection driverStatusEntities;
+
+
+    public TruckEntity() {
+        this.capacity           = 0;
+        this.crewSize           = 0;
+        this.truckStatus        = 0;
+        this.registrationNumber = "abacaba";
+    }
+
+    public TruckEntity(int crewSize, String registrationNumber, int capacity, int truckStatus)
+    {
+        this.capacity           = capacity          ;
+        this.crewSize           = crewSize          ;
+        this.truckStatus        = truckStatus       ;
+        this.registrationNumber = registrationNumber;
+    }
+
     public int getId() {
         return id;
     }
@@ -25,18 +59,14 @@ public class TruckEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "crew_size")
-    public Integer getCrewSize() {
+    public int getCrewSize() {
         return crewSize;
     }
 
-    public void setCrewSize(Integer crewSize) {
+    public void setCrewSize(int crewSize) {
         this.crewSize = crewSize;
     }
 
-    @Basic
-    @Column(name = "registration_number")
     public String getRegistrationNumber() {
         return registrationNumber;
     }
@@ -45,33 +75,21 @@ public class TruckEntity {
         this.registrationNumber = registrationNumber;
     }
 
-    @Basic
-    @Column(name = "capacity")
-    public Integer getCapacity() {
+    public int getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(Integer capacity) {
+    public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
 
-    @Basic
-    @Column(name = "truck_status")
-    public Integer getTruckStatus() {
+    public int getTruckStatus() {
         return truckStatus;
     }
 
-    public void setTruckStatus(Integer truckStatus) {
+    public void setTruckStatus(int truckStatus) {
         this.truckStatus = truckStatus;
     }
-
-    @OneToMany(mappedBy="truckEntity",targetEntity=OrderEntity.class,
-            fetch=FetchType.EAGER)
-    private Collection orderEntities;
-
-    @OneToMany(mappedBy="truckEntity",targetEntity=DriverStatusEntity.class,
-            fetch=FetchType.EAGER)
-    private Collection driverStatusEntities;
 
     @Override
     public boolean equals(Object o) {
@@ -81,11 +99,11 @@ public class TruckEntity {
         TruckEntity that = (TruckEntity) o;
 
         if (id != that.id) return false;
-        if (capacity != null ? !capacity.equals(that.capacity) : that.capacity != null) return false;
-        if (crewSize != null ? !crewSize.equals(that.crewSize) : that.crewSize != null) return false;
+        if (capacity != that.capacity) return false;
+        if (crewSize != that.crewSize) return false;
+        if (truckStatus != that.truckStatus) return false;
         if (registrationNumber != null ? !registrationNumber.equals(that.registrationNumber) : that.registrationNumber != null)
             return false;
-        if (truckStatus != null ? !truckStatus.equals(that.truckStatus) : that.truckStatus != null) return false;
 
         return true;
     }
@@ -93,10 +111,10 @@ public class TruckEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (crewSize != null ? crewSize.hashCode() : 0);
+        result = 31 * result + (Integer.hashCode(crewSize));
+        result = 31 * result + (Integer.hashCode(capacity));
+        result = 31 * result + (Integer.hashCode(truckStatus));
         result = 31 * result + (registrationNumber != null ? registrationNumber.hashCode() : 0);
-        result = 31 * result + (capacity != null ? capacity.hashCode() : 0);
-        result = 31 * result + (truckStatus != null ? truckStatus.hashCode() : 0);
         return result;
     }
 }

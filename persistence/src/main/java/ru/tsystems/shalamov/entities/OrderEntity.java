@@ -9,13 +9,27 @@ import java.util.Collection;
 @Entity
 @Table(name = "orders", schema = "", catalog = "logiweb")
 public class OrderEntity {
-    private int id;
-    private String orderIdentifier;
-    private Integer completed;
-    private Integer truck;
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private int id;
+
+    @Column(name = "order_identifier", nullable = false)
+    private String orderIdentifier;
+
+    @Column
+    private Integer completed;
+
+    @OneToMany(mappedBy = "orderEntity", targetEntity = CargoEntity.class,
+            fetch = FetchType.EAGER)
+    private Collection cargoEntities;
+
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "truck", referencedColumnName = "id")
+    private TruckEntity truckEntity;
+
+
     public int getId() {
         return id;
     }
@@ -24,8 +38,6 @@ public class OrderEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "order_identifier")
     public String getOrderIdentifier() {
         return orderIdentifier;
     }
@@ -34,8 +46,6 @@ public class OrderEntity {
         this.orderIdentifier = orderIdentifier;
     }
 
-    @Basic
-    @Column(name = "completed")
     public Integer getCompleted() {
         return completed;
     }
@@ -44,23 +54,6 @@ public class OrderEntity {
         this.completed = completed;
     }
 
-    @Basic
-    @Column(name = "truck")
-    public Integer getTruck() {
-        return truck;
-    }
-
-    public void setTruck(Integer truck) {
-        this.truck = truck;
-    }
-
-    @OneToMany(mappedBy="orderEntity",targetEntity=CargoEntity.class,
-            fetch=FetchType.EAGER)
-    private Collection cargoEntities;
-
-    @ManyToOne(optional=true)
-    @JoinColumn(name="truck",referencedColumnName="id")
-    private TruckEntity truckEntity;
 
     @Override
     public boolean equals(Object o) {
@@ -73,8 +66,6 @@ public class OrderEntity {
         if (completed != null ? !completed.equals(that.completed) : that.completed != null) return false;
         if (orderIdentifier != null ? !orderIdentifier.equals(that.orderIdentifier) : that.orderIdentifier != null)
             return false;
-        if (truck != null ? !truck.equals(that.truck) : that.truck != null) return false;
-
         return true;
     }
 
@@ -83,7 +74,6 @@ public class OrderEntity {
         int result = id;
         result = 31 * result + (orderIdentifier != null ? orderIdentifier.hashCode() : 0);
         result = 31 * result + (completed != null ? completed.hashCode() : 0);
-        result = 31 * result + (truck != null ? truck.hashCode() : 0);
         return result;
     }
 }

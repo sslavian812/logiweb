@@ -9,43 +9,44 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "shifts", schema = "", catalog = "logiweb")
 public class ShiftEntity {
-    private int id;
-    private Timestamp shiftBegin;
-    private Timestamp shiftEnd;
 
     @Id
     @Column(name = "id")
-    public int getId() {
-        return id;
-    }
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private int id;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @Column(name = "shift_begin", nullable = false)
+    private Timestamp shiftBegin;
 
-    @Basic
-    @Column(name = "shift_begin")
-    public Timestamp getShiftBegin() {
-        return shiftBegin;
-    }
-
-    public void setShiftBegin(Timestamp shiftBegin) {
-        this.shiftBegin = shiftBegin;
-    }
-
-    @Basic
     @Column(name = "shift_end")
-    public Timestamp getShiftEnd() {
-        return shiftEnd;
-    }
-
-    public void setShiftEnd(Timestamp shiftEnd) {
-        this.shiftEnd = shiftEnd;
-    }
+    private Timestamp shiftEnd;
 
     @ManyToOne(optional=false)
     @JoinColumn(name="driver_id",referencedColumnName="id")
     private DriverEntity driverEntity;
+
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Timestamp getShiftBegin() {
+        return shiftBegin;
+    }
+    public void setShiftBegin(Timestamp shiftBegin) {
+        this.shiftBegin = shiftBegin;
+    }
+
+    public Timestamp getShiftEnd() {
+        return shiftEnd;
+    }
+    public void setShiftEnd(Timestamp shiftEnd) {
+        this.shiftEnd = shiftEnd;
+    }
+
 
     @Override
     public boolean equals(Object o) {

@@ -8,44 +8,50 @@ import javax.persistence.*;
 @Entity
 @Table(name = "driver_statuses", schema = "", catalog = "logiweb")
 public class DriverStatusEntity {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
-    private Integer status;
-    private Integer currentTruck;
-    @OneToOne(optional=false,cascade=CascadeType.ALL,
-            mappedBy="driverStatusEntity",targetEntity=DriverEntity.class)
+
+    @Column(nullable = false)
+    private int status;
+
+//    @Column(name="current_truck")
+//    private Integer currentTruck;
+
+    @OneToOne(optional=true, cascade=CascadeType.ALL,
+            mappedBy="driverStatusEntity", targetEntity=DriverEntity.class)
     private DriverEntity driverEntity;
+
     @ManyToOne(optional=false)
     @JoinColumn(name="current_truck",referencedColumnName="id")
     private TruckEntity truckEntity;
 
-    @Id
-    @Column(name = "id")
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "status")
+
     public Integer getStatus() {
         return status;
     }
-
     public void setStatus(Integer status) {
         this.status = status;
     }
 
-    @Basic
-    @Column(name = "current_truck")
-    public Integer getCurrentTruck() {
-        return currentTruck;
-    }
+//    public Integer getCurrentTruck() {
+//        return currentTruck;
+//    }
+//    public void setCurrentTruck(Integer currentTruck) {
+//        this.currentTruck = currentTruck;
+//    }
 
-    public void setCurrentTruck(Integer currentTruck) {
-        this.currentTruck = currentTruck;
+
+    public DriverStatusEntity() {
     }
 
     @Override
@@ -56,8 +62,8 @@ public class DriverStatusEntity {
         DriverStatusEntity that = (DriverStatusEntity) o;
 
         if (id != that.id) return false;
-        if (currentTruck != null ? !currentTruck.equals(that.currentTruck) : that.currentTruck != null) return false;
-        if (status != null ? !status.equals(that.status) : that.status != null) return false;
+//        if (currentTruck != null ? !currentTruck.equals(that.currentTruck) : that.currentTruck != null) return false;
+        if (status != that.status) return false;
 
         return true;
     }
@@ -65,8 +71,8 @@ public class DriverStatusEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        result = 31 * result + (currentTruck != null ? currentTruck.hashCode() : 0);
+        result = 31 * result + (Integer.hashCode(status));
+//        result = 31 * result + (currentTruck != null ? currentTruck.hashCode() : 0);
         return result;
     }
 }
