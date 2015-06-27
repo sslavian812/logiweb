@@ -5,6 +5,8 @@ import javax.persistence.Persistence;
 
 import junit.framework.TestCase;
 import ru.tsystems.shalamov.entities.DriverEntity;
+import ru.tsystems.shalamov.entities.TruckEntity;
+import ru.tsystems.shalamov.entities.TruckStatus;
 
 /**
  * Created by viacheslav on 26.06.2015.
@@ -27,9 +29,9 @@ public class EntityManagerTest extends TestCase {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        entityManager.persist(new DriverEntity("name 1", "surname 1", "number 1"));
-        entityManager.persist(new DriverEntity("name 2", "surname 2", "number 2"));
-        entityManager.persist(new DriverEntity("name 3", "surname 3", "number 3"));
+        entityManager.persist(new TruckEntity(1, "n1", 1000, TruckStatus.ACTUVE));
+        entityManager.persist(new TruckEntity(2, "n2", 5000, TruckStatus.BROKEN));
+        entityManager.persist(new TruckEntity(2, "n3", 10000, TruckStatus.ACTUVE));
 
         entityManager.getTransaction().commit();
         entityManager.close();
@@ -37,9 +39,10 @@ public class EntityManagerTest extends TestCase {
 
         entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        List<DriverEntity> result = entityManager.createQuery("from DriverEntity ", DriverEntity.class).getResultList();
-        for (DriverEntity driverEntity : result) {
-            System.out.println("Driver:< " + driverEntity.getFirstName() + " >");
+
+        List<TruckEntity> result = entityManager.createQuery("from TruckEntity").getResultList();
+        for (TruckEntity entity : result) {
+                System.out.println("Truck: " + entity.getRegistrationNumber() + "[" + entity.getCapacity() + "]");
         }
         entityManager.getTransaction().commit();
         entityManager.close();

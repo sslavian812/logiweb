@@ -30,25 +30,34 @@ public class TruckEntity {
 
     @OneToMany(mappedBy = "truckEntity", targetEntity = OrderEntity.class,
             fetch = FetchType.EAGER)
-    private Collection orderEntities;
+    private Collection<OrderEntity> orderEntities;
 
     @OneToMany(mappedBy = "truckEntity", targetEntity = DriverStatusEntity.class,
             fetch = FetchType.EAGER)
-    private Collection driverStatusEntities;
+    private Collection<DriverStatusEntity> driverStatusEntities;
 
+
+    @PreRemove
+    private void preRemove() {
+        for (OrderEntity o : orderEntities) {
+            o.setTruckEntity(null);
+        }
+        for (DriverStatusEntity d : driverStatusEntities) {
+            d.setTruckEntity(null);
+        }
+    }
 
     public TruckEntity() {
-        this.capacity           = 0;
-        this.crewSize           = 0;
-        this.status             = TruckStatus.ACTUVE;
+        this.capacity = 0;
+        this.crewSize = 0;
+        this.status = TruckStatus.ACTUVE;
         this.registrationNumber = "abacaba";
     }
 
-    public TruckEntity(int crewSize, String registrationNumber, int capacity, TruckStatus truckStatus)
-    {
-        this.capacity           = capacity          ;
-        this.crewSize           = crewSize          ;
-        this.status             = truckStatus       ;
+    public TruckEntity(int crewSize, String registrationNumber, int capacity, TruckStatus truckStatus) {
+        this.capacity = capacity;
+        this.crewSize = crewSize;
+        this.status = truckStatus;
         this.registrationNumber = registrationNumber;
     }
 

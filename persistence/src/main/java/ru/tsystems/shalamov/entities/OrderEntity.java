@@ -12,7 +12,7 @@ public class OrderEntity {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "order_identifier", nullable = false)
@@ -22,14 +22,13 @@ public class OrderEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    @OneToMany(mappedBy = "orderEntity", targetEntity = CargoEntity.class,
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderEntity", targetEntity = CargoEntity.class,
             fetch = FetchType.EAGER)
-    private Collection cargoEntities;
+    private Collection<CargoEntity> cargoEntities;
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "truck", referencedColumnName = "id")
     private TruckEntity truckEntity;
-
 
     public int getId() {
         return id;
@@ -76,5 +75,13 @@ public class OrderEntity {
         result = 31 * result + (orderIdentifier != null ? orderIdentifier.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
+    }
+
+    public TruckEntity getTruckEntity() {
+        return truckEntity;
+    }
+
+    public void setTruckEntity(TruckEntity truckEntity) {
+        this.truckEntity = truckEntity;
     }
 }

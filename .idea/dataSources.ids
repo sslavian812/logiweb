@@ -12,14 +12,14 @@
       <column name="order_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="denomination" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
       <column name="weight" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="state" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="status" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
       <foreign-key name="order_id" columns="order_id" ref-table="orders" ref-schema="" ref-catalog="logiweb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
       <index name="order_id_idx" unique="false" columns="order_id"/>
     </table>
     <table name="driver_statuses" schema="" catalog="logiweb" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="status" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="status" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
       <column name="current_truck" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
       <foreign-key name="current_truck" columns="current_truck" ref-table="trucks" ref-schema="" ref-catalog="logiweb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
@@ -38,7 +38,7 @@
     <table name="orders" schema="" catalog="logiweb" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="order_identifier" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
-      <column name="completed" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="status" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
       <column name="truck" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
       <foreign-key name="truck" columns="truck" ref-table="trucks" ref-schema="" ref-catalog="logiweb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
@@ -59,7 +59,7 @@
       <column name="crew_size" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MQ=="/>
       <column name="registration_number" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
       <column name="capacity" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="truck_status" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="status" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
       <exported-key name="current_truck" table="driver_statuses" schema="" catalog="logiweb" columns="current_truck"/>
       <exported-key name="truck" table="orders" schema="" catalog="logiweb" columns="truck"/>

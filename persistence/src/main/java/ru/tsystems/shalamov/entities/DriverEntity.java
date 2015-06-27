@@ -23,11 +23,11 @@ public class DriverEntity {
     @Column(name = "personal_number", nullable = false)
     private String personalNumber;
 
-    @OneToOne(optional = true)
+    @OneToOne(cascade = CascadeType.ALL, optional = true)
     @JoinColumn(name = "id")
     private DriverStatusEntity driverStatusEntity;
 
-    @OneToMany(mappedBy = "driverEntity", targetEntity = ShiftEntity.class,
+    @OneToMany( cascade = CascadeType.ALL, mappedBy = "driverEntity", targetEntity = ShiftEntity.class,
             fetch = FetchType.EAGER)
     private Collection<ShiftEntity> shiftEntities;
 

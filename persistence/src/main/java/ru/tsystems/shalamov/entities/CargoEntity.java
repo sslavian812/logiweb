@@ -81,4 +81,12 @@ public class CargoEntity {
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
+
+    public OrderEntity getOrderEntity() {
+        return orderEntity;
+    }
+
+    public void setOrderEntity(OrderEntity orderEntity) {
+        this.orderEntity = orderEntity;
+    }
 }

@@ -65,4 +65,12 @@ public class DriverStatusEntity {
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
+
+    public TruckEntity getTruckEntity() {
+        return truckEntity;
+    }
+
+    public void setTruckEntity(TruckEntity truckEntity) {
+        this.truckEntity = truckEntity;
+    }
 }
