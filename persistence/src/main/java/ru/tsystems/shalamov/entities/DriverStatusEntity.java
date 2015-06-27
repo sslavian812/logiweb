@@ -15,10 +15,9 @@ public class DriverStatusEntity {
     private int id;
 
     @Column(nullable = false)
-    private int status;
+    @Enumerated(EnumType.STRING)
+    private DriverStatus status;
 
-//    @Column(name="current_truck")
-//    private Integer currentTruck;
 
     @OneToOne(optional=true, cascade=CascadeType.ALL,
             mappedBy="driverStatusEntity", targetEntity=DriverEntity.class)
@@ -36,19 +35,12 @@ public class DriverStatusEntity {
     }
 
 
-    public Integer getStatus() {
+    public DriverStatus getStatus() {
         return status;
     }
-    public void setStatus(Integer status) {
+    public void setStatus(DriverStatus status) {
         this.status = status;
     }
-
-//    public Integer getCurrentTruck() {
-//        return currentTruck;
-//    }
-//    public void setCurrentTruck(Integer currentTruck) {
-//        this.currentTruck = currentTruck;
-//    }
 
 
     public DriverStatusEntity() {
@@ -62,7 +54,6 @@ public class DriverStatusEntity {
         DriverStatusEntity that = (DriverStatusEntity) o;
 
         if (id != that.id) return false;
-//        if (currentTruck != null ? !currentTruck.equals(that.currentTruck) : that.currentTruck != null) return false;
         if (status != that.status) return false;
 
         return true;
@@ -71,8 +62,7 @@ public class DriverStatusEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (Integer.hashCode(status));
-//        result = 31 * result + (currentTruck != null ? currentTruck.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
 }

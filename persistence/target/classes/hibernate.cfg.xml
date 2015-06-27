@@ -22,7 +22,7 @@
     </property>
 
     <property name="show_sql">
-        true
+        false
     </property>
 
     <mapping class="ru.tsystems.shalamov.entities.CargoEntity" />

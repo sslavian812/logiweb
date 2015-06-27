@@ -19,7 +19,8 @@ public class OrderEntity {
     private String orderIdentifier;
 
     @Column
-    private Integer completed;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 
     @OneToMany(mappedBy = "orderEntity", targetEntity = CargoEntity.class,
             fetch = FetchType.EAGER)
@@ -46,12 +47,12 @@ public class OrderEntity {
         this.orderIdentifier = orderIdentifier;
     }
 
-    public Integer getCompleted() {
-        return completed;
+    public OrderStatus getStatus() {
+        return status;
     }
 
-    public void setCompleted(Integer completed) {
-        this.completed = completed;
+    public void setStatus(OrderStatus completed) {
+        this.status = completed;
     }
 
 
@@ -63,7 +64,7 @@ public class OrderEntity {
         OrderEntity that = (OrderEntity) o;
 
         if (id != that.id) return false;
-        if (completed != null ? !completed.equals(that.completed) : that.completed != null) return false;
+        if (status != null ? !status.equals(that.status) : that.status != null) return false;
         if (orderIdentifier != null ? !orderIdentifier.equals(that.orderIdentifier) : that.orderIdentifier != null)
             return false;
         return true;
@@ -73,7 +74,7 @@ public class OrderEntity {
     public int hashCode() {
         int result = id;
         result = 31 * result + (orderIdentifier != null ? orderIdentifier.hashCode() : 0);
-        result = 31 * result + (completed != null ? completed.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
 }

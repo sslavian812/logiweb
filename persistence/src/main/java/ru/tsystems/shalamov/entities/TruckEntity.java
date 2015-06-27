@@ -24,8 +24,9 @@ public class TruckEntity {
     @Column(nullable = false)
     private int capacity;
 
-    @Column(name = "truck_status", nullable = false)
-    private int truckStatus;
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TruckStatus status;
 
     @OneToMany(mappedBy = "truckEntity", targetEntity = OrderEntity.class,
             fetch = FetchType.EAGER)
@@ -39,15 +40,15 @@ public class TruckEntity {
     public TruckEntity() {
         this.capacity           = 0;
         this.crewSize           = 0;
-        this.truckStatus        = 0;
+        this.status             = TruckStatus.ACTUVE;
         this.registrationNumber = "abacaba";
     }
 
-    public TruckEntity(int crewSize, String registrationNumber, int capacity, int truckStatus)
+    public TruckEntity(int crewSize, String registrationNumber, int capacity, TruckStatus truckStatus)
     {
         this.capacity           = capacity          ;
         this.crewSize           = crewSize          ;
-        this.truckStatus        = truckStatus       ;
+        this.status             = truckStatus       ;
         this.registrationNumber = registrationNumber;
     }
 
@@ -83,12 +84,12 @@ public class TruckEntity {
         this.capacity = capacity;
     }
 
-    public int getTruckStatus() {
-        return truckStatus;
+    public TruckStatus getStatus() {
+        return status;
     }
 
-    public void setTruckStatus(int truckStatus) {
-        this.truckStatus = truckStatus;
+    public void setStatus(TruckStatus truckStatus) {
+        this.status = truckStatus;
     }
 
     @Override
@@ -101,7 +102,7 @@ public class TruckEntity {
         if (id != that.id) return false;
         if (capacity != that.capacity) return false;
         if (crewSize != that.crewSize) return false;
-        if (truckStatus != that.truckStatus) return false;
+        if (status != that.status) return false;
         if (registrationNumber != null ? !registrationNumber.equals(that.registrationNumber) : that.registrationNumber != null)
             return false;
 
@@ -113,8 +114,8 @@ public class TruckEntity {
         int result = id;
         result = 31 * result + (Integer.hashCode(crewSize));
         result = 31 * result + (Integer.hashCode(capacity));
-        result = 31 * result + (Integer.hashCode(truckStatus));
         result = 31 * result + (registrationNumber != null ? registrationNumber.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
 }

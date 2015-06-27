@@ -3,6 +3,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import ru.tsystems.shalamov.entities.TruckEntity;
+import ru.tsystems.shalamov.entities.TruckStatus;
 
 import java.util.List;
 
@@ -43,9 +44,9 @@ public class HibernateSessionTest extends TestCase {
         session = sessionFactory.openSession();
         session.beginTransaction();
         session.save(new TruckEntity());
-        session.save(new TruckEntity(1, "n1", 1000, 1));
-        session.save(new TruckEntity(2, "n2", 5000, 1));
-        session.save(new TruckEntity(2, "n3", 10000, 1));
+        session.save(new TruckEntity(1, "n1", 1000, TruckStatus.ACTUVE));
+        session.save(new TruckEntity(2, "n2", 5000, TruckStatus.BROKEN));
+        session.save(new TruckEntity(2, "n3", 10000, TruckStatus.ACTUVE));
         session.getTransaction().commit();
         session.close();
     }
@@ -55,8 +56,10 @@ public class HibernateSessionTest extends TestCase {
         session = sessionFactory.openSession();
         session.beginTransaction();
         List<TruckEntity> result = session.createQuery("from TruckEntity").list();
+        System.out.println("active only:");
         for (TruckEntity entity : result) {
-            System.out.println("Truck: " + entity.getRegistrationNumber() + "[" + entity.getCapacity() + "]");
+            if(entity.getStatus() == TruckStatus.ACTUVE)
+                System.out.println("Truck: " + entity.getRegistrationNumber() + "[" + entity.getCapacity() + "]");
         }
         session.getTransaction().commit();
         session.close();

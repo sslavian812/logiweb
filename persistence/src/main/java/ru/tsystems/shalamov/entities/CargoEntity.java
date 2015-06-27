@@ -12,9 +12,6 @@ public class CargoEntity {
     @Column
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
-//
-//    @Column(name = "order_id")
-//    private Integer orderId;
 
     @Column
     private String denomination;
@@ -23,7 +20,8 @@ public class CargoEntity {
     private Integer weight;
 
     @Column(nullable = false)
-    private int state;
+    @Enumerated(EnumType.STRING)
+    private CargoStatus status;
 
 
     @ManyToOne(optional=false)
@@ -37,12 +35,6 @@ public class CargoEntity {
         this.id = id;
     }
 
-//    public Integer getOrderId() {
-//        return orderId;
-//    }
-//    public void setOrderId(Integer orderId) {
-//        this.orderId = orderId;
-//    }
 
     public String getDenomination() {
         return denomination;
@@ -58,11 +50,11 @@ public class CargoEntity {
         this.weight = weight;
     }
 
-    public int getState() {
-        return state;
+    public CargoStatus getStatus() {
+        return status;
     }
-    public void setState(int state) {
-        this.state = state;
+    public void setStatus(CargoStatus status) {
+        this.status = status;
     }
 
 
@@ -75,8 +67,7 @@ public class CargoEntity {
 
         if (id != that.id) return false;
         if (denomination != null ? !denomination.equals(that.denomination) : that.denomination != null) return false;
-//        if (orderId != null ? !orderId.equals(that.orderId) : that.orderId != null) return false;
-        if (state != that.state) return false;
+        if (status != that.status) return false;
         if (weight != null ? !weight.equals(that.weight) : that.weight != null) return false;
 
         return true;
@@ -85,10 +76,9 @@ public class CargoEntity {
     @Override
     public int hashCode() {
         int result = id;
-//        result = 31 * result + (orderId != null ? orderId.hashCode() : 0);
         result = 31 * result + (denomination != null ? denomination.hashCode() : 0);
         result = 31 * result + (weight != null ? weight.hashCode() : 0);
-        result = 31 * result + (Integer.hashCode(state));
+        result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
 }
