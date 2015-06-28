@@ -20,14 +20,9 @@ public class TruckDaoImpl extends GenericDaoHibernateImpl<TruckEntity, Integer> 
     }
 
     @Override
-    public List<TruckEntity> findAll() {
+    public List<TruckEntity> getAll() {
         return null;
         //todo STUB
     }
 
-    @Override
-    public List<TruckEntity> findAllAvailable(int minimalCapacity) {
-        return null;
-        //todo STUB
-    }
 }

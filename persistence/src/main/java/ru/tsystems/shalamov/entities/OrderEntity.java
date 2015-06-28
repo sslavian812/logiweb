@@ -84,4 +84,16 @@ public class OrderEntity {
     public void setTruckEntity(TruckEntity truckEntity) {
         this.truckEntity = truckEntity;
     }
+
+    /**
+     * Provides total weight of all cargoes included int the order.
+     * @return
+     */
+    public int getTotalweight() {
+        int total = 0;
+        for (CargoEntity cargo : cargoEntities) {
+            total += cargo.getWeight();
+        }
+        return total;
+    }
 }

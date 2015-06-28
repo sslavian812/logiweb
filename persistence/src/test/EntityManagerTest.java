@@ -29,9 +29,9 @@ public class EntityManagerTest extends TestCase {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        entityManager.persist(new TruckEntity(1, "n1", 1000, TruckStatus.ACTUVE));
+        entityManager.persist(new TruckEntity(1, "n1", 1000, TruckStatus.INTACT));
         entityManager.persist(new TruckEntity(2, "n2", 5000, TruckStatus.BROKEN));
-        entityManager.persist(new TruckEntity(2, "n3", 10000, TruckStatus.ACTUVE));
+        entityManager.persist(new TruckEntity(2, "n3", 10000, TruckStatus.INTACT));
 
         entityManager.getTransaction().commit();
         entityManager.close();

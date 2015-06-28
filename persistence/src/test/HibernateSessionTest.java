@@ -44,9 +44,9 @@ public class HibernateSessionTest extends TestCase {
         session = sessionFactory.openSession();
         session.beginTransaction();
         session.save(new TruckEntity());
-        session.save(new TruckEntity(1, "n1", 1000, TruckStatus.ACTUVE));
+        session.save(new TruckEntity(1, "n1", 1000, TruckStatus.INTACT));
         session.save(new TruckEntity(2, "n2", 5000, TruckStatus.BROKEN));
-        session.save(new TruckEntity(2, "n3", 10000, TruckStatus.ACTUVE));
+        session.save(new TruckEntity(2, "n3", 10000, TruckStatus.INTACT));
         session.getTransaction().commit();
         session.close();
     }
@@ -58,7 +58,7 @@ public class HibernateSessionTest extends TestCase {
         List<TruckEntity> result = session.createQuery("from TruckEntity").list();
         System.out.println("active only:");
         for (TruckEntity entity : result) {
-            if(entity.getStatus() == TruckStatus.ACTUVE)
+            if(entity.getStatus() == TruckStatus.INTACT)
                 System.out.println("Truck: " + entity.getRegistrationNumber() + "[" + entity.getCapacity() + "]");
         }
         session.getTransaction().commit();
