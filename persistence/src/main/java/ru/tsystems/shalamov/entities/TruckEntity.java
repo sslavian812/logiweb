@@ -50,7 +50,7 @@ public class TruckEntity {
     public TruckEntity() {
         this.capacity = 0;
         this.crewSize = 0;
-        this.status = TruckStatus.ACTUVE;
+        this.status = TruckStatus.INTACT;
         this.registrationNumber = "abacaba";
     }
 

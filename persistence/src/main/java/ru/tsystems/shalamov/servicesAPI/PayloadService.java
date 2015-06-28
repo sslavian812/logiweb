@@ -13,12 +13,36 @@ import java.util.List;
  * Created by viacheslav on 28.06.2015.
  */
 public interface PayloadService {
-    public List<OrderEntity> getOrders();
+    /**
+     * Provides all the orders.
+     *
+     * @return list of orders.
+     */
+    List<OrderEntity> getOrders();
 
-    public void addOrder(OrderEntity order);
+    /**
+     * Creates new Order.
+     *
+     * @param order {@link ru.tsystems.shalamov.entities.OrderEntity} to add.
+     */
+    void addOrder(OrderEntity order);
 
-    public OrderStatus getOrderStatusById(int id);
+    /**
+     * Provides status of the order.
+     *
+     * @param orderId id of ther order
+     * @return {@link ru.tsystems.shalamov.entities.OrderStatus} enum,
+     * indicating status of the order.
+     */
+    OrderStatus getOrderStatusById(int orderId);
 
-    public CargoStatus getCargoStatusById(int id);
+    /**
+     * Provides status of the cargo.
+     *
+     * @param cargoId if of the cargo
+     * @return {@link ru.tsystems.shalamov.entities.CargoStatus} enum,
+     * indicating status of the cargo.
+     */
+    CargoStatus getCargoStatusById(int cargoId);
 
 }

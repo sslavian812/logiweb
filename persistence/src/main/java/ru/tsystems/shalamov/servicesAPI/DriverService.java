@@ -14,11 +14,18 @@ import java.util.List;
  * Created by viacheslav on 28.06.2015.
  */
 public interface DriverService {
-    public List<String> getCoDriversPersonalNumbers(String personalNumber);
 
-    public String getTruckRegistrationNumber(String personalNumber);
+    List<String> getCoDriversPersonalNumbers(String personalNumber);
 
-    public String getOrderIdentifier(String personalNumber);
+    String getTruckRegistrationNumber(String personalNumber);
 
-    public List<String> getCargoesDenominations(String personalNumber);
+    /**
+     * Provides Identifier of the order, if the order if complete(
+     * cargos added, tuck assigned, truck crew formed).
+     * @param personalNumber
+     * @return
+     */
+    String getOrderIdentifier(String personalNumber);
+
+    List<String> getCargoesDenominations(String personalNumber);
 }

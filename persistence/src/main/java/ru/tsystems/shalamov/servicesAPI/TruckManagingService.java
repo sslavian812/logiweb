@@ -15,19 +15,54 @@ import java.util.List;
  */
 public interface TruckManagingService {
 
-    public List<TruckEntity> getAllTrucks();
-    public void addTruck(TruckEntity truck);
-    public void updateTruck(TruckEntity truck);
-    public void deleteTruckById(int TruckId);
+    /**
+     * Provides all the trucks.
+     *
+     * @return list of trucks.
+     */
+    List<TruckEntity> getAllTrucks();
+
+    /**
+     * Adds a new truck.
+     *
+     * @param truck {@link ru.tsystems.shalamov.entities.TruckEntity} instance,
+     *              describing new truck. The id will be generated
+     *              Automatically.
+     */
+    void addTruck(TruckEntity truck);
+
+    /**
+     * Updates information about the tuck.
+     *
+     * @param truck {@link ru.tsystems.shalamov.entities.TruckEntity} instance,
+     *              describing the truck. There should be one in the database
+     *              with the same id. Otherwise, the {@link
+     *              ru.tsystems.shalamov.servicesAPI.LogiwebManagerException}
+     *              will be thrown.
+     * @throws LogiwebManagerException if incorrect id provided.
+     */
+    void updateTruck(TruckEntity truck) throws LogiwebManagerException;
+
+    /**
+     * Removes Specified truck.
+     *
+     * @param truckId Id of the truck to be removed. If there is no truck with
+     *                such Id, the {@link
+     *                ru.tsystems.shalamov.servicesAPI.LogiwebManagerException}
+     *                will be thrown.
+     * @hrows LogiwebManagerException if incorrect id provided.
+     */
+    void deleteTruckById(int truckId) throws LogiwebManagerException;
 
     /**
      * Provides list of trucks, meeting following criteria:
-     *  1) Truck is intact (not broken).
-     *  2) Truck has sufficient capacity.
-     *  3) Truck is not assigned on any other orders.
-     * @param minimalCapacity minimal car capacity to handle the cargoes in order.
+     * 1) Truck is intact (not broken).
+     * 2) Truck has sufficient capacity.
+     * 3) Truck is not assigned on any other orders.
+     *
+     * @param minimalCapacity minimal capacity to handle the cargoes in order.
      * @return list of suitable trucks.
      */
-    public List<TruckEntity> findAllAvailableTrucks(int minimalCapacity);
+    List<TruckEntity> findAllAvailableTrucks(int minimalCapacity);
 
 }
