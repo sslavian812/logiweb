@@ -1,5 +1,7 @@
 package ru.tsystems.shalamov.entities;
 
+import ru.tsystems.shalamov.entities.statuses.CargoStatus;
+
 import javax.persistence.*;
 
 /**
@@ -10,13 +12,13 @@ import javax.persistence.*;
 public class CargoEntity {
     @Id
     @Column
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column
+    @Column(nullable = false)
     private String denomination;
 
-    @Column
+    @Column(nullable = false)
     private Integer weight;
 
     @Column(nullable = false)
@@ -24,13 +26,15 @@ public class CargoEntity {
     private CargoStatus status;
 
 
-    @ManyToOne(optional=false)
-    @JoinColumn(name="order_id",referencedColumnName="id")
+    //todo restrict
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
     private OrderEntity orderEntity;
 
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -39,6 +43,7 @@ public class CargoEntity {
     public String getDenomination() {
         return denomination;
     }
+
     public void setDenomination(String denomination) {
         this.denomination = denomination;
     }
@@ -46,6 +51,7 @@ public class CargoEntity {
     public Integer getWeight() {
         return weight;
     }
+
     public void setWeight(Integer weight) {
         this.weight = weight;
     }
@@ -53,6 +59,7 @@ public class CargoEntity {
     public CargoStatus getStatus() {
         return status;
     }
+
     public void setStatus(CargoStatus status) {
         this.status = status;
     }

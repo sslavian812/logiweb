@@ -1,5 +1,7 @@
 package ru.tsystems.shalamov.entities;
 
+import ru.tsystems.shalamov.entities.statuses.DriverStatus;
+
 import javax.persistence.*;
 
 /**
@@ -11,25 +13,25 @@ public class DriverStatusEntity {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private DriverStatus status;
 
-
-    @OneToOne(optional=true, cascade=CascadeType.ALL,
-            mappedBy="driverStatusEntity", targetEntity=DriverEntity.class)
+    @OneToOne(cascade = CascadeType.ALL, optional = true)
+    @JoinColumn(name = "driver_id")
     private DriverEntity driverEntity;
 
-    @ManyToOne(optional=false)
-    @JoinColumn(name="current_truck",referencedColumnName="id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "current_truck", referencedColumnName = "id")
     private TruckEntity truckEntity;
 
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -38,6 +40,7 @@ public class DriverStatusEntity {
     public DriverStatus getStatus() {
         return status;
     }
+
     public void setStatus(DriverStatus status) {
         this.status = status;
     }

@@ -12,23 +12,25 @@ public class ShiftEntity {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "shift_begin", nullable = false)
     private Timestamp shiftBegin;
 
-    @Column(name = "shift_end")
+    @Column(name = "shift_end", nullable = true)
     private Timestamp shiftEnd;
 
-    @ManyToOne(optional=false)
-    @JoinColumn(name="driver_id",referencedColumnName="id")
+    // todo restrict
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "driver_id", referencedColumnName = "id")
     private DriverEntity driverEntity;
 
 
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -36,6 +38,7 @@ public class ShiftEntity {
     public Timestamp getShiftBegin() {
         return shiftBegin;
     }
+
     public void setShiftBegin(Timestamp shiftBegin) {
         this.shiftBegin = shiftBegin;
     }
@@ -43,6 +46,7 @@ public class ShiftEntity {
     public Timestamp getShiftEnd() {
         return shiftEnd;
     }
+
     public void setShiftEnd(Timestamp shiftEnd) {
         this.shiftEnd = shiftEnd;
     }

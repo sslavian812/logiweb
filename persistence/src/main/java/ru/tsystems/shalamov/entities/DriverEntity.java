@@ -1,7 +1,7 @@
 package ru.tsystems.shalamov.entities;
 
 import javax.persistence.*;
-import java.util.Collection;
+import javax.validation.constraints.Pattern;
 
 /**
  * Created by viacheslav on 22.06.2015.
@@ -11,37 +11,36 @@ import java.util.Collection;
 public class DriverEntity {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "first_name", nullable = false)
+    @Pattern(regexp = "[a-zA-Z]+", message = "alphabetic characters only")
     private String firstName;
 
     @Column(name = "last_name", nullable = false)
+    @Pattern(regexp = "[a-zA-Z]+", message = "alphabetic characters only")
     private String lastName;
 
     @Column(name = "personal_number", nullable = false)
     private String personalNumber;
 
-    @OneToOne(cascade = CascadeType.ALL, optional = true)
-    @JoinColumn(name = "id")
+
+    @OneToOne(optional = true, cascade = CascadeType.ALL,
+            mappedBy = "driverEntity", targetEntity = DriverStatusEntity.class)
     private DriverStatusEntity driverStatusEntity;
 
-    @OneToMany( cascade = CascadeType.ALL, mappedBy = "driverEntity", targetEntity = ShiftEntity.class,
-            fetch = FetchType.EAGER)
-    private Collection<ShiftEntity> shiftEntities;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "driverEntity", targetEntity = ShiftEntity.class,
+//            fetch = FetchType.LAZY)
+//    private List<ShiftEntity> shiftEntities;
 
 
     public DriverEntity() {
-        firstName = "";
-        lastName = "";
-        personalNumber = "";
     }
 
-    public DriverEntity(String firstName, String lastName, String personalNumber)
-    {
-        this.firstName      = firstName     ;
-        this.lastName       = lastName      ;
+    public DriverEntity(String firstName, String lastName, String personalNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.personalNumber = personalNumber;
     }
 

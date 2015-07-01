@@ -1,7 +1,10 @@
 package ru.tsystems.shalamov.entities;
 
+import ru.tsystems.shalamov.entities.statuses.TruckStatus;
+
 import javax.persistence.*;
-import java.util.Collection;
+import javax.validation.constraints.Pattern;
+import java.util.List;
 
 /**
  * Created by viacheslav on 22.06.2015.
@@ -19,6 +22,7 @@ public class TruckEntity {
     private int crewSize;
 
     @Column(name = "registration_number", nullable = false)
+    @Pattern(regexp = "[a-zA-Z]{2}[0-9]{5}", message = "two letters and 5 digits")
     private String registrationNumber;
 
     @Column(nullable = false)
@@ -29,12 +33,12 @@ public class TruckEntity {
     private TruckStatus status;
 
     @OneToMany(mappedBy = "truckEntity", targetEntity = OrderEntity.class,
-            fetch = FetchType.EAGER)
-    private Collection<OrderEntity> orderEntities;
+            fetch = FetchType.LAZY)
+    private List<OrderEntity> orderEntities;
 
     @OneToMany(mappedBy = "truckEntity", targetEntity = DriverStatusEntity.class,
-            fetch = FetchType.EAGER)
-    private Collection<DriverStatusEntity> driverStatusEntities;
+            fetch = FetchType.LAZY)
+    private List<DriverStatusEntity> driverStatusEntities;
 
 
     @PreRemove
@@ -48,10 +52,6 @@ public class TruckEntity {
     }
 
     public TruckEntity() {
-        this.capacity = 0;
-        this.crewSize = 0;
-        this.status = TruckStatus.INTACT;
-        this.registrationNumber = "abacaba";
     }
 
     public TruckEntity(int crewSize, String registrationNumber, int capacity, TruckStatus truckStatus) {

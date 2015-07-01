@@ -1,7 +1,9 @@
 package ru.tsystems.shalamov.entities;
 
+import ru.tsystems.shalamov.entities.statuses.OrderStatus;
+
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by viacheslav on 22.06.2015.
@@ -18,14 +20,15 @@ public class OrderEntity {
     @Column(name = "order_identifier", nullable = false)
     private String orderIdentifier;
 
-    @Column
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderEntity", targetEntity = CargoEntity.class,
-            fetch = FetchType.EAGER)
-    private Collection<CargoEntity> cargoEntities;
+            fetch = FetchType.LAZY)
+    private List<CargoEntity> cargoEntities;
 
+    //todo restrict
     @ManyToOne(optional = true)
     @JoinColumn(name = "truck", referencedColumnName = "id")
     private TruckEntity truckEntity;
@@ -87,6 +90,7 @@ public class OrderEntity {
 
     /**
      * Provides total weight of all cargoes included int the order.
+     *
      * @return
      */
     public int getTotalweight() {

@@ -5,7 +5,7 @@ package ru.tsystems.shalamov.dao;
  * <p/>
  * Created by viacheslav on 28.06.2015.
  */
-public class DataAccessLayerException extends RuntimeException {
+public class DataAccessLayerException extends Exception {
     public DataAccessLayerException() {
     }
 

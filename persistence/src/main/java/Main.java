@@ -6,6 +6,10 @@ import org.hibernate.cfg.Configuration;
  * Created by viacheslav on 26.06.2015.
  */
 public class Main {
+
+    private Main() {
+    }
+
     public static void main(String[] args) {
         SessionFactory sessions = new Configuration().configure().buildSessionFactory();
 
