@@ -1,14 +1,8 @@
 package ru.tsystems.shalamov.dao.impl;
 
-import ru.tsystems.shalamov.dao.EntityManagerUtil;
 import ru.tsystems.shalamov.dao.api.DriverDao;
 import ru.tsystems.shalamov.entities.DriverEntity;
-import ru.tsystems.shalamov.entities.DriverStatusEntity;
-import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 
-import javax.persistence.EntityManager;
-import javax.persistence.criteria.*;
-import java.sql.Driver;
 import java.util.List;
 
 /**

@@ -28,6 +28,9 @@
     <option name="priority" value="Medium" />
     <option name="excludeFilter" value="" />
   </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/webapp" />
+  </component>
   <component name="IdProvider" IDEtalkID="59EC899075D0072A9F6D1BF4FBA24AE6" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -36,7 +39,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="QAPlugAnalysisUIOptions">

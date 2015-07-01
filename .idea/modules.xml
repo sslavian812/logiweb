@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/persistence/persistence.iml" filepath="$PROJECT_DIR$/persistence/persistence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webapp/webapp.iml" filepath="$PROJECT_DIR$/webapp/webapp.iml" />
     </modules>
   </component>
 </project>
