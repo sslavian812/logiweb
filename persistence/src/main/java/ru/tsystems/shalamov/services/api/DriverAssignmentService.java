@@ -21,9 +21,9 @@ public interface DriverAssignmentService {
     DriverAssignment getDriverAssignment(String driverPersonalNumber) throws ServieceLauerException;
 
 
-    List<String> getCoDriversPersonalNumbers(String driverPersonalNumber);
+    List<String> getCoDriversPersonalNumbers(String driverPersonalNumber) throws ServieceLauerException;
 
-    String getTruckRegistrationNumber(String driverPersonalNumber);
+    String getTruckRegistrationNumber(String driverPersonalNumber) throws ServieceLauerException;
 
     /**
      * Provides Identifier of the order, if the order if complete(
@@ -32,8 +32,8 @@ public interface DriverAssignmentService {
      * @param personalNumber
      * @return
      */
-    String getOrderIdentifier(String driverPersonalNumber);
+    String getOrderIdentifier(String driverPersonalNumber) throws ServieceLauerException;
 
-    List<CargoEntity> getCargoes(String driverPersonalNumber);
-    List<String> getCargoesDenominations(String driverPersonalNumber);
+    List<CargoEntity> getCargoes(String driverPersonalNumber) throws ServieceLauerException;
+    List<String> getCargoesDenominations(String driverPersonalNumber) throws ServieceLauerException;
 }

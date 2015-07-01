@@ -100,4 +100,13 @@ public class OrderEntity {
         }
         return total;
     }
+
+    public void setCargoEntities(List<CargoEntity> cargoEntities) {
+        this.cargoEntities = cargoEntities;
+    }
+
+    public List<CargoEntity> getCargoEntities() {
+        return cargoEntities;
+    }
+
 }

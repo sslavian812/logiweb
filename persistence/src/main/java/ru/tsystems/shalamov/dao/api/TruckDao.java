@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface TruckDao extends GenericDao<TruckEntity> {
 
+    List<TruckEntity> findAllByCapacity(int minimalCapacity);
 }

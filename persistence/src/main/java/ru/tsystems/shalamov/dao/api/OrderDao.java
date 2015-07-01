@@ -8,4 +8,6 @@ package ru.tsystems.shalamov.dao.api;
  * Created by viacheslav on 28.06.2015.
  */
 public interface OrderDao extends GenericDao<OrderEntity> {
+
+    OrderEntity findByTruckId(int truckId);
 }

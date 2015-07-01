@@ -1,5 +1,6 @@
 package ru.tsystems.shalamov.dao.impl;
 
+import ru.tsystems.shalamov.dao.api.CargoDao;
 import ru.tsystems.shalamov.entities.CargoEntity;
 
 /**
@@ -8,7 +9,7 @@ import ru.tsystems.shalamov.entities.CargoEntity;
  * <p/>
  * Created by viacheslav on 28.06.2015.
  */
-public class CargoDaoImpl extends GenericDaoEntityManagerImpl<CargoEntity> {
+public class CargoDaoImpl extends GenericDaoEntityManagerImpl<CargoEntity> implements CargoDao {
     public CargoDaoImpl() {
         super(CargoEntity.class);
     }

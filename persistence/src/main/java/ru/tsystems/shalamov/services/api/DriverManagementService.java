@@ -17,7 +17,7 @@ public interface DriverManagementService {
 
     List<DriverEntity> listDrivers();
 
-    void addDriver(DriverEntity drier);
+    void addDriver(DriverEntity driver);
 
     void updateDriver(DriverEntity driver);
 

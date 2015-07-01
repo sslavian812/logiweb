@@ -2,6 +2,7 @@ package ru.tsystems.shalamov.services;
 
 import com.sun.istack.internal.Nullable;
 import ru.tsystems.shalamov.entities.CargoEntity;
+import ru.tsystems.shalamov.entities.DriverEntity;
 
 import java.util.List;
 
@@ -16,8 +17,7 @@ public class DriverAssignment {
     @Nullable
     private String driverPersonalNumber;
 
-    private String primaryDriverNumner;
-    private List<String> coDriverPersonalNumbers;
+    private List<DriverEntity> coDrivers;
     private String truckRegistrationNumber;
     private String orderIdentifier;
     private List<CargoEntity> cargos;
@@ -30,20 +30,12 @@ public class DriverAssignment {
         this.driverPersonalNumber = driverPersonalNumber;
     }
 
-    public String getPrimaryDriverNumner() {
-        return primaryDriverNumner;
+    public List<DriverEntity> getCoDrivers() {
+        return coDrivers;
     }
 
-    public void setPrimaryDriverNumner(String primaryDriverNumner) {
-        this.primaryDriverNumner = primaryDriverNumner;
-    }
-
-    public List<String> getCoDriverPersonalNumbers() {
-        return coDriverPersonalNumbers;
-    }
-
-    public void setCoDriverPersonalNumbers(List<String> coDriverPersonalNumbers) {
-        this.coDriverPersonalNumbers = coDriverPersonalNumbers;
+    public void setCoDrivers(List<DriverEntity> coDriverPersonalNumbers) {
+        this.coDrivers = coDriverPersonalNumbers;
     }
 
     public String getTruckRegistrationNumber() {

@@ -53,7 +53,6 @@ public class EntityManagerTest extends TestCase {
 
     private void showAll() {
         EntityManager entityManager = EntityManagerUtil.createEntityManager();
-        entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
         List<TruckEntity> result = entityManager.createQuery("from TruckEntity").getResultList();

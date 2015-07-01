@@ -1,6 +1,7 @@
 package ru.tsystems.shalamov.dao.impl;
 
 
+import ru.tsystems.shalamov.dao.api.DriverStatusDao;
 import ru.tsystems.shalamov.entities.DriverStatusEntity;
 
 /**
@@ -9,7 +10,7 @@ import ru.tsystems.shalamov.entities.DriverStatusEntity;
  * <p/>
  * Created by viacheslav on 28.06.2015.
  */
-public class DriverStatusDaoImpl extends GenericDaoEntityManagerImpl<DriverStatusEntity> {
+public class DriverStatusDaoImpl extends GenericDaoEntityManagerImpl<DriverStatusEntity> implements DriverStatusDao {
 
     public DriverStatusDaoImpl() {
         super(DriverStatusEntity.class);

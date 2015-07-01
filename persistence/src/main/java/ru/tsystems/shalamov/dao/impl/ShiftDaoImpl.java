@@ -1,6 +1,7 @@
 package ru.tsystems.shalamov.dao.impl;
 
 
+import ru.tsystems.shalamov.dao.api.ShiftDao;
 import ru.tsystems.shalamov.entities.ShiftEntity;
 
 /**
@@ -9,7 +10,7 @@ import ru.tsystems.shalamov.entities.ShiftEntity;
  * <p/>
  * Created by viacheslav on 28.06.2015.
  */
-public class ShiftDaoImpl extends GenericDaoEntityManagerImpl<ShiftEntity> {
+public class ShiftDaoImpl extends GenericDaoEntityManagerImpl<ShiftEntity> implements ShiftDao{
 
     public ShiftDaoImpl() {
         super(ShiftEntity.class);

@@ -1,5 +1,6 @@
 package ru.tsystems.shalamov.dao.impl;
 
+import ru.tsystems.shalamov.dao.api.OrderDao;
 import ru.tsystems.shalamov.entities.OrderEntity;
 
 /**
@@ -8,9 +9,15 @@ import ru.tsystems.shalamov.entities.OrderEntity;
  * <p/>
  * Created by viacheslav on 28.06.2015.
  */
-public class OrderDaoImpl extends GenericDaoEntityManagerImpl<OrderEntity> {
+public class OrderDaoImpl extends GenericDaoEntityManagerImpl<OrderEntity> implements OrderDao {
 
     public OrderDaoImpl() {
         super(OrderEntity.class);
+    }
+
+    @Override
+    public OrderEntity findByTruckId(int truckId) {
+        //TODO implement
+        return null;
     }
 }
