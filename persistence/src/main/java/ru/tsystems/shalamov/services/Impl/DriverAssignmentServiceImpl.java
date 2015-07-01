@@ -1,10 +1,10 @@
 package ru.tsystems.shalamov.services.Impl;
 
-import ru.tsystems.shalamov.dao.DaoFactory;
+import ru.tsystems.shalamov.dao.DaoProvider;
 import ru.tsystems.shalamov.entities.*;
 import ru.tsystems.shalamov.services.DriverAssignment;
 import ru.tsystems.shalamov.services.api.DriverAssignmentService;
-import ru.tsystems.shalamov.services.api.ServieceLauerException;
+import ru.tsystems.shalamov.services.ServieceLauerException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,18 +30,18 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
 
         driverAssignment.setDriverPersonalNumber(driverPersonalNumber);
 
-        DriverEntity driver = DaoFactory.getDriverDao().findByPersonalNumber(driverPersonalNumber);
-        DriverStatusEntity driverStatus = DaoFactory.getDriverStatusDao().read(driver.getId());
+        DriverEntity driver = DaoProvider.getDriverDao().findByPersonalNumber(driverPersonalNumber);
+        DriverStatusEntity driverStatus = DaoProvider.getDriverStatusDao().read(driver.getId());
         TruckEntity truck = driverStatus.getTruckEntity();
         driverAssignment.setTruckRegistrationNumber(truck.getRegistrationNumber());
 
-        OrderEntity order = DaoFactory.getOrderDao().findByTruckId(truck.getId());
+        OrderEntity order = DaoProvider.getOrderDao().findByTruckId(truck.getId());
         driverAssignment.setOrderIdentifier(order.getOrderIdentifier());
 
         List<CargoEntity> cargos = order.getCargoEntities();
         driverAssignment.setCargos(cargos);
 
-        List<DriverEntity> coDrivers = DaoFactory.getDriverDao().findByCurrentTruck(truck.getId());
+        List<DriverEntity> coDrivers = DaoProvider.getDriverDao().findByCurrentTruck(truck.getId());
         driverAssignment.setCoDrivers(coDrivers);
 
         return driverAssignment;

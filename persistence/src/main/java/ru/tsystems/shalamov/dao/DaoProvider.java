@@ -6,16 +6,17 @@ import ru.tsystems.shalamov.dao.impl.*;
 /**
  * Created by viacheslav on 01.07.2015.
  */
-public class DaoFactory {
+public class DaoProvider {
 
     private static DriverDao driverDao = null;
     private static OrderDao orderDao = null;
     private static TruckDao truckDao = null;
     private static DriverStatusDao driverStatusDao = null;
-
-
     private static CargoDao cargoDao = null;
     private static ShiftDao shiftDao = null;
+
+    private DaoProvider() {
+    }
 
     public static CargoDao getCargoDao() {
         if (cargoDao == null) {

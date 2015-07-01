@@ -1,6 +1,7 @@
 package ru.tsystems.shalamov.services.api;
 
 import ru.tsystems.shalamov.entities.TruckEntity;
+import ru.tsystems.shalamov.services.ServieceLauerException;
 
 import java.util.List;
 
@@ -37,9 +38,9 @@ public interface TruckManagementService {
      * @param truck {@link ru.tsystems.shalamov.entities.TruckEntity} instance,
      *              describing the truck. There should be one in the database
      *              with the same id. Otherwise, the {@link
-     *              ServieceLauerException}
+     *              ru.tsystems.shalamov.services.ServieceLauerException}
      *              will be thrown.
-     * @throws ServieceLauerException if incorrect id provided.
+     * @throws ru.tsystems.shalamov.services.ServieceLauerException if incorrect id provided.
      */
     void updateTruck(TruckEntity truck) throws ServieceLauerException;
 

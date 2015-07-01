@@ -1,4 +1,4 @@
-package ru.tsystems.shalamov.services.api;
+package ru.tsystems.shalamov.services;
 
 /**
  * Exception, which is thrown on services layer to indicate some failures.
@@ -9,7 +9,7 @@ public class ServieceLauerException extends Exception {
     ServieceLauerException() {
     }
 
-    ServieceLauerException(String message) {
+    public ServieceLauerException(String message) {
         super(message);
     }
 

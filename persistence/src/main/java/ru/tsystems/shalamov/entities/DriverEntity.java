@@ -100,4 +100,12 @@ public class DriverEntity {
         result = 31 * result + (personalNumber != null ? personalNumber.hashCode() : 0);
         return result;
     }
+
+    public DriverStatusEntity getDriverStatusEntity() {
+        return driverStatusEntity;
+    }
+
+    public void setDriverStatusEntity(DriverStatusEntity driverStatusEntity) {
+        this.driverStatusEntity = driverStatusEntity;
+    }
 }

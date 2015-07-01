@@ -3,8 +3,7 @@ package ru.tsystems.shalamov.services.api;
 import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.entities.OrderEntity;
 import ru.tsystems.shalamov.entities.TruckEntity;
-import ru.tsystems.shalamov.entities.statuses.CargoStatus;
-import ru.tsystems.shalamov.entities.statuses.OrderStatus;
+import ru.tsystems.shalamov.services.ServieceLauerException;
 
 import java.util.List;
 
@@ -50,27 +49,27 @@ public interface OrderManagementService {
      * @param truck   the truck, which's crew should be formed.
      * @param order   order, which should be performed.
      */
-    void assignDriversAndTruckToOrder(List<DriverEntity> drivers, TruckEntity truck, OrderEntity order);
+    void assignDriversAndTruckToOrder(List<DriverEntity> drivers,
+                                      TruckEntity truck, OrderEntity order)
+            throws ServieceLauerException;
 
 
 
-
-
-    /**
-     * Provides status of the order.
-     *
-     * @param orderId id of ther order
-     * @return {@link ru.tsystems.shalamov.entities.statuses.OrderStatus} enum,
-     * indicating status of the order.
-     */
-    OrderStatus getOrderStatusById(int orderId) throws ServieceLauerException;
-
-    /**
-     * Provides status of the cargo.
-     *
-     * @param cargoId if of the cargo
-     * @return {@link ru.tsystems.shalamov.entities.statuses.CargoStatus} enum,
-     * indicating status of the cargo.
-     */
-    CargoStatus getCargoStatusById(int cargoId) throws ServieceLauerException;
+//    /**
+//     * Provides status of the order.
+//     *
+//     * @param orderId id of ther order
+//     * @return {@link ru.tsystems.shalamov.entities.statuses.OrderStatus} enum,
+//     * indicating status of the order.
+//     */
+//    OrderStatus getOrderStatusById(int orderId) throws ServieceLauerException;
+//
+//    /**
+//     * Provides status of the cargo.
+//     *
+//     * @param cargoId if of the cargo
+//     * @return {@link ru.tsystems.shalamov.entities.statuses.CargoStatus} enum,
+//     * indicating status of the cargo.
+//     */
+//    CargoStatus getCargoStatusById(int cargoId) throws ServieceLauerException;
 }

@@ -1,6 +1,6 @@
 package ru.tsystems.shalamov.services.Impl;
 
-import ru.tsystems.shalamov.dao.DaoFactory;
+import ru.tsystems.shalamov.dao.DaoProvider;
 import ru.tsystems.shalamov.dao.api.DriverDao;
 import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.services.api.DriverManagementService;
@@ -13,27 +13,27 @@ import java.util.List;
 public class DriverManagementServiceImpl implements DriverManagementService {
     @Override
     public List<DriverEntity> listDrivers() {
-        return DaoFactory.getDriverDao().findAll();
+        return DaoProvider.getDriverDao().findAll();
     }
 
     @Override
     public void addDriver(DriverEntity driver) {
-        DaoFactory.getDriverDao().create(driver);
+        DaoProvider.getDriverDao().create(driver);
     }
 
     @Override
     public void updateDriver(DriverEntity driver) {
-        DaoFactory.getDriverDao().update(driver);
+        DaoProvider.getDriverDao().update(driver);
     }
 
     @Override
     public void deleteDriverById(int driverId) {
-        DriverDao driverDao = DaoFactory.getDriverDao();
+        DriverDao driverDao = DaoProvider.getDriverDao();
         driverDao.delete(driverDao.read(driverId));
     }
 
     @Override
     public List<DriverEntity> findAvailableDrivers() {
-        return DaoFactory.getDriverDao().findAvailable();
+        return DaoProvider.getDriverDao().findAvailable();
     }
 }

@@ -2,6 +2,7 @@ package ru.tsystems.shalamov.services.api;
 
 import ru.tsystems.shalamov.entities.CargoEntity;
 import ru.tsystems.shalamov.services.DriverAssignment;
+import ru.tsystems.shalamov.services.ServieceLauerException;
 
 import java.util.List;
 
