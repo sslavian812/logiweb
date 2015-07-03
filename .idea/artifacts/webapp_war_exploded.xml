@@ -33,6 +33,7 @@
           <element id="library" level="project" name="Maven: org.javassist:javassist:3.18.1-GA" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.6" />
           <element id="library" level="project" name="Maven: javax.validation:validation-api:1.0.0.GA" />
+          <element id="library" level="project" name="Maven: org.jvnet.sorcerer:sorcerer-javac:0.8" />
         </element>
       </element>
       <element id="directory" name="META-INF">

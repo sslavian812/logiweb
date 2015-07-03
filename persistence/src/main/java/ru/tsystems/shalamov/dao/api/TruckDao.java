@@ -10,5 +10,7 @@ import java.util.List;
  */
 public interface TruckDao extends GenericDao<TruckEntity> {
 
-    List<TruckEntity> findAllByCapacity(int minimalCapacity);
+    List<TruckEntity> findByMinCapacityWhereStatusOkAndNotAssignedToOrder(int minimalCapacity);
+
+    TruckEntity findByRegistrationNumber(String truckRegistrationNumber);
 }

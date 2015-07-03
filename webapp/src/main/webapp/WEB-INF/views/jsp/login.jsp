@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: viacheslav
@@ -6,16 +5,18 @@
   Time: 2:37
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+<%@ page isELIgnored="false" contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>welcome!</title>
 </head>
 <body>
 
-your login is : <c:out value="${login}" />
-<br/>
-yout password is : <c:out value="${password}"/>
+<c:out value="${check}" />
+<%--your login is : <c:out value="${login}" />--%>
+<%--<br/>--%>
+<%--yout password is : <c:out value="${password}"/>--%>
 
 </body>
 </html>

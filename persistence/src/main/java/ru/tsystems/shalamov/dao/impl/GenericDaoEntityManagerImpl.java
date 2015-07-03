@@ -1,6 +1,5 @@
 package ru.tsystems.shalamov.dao.impl;
 
-import ru.tsystems.shalamov.dao.EntityManagerUtil;
 import ru.tsystems.shalamov.dao.api.GenericDao;
 
 import javax.persistence.EntityManager;
@@ -15,45 +14,44 @@ import java.util.List;
 public class GenericDaoEntityManagerImpl<T> implements GenericDao<T> {
 
     private Class<T> type;
+    EntityManager em;
 
-    public GenericDaoEntityManagerImpl(Class<T> type) {
+    public GenericDaoEntityManagerImpl(Class<T> type, EntityManager entityManager) {
         this.type = type;
+        this.em = entityManager;
     }
-
-    //todo: should I close entityManagers in each method here?
 
     @Override
     public void create(T newInstance) {
-        getManager().persist(newInstance);
+        getEntityManager().persist(newInstance);
     }
 
     @Override
     public T read(int id) {
-        return getManager().find(type, id);
+        return getEntityManager().find(type, id);
     }
 
     @Override
     public void update(T transientObject) {
-        getManager().refresh(transientObject);
+        getEntityManager().refresh(transientObject);
     }
 
     @Override
     public void delete(T persistentObject) {
-        getManager().remove(persistentObject);
+        getEntityManager().remove(persistentObject);
     }
 
     @Override
     public List<T> findAll() {
-        //return EntityManagerUtil.createEntityManager().createQuery("from "+ T.class.getSimpleName());
 
-        EntityManager em = EntityManagerUtil.createEntityManager();
+        EntityManager em = getEntityManager();
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<T> query = criteriaBuilder.createQuery(type);
         Root<T> tRoot = query.from(type);
         return em.createQuery(query.select(tRoot)).getResultList();
     }
 
-    private EntityManager getManager() {
-        return EntityManagerUtil.createEntityManager();
+    protected EntityManager getEntityManager() {
+        return em;
     }
 }

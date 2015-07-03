@@ -1,6 +1,5 @@
-package ru.tsystems.shalamov.services.Impl;
+package ru.tsystems.shalamov.services.impl;
 
-import ru.tsystems.shalamov.dao.DaoProvider;
 import ru.tsystems.shalamov.dao.api.DriverDao;
 import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.services.api.DriverManagementService;
@@ -11,29 +10,35 @@ import java.util.List;
  * Created by viacheslav on 01.07.2015.
  */
 public class DriverManagementServiceImpl implements DriverManagementService {
+    DriverDao driverDao;
+
+    public DriverManagementServiceImpl(DriverDao driverDao) {
+        this.driverDao = driverDao;
+    }
+
+
     @Override
     public List<DriverEntity> listDrivers() {
-        return DaoProvider.getDriverDao().findAll();
+        return driverDao.findAll();
     }
 
     @Override
     public void addDriver(DriverEntity driver) {
-        DaoProvider.getDriverDao().create(driver);
+        driverDao.create(driver);
     }
 
     @Override
     public void updateDriver(DriverEntity driver) {
-        DaoProvider.getDriverDao().update(driver);
+        driverDao.update(driver);
     }
 
     @Override
-    public void deleteDriverById(int driverId) {
-        DriverDao driverDao = DaoProvider.getDriverDao();
-        driverDao.delete(driverDao.read(driverId));
+    public void deleteDriverByPersonalDriver(String driverPersonalNumber) {
+        driverDao.delete(driverDao.findByPersonalNumber(driverPersonalNumber));
     }
 
-    @Override
-    public List<DriverEntity> findAvailableDrivers() {
-        return DaoProvider.getDriverDao().findAvailable();
-    }
+//    @Override
+//    public List<DriverEntity> findAvailableDrivers() {
+//        return driverDao.findByMaxWorkingHoursWhereNotAssignedToOrder();
+//    }
 }

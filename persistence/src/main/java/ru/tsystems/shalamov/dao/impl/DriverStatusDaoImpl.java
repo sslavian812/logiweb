@@ -4,6 +4,8 @@ package ru.tsystems.shalamov.dao.impl;
 import ru.tsystems.shalamov.dao.api.DriverStatusDao;
 import ru.tsystems.shalamov.entities.DriverStatusEntity;
 
+import javax.persistence.EntityManager;
+
 /**
  * Abstract generic DAO implementation for {@link ru.tsystems.shalamov.entities.DriverStatusEntity}.
  * CRUD operations are inherited. Implements some domain-specific operations.
@@ -12,7 +14,7 @@ import ru.tsystems.shalamov.entities.DriverStatusEntity;
  */
 public class DriverStatusDaoImpl extends GenericDaoEntityManagerImpl<DriverStatusEntity> implements DriverStatusDao {
 
-    public DriverStatusDaoImpl() {
-        super(DriverStatusEntity.class);
+    public DriverStatusDaoImpl(EntityManager entityManager) {
+        super(DriverStatusEntity.class, entityManager);
     }
 }

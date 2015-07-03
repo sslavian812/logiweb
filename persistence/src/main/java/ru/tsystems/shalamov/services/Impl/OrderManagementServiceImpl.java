@@ -1,13 +1,15 @@
-package ru.tsystems.shalamov.services.Impl;
+package ru.tsystems.shalamov.services.impl;
 
-import ru.tsystems.shalamov.dao.DaoProvider;
+import ru.tsystems.shalamov.dao.api.DriverDao;
 import ru.tsystems.shalamov.dao.api.DriverStatusDao;
+import ru.tsystems.shalamov.dao.api.OrderDao;
+import ru.tsystems.shalamov.dao.api.TruckDao;
 import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.entities.DriverStatusEntity;
 import ru.tsystems.shalamov.entities.OrderEntity;
 import ru.tsystems.shalamov.entities.TruckEntity;
-import ru.tsystems.shalamov.services.api.OrderManagementService;
 import ru.tsystems.shalamov.services.ServieceLauerException;
+import ru.tsystems.shalamov.services.api.OrderManagementService;
 
 import java.util.List;
 
@@ -15,31 +17,46 @@ import java.util.List;
  * Created by viacheslav on 01.07.2015.
  */
 public class OrderManagementServiceImpl implements OrderManagementService {
+
+    DriverDao driverDao;
+    OrderDao orderDao;
+    TruckDao truckDao;
+    DriverStatusDao driverStatusDao;
+
+    public OrderManagementServiceImpl(DriverDao driverDao, OrderDao orderDao,
+                                      TruckDao truckDao, DriverStatusDao driverStatusDao) {
+        this.driverDao = driverDao;
+        this.orderDao = orderDao;
+        this.truckDao = truckDao;
+        this.driverStatusDao = driverStatusDao;
+    }
+
+
     @Override
     public void createOrder(OrderEntity order) {
-        DaoProvider.getOrderDao().create(order);
+        orderDao.create(order);
     }
 
     @Override
     public void updateOrder(OrderEntity order) throws ServieceLauerException {
-        DaoProvider.getOrderDao().update(order);
+        orderDao.update(order);
     }
 
     @Override
     public List<OrderEntity> listOrders() {
-        return DaoProvider.getOrderDao().findAll();
+        return orderDao.findAll();
     }
 
     @Override
     public List<TruckEntity> findTrucksForOrder(OrderEntity order) {
-        List<TruckEntity> suitableTrucks = DaoProvider.getTruckDao().findAllByCapacity(order.getTotalweight());
+        List<TruckEntity> suitableTrucks = truckDao.findByMinCapacityWhereStatusOkAndNotAssignedToOrder(order.getTotalweight());
         // todo make join here and filter only cars, which are not assigned to Any order.
         return suitableTrucks;
     }
 
     @Override
     public List<DriverEntity> findDriversForOrder(OrderEntity order) {
-        return DaoProvider.getDriverDao().findAvailable();
+        return driverDao.findByMaxWorkingHoursWhereNotAssignedToOrder();
     }
 
     @Override
@@ -50,10 +67,9 @@ public class OrderManagementServiceImpl implements OrderManagementService {
         }
 
         order.setTruckEntity(truck);
-        DaoProvider.getOrderDao().update(order);
+        orderDao.update(order);
 
         drivers.subList(0, crewSize);
-        DriverStatusDao driverStatusDao = DaoProvider.getDriverStatusDao();
         for (DriverEntity driver : drivers) {
             DriverStatusEntity driverStatus = driver.getDriverStatusEntity();
             driverStatus.setTruckEntity(truck);

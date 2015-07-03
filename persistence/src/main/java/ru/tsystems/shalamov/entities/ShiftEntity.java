@@ -1,6 +1,7 @@
 package ru.tsystems.shalamov.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
@@ -8,12 +9,12 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "shifts", schema = "", catalog = "logiweb")
-public class ShiftEntity {
+public class ShiftEntity implements Serializable {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private transient int id;
 
     @Column(name = "shift_begin", nullable = false)
     private Timestamp shiftBegin;

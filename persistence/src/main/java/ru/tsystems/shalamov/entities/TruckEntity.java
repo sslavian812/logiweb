@@ -4,6 +4,7 @@ import ru.tsystems.shalamov.entities.statuses.TruckStatus;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,12 +12,12 @@ import java.util.List;
  */
 @Entity
 @Table(name = "trucks", schema = "", catalog = "logiweb")
-public class TruckEntity {
+public class TruckEntity implements Serializable {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private transient int id;
 
     @Column(name = "crew_size", nullable = false)
     private int crewSize;

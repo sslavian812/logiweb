@@ -4,6 +4,8 @@ package ru.tsystems.shalamov.dao.impl;
 import ru.tsystems.shalamov.dao.api.ShiftDao;
 import ru.tsystems.shalamov.entities.ShiftEntity;
 
+import javax.persistence.EntityManager;
+
 /**
  * Abstract generic DAO implementation for {@link ru.tsystems.shalamov.entities.ShiftEntity}.
  * CRUD operations are inherited. Implements some domain-specific operations.
@@ -12,7 +14,7 @@ import ru.tsystems.shalamov.entities.ShiftEntity;
  */
 public class ShiftDaoImpl extends GenericDaoEntityManagerImpl<ShiftEntity> implements ShiftDao{
 
-    public ShiftDaoImpl() {
-        super(ShiftEntity.class);
+    public ShiftDaoImpl(EntityManager entityManager) {
+        super(ShiftEntity.class, entityManager);
     }
 }

@@ -3,6 +3,7 @@ package ru.tsystems.shalamov.entities;
 import ru.tsystems.shalamov.entities.statuses.OrderStatus;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,12 +11,12 @@ import java.util.List;
  */
 @Entity
 @Table(name = "orders", schema = "", catalog = "logiweb")
-public class OrderEntity {
+public class OrderEntity implements Serializable {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private transient int id;
 
     @Column(name = "order_identifier", nullable = false)
     private String orderIdentifier;

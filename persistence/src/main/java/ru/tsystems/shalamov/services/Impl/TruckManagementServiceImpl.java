@@ -1,6 +1,5 @@
-package ru.tsystems.shalamov.services.Impl;
+package ru.tsystems.shalamov.services.impl;
 
-import ru.tsystems.shalamov.dao.DaoProvider;
 import ru.tsystems.shalamov.dao.api.TruckDao;
 import ru.tsystems.shalamov.entities.TruckEntity;
 import ru.tsystems.shalamov.services.ServieceLauerException;
@@ -12,29 +11,35 @@ import java.util.List;
  * Created by viacheslav on 01.07.2015.
  */
 public class TruckManagementServiceImpl implements TruckManagementService {
+    TruckDao truckDao;
+
+    public TruckManagementServiceImpl(TruckDao truckDao) {
+        this.truckDao = truckDao;
+    }
+
+
     @Override
     public List<TruckEntity> getAllTrucks() {
-        return DaoProvider.getTruckDao().findAll();
+        return truckDao.findAll();
     }
 
     @Override
     public void addTruck(TruckEntity truck) {
-        DaoProvider.getTruckDao().create(truck);
+        truckDao.create(truck);
     }
 
     @Override
     public void updateTruck(TruckEntity truck) throws ServieceLauerException {
-        DaoProvider.getTruckDao().update(truck);
+        truckDao.update(truck);
     }
 
     @Override
-    public void deleteTruckById(int truckId) throws ServieceLauerException {
-        TruckDao truckDao = DaoProvider.getTruckDao();
-        truckDao.delete(truckDao.read(truckId));
+    public void deleteTruckByRegistrationNumber(String truckRegistrationNumber) throws ServieceLauerException {
+        truckDao.delete(truckDao.findByRegistrationNumber(truckRegistrationNumber));
     }
 
-    @Override
-    public List<TruckEntity> findAvailableTrucks(int minimalCapacity) {
-        return DaoProvider.getTruckDao().findAllByCapacity(minimalCapacity);
-    }
+//    @Override
+//    public List<TruckEntity> findAvailableTrucks(int minimalCapacity) {
+//        return truckDao.findByMinCapacityWhereStatusOkAndNotAssignedToOrder(minimalCapacity);
+//    }
 }

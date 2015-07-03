@@ -47,23 +47,23 @@ public interface TruckManagementService {
     /**
      * Removes Specified truck.
      *
-     * @param truckId Id of the truck to be removed. If there is no truck with
+     * @param truckRegistrationNumber Id of the truck to be removed. If there is no truck with
      *                such Id, the {@link
-     *                ServieceLauerException}
+     *                ru.tsystems.shalamov.services.ServieceLauerException}
      *                will be thrown.
      * @hrows LogiwebManagerException if incorrect id provided.
      */
-    void deleteTruckById(int truckId) throws ServieceLauerException;
+    void deleteTruckByRegistrationNumber(String truckRegistrationNumber) throws ServieceLauerException;
 
-    /**
-     * Provides list of trucks, meeting following criteria:
-     * 1) Truck is intact (not broken).
-     * 2) Truck has sufficient capacity.
-     * 3) Truck is not assigned on any other orders.
-     *
-     * @param minimalCapacity minimal capacity to handle the cargoes in order.
-     * @return list of suitable trucks.
-     */
-    List<TruckEntity> findAvailableTrucks(int minimalCapacity);
+//    /**
+//     * Provides list of trucks, meeting following criteria:
+//     * 1) Truck is intact (not broken).
+//     * 2) Truck has sufficient capacity.
+//     * 3) Truck is not assigned on any other orders.
+//     *
+//     * @param minimalCapacity minimal capacity to handle the cargoes in order.
+//     * @return list of suitable trucks.
+//     */
+//    List<TruckEntity> findAvailableTrucks(int minimalCapacity);
 
 }

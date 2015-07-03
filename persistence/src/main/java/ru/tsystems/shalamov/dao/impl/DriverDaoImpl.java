@@ -2,7 +2,11 @@ package ru.tsystems.shalamov.dao.impl;
 
 import ru.tsystems.shalamov.dao.api.DriverDao;
 import ru.tsystems.shalamov.entities.DriverEntity;
+import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -13,28 +17,18 @@ import java.util.List;
  */
 public class DriverDaoImpl extends GenericDaoEntityManagerImpl<DriverEntity> implements DriverDao {
 
-    public DriverDaoImpl() { super(DriverEntity.class);
+    public DriverDaoImpl(EntityManager entityManager) { super(DriverEntity.class, entityManager);
     }
 
     @Override
-    public List<DriverEntity> findAvailable() {
+    public List<DriverEntity> findByMaxWorkingHoursWhereNotAssignedToOrder() {
 
-        // TODO: I'm stuck here for long time, but nothing reached.
-//        EntityManager em = EntityManagerUtil.createEntityManager();
-//
-//        CriteriaBuilder cb = em.getCriteriaBuilder();
-//
-//        CriteriaQuery<DriverEntity> driverCriteria = cb.createQuery(DriverEntity.class);
-//        CriteriaQuery<DriverStatusEntity> statusCriteria = cb.createQuery(DriverStatusEntity.class);
-//
-//        Root<DriverEntity> driverRoot = driverCriteria.from(DriverEntity.class);
-//        Root<DriverStatusEntity> statusRoot = statusCriteria.from(DriverStatusEntity.class);
-//
-//        Join<DriverEntity, DriverStatusEntity> statusJoin = statusRoot.join("driver_id", JoinType.RIGHT);
-//
-//        driverCriteria.where(cb.equal(statusJoin.get(DriverStatusEntity_.status), DriverStatus.REST));
-//
-//        driverCriteria.select(driverRoot);
+        EntityManager em = getEntityManager();
+
+        TypedQuery<DriverEntity> q = em.createQuery(
+                "SELECT d FROM DriverEntity d JOIN d.driverStatusEntity s WHERE s.status IN :driverStatuses", DriverEntity.class);
+        q.setParameter("driverStatuses", Arrays.asList(DriverStatus.PRIMARY, DriverStatus.AUXILIARY));
+        q.getResultList();
 
         return null;
     }

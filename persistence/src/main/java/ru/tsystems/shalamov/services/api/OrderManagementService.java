@@ -35,11 +35,25 @@ public interface OrderManagementService {
     List<OrderEntity> listOrders();
 
 
+    /**
+     * Provides list of trucks, meeting following criteria:
+     * 1) Truck is intact (not broken).
+     * 2) Truck has sufficient capacity.
+     * 3) Truck is not assigned on any other orders.
+     *
+     * @param order order which for suitable truck will be searched.
+     * @return list of suitable trucks.
+     */
     List<TruckEntity> findTrucksForOrder(OrderEntity order);
-        // call TruckManagementService.findAvailableTrucks(order.getTotalWeight());
 
+    /**
+     * Provides list of available drivers(less than 176 work hours in the month
+     * and not assigned yet for any other Order)
+     *
+     * @param order not userd for now
+     * @return list of available Drivers.
+     */
     List<DriverEntity> findDriversForOrder(OrderEntity order);
-        // call DriverManagementService.findAvailableDrivers();  no usage of order for now!!
 
     /**
      * Assigns given drivers as a crew for a truck and truck to order if possible.

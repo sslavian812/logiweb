@@ -3,24 +3,25 @@ package ru.tsystems.shalamov.entities;
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by viacheslav on 22.06.2015.
  */
 @Entity
 @Table(name = "driver_statuses", schema = "", catalog = "logiweb")
-public class DriverStatusEntity {
+public class DriverStatusEntity implements Serializable {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private transient int id;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private DriverStatus status;
 
-    @OneToOne(cascade = CascadeType.ALL, optional = true)
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "driver_id")
     private DriverEntity driverEntity;
 

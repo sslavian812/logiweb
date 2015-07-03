@@ -3,17 +3,18 @@ package ru.tsystems.shalamov.entities;
 import ru.tsystems.shalamov.entities.statuses.CargoStatus;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by viacheslav on 22.06.2015.
  */
 @Entity
 @Table(name = "cargos", schema = "", catalog = "logiweb")
-public class CargoEntity {
+public class CargoEntity implements Serializable {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private transient int id;
 
     @Column(nullable = false)
     private String denomination;

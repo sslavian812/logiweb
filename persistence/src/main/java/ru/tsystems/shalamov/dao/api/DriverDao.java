@@ -10,7 +10,7 @@ import java.util.List;
  * Created by viacheslav on 28.06.2015.
  */
 public interface DriverDao extends GenericDao<DriverEntity> {
-    List<DriverEntity> findAvailable();
+    List<DriverEntity> findByMaxWorkingHoursWhereNotAssignedToOrder();
 
     DriverEntity findByPersonalNumber(String driverPersonalNumber);
 

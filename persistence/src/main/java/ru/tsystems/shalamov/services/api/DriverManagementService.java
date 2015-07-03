@@ -21,13 +21,5 @@ public interface DriverManagementService {
 
     void updateDriver(DriverEntity driver);
 
-    void deleteDriverById(int driverId);
-
-    /**
-     * Provides list of available drivers(less than 176 work hours in the month
-     * and not assigned yet for any other Order)
-     *
-     * @return list of available Drivers.
-     */
-    List<DriverEntity> findAvailableDrivers();
+    void deleteDriverByPersonalDriver(String driverPersonalNumber);
 }

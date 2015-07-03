@@ -2,17 +2,18 @@ package ru.tsystems.shalamov.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 
 /**
  * Created by viacheslav on 22.06.2015.
  */
 @Entity
 @Table(name = "drivers", schema = "", catalog = "logiweb")
-public class DriverEntity {
+public class DriverEntity implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private transient int id;
 
     @Column(name = "first_name", nullable = false)
     @Pattern(regexp = "[a-zA-Z]+", message = "alphabetic characters only")
@@ -26,7 +27,7 @@ public class DriverEntity {
     private String personalNumber;
 
 
-    @OneToOne(optional = true, cascade = CascadeType.ALL,
+    @OneToOne(optional = false, cascade = CascadeType.ALL,
             mappedBy = "driverEntity", targetEntity = DriverStatusEntity.class)
     private DriverStatusEntity driverStatusEntity;
 

@@ -3,6 +3,8 @@ package ru.tsystems.shalamov.dao.impl;
 import ru.tsystems.shalamov.dao.api.OrderDao;
 import ru.tsystems.shalamov.entities.OrderEntity;
 
+import javax.persistence.EntityManager;
+
 /**
  * Abstract generic DAO implementation for {@link ru.tsystems.shalamov.entities.OrderEntity}.
  * CRUD operations are inherited. Implements some domain-specific operations.
@@ -11,8 +13,8 @@ import ru.tsystems.shalamov.entities.OrderEntity;
  */
 public class OrderDaoImpl extends GenericDaoEntityManagerImpl<OrderEntity> implements OrderDao {
 
-    public OrderDaoImpl() {
-        super(OrderEntity.class);
+    public OrderDaoImpl(EntityManager entityManager) {
+        super(OrderEntity.class, entityManager);
     }
 
     @Override

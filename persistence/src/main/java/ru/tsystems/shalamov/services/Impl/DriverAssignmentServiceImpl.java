@@ -1,10 +1,11 @@
-package ru.tsystems.shalamov.services.Impl;
+package ru.tsystems.shalamov.services.impl;
 
-import ru.tsystems.shalamov.dao.DaoProvider;
+import ru.tsystems.shalamov.dao.api.DriverDao;
+import ru.tsystems.shalamov.dao.api.OrderDao;
 import ru.tsystems.shalamov.entities.*;
 import ru.tsystems.shalamov.services.DriverAssignment;
-import ru.tsystems.shalamov.services.api.DriverAssignmentService;
 import ru.tsystems.shalamov.services.ServieceLauerException;
+import ru.tsystems.shalamov.services.api.DriverAssignmentService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,13 +14,24 @@ import java.util.stream.Collectors;
  * Created by viacheslav on 01.07.2015.
  */
 public class DriverAssignmentServiceImpl implements DriverAssignmentService {
+
+    DriverDao driverDao;
+    OrderDao orderDao;
+
+    public DriverAssignmentServiceImpl(DriverDao driverDao, OrderDao orderDao) {
+        this.driverDao = driverDao;
+        this.orderDao = orderDao;
+    }
+
+
     /**
      * provides "driver assignment card":
-     *     private String driverPersonalNumber; +
-     *     private List<DriverEntity> coDriverPersonalNumbers;
-     *     private String truckRegistrationNumber; +
-     *     private String orderIdentifier; +
-     *     private List<CargoEntity> cargos; +
+     * private String driverPersonalNumber; +
+     * private List<DriverEntity> coDriverPersonalNumbers;
+     * private String truckRegistrationNumber; +
+     * private String orderIdentifier; +
+     * private List<CargoEntity> cargos; +
+     *
      * @param driverPersonalNumber
      * @return
      * @throws ServieceLauerException
@@ -30,18 +42,19 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
 
         driverAssignment.setDriverPersonalNumber(driverPersonalNumber);
 
-        DriverEntity driver = DaoProvider.getDriverDao().findByPersonalNumber(driverPersonalNumber);
-        DriverStatusEntity driverStatus = DaoProvider.getDriverStatusDao().read(driver.getId());
+        DriverEntity driver = driverDao.findByPersonalNumber(driverPersonalNumber);
+        DriverStatusEntity driverStatus = driver.getDriverStatusEntity();
+
         TruckEntity truck = driverStatus.getTruckEntity();
         driverAssignment.setTruckRegistrationNumber(truck.getRegistrationNumber());
 
-        OrderEntity order = DaoProvider.getOrderDao().findByTruckId(truck.getId());
+        OrderEntity order = orderDao.findByTruckId(truck.getId());
         driverAssignment.setOrderIdentifier(order.getOrderIdentifier());
 
         List<CargoEntity> cargos = order.getCargoEntities();
         driverAssignment.setCargos(cargos);
 
-        List<DriverEntity> coDrivers = DaoProvider.getDriverDao().findByCurrentTruck(truck.getId());
+        List<DriverEntity> coDrivers = driverDao.findByCurrentTruck(truck.getId());
         driverAssignment.setCoDrivers(coDrivers);
 
         return driverAssignment;
