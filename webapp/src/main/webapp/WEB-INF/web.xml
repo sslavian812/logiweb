@@ -5,15 +5,37 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
 
+    <filter>
+        <filter-name>LoggerFilter</filter-name> <!-- mandatory -->
+        <filter-class>ru.tsystems.shalamov.web.LoggerFilter</filter-class> <!-- mandatory -->
+    </filter>
+
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name> <!-- mandatory -->
+        <filter-class>ru.tsystems.shalamov.web.AuthenticationFilter</filter-class> <!-- mandatory -->
+    </filter>
+
+    <filter-mapping>
+        <filter-name>LoggerFilter</filter-name> <!-- mandatory -->
+        <servlet-name>LoginServlet</servlet-name>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name> <!-- mandatory -->
+        <url-pattern>/secure/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>ru.tsystems.shalamov.web.LoginServlet</servlet-class>
     </servlet>
 
-
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
+
+
+
 
 </web-app>

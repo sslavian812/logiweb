@@ -8,13 +8,15 @@ function validateForm() {
         return false;
     }
 
-    if (password == null || password =="") {
-        // may be driver
-        alert("trying to sing in as driver");
+    // todo: this check is always false. WTF?
+    if (new String("manager").valueOf() == new String(login).valueOf()) {
+        if (password == null || password == "") {
+            alert("password must be filled out for managers");
+            return false;
+        } else {
+            return true;
+        }
     }
-    else
-    {
-        alert("truing to sign in as manager");
-    }
+
     return true;
 }
