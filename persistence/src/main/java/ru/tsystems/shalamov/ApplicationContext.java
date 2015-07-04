@@ -15,7 +15,7 @@ import javax.persistence.Persistence;
 /**
  * Created by viacheslav on 04.07.2015.
  */
-public class ApplicationContext {
+public final class ApplicationContext {
 
     public static final ApplicationContext INSTANCE = new ApplicationContext();
 

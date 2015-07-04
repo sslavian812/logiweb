@@ -8,6 +8,7 @@ function validateForm() {
         return false;
     }
 
+    // todo: this check is always false. WTF?
     if (new String("manager").valueOf() == new String(login).valueOf()) {
         if (password == null || password == "") {
             alert("password must be filled out for managers");

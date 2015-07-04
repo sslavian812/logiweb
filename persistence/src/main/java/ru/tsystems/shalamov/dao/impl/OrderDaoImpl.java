@@ -33,8 +33,7 @@ public class OrderDaoImpl extends GenericDaoEntityManagerImpl<OrderEntity> imple
         Join trucks = orderEntityRoot.join("truckEntity");
 
 
-        return em.createQuery(criteriaQuery.select(orderEntityRoot)
-                .where(criteriaBuilder.equal(orderEntityRoot.get("status"), OrderStatus.IN_PROGRESS))
+        return em.createQuery(criteriaQuery.where(criteriaBuilder.equal(orderEntityRoot.get("status"), OrderStatus.IN_PROGRESS))
                 .where(criteriaBuilder.equal(trucks.get("id"), truckId))).getSingleResult();
     }
 }
