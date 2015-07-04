@@ -33,6 +33,9 @@ public class DriverDaoImpl extends GenericDaoEntityManagerImpl<DriverEntity> imp
         TypedQuery<DriverEntity> q = em.createQuery(
                 "SELECT d FROM DriverEntity d JOIN d.driverStatusEntity s WHERE s.status IN :driverStatuses", DriverEntity.class);
         q.setParameter("driverStatuses", Arrays.asList(DriverStatus.PRIMARY, DriverStatus.AUXILIARY));
+
+        //todo: by working hours.
+
         return q.getResultList();
     }
 
