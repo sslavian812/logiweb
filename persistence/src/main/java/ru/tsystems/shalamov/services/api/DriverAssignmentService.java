@@ -14,7 +14,7 @@ import java.util.List;
  * - Truck registration numbers
  * - Order identifier
  * - List of cargoes
- * <p/>
+ * <p>
  * Created by viacheslav on 28.06.2015.
  */
 public interface DriverAssignmentService {
@@ -36,5 +36,6 @@ public interface DriverAssignmentService {
     String getOrderIdentifier(String driverPersonalNumber) throws ServieceLauerException;
 
     List<CargoEntity> getCargoes(String driverPersonalNumber) throws ServieceLauerException;
+
     List<String> getCargoesDenominations(String driverPersonalNumber) throws ServieceLauerException;
 }

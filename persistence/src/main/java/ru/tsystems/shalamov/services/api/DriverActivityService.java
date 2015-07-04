@@ -5,7 +5,7 @@ import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 
 /**
  * For drivers (through ws/rs-interface), recording the actual work time: (PART 2)
- * <p/>
+ * <p>
  * Driver begins the working shift:
  * - Driver's personal number;
  * - Status {PRIMARY, AUXILIARY}
@@ -17,7 +17,7 @@ import ru.tsystems.shalamov.entities.statuses.DriverStatus;
  * Cargo's status changed:
  * - Cargo's id;
  * - Cargo's status {SHIPPED, DELIVERED}
- * <p/>
+ * <p>
  * Created by viacheslav on 28.06.2015.
  */
 public interface DriverActivityService {

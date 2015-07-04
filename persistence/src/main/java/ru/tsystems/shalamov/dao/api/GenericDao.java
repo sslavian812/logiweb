@@ -4,14 +4,13 @@ import java.util.List;
 
 /**
  * Abstract generic DAO (CRUD) interface.
- * <p/>
+ * <p>
  * Created by viacheslav on 28.06.2015.
  */
 public interface GenericDao<T> {
 
     /**
      * Persist the newInstance object into database
-     * // todo: should I return primary key from database here???
      */
     void create(T newInstance);
 
@@ -33,6 +32,7 @@ public interface GenericDao<T> {
 
     /**
      * Provides all the objects;
+     *
      * @return
      */
     List<T> findAll();

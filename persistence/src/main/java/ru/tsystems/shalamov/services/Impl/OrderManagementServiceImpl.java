@@ -11,6 +11,7 @@ import ru.tsystems.shalamov.entities.TruckEntity;
 import ru.tsystems.shalamov.services.ServieceLauerException;
 import ru.tsystems.shalamov.services.api.OrderManagementService;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 /**
@@ -23,12 +24,19 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     TruckDao truckDao;
     DriverStatusDao driverStatusDao;
 
+    private EntityManager em;
+
+    private EntityManager getEntityManager() {
+        return em;
+    }
+
     public OrderManagementServiceImpl(DriverDao driverDao, OrderDao orderDao,
-                                      TruckDao truckDao, DriverStatusDao driverStatusDao) {
+                                      TruckDao truckDao, DriverStatusDao driverStatusDao, EntityManager em) {
         this.driverDao = driverDao;
         this.orderDao = orderDao;
         this.truckDao = truckDao;
         this.driverStatusDao = driverStatusDao;
+        this.em = em;
     }
 
 
@@ -50,7 +58,6 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     @Override
     public List<TruckEntity> findTrucksForOrder(OrderEntity order) {
         List<TruckEntity> suitableTrucks = truckDao.findByMinCapacityWhereStatusOkAndNotAssignedToOrder(order.getTotalweight());
-        // todo make join here and filter only cars, which are not assigned to Any order.
         return suitableTrucks;
     }
 

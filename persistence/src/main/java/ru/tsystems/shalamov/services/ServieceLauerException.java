@@ -2,7 +2,7 @@ package ru.tsystems.shalamov.services;
 
 /**
  * Exception, which is thrown on services layer to indicate some failures.
- * <p/>
+ * <p>
  * Created by viacheslav on 28.06.2015.
  */
 public class ServieceLauerException extends Exception {

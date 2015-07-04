@@ -4,6 +4,7 @@ import ru.tsystems.shalamov.dao.api.DriverDao;
 import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.services.api.DriverManagementService;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 /**
@@ -12,8 +13,15 @@ import java.util.List;
 public class DriverManagementServiceImpl implements DriverManagementService {
     DriverDao driverDao;
 
-    public DriverManagementServiceImpl(DriverDao driverDao) {
+    private EntityManager em;
+
+    private EntityManager getEntityManager() {
+        return em;
+    }
+
+    public DriverManagementServiceImpl(DriverDao driverDao, EntityManager em) {
         this.driverDao = driverDao;
+        this.em = em;
     }
 
 

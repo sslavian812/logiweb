@@ -11,8 +11,8 @@ public class EntityManagerUtil {
     private static EntityManagerFactory entityManagerFactory = null;
 
 
-    private EntityManagerUtil()
-    {}
+    private EntityManagerUtil() {
+    }
 
     /**
      * Constructs a new Singleton EntityManagerFactory
@@ -49,13 +49,13 @@ public class EntityManagerUtil {
 
     public static void closeFactory() {
         if (entityManagerFactory != null) {
-                entityManagerFactory.close();
+            entityManagerFactory.close();
         }
     }
 
     public static void close(EntityManager entityManager) {
         if (entityManager != null) {
-                entityManager.close();
+            entityManager.close();
         }
     }
 }

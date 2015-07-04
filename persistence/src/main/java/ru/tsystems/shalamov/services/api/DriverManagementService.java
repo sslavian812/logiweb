@@ -10,7 +10,7 @@ import java.util.List;
  * - Crew size of the particular Truck.
  * - Time limit 176 hours per month for each driver.
  * - Driver is not assigned now for any other Order.
- * <p/>
+ * <p>
  * Created by viacheslav on 28.06.2015.
  */
 public interface DriverManagementService {

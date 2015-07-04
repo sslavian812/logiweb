@@ -57,6 +57,7 @@ public interface OrderManagementService {
 
     /**
      * Assigns given drivers as a crew for a truck and truck to order if possible.
+     *
      * @param drivers List of drivers. List should have sufficient size
      *                to form crew of the truck. Otherwise it will
      *                be impossible to assign drivers.
@@ -66,7 +67,6 @@ public interface OrderManagementService {
     void assignDriversAndTruckToOrder(List<DriverEntity> drivers,
                                       TruckEntity truck, OrderEntity order)
             throws ServieceLauerException;
-
 
 
 //    /**

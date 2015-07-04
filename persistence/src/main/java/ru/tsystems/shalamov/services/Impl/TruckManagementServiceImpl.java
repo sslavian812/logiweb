@@ -5,6 +5,7 @@ import ru.tsystems.shalamov.entities.TruckEntity;
 import ru.tsystems.shalamov.services.ServieceLauerException;
 import ru.tsystems.shalamov.services.api.TruckManagementService;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 /**
@@ -13,8 +14,15 @@ import java.util.List;
 public class TruckManagementServiceImpl implements TruckManagementService {
     TruckDao truckDao;
 
-    public TruckManagementServiceImpl(TruckDao truckDao) {
+    private EntityManager em;
+
+    private EntityManager getEntityManager() {
+        return em;
+    }
+
+    public TruckManagementServiceImpl(TruckDao truckDao, EntityManager em) {
         this.truckDao = truckDao;
+        this.em = em;
     }
 
 

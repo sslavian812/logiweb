@@ -7,6 +7,7 @@ import ru.tsystems.shalamov.services.DriverAssignment;
 import ru.tsystems.shalamov.services.ServieceLauerException;
 import ru.tsystems.shalamov.services.api.DriverAssignmentService;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,12 +16,19 @@ import java.util.stream.Collectors;
  */
 public class DriverAssignmentServiceImpl implements DriverAssignmentService {
 
-    DriverDao driverDao;
-    OrderDao orderDao;
+    private DriverDao driverDao;
+    private OrderDao orderDao;
 
-    public DriverAssignmentServiceImpl(DriverDao driverDao, OrderDao orderDao) {
+    private EntityManager em;
+
+    private EntityManager getEntityManager() {
+        return em;
+    }
+
+    public DriverAssignmentServiceImpl(DriverDao driverDao, OrderDao orderDao, EntityManager em) {
         this.driverDao = driverDao;
         this.orderDao = orderDao;
+        this.em = em;
     }
 
 

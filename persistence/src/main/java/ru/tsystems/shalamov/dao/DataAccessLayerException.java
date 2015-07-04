@@ -2,7 +2,7 @@ package ru.tsystems.shalamov.dao;
 
 /**
  * Represents Exceptions thrown by the Data Access Layer.
- * <p/>
+ * <p>
  * Created by viacheslav on 28.06.2015.
  */
 public class DataAccessLayerException extends Exception {

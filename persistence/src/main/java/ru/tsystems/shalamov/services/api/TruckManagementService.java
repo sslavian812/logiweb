@@ -11,7 +11,7 @@ import java.util.List;
  * - Truck is intact (not broken).
  * - Truck has sufficient capacity.
  * - Truck is not assigned on any other orders.
- * <p/>
+ * <p>
  * Created by viacheslav on 28.06.2015.
  */
 public interface TruckManagementService {
@@ -48,9 +48,9 @@ public interface TruckManagementService {
      * Removes Specified truck.
      *
      * @param truckRegistrationNumber Id of the truck to be removed. If there is no truck with
-     *                such Id, the {@link
-     *                ru.tsystems.shalamov.services.ServieceLauerException}
-     *                will be thrown.
+     *                                such Id, the {@link
+     *                                ru.tsystems.shalamov.services.ServieceLauerException}
+     *                                will be thrown.
      * @hrows LogiwebManagerException if incorrect id provided.
      */
     void deleteTruckByRegistrationNumber(String truckRegistrationNumber) throws ServieceLauerException;
