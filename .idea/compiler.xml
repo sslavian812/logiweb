@@ -20,6 +20,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="logiweb" target="1.8" />
+      <module name="parent" target="1.8" />
       <module name="persistence" target="1.8" />
       <module name="webapp" target="1.8" />
     </bytecodeTargetLevel>
