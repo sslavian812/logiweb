@@ -1,10 +1,16 @@
 package ru.tsystems.shalamov.web;
 
+import ru.tsystems.shalamov.ApplicationContext;
+import ru.tsystems.shalamov.dao.api.DriverDao;
+import ru.tsystems.shalamov.entities.DriverEntity;
+import ru.tsystems.shalamov.services.DriverAssignment;
+import ru.tsystems.shalamov.services.api.DriverAssignmentService;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Driver;
 
 /**
  * Created by viacheslav on 04.07.2015.
@@ -41,22 +47,38 @@ public class LoginServlet extends HttpServlet {
                 response.addCookie(userName);
                 getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/manager.jsp").forward(request, response);
             } else {
+                request.setAttribute("message", "fail to login as manager");
                 getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
             }
         } else {
-            // todo: check driers here;
-            //either
-            //RequestDispatcher rd = getServletContext().getRequestDispatcher("/driver.jsp");
-            //or
-            //RequestDispatcher rd = getServletContext().getRequestDispatcher("/fail.jsp");
-            //rd.include(request, response);
-        }
+            DriverDao driverDao = ApplicationContext.INSTANCE.getDriverDao();
+            DriverEntity driver = driverDao.findByPersonalNumber(lg);
+            RequestDispatcher rd;
+            if (driver == null) {
+                request.setAttribute("message", "no driver found with personal number " + lg);
+                rd = getServletContext().getRequestDispatcher("/fail.jsp");
+            } else {
+                rd = getServletContext().getRequestDispatcher("/driver.jsp");
+                DriverAssignmentService driverAssignmentService = ApplicationContext.INSTANCE.getDriverAssignmentService();
+                DriverAssignment assignment = driverAssignmentService.findDriverAssignmentByPersonalNumber(lg);
+                if (driverAssignmentService == null) {
+                    request.setAttribute("message", "no assignments found for driver " + lg);
+                    rd = getServletContext().getRequestDispatcher("/fail.jsp");
+                }
 
-//
-//        String res = pw.equals(password) ? "OK" : "NO";
-//        request.setAttribute("check", res);
-//
-//        getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/login.jsp").forward(request, response);
+                setAllData(request, assignment);
+            }
+            rd.include(request, response);
+        }
+    }
+
+    private void setAllData(HttpServletRequest request, DriverAssignment assignment) {
+        request.setAttribute("driver", assignment.getDriverPersonalNumber());
+        request.setAttribute("truck", assignment.getTruckRegistrationNumber());
+        request.setAttribute("order", assignment.getOrderIdentifier());
+
+        request.setAttribute("codrivers", assignment.getCoDrivers());
+        request.setAttribute("cargos", assignment.getCargos());
     }
 
     public void destroy() {

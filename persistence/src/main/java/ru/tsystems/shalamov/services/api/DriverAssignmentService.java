@@ -21,6 +21,7 @@ public interface DriverAssignmentService {
 
     DriverAssignment getDriverAssignment(String driverPersonalNumber) throws ServieceLauerException;
 
+    DriverAssignment findDriverAssignmentByPersonalNumber(String personalNumber);
 
     List<String> getCoDriversPersonalNumbers(String driverPersonalNumber) throws ServieceLauerException;
 
@@ -30,7 +31,7 @@ public interface DriverAssignmentService {
      * Provides Identifier of the order, if the order if complete(
      * cargos added, tuck assigned, truck crew formed).
      *
-     * @param personalNumber
+     * @param driverPersonalNumber
      * @return
      */
     String getOrderIdentifier(String driverPersonalNumber) throws ServieceLauerException;

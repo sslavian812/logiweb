@@ -69,6 +69,16 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
     }
 
     @Override
+    public DriverAssignment findDriverAssignmentByPersonalNumber(String personalNumber) {
+        try {
+            DriverAssignment assignment = getDriverAssignment(personalNumber);
+            return assignment;
+        } catch (ServieceLauerException e) {
+            return null;
+        }
+    }
+
+    @Override
     public List<String> getCoDriversPersonalNumbers(String driverPersonalNumber) throws ServieceLauerException {
         DriverAssignment driverAssignment = getDriverAssignment(driverPersonalNumber);
         return driverAssignment.getCoDrivers()
