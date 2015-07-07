@@ -7,8 +7,8 @@
           <element id="module-output" name="webapp" />
         </element>
         <element id="directory" name="lib">
-          <element id="archive" name="logiweb-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="logiweb" />
+          <element id="archive" name="persistence-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="persistence" />
           </element>
           <element id="library" level="project" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-entitymanager:5.0.0.CR1" />
@@ -25,6 +25,9 @@
           <element id="library" level="project" name="Maven: org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1" />
           <element id="library" level="project" name="Maven: org.javassist:javassist:3.18.1-GA" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.6" />
+          <element id="library" level="project" name="Maven: org.testng:testng:6.8.8" />
+          <element id="library" level="project" name="Maven: org.beanshell:bsh:2.0b4" />
+          <element id="library" level="project" name="Maven: com.beust:jcommander:1.27" />
           <element id="library" level="project" name="Maven: javax.validation:validation-api:1.0.0.GA" />
           <element id="library" level="project" name="Maven: org.jvnet.sorcerer:sorcerer-javac:0.8" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-jpamodelgen:1.0.0.Final" />

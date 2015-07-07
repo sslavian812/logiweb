@@ -40,7 +40,7 @@
 
         <dependency>
             <groupId>ru.tsystems.shalamov</groupId>
-            <artifactId>logiweb</artifactId>
+            <artifactId>persistence</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
