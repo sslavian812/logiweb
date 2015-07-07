@@ -22,7 +22,7 @@ public class TruckEntity implements Serializable {
     @Column(name = "crew_size", nullable = false)
     private int crewSize;
 
-    @Column(name = "registration_number", nullable = false)
+    @Column(name = "registration_number", nullable = false, unique = true)
     @Pattern(regexp = "[a-zA-Z]{2}[0-9]{5}", message = "two letters and 5 digits")
     private String registrationNumber;
 

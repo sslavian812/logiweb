@@ -1,7 +1,7 @@
 package ru.tsystems.shalamov.services.api;
 
 import ru.tsystems.shalamov.entities.TruckEntity;
-import ru.tsystems.shalamov.services.ServieceLauerException;
+import ru.tsystems.shalamov.services.ServiceLauerException;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * - Truck is intact (not broken).
  * - Truck has sufficient capacity.
  * - Truck is not assigned on any other orders.
- * <p>
+ * <p/>
  * Created by viacheslav on 28.06.2015.
  */
 public interface TruckManagementService {
@@ -21,7 +21,7 @@ public interface TruckManagementService {
      *
      * @return list of trucks.
      */
-    List<TruckEntity> getAllTrucks();
+    List<TruckEntity> getAllTrucks() throws ServiceLauerException;
 
     /**
      * Adds a new truck.
@@ -30,7 +30,7 @@ public interface TruckManagementService {
      *              describing new truck. The id will be generated
      *              Automatically.
      */
-    void addTruck(TruckEntity truck);
+    void addTruck(TruckEntity truck) throws ServiceLauerException;
 
     /**
      * Updates information about the tuck.
@@ -38,22 +38,22 @@ public interface TruckManagementService {
      * @param truck {@link ru.tsystems.shalamov.entities.TruckEntity} instance,
      *              describing the truck. There should be one in the database
      *              with the same id. Otherwise, the {@link
-     *              ru.tsystems.shalamov.services.ServieceLauerException}
+     *              ru.tsystems.shalamov.services.ServiceLauerException}
      *              will be thrown.
-     * @throws ru.tsystems.shalamov.services.ServieceLauerException if incorrect id provided.
+     * @throws ru.tsystems.shalamov.services.ServiceLauerException if incorrect id provided.
      */
-    void updateTruck(TruckEntity truck) throws ServieceLauerException;
+    void updateTruck(TruckEntity truck) throws ServiceLauerException;
 
     /**
      * Removes Specified truck.
      *
      * @param truckRegistrationNumber Id of the truck to be removed. If there is no truck with
      *                                such Id, the {@link
-     *                                ru.tsystems.shalamov.services.ServieceLauerException}
+     *                                ru.tsystems.shalamov.services.ServiceLauerException}
      *                                will be thrown.
      * @hrows LogiwebManagerException if incorrect id provided.
      */
-    void deleteTruckByRegistrationNumber(String truckRegistrationNumber) throws ServieceLauerException;
+    void deleteTruckByRegistrationNumber(String truckRegistrationNumber) throws ServiceLauerException;
 
 //    /**
 //     * Provides list of trucks, meeting following criteria:

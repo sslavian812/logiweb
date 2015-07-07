@@ -1,5 +1,6 @@
 package ru.tsystems.shalamov.services.impl;
 
+import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.DriverDao;
 import ru.tsystems.shalamov.dao.api.DriverStatusDao;
 import ru.tsystems.shalamov.dao.api.OrderDao;
@@ -8,7 +9,7 @@ import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.entities.DriverStatusEntity;
 import ru.tsystems.shalamov.entities.OrderEntity;
 import ru.tsystems.shalamov.entities.TruckEntity;
-import ru.tsystems.shalamov.services.ServieceLauerException;
+import ru.tsystems.shalamov.services.ServiceLauerException;
 import ru.tsystems.shalamov.services.api.OrderManagementService;
 
 import javax.persistence.EntityManager;
@@ -39,48 +40,110 @@ public class OrderManagementServiceImpl implements OrderManagementService {
         this.em = em;
     }
 
-
-    @Override
-    public void createOrder(OrderEntity order) {
-        orderDao.create(order);
+    private void unlock() {
+        if (getEntityManager().getTransaction().isActive())
+            getEntityManager().getTransaction().rollback();
     }
 
     @Override
-    public void updateOrder(OrderEntity order) throws ServieceLauerException {
-        orderDao.update(order);
+    public void createOrder(OrderEntity order) throws ServiceLauerException {
+        try {
+            getEntityManager().getTransaction().begin();
+            orderDao.create(order);
+            getEntityManager().getTransaction().commit();
+        } catch (DataAccessLayerException e) {
+            throw new ServiceLauerException(e);
+        } finally {
+            if (getEntityManager().getTransaction().isActive())
+                getEntityManager().getTransaction().rollback();
+        }
     }
 
     @Override
-    public List<OrderEntity> listOrders() {
-        return orderDao.findAll();
+    public void updateOrder(OrderEntity order) throws ServiceLauerException {
+        try {
+            getEntityManager().getTransaction().begin();
+            orderDao.update(order);
+            getEntityManager().getTransaction().commit();
+        } catch (DataAccessLayerException e) {
+            throw new ServiceLauerException(e);
+        } finally {
+            if (getEntityManager().getTransaction().isActive())
+                getEntityManager().getTransaction().rollback();
+        }
     }
 
     @Override
-    public List<TruckEntity> findTrucksForOrder(OrderEntity order) {
-        List<TruckEntity> suitableTrucks = truckDao.findByMinCapacityWhereStatusOkAndNotAssignedToOrder(order.getTotalweight());
-        return suitableTrucks;
+    public List<OrderEntity> listOrders() throws ServiceLauerException {
+        try {
+            getEntityManager().getTransaction().begin(); // just a lock;
+            List<OrderEntity> list = orderDao.findAll();
+            getEntityManager().getTransaction().commit();
+            return list;
+        } catch (DataAccessLayerException e) {
+            throw new ServiceLauerException(e);
+        } finally {
+            if (getEntityManager().getTransaction().isActive())
+                getEntityManager().getTransaction().rollback();
+        }
     }
 
     @Override
-    public List<DriverEntity> findDriversForOrder(OrderEntity order) {
-        return driverDao.findByMaxWorkingHoursWhereNotAssignedToOrder();
+    public List<TruckEntity> findTrucksForOrder(OrderEntity order) throws ServiceLauerException {
+        try {
+            getEntityManager().getTransaction().begin();
+            List<TruckEntity> suitableTrucks = truckDao.findByMinCapacityWhereStatusOkAndNotAssignedToOrder(order.getTotalweight());
+            getEntityManager().getTransaction().commit();
+            return suitableTrucks;
+        } catch (DataAccessLayerException e) {
+            throw new ServiceLauerException(e);
+        } finally {
+            if (getEntityManager().getTransaction().isActive())
+                getEntityManager().getTransaction().rollback();
+        }
     }
 
     @Override
-    public void assignDriversAndTruckToOrder(List<DriverEntity> drivers, TruckEntity truck, OrderEntity order) throws ServieceLauerException {
+    public List<DriverEntity> findDriversForOrder(OrderEntity order) throws ServiceLauerException {
+        try {
+            getEntityManager().getTransaction().begin();
+            List<DriverEntity> list = driverDao.findByMaxWorkingHoursWhereNotAssignedToOrder();
+            getEntityManager().getTransaction().commit();
+            return list;
+        } catch (DataAccessLayerException e) {
+            throw new ServiceLauerException(e);
+        } finally {
+            if (getEntityManager().getTransaction().isActive())
+                getEntityManager().getTransaction().rollback();
+        }
+    }
+
+    @Override
+    public void assignDriversAndTruckToOrder(List<DriverEntity> drivers, TruckEntity truck, OrderEntity order) throws ServiceLauerException {
         int crewSize = truck.getCrewSize();
         if (drivers.size() < crewSize) {
-            throw new ServieceLauerException("not enough drivers provided to assing as crew");
+            throw new ServiceLauerException("not enough drivers provided to assing as crew");
         }
 
-        order.setTruckEntity(truck);
-        orderDao.update(order);
+        try {
+            getEntityManager().getTransaction().begin();
 
-        drivers.subList(0, crewSize);
-        for (DriverEntity driver : drivers) {
-            DriverStatusEntity driverStatus = driver.getDriverStatusEntity();
-            driverStatus.setTruckEntity(truck);
-            driverStatusDao.update(driverStatus);
+            order.setTruckEntity(truck);
+            orderDao.update(order);
+            getEntityManager().refresh(order);
+
+            drivers.subList(0, crewSize);
+            for (DriverEntity driver : drivers) {
+                DriverStatusEntity driverStatus = driver.getDriverStatusEntity();
+                driverStatus.setTruckEntity(truck);
+                driverStatusDao.update(driverStatus);
+            }
+            getEntityManager().getTransaction().commit();
+        } catch (DataAccessLayerException e) {
+            throw new ServiceLauerException(e);
+        } finally {
+            if (getEntityManager().getTransaction().isActive())
+                getEntityManager().getTransaction().rollback();
         }
     }
 }

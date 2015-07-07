@@ -1,5 +1,6 @@
 package ru.tsystems.shalamov.dao.impl;
 
+import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.DriverDao;
 import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
@@ -16,7 +17,7 @@ import java.util.List;
 /**
  * Abstract generic DAO implementation for {@link ru.tsystems.shalamov.entities.DriverEntity}.
  * CRUD operations are inherited. Implements some domain-specific operations.
- * <p>
+ * <p/>
  * Created by viacheslav on 28.06.2015.
  */
 public class DriverDaoImpl extends GenericDaoEntityManagerImpl<DriverEntity> implements DriverDao {
@@ -26,43 +27,55 @@ public class DriverDaoImpl extends GenericDaoEntityManagerImpl<DriverEntity> imp
     }
 
     @Override
-    public List<DriverEntity> findByMaxWorkingHoursWhereNotAssignedToOrder() {
+    public List<DriverEntity> findByMaxWorkingHoursWhereNotAssignedToOrder() throws DataAccessLayerException {
 
-        EntityManager em = getEntityManager();
+        try {
+            EntityManager em = getEntityManager();
 
-        TypedQuery<DriverEntity> q = em.createQuery(
-                "SELECT d FROM DriverEntity d JOIN d.driverStatusEntity s WHERE s.status IN :driverStatuses", DriverEntity.class);
-        q.setParameter("driverStatuses", Arrays.asList(DriverStatus.PRIMARY, DriverStatus.AUXILIARY));
+            TypedQuery<DriverEntity> q = em.createQuery(
+                    "SELECT d FROM DriverEntity d JOIN d.driverStatusEntity s WHERE s.status IN :driverStatuses", DriverEntity.class);
+            q.setParameter("driverStatuses", Arrays.asList(DriverStatus.PRIMARY, DriverStatus.AUXILIARY));
 
-        //todo: by working hours.
+            //todo: by working hours.
 
-        return q.getResultList();
+            return q.getResultList();
+        } catch (Exception e) {
+            throw new DataAccessLayerException(e);
+        }
     }
 
     @Override
-    public DriverEntity findByPersonalNumber(String driverPersonalNumber) {
-        EntityManager em = getEntityManager();
+    public DriverEntity findByPersonalNumber(String driverPersonalNumber) throws DataAccessLayerException {
+        try {
+            EntityManager em = getEntityManager();
 
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        CriteriaQuery<DriverEntity> criteriaQuery = criteriaBuilder.createQuery(DriverEntity.class);
-        Root<DriverEntity> driverEntityRoot = criteriaQuery.from(DriverEntity.class);
+            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            CriteriaQuery<DriverEntity> criteriaQuery = criteriaBuilder.createQuery(DriverEntity.class);
+            Root<DriverEntity> driverEntityRoot = criteriaQuery.from(DriverEntity.class);
 
-        return em.createQuery(criteriaQuery.select(driverEntityRoot).where(criteriaBuilder.equal(
-                driverEntityRoot.get("personal_number"), driverPersonalNumber))).getSingleResult();
+            return em.createQuery(criteriaQuery.select(driverEntityRoot).where(criteriaBuilder.equal(
+                    driverEntityRoot.get("personal_number"), driverPersonalNumber))).getSingleResult();
+        } catch (Exception e) {
+            throw new DataAccessLayerException(e);
+        }
     }
 
     @Override
-    public List<DriverEntity> findByCurrentTruck(int truckId) {
-        EntityManager em = getEntityManager();
+    public List<DriverEntity> findByCurrentTruck(int truckId) throws DataAccessLayerException {
+        try {
+            EntityManager em = getEntityManager();
 
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        CriteriaQuery<DriverEntity> criteriaQuery = criteriaBuilder.createQuery(DriverEntity.class);
+            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            CriteriaQuery<DriverEntity> criteriaQuery = criteriaBuilder.createQuery(DriverEntity.class);
 
-        Root driverEntityRoot = criteriaQuery.from(DriverEntity.class);
-        Join statuses = driverEntityRoot.join("driverStatusEntity");
-        Join trucks = statuses.join("truckEntity");
+            Root driverEntityRoot = criteriaQuery.from(DriverEntity.class);
+            Join statuses = driverEntityRoot.join("driverStatusEntity");
+            Join trucks = statuses.join("truckEntity");
 
-        return em.createQuery(criteriaQuery.where(
-                criteriaBuilder.equal(trucks.get("id"), truckId))).getResultList();
+            return em.createQuery(criteriaQuery.where(
+                    criteriaBuilder.equal(trucks.get("id"), truckId))).getResultList();
+        } catch (Exception e) {
+            throw new DataAccessLayerException(e);
+        }
     }
 }

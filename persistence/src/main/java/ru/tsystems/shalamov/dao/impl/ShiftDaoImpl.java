@@ -2,6 +2,7 @@ package ru.tsystems.shalamov.dao.impl;
 
 
 import ru.tsystems.shalamov.DateUtilities;
+import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.ShiftDao;
 import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.entities.ShiftEntity;
@@ -17,7 +18,7 @@ import java.util.List;
 /**
  * Abstract generic DAO implementation for {@link ru.tsystems.shalamov.entities.ShiftEntity}.
  * CRUD operations are inherited. Implements some domain-specific operations.
- * <p>
+ * <p/>
  * Created by viacheslav on 28.06.2015.
  */
 public class ShiftDaoImpl extends GenericDaoEntityManagerImpl<ShiftEntity> implements ShiftDao {
@@ -27,30 +28,33 @@ public class ShiftDaoImpl extends GenericDaoEntityManagerImpl<ShiftEntity> imple
     }
 
     @Override
-    public float GetWorkingHoursInMonthByDriver(Date date, DriverEntity driverEntity) {
-        EntityManager em = getEntityManager();
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+    public float GetWorkingHoursInMonthByDriver(Date date, DriverEntity driverEntity)
+            throws DataAccessLayerException {
+        try {
+            EntityManager em = getEntityManager();
+            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
-        CriteriaQuery<ShiftEntity> criteriaQuery = criteriaBuilder.createQuery(ShiftEntity.class);
-        //Root<ShiftEntity> shiftEntityRoot = criteriaQuery.from(ShiftEntity.class);
+            CriteriaQuery<ShiftEntity> criteriaQuery = criteriaBuilder.createQuery(ShiftEntity.class);
 
-        Root shiftEntityRoot = criteriaQuery.from(ShiftEntity.class);
+            Root shiftEntityRoot = criteriaQuery.from(ShiftEntity.class);
 
-        Join drivers = shiftEntityRoot.join("driver_id");
+            Join drivers = shiftEntityRoot.join("driver_id");
 
-        List<ShiftEntity> shifts = em.createQuery(criteriaQuery.where(criteriaBuilder.equal(
-                        drivers.get("personal_number"), driverEntity.getPersonalNumber()))
-                        .where(criteriaBuilder.greaterThan(
-                                shiftEntityRoot.get("shift_begin"), DateUtilities.getFirstDayOfMonthDate(date)))
-        ).getResultList();
+            List<ShiftEntity> shifts = em.createQuery(criteriaQuery.where(criteriaBuilder.equal(
+                            drivers.get("personal_number"), driverEntity.getPersonalNumber()))
+                            .where(criteriaBuilder.greaterThan(
+                                    shiftEntityRoot.get("shift_begin"), DateUtilities.getFirstDayOfMonthDate(date)))
+            ).getResultList();
 
-        float dif = 0;
-        for (ShiftEntity s : shifts) {
-            if (s.getShiftEnd() != null)
-                dif += DateUtilities.diffInHours(s.getShiftBegin(), s.getShiftEnd());
+            float dif = 0;
+            for (ShiftEntity s : shifts) {
+                if (s.getShiftEnd() != null)
+                    dif += DateUtilities.diffInHours(s.getShiftBegin(), s.getShiftEnd());
+            }
+
+            return dif;
+        } catch (Exception e) {
+            throw new DataAccessLayerException(e);
         }
-
-
-        return dif;
     }
 }

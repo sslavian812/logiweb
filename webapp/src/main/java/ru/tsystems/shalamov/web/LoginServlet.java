@@ -1,16 +1,15 @@
 package ru.tsystems.shalamov.web;
 
 import ru.tsystems.shalamov.ApplicationContext;
-import ru.tsystems.shalamov.dao.api.DriverDao;
-import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.services.DriverAssignment;
+import ru.tsystems.shalamov.services.ServiceLauerException;
 import ru.tsystems.shalamov.services.api.DriverAssignmentService;
+import ru.tsystems.shalamov.services.api.DriverManagementService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.sql.Driver;
 
 /**
  * Created by viacheslav on 04.07.2015.
@@ -21,7 +20,10 @@ public class LoginServlet extends HttpServlet {
     private final String managerID = "manager";
     private final String password = "abacaba";
 
+    DriverManagementService driverManagementService;
+
     public void init() throws ServletException {
+        driverManagementService = ApplicationContext.INSTANCE.getDriverManagementService();
     }
 
     public void doPost(HttpServletRequest request,
@@ -51,25 +53,47 @@ public class LoginServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
             }
         } else {
-            DriverDao driverDao = ApplicationContext.INSTANCE.getDriverDao();
-            DriverEntity driver = driverDao.findByPersonalNumber(lg);
             RequestDispatcher rd;
-            if (driver == null) {
+
+            boolean existsDriver = false;
+
+            try {
+                existsDriver = driverManagementService.checkDriverExistence(lg);
+            } catch (ServiceLauerException e) {
+                // todo distinct such case with absence of drivers case;
+            }
+
+            if (existsDriver) {
                 request.setAttribute("message", "no driver found with personal number " + lg);
                 rd = getServletContext().getRequestDispatcher("/fail.jsp");
             } else {
                 rd = getServletContext().getRequestDispatcher("/driver.jsp");
                 DriverAssignmentService driverAssignmentService = ApplicationContext.INSTANCE.getDriverAssignmentService();
-                DriverAssignment assignment = driverAssignmentService.findDriverAssignmentByPersonalNumber(lg);
-                if (driverAssignmentService == null) {
+                DriverAssignment assignment;
+                try {
+                    assignment = driverAssignmentService.getDriverAssignmentByPersonalNumber(lg);
+                } catch (ServiceLauerException e) {
+                    assignment = null;
+                }
+
+                if (!checkAssignment(assignment)) {
                     request.setAttribute("message", "no assignments found for driver " + lg);
                     rd = getServletContext().getRequestDispatcher("/fail.jsp");
                 }
-
                 setAllData(request, assignment);
             }
             rd.include(request, response);
         }
+    }
+
+    private boolean checkAssignment(DriverAssignment assignment) {
+        if (assignment == null)
+            return false;
+        if (assignment.getOrderIdentifier() == null || assignment.getOrderIdentifier().isEmpty())
+            return false;
+        if (assignment.getTruckRegistrationNumber() == null || assignment.getTruckRegistrationNumber().isEmpty())
+            return false;
+        return true;
     }
 
     private void setAllData(HttpServletRequest request, DriverAssignment assignment) {

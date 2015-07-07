@@ -1,5 +1,6 @@
 package ru.tsystems.shalamov.dao.api;
 
+import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.entities.TruckEntity;
 
 import java.util.List;
@@ -10,7 +11,9 @@ import java.util.List;
  */
 public interface TruckDao extends GenericDao<TruckEntity> {
 
-    List<TruckEntity> findByMinCapacityWhereStatusOkAndNotAssignedToOrder(int minimalCapacity);
+    List<TruckEntity> findByMinCapacityWhereStatusOkAndNotAssignedToOrder(int minimalCapacity)
+            throws DataAccessLayerException;
 
-    TruckEntity findByRegistrationNumber(String truckRegistrationNumber);
+    TruckEntity findByRegistrationNumber(String truckRegistrationNumber)
+            throws DataAccessLayerException;
 }

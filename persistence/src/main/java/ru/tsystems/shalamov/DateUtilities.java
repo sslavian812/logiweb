@@ -36,8 +36,7 @@ public class DateUtilities {
     }
 
 
-    private static Calendar getFirstDayOfMonthCalendar(Date date)
-    {
+    private static Calendar getFirstDayOfMonthCalendar(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
 

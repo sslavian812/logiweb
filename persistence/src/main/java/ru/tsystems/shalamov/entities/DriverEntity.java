@@ -23,7 +23,7 @@ public class DriverEntity implements Serializable {
     @Pattern(regexp = "[a-zA-Z]+", message = "alphabetic characters only")
     private String lastName;
 
-    @Column(name = "personal_number", nullable = false)
+    @Column(name = "personal_number", nullable = false, unique = true)
     private String personalNumber;
 
 

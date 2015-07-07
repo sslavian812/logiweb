@@ -18,7 +18,7 @@ public class OrderEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private transient int id;
 
-    @Column(name = "order_identifier", nullable = false)
+    @Column(name = "order_identifier", nullable = false, unique = true)
     private String orderIdentifier;
 
     @Column(nullable = false)

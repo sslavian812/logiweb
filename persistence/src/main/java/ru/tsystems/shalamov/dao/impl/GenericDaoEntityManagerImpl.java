@@ -1,5 +1,6 @@
 package ru.tsystems.shalamov.dao.impl;
 
+import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.GenericDao;
 
 import javax.persistence.EntityManager;
@@ -22,33 +23,53 @@ public class GenericDaoEntityManagerImpl<T> implements GenericDao<T> {
     }
 
     @Override
-    public void create(T newInstance) {
-        getEntityManager().persist(newInstance);
+    public void create(T newInstance) throws DataAccessLayerException {
+        try {
+            getEntityManager().persist(newInstance);
+        } catch (Exception exception) {
+            throw new DataAccessLayerException(exception);
+        }
     }
 
     @Override
-    public T read(int id) {
-        return getEntityManager().find(type, id);
+    public T read(int id) throws DataAccessLayerException {
+        try {
+            return getEntityManager().find(type, id);
+        } catch (Exception exception) {
+            throw new DataAccessLayerException(exception);
+        }
     }
 
     @Override
-    public void update(T transientObject) {
-        getEntityManager().refresh(transientObject);
+    public void update(T transientObject) throws DataAccessLayerException {
+        try {
+            getEntityManager().refresh(transientObject);
+        } catch (Exception exception) {
+            throw new DataAccessLayerException(exception);
+        }
     }
 
     @Override
-    public void delete(T persistentObject) {
-        getEntityManager().remove(persistentObject);
+    public void delete(T persistentObject) throws DataAccessLayerException {
+        try {
+            getEntityManager().remove(persistentObject);
+        } catch (Exception exception) {
+            throw new DataAccessLayerException(exception);
+        }
     }
 
     @Override
-    public List<T> findAll() {
+    public List<T> findAll() throws DataAccessLayerException {
 
-        EntityManager em = getEntityManager();
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        CriteriaQuery<T> query = criteriaBuilder.createQuery(type);
-        Root<T> tRoot = query.from(type);
-        return em.createQuery(query.select(tRoot)).getResultList();
+        try {
+            EntityManager em = getEntityManager();
+            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            CriteriaQuery<T> query = criteriaBuilder.createQuery(type);
+            Root<T> tRoot = query.from(type);
+            return em.createQuery(query.select(tRoot)).getResultList();
+        } catch (Exception exception) {
+            throw new DataAccessLayerException(exception);
+        }
     }
 
     protected EntityManager getEntityManager() {
