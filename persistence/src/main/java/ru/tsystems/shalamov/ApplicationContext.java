@@ -20,6 +20,7 @@ public final class ApplicationContext {
     public static final ApplicationContext INSTANCE = new ApplicationContext();
 
     private static final String PERSISTENCE_UNIT = "logiweb";
+    public static final String ROLE = "role";
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;

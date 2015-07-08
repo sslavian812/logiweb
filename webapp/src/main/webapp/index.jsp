@@ -1,48 +1,17 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]> <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]> <html class="lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<%--
+  Created by IntelliJ IDEA.
+  User: viacheslav
+  Date: 08.07.2015
+  Time: 10:44
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Logiweb</title>
-    <link rel="stylesheet" href="resources/core/css/style.css">
-    <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <title></title>
+    <meta http-equiv="refresh" content="0; url=/login" />
 </head>
 <body>
-<script src="resources/core/js/index.js"></script>
-<section class="container">
-    <div class="login">
-        <h1>Login to Logiweb</h1>
-        <form id="login_form" method="post" onsubmit="return validateForm()" action="/login" >
-            <p><input type="text" name="login"  value="" placeholder="Username or Personal Identifier" required></p>
-            <p><input type="password" name="password" value="" placeholder="Password or empty(for drivers)"></p>
-            <p class="remember_me">
-                <label>
-                    <input type="checkbox" name="remember_me" id="remember_me">
-                    Remember me on this computer
-                </label>
-            </p>
-            <p class="submit"><input type="submit" name="commit" value="Login"></p>
-        </form>
-    </div>
-
-    <div class="login-help">
-        <p>Forgot your password? <a href="/forgot">Click here to reset it</a>.</p>
-    </div>
-</section>
-
-<%--<section class="about">--%>
-    <%--<p class="about-links">--%>
-        <%--<a href="http://www.cssflow.com/snippets/login-form" target="_parent">View Article</a>--%>
-        <%--<a href="http://www.cssflow.com/snippets/login-form.zip" target="_parent">Download</a>--%>
-    <%--</p>--%>
-    <%--<p class="about-author">--%>
-        <%--&copy; 2012&ndash;2013 <a href="http://thibaut.me" target="_blank">Thibaut Courouble</a> ---%>
-        <%--<a href="http://www.cssflow.com/mit-license" target="_blank">MIT License</a><br>--%>
-        <%--Original PSD by <a href="http://www.premiumpixels.com/freebies/clean-simple-login-form-psd/" target="_blank">Orman Clark</a>--%>
-<%--</section>--%>
 
 </body>
 </html>

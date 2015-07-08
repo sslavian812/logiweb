@@ -1,6 +1,5 @@
 package ru.tsystems.shalamov.services;
 
-import com.sun.istack.internal.Nullable;
 import ru.tsystems.shalamov.entities.CargoEntity;
 import ru.tsystems.shalamov.entities.DriverEntity;
 
@@ -14,7 +13,6 @@ public class DriverAssignment {
     /**
      * Id of driver, which requested the assignment information. May be null.
      */
-    @Nullable
     private String driverPersonalNumber;
 
     private List<DriverEntity> coDrivers;

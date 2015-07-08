@@ -40,11 +40,6 @@ public class OrderManagementServiceImpl implements OrderManagementService {
         this.em = em;
     }
 
-    private void unlock() {
-        if (getEntityManager().getTransaction().isActive())
-            getEntityManager().getTransaction().rollback();
-    }
-
     @Override
     public void createOrder(OrderEntity order) throws ServiceLauerException {
         try {

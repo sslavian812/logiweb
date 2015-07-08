@@ -3,21 +3,6 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <!--<parent>-->
-        <!--<artifactId>logiweb</artifactId>-->
-        <!--<groupId>ru.tsystems.shalamov</groupId>-->
-        <!--<version>1.0-SNAPSHOT</version>-->
-        <!--<relativePath>../persistence/pom.xml</relativePath>-->
-    <!--</parent>-->
-
-    <!---->
-
-    <!--<artifactId>webapp</artifactId>-->
-    <!--<packaging>war</packaging>-->
-    <!--<name>webapp Maven Webapp</name>-->
-    <!--<url>http://maven.apache.org</url>-->
-
-
     <parent>
         <artifactId>parent</artifactId>
         <groupId>ru.tsystems.shalamov</groupId>
@@ -73,6 +58,8 @@
         </dependency>
 
     </dependencies>
+
+
     <build>
         <finalName>webapp</finalName>
     </build>
