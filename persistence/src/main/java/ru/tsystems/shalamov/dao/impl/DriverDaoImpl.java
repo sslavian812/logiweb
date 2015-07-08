@@ -1,5 +1,6 @@
 package ru.tsystems.shalamov.dao.impl;
 
+import org.apache.log4j.Logger;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.DriverDao;
 import ru.tsystems.shalamov.entities.DriverEntity;
@@ -21,6 +22,8 @@ import java.util.List;
  * Created by viacheslav on 28.06.2015.
  */
 public class DriverDaoImpl extends GenericDaoEntityManagerImpl<DriverEntity> implements DriverDao {
+
+    private static Logger logger = Logger.getLogger(DriverDaoImpl.class);
 
     public DriverDaoImpl(EntityManager entityManager) {
         super(DriverEntity.class, entityManager);
