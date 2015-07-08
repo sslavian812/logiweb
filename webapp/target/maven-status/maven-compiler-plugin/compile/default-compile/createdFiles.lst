@@ -1,0 +1,4 @@
+ru\tsystems\shalamov\web\LoginFilter.class
+ru\tsystems\shalamov\web\LoginServlet.class
+ru\tsystems\shalamov\web\AuthenticationFilter.class
+ru\tsystems\shalamov\web\LoggerFilter.class
