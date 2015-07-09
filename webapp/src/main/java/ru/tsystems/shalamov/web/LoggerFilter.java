@@ -1,5 +1,7 @@
 package ru.tsystems.shalamov.web;
 
+import org.apache.log4j.Logger;
+
 import javax.servlet.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,8 @@ import java.util.Enumeration;
 public class LoggerFilter implements Filter {
 
     private ServletContext context;
+
+    //private static final Logger LOG = Logger.getLogger(LoggerFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

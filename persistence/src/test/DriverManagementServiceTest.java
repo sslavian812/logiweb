@@ -2,7 +2,7 @@ import org.junit.Test;
 import org.testng.Assert;
 import ru.tsystems.shalamov.ApplicationContext;
 import ru.tsystems.shalamov.entities.DriverEntity;
-import ru.tsystems.shalamov.services.ServiceLauerException;
+import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.DriverManagementService;
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class DriverManagementServiceTest {
             List<DriverEntity> remaining = driverManagementService.listDrivers();
 
             Assert.assertFalse(remaining.contains(driver));
-        } catch (ServiceLauerException e) {
+        } catch (ServiceLayerException e) {
             throw new RuntimeException(e);
         }
     }

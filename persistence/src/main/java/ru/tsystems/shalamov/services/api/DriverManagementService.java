@@ -1,7 +1,7 @@
 package ru.tsystems.shalamov.services.api;
 
 import ru.tsystems.shalamov.entities.DriverEntity;
-import ru.tsystems.shalamov.services.ServiceLauerException;
+import ru.tsystems.shalamov.services.ServiceLayerException;
 
 import java.util.List;
 
@@ -16,13 +16,13 @@ import java.util.List;
  */
 public interface DriverManagementService {
 
-    List<DriverEntity> listDrivers() throws ServiceLauerException;
+    List<DriverEntity> listDrivers() throws ServiceLayerException;
 
-    void addDriver(DriverEntity driver) throws ServiceLauerException;
+    void addDriver(DriverEntity driver) throws ServiceLayerException;
 
-    void updateDriver(DriverEntity driver) throws ServiceLauerException;
+    void updateDriver(DriverEntity driver) throws ServiceLayerException;
 
-    void deleteDriverByPersonalDriver(String driverPersonalNumber) throws ServiceLauerException;
+    void deleteDriverByPersonalDriver(String driverPersonalNumber) throws ServiceLayerException;
 
-    boolean checkDriverExistence(String personalNumber) throws ServiceLauerException;
+    boolean checkDriverExistence(String personalNumber) throws ServiceLayerException;
 }

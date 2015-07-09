@@ -2,7 +2,7 @@ package ru.tsystems.shalamov.services.api;
 
 import ru.tsystems.shalamov.entities.CargoEntity;
 import ru.tsystems.shalamov.services.DriverAssignment;
-import ru.tsystems.shalamov.services.ServiceLauerException;
+import ru.tsystems.shalamov.services.ServiceLayerException;
 
 import java.util.List;
 
@@ -19,11 +19,11 @@ import java.util.List;
  */
 public interface DriverAssignmentService {
 
-    DriverAssignment getDriverAssignmentByPersonalNumber(String driverPersonalNumber) throws ServiceLauerException;
+    DriverAssignment getDriverAssignmentByPersonalNumber(String driverPersonalNumber) throws ServiceLayerException;
 
-    List<String> getCoDriversPersonalNumbers(String driverPersonalNumber) throws ServiceLauerException;
+    List<String> getCoDriversPersonalNumbers(String driverPersonalNumber) throws ServiceLayerException;
 
-    String getTruckRegistrationNumber(String driverPersonalNumber) throws ServiceLauerException;
+    String getTruckRegistrationNumber(String driverPersonalNumber) throws ServiceLayerException;
 
     /**
      * Provides Identifier of the order, if the order if complete(
@@ -32,9 +32,9 @@ public interface DriverAssignmentService {
      * @param driverPersonalNumber
      * @return
      */
-    String getOrderIdentifier(String driverPersonalNumber) throws ServiceLauerException;
+    String getOrderIdentifier(String driverPersonalNumber) throws ServiceLayerException;
 
-    List<CargoEntity> getCargoes(String driverPersonalNumber) throws ServiceLauerException;
+    List<CargoEntity> getCargoes(String driverPersonalNumber) throws ServiceLayerException;
 
-    List<String> getCargoesDenominations(String driverPersonalNumber) throws ServiceLauerException;
+    List<String> getCargoesDenominations(String driverPersonalNumber) throws ServiceLayerException;
 }

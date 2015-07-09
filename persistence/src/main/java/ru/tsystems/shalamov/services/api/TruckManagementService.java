@@ -1,7 +1,7 @@
 package ru.tsystems.shalamov.services.api;
 
 import ru.tsystems.shalamov.entities.TruckEntity;
-import ru.tsystems.shalamov.services.ServiceLauerException;
+import ru.tsystems.shalamov.services.ServiceLayerException;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public interface TruckManagementService {
      *
      * @return list of trucks.
      */
-    List<TruckEntity> getAllTrucks() throws ServiceLauerException;
+    List<TruckEntity> getAllTrucks() throws ServiceLayerException;
 
     /**
      * Adds a new truck.
@@ -30,7 +30,7 @@ public interface TruckManagementService {
      *              describing new truck. The id will be generated
      *              Automatically.
      */
-    void addTruck(TruckEntity truck) throws ServiceLauerException;
+    void addTruck(TruckEntity truck) throws ServiceLayerException;
 
     /**
      * Updates information about the tuck.
@@ -38,22 +38,22 @@ public interface TruckManagementService {
      * @param truck {@link ru.tsystems.shalamov.entities.TruckEntity} instance,
      *              describing the truck. There should be one in the database
      *              with the same id. Otherwise, the {@link
-     *              ru.tsystems.shalamov.services.ServiceLauerException}
+     *              ru.tsystems.shalamov.services.ServiceLayerException}
      *              will be thrown.
-     * @throws ru.tsystems.shalamov.services.ServiceLauerException if incorrect id provided.
+     * @throws ru.tsystems.shalamov.services.ServiceLayerException if incorrect id provided.
      */
-    void updateTruck(TruckEntity truck) throws ServiceLauerException;
+    void updateTruck(TruckEntity truck) throws ServiceLayerException;
 
     /**
      * Removes Specified truck.
      *
      * @param truckRegistrationNumber Id of the truck to be removed. If there is no truck with
      *                                such Id, the {@link
-     *                                ru.tsystems.shalamov.services.ServiceLauerException}
+     *                                ru.tsystems.shalamov.services.ServiceLayerException}
      *                                will be thrown.
      * @hrows LogiwebManagerException if incorrect id provided.
      */
-    void deleteTruckByRegistrationNumber(String truckRegistrationNumber) throws ServiceLauerException;
+    void deleteTruckByRegistrationNumber(String truckRegistrationNumber) throws ServiceLayerException;
 
 //    /**
 //     * Provides list of trucks, meeting following criteria:

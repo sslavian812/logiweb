@@ -2,7 +2,7 @@ package ru.tsystems.shalamov.web;
 
 import ru.tsystems.shalamov.ApplicationContext;
 import ru.tsystems.shalamov.services.DriverAssignment;
-import ru.tsystems.shalamov.services.ServiceLauerException;
+import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.DriverAssignmentService;
 import ru.tsystems.shalamov.services.api.DriverManagementService;
 
@@ -39,13 +39,13 @@ public class LoginServlet extends HttpServlet {
         if (managerID.equals(lg)) {
             if (password.equals(pw)) {
 
-                HttpSession session = request.getSession();
-                session.setAttribute("manager", lg);
+                HttpSession session = request.getSession(true);
+                session.setAttribute(ApplicationContext.ROLE, ApplicationContext.ROLE_MANAGER);
 
-                //setting session to expiry in 30 mins
-                session.setMaxInactiveInterval(30 * 60);
+                //setting session to expiry in 60 mins
+                session.setMaxInactiveInterval(60 * 60);
                 Cookie userName = new Cookie("user", lg);
-                userName.setMaxAge(30 * 60);
+                userName.setMaxAge(60 * 60);
                 response.addCookie(userName);
                 getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/manager.jsp").forward(request, response);
             } else {
@@ -59,11 +59,12 @@ public class LoginServlet extends HttpServlet {
 
             try {
                 existsDriver = driverManagementService.checkDriverExistence(lg);
-            } catch (ServiceLauerException e) {
+                // either existsDriver indicates driver existence or remains false in case of error
+            } catch (ServiceLayerException e) {
                 // todo distinct such case with absence of drivers case;
             }
 
-            if (existsDriver) {
+            if (!existsDriver) {
                 request.setAttribute("message", "no driver found with personal number " + lg);
                 rd = getServletContext().getRequestDispatcher("/fail.jsp");
             } else {
@@ -72,7 +73,7 @@ public class LoginServlet extends HttpServlet {
                 DriverAssignment assignment;
                 try {
                     assignment = driverAssignmentService.getDriverAssignmentByPersonalNumber(lg);
-                } catch (ServiceLauerException e) {
+                } catch (ServiceLayerException e) {
                     assignment = null;
                 }
 

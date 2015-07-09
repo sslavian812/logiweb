@@ -12,6 +12,15 @@ import java.util.List;
 @Entity
 @Table(name = "orders", schema = "", catalog = "logiweb")
 public class OrderEntity implements Serializable {
+
+    public OrderEntity() {
+    }
+
+    public OrderEntity(String orderIdentifier) {
+        this.orderIdentifier = orderIdentifier;
+        this.status = OrderStatus.IN_PROGRESS;
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)

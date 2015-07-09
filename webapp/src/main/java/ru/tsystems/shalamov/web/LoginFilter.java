@@ -5,6 +5,7 @@ import ru.tsystems.shalamov.ApplicationContext;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -23,18 +24,21 @@ public class LoginFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-        String path = httpRequest.getRequestURI();
+        HttpSession session = httpRequest.getSession(false);
 
-        boolean loggedIn = httpRequest.getSession().getAttribute(ApplicationContext.ROLE) != null;
-        String pathLoginPage = httpRequest.getContextPath() + LOGIN_PAGE;
+
+        boolean loggedIn = false;
+        if(session != null)
+            loggedIn = ApplicationContext.ROLE_MANAGER.equals(session.getAttribute(ApplicationContext.ROLE));
+
 
         if (loggedIn) {
             chain.doFilter(request, response);
         } else {
             try {
-                httpResponse.sendRedirect(httpRequest.getContextPath() + LOGIN_PAGE);
+                httpResponse.sendRedirect(LOGIN_PAGE);
             } catch (IOException e) {
-                //todo handle
+                //todo handle and log
             }
         }
     }

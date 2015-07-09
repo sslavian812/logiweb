@@ -128,4 +128,16 @@ public class TruckEntity implements Serializable {
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
+
+    public void setDriverStatusEntities(List<DriverStatusEntity> driverStatusEntities) {
+        this.driverStatusEntities = driverStatusEntities;
+    }
+
+    public void setOrderEntities(List<OrderEntity> orderEntities) {
+        this.orderEntities = orderEntities;
+    }
+
+    public List<DriverStatusEntity> getDriverStatusEntities() {
+        return driverStatusEntities;
+    }
 }

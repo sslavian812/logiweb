@@ -2,7 +2,7 @@ package ru.tsystems.shalamov.services.api;
 
 import ru.tsystems.shalamov.entities.statuses.CargoStatus;
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
-import ru.tsystems.shalamov.services.ServiceLauerException;
+import ru.tsystems.shalamov.services.ServiceLayerException;
 
 /**
  * For drivers (through ws/rs-interface), recording the actual work time: (PART 2)
@@ -23,11 +23,11 @@ import ru.tsystems.shalamov.services.ServiceLauerException;
  */
 public interface DriverActivityService {
 
-    void beginShift(String personalNumber, DriverStatus driverStatus) throws ServiceLauerException;
+    void beginShift(String personalNumber, DriverStatus driverStatus) throws ServiceLayerException;
 
-    void changeState(String personalNumber, DriverStatus driverStatus) throws ServiceLauerException;
+    void changeState(String personalNumber, DriverStatus driverStatus) throws ServiceLayerException;
 
-    void endShift(String personalNumber) throws ServiceLauerException;
+    void endShift(String personalNumber) throws ServiceLayerException;
 
-    void cargoStatusChanged(int cargoId, CargoStatus cargoStatus) throws ServiceLauerException;
+    void cargoStatusChanged(int cargoId, CargoStatus cargoStatus) throws ServiceLayerException;
 }

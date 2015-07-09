@@ -3,7 +3,7 @@ package ru.tsystems.shalamov.services.api;
 import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.entities.OrderEntity;
 import ru.tsystems.shalamov.entities.TruckEntity;
-import ru.tsystems.shalamov.services.ServiceLauerException;
+import ru.tsystems.shalamov.services.ServiceLayerException;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public interface OrderManagementService {
      *
      * @param order {@link ru.tsystems.shalamov.entities.OrderEntity} to add.
      */
-    void createOrder(OrderEntity order) throws ServiceLauerException;
+    void createOrder(OrderEntity order) throws ServiceLayerException;
 
     /**
      * Updates Order.
@@ -25,14 +25,14 @@ public interface OrderManagementService {
      * @param order {@link ru.tsystems.shalamov.entities.OrderEntity} to update.
      *              Should have id, which already presents in the database;
      */
-    void updateOrder(OrderEntity order) throws ServiceLauerException;
+    void updateOrder(OrderEntity order) throws ServiceLayerException;
 
     /**
      * Provides all the orders.
      *
      * @return list of orders.
      */
-    List<OrderEntity> listOrders() throws ServiceLauerException;
+    List<OrderEntity> listOrders() throws ServiceLayerException;
 
 
     /**
@@ -44,7 +44,7 @@ public interface OrderManagementService {
      * @param order order which for suitable truck will be searched.
      * @return list of suitable trucks.
      */
-    List<TruckEntity> findTrucksForOrder(OrderEntity order) throws ServiceLauerException;
+    List<TruckEntity> findTrucksForOrder(OrderEntity order) throws ServiceLayerException;
 
     /**
      * Provides list of available drivers(less than 176 work hours in the month
@@ -53,7 +53,7 @@ public interface OrderManagementService {
      * @param order not userd for now
      * @return list of available Drivers.
      */
-    List<DriverEntity> findDriversForOrder(OrderEntity order) throws ServiceLauerException;
+    List<DriverEntity> findDriversForOrder(OrderEntity order) throws ServiceLayerException;
 
     /**
      * Assigns given drivers as a crew for a truck and truck to order if possible.
@@ -66,7 +66,7 @@ public interface OrderManagementService {
      */
     void assignDriversAndTruckToOrder(List<DriverEntity> drivers,
                                       TruckEntity truck, OrderEntity order)
-            throws ServiceLauerException;
+            throws ServiceLayerException;
 
 
 //    /**
