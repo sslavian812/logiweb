@@ -10,6 +10,7 @@ public abstract class TruckEntity_ {
 
 	public static volatile SingularAttribute<TruckEntity, String> registrationNumber;
 	public static volatile SingularAttribute<TruckEntity, Integer> crewSize;
+	public static volatile SingularAttribute<TruckEntity, Integer> id;
 	public static volatile ListAttribute<TruckEntity, DriverStatusEntity> driverStatusEntities;
 	public static volatile ListAttribute<TruckEntity, OrderEntity> orderEntities;
 	public static volatile SingularAttribute<TruckEntity, Integer> capacity;

@@ -10,6 +10,7 @@ public abstract class OrderEntity_ {
 
 	public static volatile ListAttribute<OrderEntity, CargoEntity> cargoEntities;
 	public static volatile SingularAttribute<OrderEntity, String> orderIdentifier;
+	public static volatile SingularAttribute<OrderEntity, Integer> id;
 	public static volatile SingularAttribute<OrderEntity, TruckEntity> truckEntity;
 	public static volatile SingularAttribute<OrderEntity, OrderStatus> status;
 

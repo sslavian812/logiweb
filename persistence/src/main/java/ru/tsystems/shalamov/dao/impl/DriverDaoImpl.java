@@ -7,6 +7,7 @@ import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -57,7 +58,9 @@ public class DriverDaoImpl extends GenericDaoEntityManagerImpl<DriverEntity> imp
             Root<DriverEntity> driverEntityRoot = criteriaQuery.from(DriverEntity.class);
 
             return em.createQuery(criteriaQuery.select(driverEntityRoot).where(criteriaBuilder.equal(
-                    driverEntityRoot.get("personal_number"), driverPersonalNumber))).getSingleResult();
+                    driverEntityRoot.get("personalNumber"), driverPersonalNumber))).getSingleResult();
+        } catch (NoResultException e) {
+            return null;
         } catch (Exception e) {
             throw new DataAccessLayerException(e);
         }

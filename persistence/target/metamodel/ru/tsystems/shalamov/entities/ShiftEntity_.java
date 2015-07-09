@@ -9,6 +9,7 @@ public abstract class ShiftEntity_ {
 
 	public static volatile SingularAttribute<ShiftEntity, Timestamp> shiftBegin;
 	public static volatile SingularAttribute<ShiftEntity, Timestamp> shiftEnd;
+	public static volatile SingularAttribute<ShiftEntity, Integer> id;
 	public static volatile SingularAttribute<ShiftEntity, DriverEntity> driverEntity;
 
 }

@@ -21,7 +21,7 @@ public class DriverManagementServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        driverManagementService = ApplicationContext.INSTANCE.getDriverManagementService();
+        driverManagementService = ApplicationContext.getInstance().getDriverManagementService();
     }
 
     @Override
@@ -66,7 +66,7 @@ public class DriverManagementServlet extends HttpServlet {
         if (path.endsWith("deleteDriver")) {
             String personalNumber = request.getParameter("driver");
             try {
-                driverManagementService.deleteDriverByPersonalDriver(personalNumber);
+                driverManagementService.deleteDriverByPersonalNumber(personalNumber);
                 response.sendRedirect("/secure/drivers.jsp");
             } catch (ServiceLayerException e) {
                 //todo log!!!!

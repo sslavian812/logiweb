@@ -14,7 +14,7 @@ public class ShiftEntity implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private transient int id;
+    private  int id;
 
     @Column(name = "shift_begin", nullable = false)
     private Timestamp shiftBegin;
@@ -24,7 +24,7 @@ public class ShiftEntity implements Serializable {
 
     // todo restrict
     @ManyToOne(optional = false)
-    @JoinColumn(name = "driver_id", referencedColumnName = "id")
+    @JoinColumn(name = "driver_id_for_shift", referencedColumnName = "id")
     private DriverEntity driverEntity;
 
 

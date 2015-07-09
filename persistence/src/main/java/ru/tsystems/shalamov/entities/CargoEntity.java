@@ -14,7 +14,7 @@ public class CargoEntity implements Serializable {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private transient int id;
+    private int id;
 
     @Column(nullable = false)
     private String denomination;

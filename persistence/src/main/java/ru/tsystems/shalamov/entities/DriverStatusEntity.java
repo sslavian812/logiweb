@@ -15,17 +15,17 @@ public class DriverStatusEntity implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private transient int id;
+    private int id;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private DriverStatus status;
 
     @OneToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "driver_id")
+    @JoinColumn(name = "driver_id_for_status")
     private DriverEntity driverEntity;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "current_truck", referencedColumnName = "id")
     private TruckEntity truckEntity;
 
@@ -48,6 +48,13 @@ public class DriverStatusEntity implements Serializable {
 
 
     public DriverStatusEntity() {
+    }
+
+    public DriverStatusEntity(DriverEntity driver) {
+        this.status = DriverStatus.REST;
+        this.driverEntity = driver;
+        this.truckEntity = null;
+        driver.setDriverStatusEntity(this);
     }
 
     @Override

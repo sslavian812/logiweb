@@ -17,7 +17,27 @@ import javax.persistence.Persistence;
  */
 public final class ApplicationContext {
 
-    public static final ApplicationContext INSTANCE = new ApplicationContext();
+    // volatile way:
+//    private static volatile ApplicationContext INSTANCE = null;
+//
+//    public static ApplicationContext getInstance() {
+//        if (INSTANCE == null)
+//            synchronized (ApplicationContext.class) {
+//                if (INSTANCE == null) {
+//                    INSTANCE = new ApplicationContext();
+//                }
+//            }
+//        return INSTANCE;
+//    }
+
+    // lazy holder way:
+    private static class LazyHolder {
+        public static final ApplicationContext INSTANCE = new ApplicationContext();
+    }
+
+    public static ApplicationContext getInstance() {
+        return LazyHolder.INSTANCE;
+    }
 
     private static final String PERSISTENCE_UNIT = "logiweb";
     public static final String ROLE = "role";
@@ -120,7 +140,7 @@ public final class ApplicationContext {
     public DriverManagementService getDriverManagementService() {
         if (driverManagementService == null)
             driverManagementService = new DriverManagementServiceImpl(
-                    getDriverDao(), getEntityManager());
+                    getDriverDao(), getDriverStatusDao(), getEntityManager());
         return driverManagementService;
     }
 

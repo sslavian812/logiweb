@@ -22,7 +22,7 @@ public interface DriverManagementService {
 
     void updateDriver(DriverEntity driver) throws ServiceLayerException;
 
-    void deleteDriverByPersonalDriver(String driverPersonalNumber) throws ServiceLayerException;
+    void deleteDriverByPersonalNumber(String driverPersonalNumber) throws ServiceLayerException;
 
     boolean checkDriverExistence(String personalNumber) throws ServiceLayerException;
 }

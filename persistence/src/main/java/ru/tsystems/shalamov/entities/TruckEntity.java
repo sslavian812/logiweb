@@ -17,7 +17,7 @@ public class TruckEntity implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private transient int id;
+    private  int id;
 
     @Column(name = "crew_size", nullable = false)
     private int crewSize;

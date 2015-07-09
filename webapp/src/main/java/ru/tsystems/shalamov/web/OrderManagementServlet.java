@@ -20,7 +20,7 @@ public class OrderManagementServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        orderManagementService = ApplicationContext.INSTANCE.getOrderManagementService();
+        orderManagementService = ApplicationContext.getInstance().getOrderManagementService();
     }
 
     @Override

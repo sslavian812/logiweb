@@ -9,6 +9,7 @@ public abstract class DriverEntity_ {
 	public static volatile SingularAttribute<DriverEntity, String> firstName;
 	public static volatile SingularAttribute<DriverEntity, String> lastName;
 	public static volatile SingularAttribute<DriverEntity, DriverStatusEntity> driverStatusEntity;
+	public static volatile SingularAttribute<DriverEntity, Integer> id;
 	public static volatile SingularAttribute<DriverEntity, String> personalNumber;
 
 }

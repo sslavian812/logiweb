@@ -89,19 +89,18 @@ CREATE TABLE `cargos` (
 DROP TABLE IF EXISTS `shifts`;
 
 CREATE TABLE `shifts` (
-  `id`          INT(11) NOT NULL AUTO_INCREMENT,
-  `driver_id`   INT(11)          DEFAULT NULL,
-  `shift_begin` DATETIME(6)      DEFAULT NULL,
-  `shift_end`   DATETIME(6)      DEFAULT NULL,
+  `id`                  INT(11) NOT NULL AUTO_INCREMENT,
+  `driver_id_for_shift` INT(11)          DEFAULT NULL,
+  `shift_begin`         DATETIME(6)      DEFAULT NULL,
+  `shift_end`           DATETIME(6)      DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `driver_id_idx` (`driver_id`),
-  CONSTRAINT `driver_id` FOREIGN KEY (`driver_id`) REFERENCES `drivers` (`id`)
+  KEY `driver_id_idx` (`driver_id_for_shift`),
+  CONSTRAINT `driver_id_for_shift` FOREIGN KEY (`driver_id_for_shift`) REFERENCES `drivers` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 )
   ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
+  DEFAULT CHARSET = utf8
 
 -- ---------------------------------------------------------------------------
 -- some data

@@ -12,6 +12,7 @@ ru\tsystems\shalamov\services\api\TruckManagementService.class
 ru\tsystems\shalamov\dao\api\DriverStatusDao.class
 ru\tsystems\shalamov\dao\api\ShiftDao.class
 ru\tsystems\shalamov\entities\TruckEntity_.class
+ru\tsystems\shalamov\services\ServiceLayerException.class
 ru\tsystems\shalamov\ApplicationContext.class
 ru\tsystems\shalamov\entities\statuses\CargoStatus.class
 ru\tsystems\shalamov\entities\CargoEntity_.class
@@ -40,7 +41,6 @@ ru\tsystems\shalamov\dao\impl\CargoDaoImpl.class
 ru\tsystems\shalamov\dao\api\GenericDao.class
 ru\tsystems\shalamov\services\api\DriverActivityService.class
 ru\tsystems\shalamov\DateUtilities.class
-ru\tsystems\shalamov\services\ServiceLauerException.class
 ru\tsystems\shalamov\dao\impl\GenericDaoEntityManagerImpl.class
 ru\tsystems\shalamov\services\impl\TruckManagementServiceImpl.class
 ru\tsystems\shalamov\entities\DriverStatusEntity_.class

@@ -1,4 +1,5 @@
 ru\tsystems\shalamov\web\LoginFilter.class
 ru\tsystems\shalamov\web\LoginServlet.class
-ru\tsystems\shalamov\web\AuthenticationFilter.class
 ru\tsystems\shalamov\web\LoggerFilter.class
+ru\tsystems\shalamov\web\OrderManagementServlet.class
+ru\tsystems\shalamov\web\DriverManagementServlet.class

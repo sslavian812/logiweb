@@ -15,7 +15,7 @@
 <section class="container">
     <div class="login">
         <h1>Login to Logiweb</h1>
-        <form id="login_form" method="post" onsubmit="return validateForm()" action="/login" >
+        <form id="login_form" method="post" onsubmit="return validateLoginForm()" action="/login" >
             <p><input type="text" name="login"  value="" placeholder="Username or Personal Identifier" required></p>
             <p><input type="password" name="password" value="" placeholder="Password or empty(for drivers)"></p>
             <p class="remember_me">

@@ -13,7 +13,7 @@ public class DriverEntity implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private transient int id;
+    private int id;
 
     @Column(name = "first_name", nullable = false)
     @Pattern(regexp = "[a-zA-Z]+", message = "alphabetic characters only")

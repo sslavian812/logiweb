@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
     DriverManagementService driverManagementService;
 
     public void init() throws ServletException {
-        driverManagementService = ApplicationContext.INSTANCE.getDriverManagementService();
+        driverManagementService = ApplicationContext.getInstance().getDriverManagementService();
     }
 
     public void doPost(HttpServletRequest request,
@@ -69,7 +69,7 @@ public class LoginServlet extends HttpServlet {
                 rd = getServletContext().getRequestDispatcher("/fail.jsp");
             } else {
                 rd = getServletContext().getRequestDispatcher("/driver.jsp");
-                DriverAssignmentService driverAssignmentService = ApplicationContext.INSTANCE.getDriverAssignmentService();
+                DriverAssignmentService driverAssignmentService = ApplicationContext.getInstance().getDriverAssignmentService();
                 DriverAssignment assignment;
                 try {
                     assignment = driverAssignmentService.getDriverAssignmentByPersonalNumber(lg);

@@ -10,7 +10,7 @@ import java.util.List;
  * Created by viacheslav on 22.06.2015.
  */
 @Entity
-@Table(name = "orders", schema = "", catalog = "logiweb")
+@Table(name = "orders")
 public class OrderEntity implements Serializable {
 
     public OrderEntity() {
@@ -24,7 +24,7 @@ public class OrderEntity implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private transient int id;
+    private int id;
 
     @Column(name = "order_identifier", nullable = false, unique = true)
     private String orderIdentifier;
