@@ -6,6 +6,7 @@ import ru.tsystems.shalamov.entities.OrderEntity;
 import ru.tsystems.shalamov.entities.statuses.OrderStatus;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
@@ -38,6 +39,24 @@ public class OrderDaoImpl extends GenericDaoEntityManagerImpl<OrderEntity> imple
             return em.createQuery(criteriaQuery.where(criteriaBuilder.equal(orderEntityRoot.get("status"), OrderStatus.IN_PROGRESS))
                     .where(criteriaBuilder.equal(trucks.get("id"), truckId))).getSingleResult();
         } catch (Exception e) {
+            throw new DataAccessLayerException(e);
+        }
+    }
+
+    @Override
+    public OrderEntity findByOrderIdentifier(String orderIdentifier) throws DataAccessLayerException {
+        try {
+            EntityManager em = getEntityManager();
+
+            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            CriteriaQuery<OrderEntity> criteriaQuery = criteriaBuilder.createQuery(OrderEntity.class);
+
+            Root<OrderEntity> orderEntityRoot = criteriaQuery.from(OrderEntity.class);
+            return em.createQuery(criteriaQuery.select(orderEntityRoot).where(criteriaBuilder.equal(
+                    orderEntityRoot.get("orderIdentifier"), orderIdentifier))).getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }catch (Exception e) {
             throw new DataAccessLayerException(e);
         }
     }

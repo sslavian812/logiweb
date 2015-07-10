@@ -15,17 +15,17 @@
 <body>
 <section class="container">
     <div class="login" >
-        <a class="mrg" href="/secure/showDrivers">
+        <a href="/secure/showDrivers">
             <button type="button" class="btn btn-info btn-block submit">Drivers</button>
         </a>
-        <a class="mrg" href="/secure/showOrders">
-            <button type="button" class="btn btn-info btn-block">Trucks</button>
-        </a>
-        <a class="mrg" href="/secure/showTrucks">
+        <a href="/secure/showOrders">
             <button type="button" class="btn btn-info btn-block">Orders</button>
         </a>
-        <a class="mrg" href="/secure/showAssignments">
-            <button type="button" class="btn btn-info btn-block">Assign</button>
+        <a href="/secure/showTrucks">
+            <button type="button" class="btn btn-info btn-block">Trucks</button>
+        </a>
+        <a href="/secure/showAssignments">
+            <button type="button" disabled="disabled" class="btn btn-info btn-block">Assign</button>
         </a>
     </div>
 </section>

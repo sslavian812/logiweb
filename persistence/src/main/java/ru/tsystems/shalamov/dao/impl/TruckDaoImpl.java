@@ -6,6 +6,7 @@ import ru.tsystems.shalamov.entities.TruckEntity;
 import ru.tsystems.shalamov.entities.statuses.TruckStatus;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
@@ -65,8 +66,10 @@ public class TruckDaoImpl extends GenericDaoEntityManagerImpl<TruckEntity> imple
 
             Root<TruckEntity> truckEntityRoot = criteriaQuery.from(TruckEntity.class);
             return em.createQuery(criteriaQuery.select(truckEntityRoot).where(criteriaBuilder.equal(
-                    truckEntityRoot.get("registration_number"), truckRegistrationNumber))).getSingleResult();
-        } catch (Exception e) {
+                    truckEntityRoot.get("registrationNumber"), truckRegistrationNumber))).getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }catch (Exception e) {
             throw new DataAccessLayerException(e);
         }
     }

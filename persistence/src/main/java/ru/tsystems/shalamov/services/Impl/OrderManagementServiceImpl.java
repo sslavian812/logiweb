@@ -44,6 +44,9 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     public void createOrder(OrderEntity order) throws ServiceLayerException {
         try {
             getEntityManager().getTransaction().begin();
+            if (orderDao.findByOrderIdentifier(order.getOrderIdentifier()) != null) {
+                throw new ServiceLayerException("Order Identifier already in use");
+            }
             orderDao.create(order);
             getEntityManager().getTransaction().commit();
         } catch (DataAccessLayerException e) {

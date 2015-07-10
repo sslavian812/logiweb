@@ -11,4 +11,6 @@ import ru.tsystems.shalamov.entities.OrderEntity;
 public interface OrderDao extends GenericDao<OrderEntity> {
 
     OrderEntity findByTruckId(int truckId) throws DataAccessLayerException;
+
+    OrderEntity findByOrderIdentifier(String orderIdentifier) throws DataAccessLayerException;
 }

@@ -45,10 +45,10 @@ public class TruckManagementServiceImpl implements TruckManagementService {
     @Override
     public void addTruck(TruckEntity truck) throws ServiceLayerException {
         try {
+            getEntityManager().getTransaction().begin();
             if (truckDao.findByRegistrationNumber(truck.getRegistrationNumber()) != null) {
                 throw new ServiceLayerException("truck registration number already in use!");
             }
-            getEntityManager().getTransaction().begin();
             truckDao.create(truck);
             getEntityManager().getTransaction().commit();
         } catch (DataAccessLayerException e) {

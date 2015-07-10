@@ -25,7 +25,7 @@
             <button type="button" class="btn btn-info btn-block">Trucks</button>
         </a>
         <a href="/secure/showAssignments">
-            <button type="button" class="btn btn-info btn-block">Assign</button>
+            <button type="button" disabled="disabled" class="btn btn-info btn-block">Assign</button>
         </a>
     </div>
 </section>
