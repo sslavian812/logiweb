@@ -42,10 +42,20 @@ public class GenericDaoEntityManagerImpl<T> implements GenericDao<T> {
 
     @Override
     public void update(T transientObject) throws DataAccessLayerException {
+//        try {
+//            getEntityManager().refresh(transientObject);
+//        } catch (Exception exception) {
+//            throw new DataAccessLayerException(exception);
+//        }
+        if (transientObject == null) {
+            throw new NullPointerException("Argument must be nt null");
+        }
+
         try {
-            getEntityManager().refresh(transientObject);
-        } catch (Exception exception) {
-            throw new DataAccessLayerException(exception);
+            getEntityManager().merge(transientObject);
+        } catch (Exception e) {
+            //todo log
+            throw new DataAccessLayerException(e);
         }
     }
 

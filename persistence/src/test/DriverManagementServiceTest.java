@@ -55,9 +55,9 @@ public class DriverManagementServiceTest {
 
             // change status back:
             newDriver.getDriverStatusEntity().setStatus(DriverStatus.REST);
-            // todo: DOES NOT UPDATE THE DATABASE!!!
             driverManagementService.updateDriverStatus(newDriver.getDriverStatusEntity());
 
+            
 
             // remove one driver:
             drivers = driverManagementService.listDrivers();
