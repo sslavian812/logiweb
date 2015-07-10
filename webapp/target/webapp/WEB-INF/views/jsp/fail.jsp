@@ -14,5 +14,7 @@
 </head>
 <body>
 <c:out value="${message}" />
+<br>
+<c:out value="${cause}"/>
 </body>
 </html>

@@ -22,7 +22,6 @@ function validateLoginForm() {
             return true;
         }
     }
-
     return true;
 }
 
@@ -62,7 +61,7 @@ function validateTruckForm() {
         return false;
     }
     if (!(/^[a-z]{2}[0-9]{5}$/i.test(registrationNumber))) {
-        alert('Registration number must consist of two letters and 5 digits');
+        alert('Registration number must consist of 2 letters and 5 digits');
         return false;
     }
     if (!(/^[0-9]+$/.test(capacity))) {

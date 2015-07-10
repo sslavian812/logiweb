@@ -80,6 +80,11 @@
         <url-pattern>/secure/addOrder</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>OrderManagementServlet</servlet-name>
+        <url-pattern>/secure/deleteOrder</url-pattern>
+    </servlet-mapping>
+
     <!--TRUCKS-->
     <servlet-mapping>
         <servlet-name>TruckManagementServlet</servlet-name>

@@ -46,6 +46,7 @@ public class DriverManagementServlet extends HttpServlet {
         String path = request.getRequestURI();
         if (path == null || path.isEmpty()) {
             doGet(request, response);
+            return;
         }
 
         if (path.endsWith("showDrivers")) {

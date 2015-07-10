@@ -48,6 +48,7 @@ public class OrderManagementServlet extends HttpServlet {
         String path = request.getRequestURI();
         if (path == null || path.isEmpty()) {
             doGet(request, response);
+            return;
         }
 
         if (path.endsWith("showOrders")) {
@@ -73,16 +74,16 @@ public class OrderManagementServlet extends HttpServlet {
         }
 
         if (path.endsWith("deleteOrder")) {
-            String orderIdentifier = request.getParameter("orderIdentifier");
-//            try {
-                //orderManagementService.deleteOrderByOrderIdentifier(orderIdentifier);
-                // todo add deletion if not assigned
+            String orderIdentifier = request.getParameter("order");
+            try {
+                orderManagementService.deleteOrderByOrderIdentifierIfNotAssigned(orderIdentifier);
                 doGet(request, response);
-//            } catch (ServiceLayerException e) {
-//                //todo log!!!!
-//                request.setAttribute("message", "fail to delete order " + orderIdentifier);
-//                getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
-//            }
+            } catch (ServiceLayerException e) {
+                //todo log!!!!
+                request.setAttribute("message", "fail to delete order " + orderIdentifier);
+                request.setAttribute("cause", e.getMessage());
+                getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
+            }
 
             response.sendRedirect("/secure/orders.jsp");
         }

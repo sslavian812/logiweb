@@ -25,7 +25,7 @@
                 <td>
                     <form method="post"
                           action="/secure/deleteOrder?order=${order.orderIdentifier}">
-                        <button type="submit" disabled="disabled" class="btn btn-danger">delete</button>
+                        <button type="submit" class="btn btn-danger">delete</button>
                     </form>
                 </td>
             </tr>

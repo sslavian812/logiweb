@@ -27,7 +27,8 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     }
 
     public OrderManagementServiceImpl(DriverDao driverDao, OrderDao orderDao,
-          TruckDao truckDao, DriverStatusDao driverStatusDao, CargoDao cargoDao, EntityManager em) {
+                                      TruckDao truckDao, DriverStatusDao driverStatusDao,
+                                      CargoDao cargoDao, EntityManager em) {
 
         this.driverDao = driverDao;
         this.orderDao = orderDao;
@@ -55,7 +56,8 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     }
 
     @Override
-    public void createOrderWithCargoes(OrderEntity order, List<CargoEntity> cargoes) throws ServiceLayerException {
+    public void createOrderWithCargoes(OrderEntity order, List<CargoEntity> cargoes)
+            throws ServiceLayerException {
         try {
             getEntityManager().getTransaction().begin();
             if (orderDao.findByOrderIdentifier(order.getOrderIdentifier()) != null) {
@@ -104,7 +106,8 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     }
 
     @Override
-    public List<TruckEntity> findTrucksForOrder(OrderEntity order) throws ServiceLayerException {
+    public List<TruckEntity> findTrucksForOrder(OrderEntity order)
+            throws ServiceLayerException {
         try {
             getEntityManager().getTransaction().begin();
             List<TruckEntity> suitableTrucks = truckDao.findByMinCapacityWhereStatusOkAndNotAssignedToOrder(order.getTotalweight());
@@ -119,7 +122,8 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     }
 
     @Override
-    public List<DriverEntity> findDriversForOrder(OrderEntity order) throws ServiceLayerException {
+    public List<DriverEntity> findDriversForOrder(OrderEntity order)
+            throws ServiceLayerException {
         try {
             getEntityManager().getTransaction().begin();
             List<DriverEntity> list = driverDao.findByMaxWorkingHoursWhereNotAssignedToOrder();
@@ -134,7 +138,9 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     }
 
     @Override
-    public void assignDriversAndTruckToOrder(List<DriverEntity> drivers, TruckEntity truck, OrderEntity order) throws ServiceLayerException {
+    public void assignDriversAndTruckToOrder(List<DriverEntity> drivers,
+                                             TruckEntity truck, OrderEntity order)
+            throws ServiceLayerException {
         int crewSize = truck.getCrewSize();
         if (drivers.size() < crewSize) {
             throw new ServiceLayerException("not enough drivers provided to assing as crew");
@@ -152,6 +158,31 @@ public class OrderManagementServiceImpl implements OrderManagementService {
                 DriverStatusEntity driverStatus = driver.getDriverStatusEntity();
                 driverStatus.setTruckEntity(truck);
                 driverStatusDao.update(driverStatus);
+            }
+            getEntityManager().getTransaction().commit();
+        } catch (DataAccessLayerException e) {
+            throw new ServiceLayerException(e);
+        } finally {
+            if (getEntityManager().getTransaction().isActive())
+                getEntityManager().getTransaction().rollback();
+        }
+    }
+
+    @Override
+    public void deleteOrderByOrderIdentifierIfNotAssigned(String orderIdentifier) throws ServiceLayerException {
+        try {
+            getEntityManager().getTransaction().begin(); // just a lock;
+            OrderEntity order = orderDao.findByOrderIdentifier(orderIdentifier);
+            if (order == null) {
+                // todo log;
+                throw new ServiceLayerException("There are no orders with" +
+                        " order identifier [" + orderIdentifier + "]");
+            }
+            if (order.getTruckEntity() == null)
+                orderDao.delete(order);
+            else {
+                throw new ServiceLayerException("cant delete order " +
+                        order.getOrderIdentifier() + ". There is a truck assigned to it.");
             }
             getEntityManager().getTransaction().commit();
         } catch (DataAccessLayerException e) {

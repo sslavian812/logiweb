@@ -72,21 +72,5 @@ public interface OrderManagementService {
             throws ServiceLayerException;
 
 
-//    /**
-//     * Provides status of the order.
-//     *
-//     * @param orderId id of ther order
-//     * @return {@link ru.tsystems.shalamov.entities.statuses.OrderStatus} enum,
-//     * indicating status of the order.
-//     */
-//    OrderStatus getOrderStatusById(int orderId) throws ServieceLauerException;
-//
-//    /**
-//     * Provides status of the cargo.
-//     *
-//     * @param cargoId if of the cargo
-//     * @return {@link ru.tsystems.shalamov.entities.statuses.CargoStatus} enum,
-//     * indicating status of the cargo.
-//     */
-//    CargoStatus getCargoStatusById(int cargoId) throws ServieceLauerException;
+    void deleteOrderByOrderIdentifierIfNotAssigned(String orderIdentifier) throws ServiceLayerException;
 }
