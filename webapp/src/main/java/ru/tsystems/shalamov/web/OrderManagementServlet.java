@@ -1,7 +1,9 @@
 package ru.tsystems.shalamov.web;
 
 import ru.tsystems.shalamov.ApplicationContext;
+import ru.tsystems.shalamov.entities.CargoEntity;
 import ru.tsystems.shalamov.entities.OrderEntity;
+import ru.tsystems.shalamov.entities.statuses.CargoStatus;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.OrderManagementService;
 
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,9 +56,14 @@ public class OrderManagementServlet extends HttpServlet {
 
         if (path.endsWith("addOrder")) {
             String identifier = request.getParameter("orderIdentifier");
-            
+            String denomination = request.getParameter("denomination");
+            int weignt = Integer.parseInt(request.getParameter("weight"));
+
+            List<CargoEntity> cargoes = new ArrayList<>();
+            OrderEntity order = new OrderEntity(identifier);
+            cargoes.add(new CargoEntity(denomination, weignt, CargoStatus.PREPARED, order));
             try {
-                orderManagementService.createOrder(new OrderEntity(identifier));
+                orderManagementService.createOrderWithCargoes(order, cargoes);
                 doGet(request, response);
             } catch (ServiceLayerException e) {
                 //todo log!!!!
@@ -68,7 +76,7 @@ public class OrderManagementServlet extends HttpServlet {
             String orderIdentifier = request.getParameter("orderIdentifier");
 //            try {
                 //orderManagementService.deleteOrderByOrderIdentifier(orderIdentifier);
-                // todo add deletion if uncomplete
+                // todo add deletion if not assigned
                 doGet(request, response);
 //            } catch (ServiceLayerException e) {
 //                //todo log!!!!

@@ -1,5 +1,6 @@
 package ru.tsystems.shalamov.services.api;
 
+import ru.tsystems.shalamov.entities.CargoEntity;
 import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.entities.OrderEntity;
 import ru.tsystems.shalamov.entities.TruckEntity;
@@ -18,6 +19,8 @@ public interface OrderManagementService {
      * @param order {@link ru.tsystems.shalamov.entities.OrderEntity} to add.
      */
     void createOrder(OrderEntity order) throws ServiceLayerException;
+
+    void createOrderWithCargoes(OrderEntity order, List<CargoEntity> cargoes) throws ServiceLayerException;
 
     /**
      * Updates Order.

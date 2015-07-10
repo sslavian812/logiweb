@@ -148,7 +148,7 @@ public final class ApplicationContext {
         if (orderManagementService == null)
             orderManagementService = new OrderManagementServiceImpl(
                     getDriverDao(), getOrderDao(), getTruckDao(),
-                    getDriverStatusDao(), getEntityManager());
+                    getDriverStatusDao(), getCargoDao(), getEntityManager());
         return orderManagementService;
     }
 

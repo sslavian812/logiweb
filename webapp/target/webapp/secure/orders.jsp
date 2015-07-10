@@ -45,6 +45,14 @@
         <input type="text" placeholder="Type something…" name="orderIdentifier">
         <span class="help-block">Example: 0xbeadface</span>
 
+        <label>Cargo denomination</label>
+        <input type="text" placeholder="Type something…" name="denomination">
+        <span class="help-block">Example: bricks</span>
+
+        <label>Cargo weight (kg)</label>
+        <input type="text" placeholder="Type something…" name="weight">
+        <span class="help-block">Example: 1500</span>
+
         <button type="submit" class="btn">Submit</button>
     </fieldset>
 </form>

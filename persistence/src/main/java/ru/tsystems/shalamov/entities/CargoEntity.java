@@ -32,6 +32,17 @@ public class CargoEntity implements Serializable {
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     private OrderEntity orderEntity;
 
+    public CargoEntity() {
+    }
+
+    public CargoEntity(String denomination, int weight, CargoStatus status, OrderEntity order) {
+        this.denomination = denomination;
+        this.weight = weight;
+        this.status = status;
+        this.orderEntity = order;
+    }
+
+
     public int getId() {
         return id;
     }

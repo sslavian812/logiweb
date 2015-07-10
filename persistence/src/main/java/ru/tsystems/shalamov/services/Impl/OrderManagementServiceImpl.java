@@ -1,14 +1,8 @@
 package ru.tsystems.shalamov.services.impl;
 
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
-import ru.tsystems.shalamov.dao.api.DriverDao;
-import ru.tsystems.shalamov.dao.api.DriverStatusDao;
-import ru.tsystems.shalamov.dao.api.OrderDao;
-import ru.tsystems.shalamov.dao.api.TruckDao;
-import ru.tsystems.shalamov.entities.DriverEntity;
-import ru.tsystems.shalamov.entities.DriverStatusEntity;
-import ru.tsystems.shalamov.entities.OrderEntity;
-import ru.tsystems.shalamov.entities.TruckEntity;
+import ru.tsystems.shalamov.dao.api.*;
+import ru.tsystems.shalamov.entities.*;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.OrderManagementService;
 
@@ -21,9 +15,10 @@ import java.util.List;
 public class OrderManagementServiceImpl implements OrderManagementService {
 
     DriverDao driverDao;
-    OrderDao orderDao;
     TruckDao truckDao;
     DriverStatusDao driverStatusDao;
+    OrderDao orderDao;
+    CargoDao cargoDao;
 
     private EntityManager em;
 
@@ -32,11 +27,13 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     }
 
     public OrderManagementServiceImpl(DriverDao driverDao, OrderDao orderDao,
-                                      TruckDao truckDao, DriverStatusDao driverStatusDao, EntityManager em) {
+          TruckDao truckDao, DriverStatusDao driverStatusDao, CargoDao cargoDao, EntityManager em) {
+
         this.driverDao = driverDao;
         this.orderDao = orderDao;
         this.truckDao = truckDao;
         this.driverStatusDao = driverStatusDao;
+        this.cargoDao = cargoDao;
         this.em = em;
     }
 
@@ -48,6 +45,26 @@ public class OrderManagementServiceImpl implements OrderManagementService {
                 throw new ServiceLayerException("Order Identifier already in use");
             }
             orderDao.create(order);
+            getEntityManager().getTransaction().commit();
+        } catch (DataAccessLayerException e) {
+            throw new ServiceLayerException(e);
+        } finally {
+            if (getEntityManager().getTransaction().isActive())
+                getEntityManager().getTransaction().rollback();
+        }
+    }
+
+    @Override
+    public void createOrderWithCargoes(OrderEntity order, List<CargoEntity> cargoes) throws ServiceLayerException {
+        try {
+            getEntityManager().getTransaction().begin();
+            if (orderDao.findByOrderIdentifier(order.getOrderIdentifier()) != null) {
+                throw new ServiceLayerException("Order Identifier already in use");
+            }
+            orderDao.create(order);
+            for (CargoEntity e : cargoes)
+                cargoDao.create(e);
+
             getEntityManager().getTransaction().commit();
         } catch (DataAccessLayerException e) {
             throw new ServiceLayerException(e);
