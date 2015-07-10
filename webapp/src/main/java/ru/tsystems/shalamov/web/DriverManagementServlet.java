@@ -43,9 +43,13 @@ public class DriverManagementServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String path = request.getPathInfo();
+        String path = request.getRequestURI();
         if (path == null || path.isEmpty()) {
-            response.sendRedirect("/secure/drivers.jsp");
+            doGet(request, response);
+        }
+
+        if (path.endsWith("showDrivers")) {
+            doGet(request, response);
         }
 
         if (path.endsWith("addDriver")) {
@@ -55,7 +59,7 @@ public class DriverManagementServlet extends HttpServlet {
 
             try {
                 driverManagementService.addDriver(new DriverEntity(first, last, personal));
-                response.sendRedirect("/secure/drivers.jsp");
+                doGet(request, response);
             } catch (ServiceLayerException e) {
                 //todo log!!!!
                 request.setAttribute("message", "fail to add driver " + personal);
@@ -67,7 +71,7 @@ public class DriverManagementServlet extends HttpServlet {
             String personalNumber = request.getParameter("driver");
             try {
                 driverManagementService.deleteDriverByPersonalNumber(personalNumber);
-                response.sendRedirect("/secure/drivers.jsp");
+                doGet(request, response);
             } catch (ServiceLayerException e) {
                 //todo log!!!!
                 request.setAttribute("message", "fail to delete driver " + personalNumber);

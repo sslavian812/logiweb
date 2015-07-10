@@ -34,15 +34,15 @@ function validateDriverForm() {
     var personalNumber = form["personalNumber"];
 
 
-    if (/^[a-z0-9]+$/i.test(firstName)) {
+    if (! (/^[a-z0-9]+$/i.test(firstName))) {
         alert('Input must be alphanumeric and not empty');
         return false;
     }
-    if (/^[a-z0-9]+$/i.test(lastName)) {
+    if (!(/^[a-z0-9]+$/i.test(lastName))) {
         alert('Input must be alphanumeric and not empty');
         return false;
     }
-    if (/^[a-z0-9]+$/i.test(personalNumber)) {
+    if (!(/^[a-z0-9]+$/i.test(personalNumber))) {
         alert('Input must be alphanumeric and not empty');
         return false;
     }

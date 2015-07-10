@@ -28,9 +28,9 @@
         </form>
     </div>
 
-    <div class="login-help">
-        <p>Forgot your password? <a href="/forgot">Click here to reset it</a>.</p>
-    </div>
+    <%--<div class="login-help">--%>
+        <%--<p>Forgot your password? <a href="/forgot">Click here to reset it</a>.</p>--%>
+    <%--</div>--%>
 </section>
 
 <%--<section class="about">--%>

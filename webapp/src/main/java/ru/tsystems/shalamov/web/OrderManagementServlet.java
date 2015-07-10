@@ -42,22 +42,41 @@ public class OrderManagementServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String path = request.getPathInfo();
+        String path = request.getRequestURI();
         if (path == null || path.isEmpty()) {
-            response.sendRedirect("/secure/orders.jsp");
+            doGet(request, response);
+        }
+
+        if (path.endsWith("showOrders")) {
+            doGet(request, response);
         }
 
         if (path.endsWith("addOrder")) {
             String identifier = request.getParameter("orderIdentifier");
-
+            
             try {
                 orderManagementService.createOrder(new OrderEntity(identifier));
-                response.sendRedirect("/secure/orders.jsp");
+                doGet(request, response);
             } catch (ServiceLayerException e) {
                 //todo log!!!!
                 request.setAttribute("message", "fail to add order " + identifier);
                 getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
             }
+        }
+
+        if (path.endsWith("deleteOrder")) {
+            String orderIdentifier = request.getParameter("orderIdentifier");
+//            try {
+                //orderManagementService.deleteOrderByOrderIdentifier(orderIdentifier);
+                // todo add deletion if uncomplete
+                doGet(request, response);
+//            } catch (ServiceLayerException e) {
+//                //todo log!!!!
+//                request.setAttribute("message", "fail to delete order " + orderIdentifier);
+//                getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
+//            }
+
+            response.sendRedirect("/secure/orders.jsp");
         }
     }
 

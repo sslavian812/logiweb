@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
                 Cookie userName = new Cookie("user", lg);
                 userName.setMaxAge(60 * 60);
                 response.addCookie(userName);
-                getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/manager.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("secure/manager.jsp").forward(request, response);
             } else {
                 request.setAttribute("message", "fail to login as manager");
                 getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
