@@ -14,11 +14,10 @@
 
 </head>
 <body>
-
+<script src="/resources/core/js/validation.js"></script>
 
 <c:if test="${fn:length(drivers) > 0}">
 
-    <script src="resources/core/js/validation.js"></script>
     <table class="table table-striped">
         <c:forEach var="driver" items="${drivers}">
             <tr>

@@ -59,10 +59,10 @@ public class LoginServlet extends HttpServlet {
 
                 //setting session to expiry in 60 mins
                 session.setMaxInactiveInterval(60 * 60);
-                Cookie userName = new Cookie("user", lg);
+                Cookie userName = new Cookie(ApplicationContext.ROLE, ApplicationContext.ROLE_MANAGER);
                 userName.setMaxAge(60 * 60);
                 response.addCookie(userName);
-                getServletContext().getRequestDispatcher("secure/manager.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/secure/manager.jsp").forward(request, response);
             } else {
                 request.setAttribute("message", "fail to login as manager");
                 getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);

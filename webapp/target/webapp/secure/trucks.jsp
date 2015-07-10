@@ -13,10 +13,9 @@
     <link rel="stylesheet" href="/resources/core/css/bootstrap.min.css">
 </head>
 <body>
-
+<script src="/resources/core/js/validation.js"></script>
 
 <c:if test="${fn:length(trucks) > 0}">
-    <script src="resources/core/js/validation.js"></script>
     <table class="table table-striped">
         <c:forEach var="truck" items="${trucks}">
             <tr>
