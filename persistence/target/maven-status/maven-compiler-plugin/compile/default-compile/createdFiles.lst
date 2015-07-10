@@ -19,11 +19,13 @@ ru\tsystems\shalamov\entities\CargoEntity_.class
 ru\tsystems\shalamov\services\api\DriverManagementService.class
 ru\tsystems\shalamov\services\api\OrderManagementService.class
 ru\tsystems\shalamov\entities\ShiftEntity_.class
+ru\tsystems\shalamov\ApplicationContext$1.class
 ru\tsystems\shalamov\dao\impl\OrderDaoImpl.class
 ru\tsystems\shalamov\entities\OrderEntity.class
 ru\tsystems\shalamov\services\api\DriverAssignmentService.class
 ru\tsystems\shalamov\dao\EntityManagerUtil.class
 ru\tsystems\shalamov\entities\CargoEntity.class
+ru\tsystems\shalamov\ApplicationContext$LazyHolder.class
 ru\tsystems\shalamov\dao\DataAccessLayerException.class
 ru\tsystems\shalamov\entities\DriverEntity.class
 ru\tsystems\shalamov\entities\DriverStatusEntity.class

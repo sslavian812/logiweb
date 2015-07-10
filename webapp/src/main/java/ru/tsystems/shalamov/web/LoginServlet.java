@@ -26,6 +26,21 @@ public class LoginServlet extends HttpServlet {
         driverManagementService = ApplicationContext.getInstance().getDriverManagementService();
     }
 
+    @Override
+    public void doGet(HttpServletRequest request,
+                      HttpServletResponse response) {
+        response.setContentType("text/html");
+        try {
+            getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            //todo log
+            e.printStackTrace();
+        }
+
+    }
+
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response)
             throws ServletException, IOException {

@@ -5,12 +5,135 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97b6ffa6-d5ad-44c9-a8d8-08dc0a3d0b68" name="Default" comment="">
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\TEST-TestSuite.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\TestSuite.txt" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\Command line suite\Command line test.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\Command line suite\Command line test.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\bullet_point.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\collapseall.gif" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\emailable-report.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\failed.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\index.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\jquery-1.7.1.min.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\junitreports\TEST-EntityManagerTest.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\navigator-bullet.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\old\Command line suite\Command line test.properties" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\old\Command line suite\classes.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\old\Command line suite\groups.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\old\Command line suite\index.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\old\Command line suite\main.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\old\Command line suite\methods-alphabetical.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\old\Command line suite\methods-not-run.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\old\Command line suite\methods.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\old\Command line suite\reporter-output.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\old\Command line suite\testng.xml.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\old\Command line suite\toc.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\old\index.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\passed.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\skipped.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\testng-reports.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\testng-reports.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\testng-results.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-junit-results\testng.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\Command line suite\Command line test.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\Command line suite\Command line test.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\bullet_point.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\collapseall.gif" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\emailable-report.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\failed.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\index.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\jquery-1.7.1.min.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\navigator-bullet.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\old\Command line suite\Command line test.properties" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\old\Command line suite\classes.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\old\Command line suite\groups.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\old\Command line suite\index.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\old\Command line suite\main.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\old\Command line suite\methods-alphabetical.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\old\Command line suite\methods-not-run.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\old\Command line suite\methods.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\old\Command line suite\reporter-output.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\old\Command line suite\testng.xml.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\old\Command line suite\toc.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\old\index.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\passed.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\skipped.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\testng-reports.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\testng-reports.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\testng-results.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\persistence\target\surefire-reports\testng-native-results\testng.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\common-tomcat-maven-plugin-2.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\commons-cli-1.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\commons-codec-1.6.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\commons-compress-1.4.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\commons-io-2.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\commons-lang-2.6.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\commons-logging-1.1.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\ecj-4.2.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\geronimo-jta_1.1_spec-1.1.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\guava-10.0.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\hibernate-core-5.0.0.CR1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\hibernate-entitymanager-5.0.0.CR1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\hibernate-jpa-2.0-api-1.0.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\hibernate-jpamodelgen-1.0.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\httpclient-4.3.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\httpcore-4.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\jboss-logging-3.3.0.Beta1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\jboss-logging-annotations-1.2.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\jboss-logging-processor-1.2.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\jcl-over-slf4j-1.7.5.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\jdeparser-1.0.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\maven-archiver-2.4.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\maven-filtering-1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\plexus-archiver-2.1.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\plexus-build-api-0.0.4.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\plexus-interpolation-1.13.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\plexus-io-2.0.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\plexus-utils-3.0.15.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat-annotations-api-7.0.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat-api-7.0.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat-catalina-7.0.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat-catalina-ha-7.0.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat-coyote-7.0.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat-dbcp-7.0.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat-el-api-7.0.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat-embed-core-7.0.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat-embed-logging-juli-7.0.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat-embed-logging-log4j-7.0.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat-jasper-7.0.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat-jasper-el-7.0.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat-jdbc-7.0.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat-jsp-api-7.0.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat-juli-7.0.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat-servlet-api-7.0.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat-tribes-7.0.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat-util-7.0.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat7-maven-plugin-2.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\tomcat7-war-runner-2.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\webapp\target\webapp\WEB-INF\lib\xz-1.0.jar" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/target/test-classes/DriverManagementServiceTest.class" afterPath="$PROJECT_DIR$/persistence/target/test-classes/DriverManagementServiceTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/target/classes/ru/tsystems/shalamov/dao/impl/GenericDaoEntityManagerImpl.class" afterPath="$PROJECT_DIR$/persistence/target/classes/ru/tsystems/shalamov/dao/impl/GenericDaoEntityManagerImpl.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/target/classes/ru/tsystems/shalamov/web/LoginServlet.class" afterPath="$PROJECT_DIR$/webapp/target/classes/ru/tsystems/shalamov/web/LoginServlet.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/target/webapp/WEB-INF/classes/ru/tsystems/shalamov/web/LoginServlet.class" afterPath="$PROJECT_DIR$/webapp/target/webapp/WEB-INF/classes/ru/tsystems/shalamov/web/LoginServlet.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/target/persistence-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/persistence/target/persistence-1.0-SNAPSHOT.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/target/webapp/WEB-INF/lib/persistence-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/webapp/target/webapp/WEB-INF/lib/persistence-1.0-SNAPSHOT.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/target/webapp.war" afterPath="$PROJECT_DIR$/webapp/target/webapp.war" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/src/test/DriverManagementServiceTest.java" afterPath="$PROJECT_DIR$/persistence/src/test/DriverManagementServiceTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/dao/impl/GenericDaoEntityManagerImpl.java" afterPath="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/dao/impl/GenericDaoEntityManagerImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/LoginServlet.java" afterPath="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/LoginServlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/persistence/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/src/main/webapp/index.jsp" afterPath="$PROJECT_DIR$/webapp/src/main/webapp/index.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/target/webapp/index.jsp" afterPath="$PROJECT_DIR$/webapp/target/webapp/index.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/logiweb.iml" afterPath="$PROJECT_DIR$/persistence/logiweb.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/parent.iml" afterPath="$PROJECT_DIR$/parent.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/src/main/resources/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/persistence/src/main/resources/META-INF/persistence.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/target/classes/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/persistence/target/classes/META-INF/persistence.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/persistence/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/webapp/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/persistence/pom.xml" afterPath="$PROJECT_DIR$/persistence/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/web.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/target/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/webapp/target/webapp/WEB-INF/web.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/webapp.iml" afterPath="$PROJECT_DIR$/webapp/webapp.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/webapp_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/webapp_war_exploded.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="logiweb.iws" />
@@ -65,104 +188,96 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DriverManagementServiceTest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/persistence/src/test/DriverManagementServiceTest.java">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/persistence/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.4721907" vertical-offset="3" max-vertical-offset="2132">
-              <caret line="59" column="12" selection-start-line="59" selection-start-column="12" selection-end-line="59" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DriverManagementService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/services/api/DriverManagementService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="428" max-vertical-offset="910">
-              <caret line="29" column="9" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DriverManagementServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/services/impl/DriverManagementServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3390" max-vertical-offset="4212">
-              <caret line="147" column="0" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DriverDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/dao/api/DriverDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="572">
-              <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DriverDaoImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/dao/impl/DriverDaoImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="185" max-vertical-offset="1066">
-              <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.31991053" vertical-offset="728" max-vertical-offset="2574">
+              <caret line="79" column="20" selection-start-line="79" selection-start-column="20" selection-end-line="79" selection-end-column="20" />
               <folding>
-                <element signature="docComment;class#DriverDaoImpl#0" expanded="false" />
-                <element signature="method#findByMaxWorkingHoursWhereNotAssignedToOrder#0;class#DriverDaoImpl#0" expanded="false" />
-                <element signature="method#findByCurrentTruck#0;class#DriverDaoImpl#0" expanded="false" />
+                <element signature="n#build#0;n#project#0;n#!!top" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GenericDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/dao/api/GenericDao.java">
+      <file leaf-file-name="LoginServlet.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/LoginServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="302" max-vertical-offset="1196">
-              <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GenericDaoEntityManagerImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/dao/impl/GenericDaoEntityManagerImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1232" max-vertical-offset="2262">
-              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-              <folding>
-                <element signature="e#2638#2639#0" expanded="true" />
-                <element signature="e#2663#2664#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DriverStatusDaoImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/dao/impl/DriverStatusDaoImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="520">
-              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="702" max-vertical-offset="3224">
+              <caret line="38" column="32" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AbstractEntityManagerImpl.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-entitymanager/5.0.0.CR1/hibernate-entitymanager-5.0.0.CR1.jar!/org/hibernate/jpa/spi/AbstractEntityManagerImpl.class">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.92" vertical-offset="16700" max-vertical-offset="34424">
-              <caret line="760" column="16" selection-start-line="760" selection-start-column="16" selection-end-line="760" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2054">
+              <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="webapp.iml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webapp/webapp.iml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2704">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webapp/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1950">
+              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/login.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.9428573" vertical-offset="312" max-vertical-offset="1404">
+              <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CargoEntity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/entities/CargoEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.394737" vertical-offset="421" max-vertical-offset="2158">
+              <caret line="30" column="14" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DriverEntity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/entities/DriverEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-32.42105" vertical-offset="276" max-vertical-offset="2600">
+              <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
               <folding>
-                <element signature="e#33577#33578#0" expanded="true" />
-                <element signature="e#33644#33645#0" expanded="true" />
+                <element signature="e#1962#1963#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DriverStatusEntity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/entities/DriverStatusEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.5" vertical-offset="339" max-vertical-offset="2028">
+              <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -175,7 +290,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/dao/api/GenericDao.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/dao/api/DriverDao.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/dao/api/OrderDao.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/dao/api/ShiftDao.java" />
@@ -191,14 +305,12 @@
         <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/services/ServieceLauerException.java" />
         <option value="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/jsp/login.jsp" />
         <option value="$PROJECT_DIR$/webapp/src/main/webapp/index.jsl.jsp" />
-        <option value="$PROJECT_DIR$/webapp/src/main/webapp/index.jsp" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/services/DriverAssignment.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/services/impl/OrderManagementServiceImpl.java" />
         <option value="$PROJECT_DIR$/persistence/src/test/OrderManagementServiceTest.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/entities/statuses/TruckStatus.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/resources/log4j.xml" />
         <option value="$PROJECT_DIR$/webapp/pom.xml" />
-        <option value="$PROJECT_DIR$/persistence/pom.xml" />
         <option value="$PROJECT_DIR$/guide.md" />
         <option value="$PROJECT_DIR$/webapp/src/main/webapp/secure/addDriver.jsp" />
         <option value="$PROJECT_DIR$/webapp/src/main/webapp/resources/core/js/validation.js" />
@@ -207,15 +319,12 @@
         <option value="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/LoginFilter.java" />
         <option value="$PROJECT_DIR$/webapp/src/main/webapp/secure/drivers.jsp" />
         <option value="$PROJECT_DIR$/webapp/src/main/webapp/secure/orders.jsp" />
-        <option value="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/services/impl/TruckManagementServiceImpl.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/entities/OrderEntity.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/entities/DriverEntity.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/entities/TruckEntity.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/entities/CargoEntity.java" />
         <option value="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/DriverManagementServlet.java" />
-        <option value="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/LoginServlet.java" />
         <option value="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/OrderManagementServlet.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/dao/impl/DriverDaoImpl.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/ApplicationContext.java" />
@@ -226,6 +335,12 @@
         <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/services/impl/DriverManagementServiceImpl.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/dao/impl/GenericDaoEntityManagerImpl.java" />
         <option value="$PROJECT_DIR$/persistence/src/test/DriverManagementServiceTest.java" />
+        <option value="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/webapp/src/main/webapp/index.jsp" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/persistence/src/main/resources/META-INF/persistence.xml" />
+        <option value="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/LoginServlet.java" />
+        <option value="$PROJECT_DIR$/persistence/pom.xml" />
       </list>
     </option>
   </component>
@@ -391,6 +506,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -420,6 +536,62 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logiweb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logiweb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -476,248 +648,9 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persistence" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persistence" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shalamov" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persistence" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shalamov" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="services" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persistence" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shalamov" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="services" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="impl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persistence" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shalamov" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="entities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persistence" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shalamov" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dao" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persistence" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shalamov" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dao" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="impl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -756,11 +689,11 @@
       <recent name="C:\TS\logiweb\persistence\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\TS\logiweb\webapp\src\main\webapp\WEB-INF\views\jsp" />
+      <recent name="C:\TS\logiweb\webapp\src\main\webapp\WEB-INF" />
       <recent name="C:\TS\logiweb\webapp\src\main\webapp" />
+      <recent name="C:\TS\logiweb\webapp\src\main\webapp\WEB-INF\views\jsp" />
       <recent name="C:\TS\logiweb\webapp\src\main\resources\core\js" />
       <recent name="C:\TS\logiweb\webapp\src\main\resources" />
-      <recent name="C:\TS\logiweb\persistence\src\main\resources" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="ru.tsystems.shalamov.services" />
@@ -770,7 +703,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.DMtest">
+  <component name="RunManager" selected="Tomcat Server.Unnamed">
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -1236,8 +1169,8 @@
       </ConfigurationWrapper>
       <method>
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="webapp:war" />
           <artifact name="webapp:war exploded" />
+          <artifact name="webapp:war" />
         </option>
       </method>
     </configuration>
@@ -1279,7 +1212,8 @@
       <workItem from="1436346471946" duration="1282000" />
       <workItem from="1436348029065" duration="15048000" />
       <workItem from="1436387629895" duration="5915000" />
-      <workItem from="1436394213076" duration="24714000" />
+      <workItem from="1436394213076" duration="26259000" />
+      <workItem from="1436517580599" duration="5171000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1434903633348</created>
@@ -1339,7 +1273,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="244752000" />
+    <option name="totallyTimeSpent" value="251468000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1377,14 +1311,14 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24957556" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5585392" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3888292" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32936078" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.61546725" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6251343" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32936078" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32975295" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5907626" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6380236" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="CheckStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.528464" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15280136" sideWeight="0.27105832" order="5" side_tool="true" content_ui="tabs" />
@@ -1393,7 +1327,6 @@
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23608018" sideWeight="0.40708914" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.74221265" sideWeight="0.5" order="18" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.60687435" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1401,6 +1334,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32936078" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.60687435" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1434,13 +1368,19 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/persistence/src/test/DriverManagementServiceTest.java</url>
-          <line>23</line>
+          <url>file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/LoginServlet.java</url>
+          <line>25</line>
           <properties />
-          <option name="timeStamp" value="9" />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/LoginServlet.java</url>
+          <line>47</line>
+          <properties />
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="10" />
+      <option name="time" value="12" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
@@ -1469,46 +1409,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.26174498" vertical-offset="546" max-vertical-offset="3562">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/webapp.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3718">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/guide.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5249406" vertical-offset="78" max-vertical-offset="936">
           <caret line="20" column="3" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
-          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/resources/core/js/validation.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.12751678" vertical-offset="562" max-vertical-offset="1456">
           <caret line="26" column="1" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/login.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.9428573" vertical-offset="312" max-vertical-offset="1404">
-          <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1516,22 +1430,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5188" max-vertical-offset="18070">
           <caret line="285" column="18" selection-start-line="285" selection-start-column="18" selection-end-line="285" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1950">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.171429" vertical-offset="0" max-vertical-offset="598">
-          <caret line="11" column="53" selection-start-line="11" selection-start-column="53" selection-end-line="11" selection-end-column="53" />
           <folding />
         </state>
       </provider>
@@ -1548,25 +1446,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="598">
           <caret line="7" column="53" selection-start-line="7" selection-start-column="53" selection-end-line="7" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/LoggerFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1378">
-          <caret line="27" column="47" selection-start-line="27" selection-start-column="47" selection-end-line="27" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/LoginFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="250" max-vertical-offset="1534">
-          <caret line="26" column="60" selection-start-line="26" selection-start-column="60" selection-end-line="26" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1582,15 +1461,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="624">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="338" max-vertical-offset="2106">
-          <caret line="14" column="58" selection-start-line="14" selection-start-column="58" selection-end-line="14" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1598,7 +1468,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2704">
           <caret line="93" column="37" selection-start-line="93" selection-start-column="37" selection-end-line="93" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1614,23 +1483,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.285714" vertical-offset="168" max-vertical-offset="1092">
           <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/persistence.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1690">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/resources/META-INF/persistence.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="650">
-          <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1653,14 +1505,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="1846">
-          <caret line="14" column="59" selection-start-line="14" selection-start-column="59" selection-end-line="14" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/persistence/src/main/resources/hibernate.cfg.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1040">
@@ -1669,72 +1513,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/entities/CargoEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2158">
-          <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/secure/drivers.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.9714286" vertical-offset="312" max-vertical-offset="1326">
           <caret line="16" column="59" selection-start-line="16" selection-start-column="59" selection-end-line="16" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/OrderManagementServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="207" max-vertical-offset="1586">
-          <caret line="22" column="65" selection-start-line="22" selection-start-column="65" selection-end-line="22" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/LoginServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1507" max-vertical-offset="2834">
-          <caret line="71" column="98" selection-start-line="71" selection-start-column="98" selection-end-line="71" selection-end-column="98" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/DriverManagementServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="233" max-vertical-offset="2002">
-          <caret line="23" column="66" selection-start-line="23" selection-start-column="66" selection-end-line="23" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/entities/DriverEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="2600">
-          <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-          <folding>
-            <element signature="e#1962#1963#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/ApplicationContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3136" max-vertical-offset="4030">
-          <caret line="142" column="57" selection-start-line="142" selection-start-column="57" selection-end-line="142" selection-end-column="57" />
-          <folding>
-            <element signature="e#1262#1263#0" expanded="false" />
-            <element signature="e#1304#1305#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/entities/DriverStatusEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="338" max-vertical-offset="2028">
-          <caret line="24" column="44" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1742,7 +1524,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="338" max-vertical-offset="1794">
           <caret line="26" column="43" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1750,10 +1531,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.84" vertical-offset="920" max-vertical-offset="5356">
           <caret line="68" column="19" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
-          <folding>
-            <element signature="e#3308#3309#0" expanded="true" />
-            <element signature="e#3344#3345#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1761,7 +1538,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3019" max-vertical-offset="3900">
           <caret line="142" column="0" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1769,7 +1545,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1690">
           <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1777,7 +1552,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5864" max-vertical-offset="18590">
           <caret line="260" column="12" selection-start-line="260" selection-start-column="12" selection-end-line="260" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1785,10 +1559,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.92" vertical-offset="16700" max-vertical-offset="34424">
           <caret line="760" column="16" selection-start-line="760" selection-start-column="16" selection-end-line="760" selection-end-column="16" />
-          <folding>
-            <element signature="e#33577#33578#0" expanded="true" />
-            <element signature="e#33644#33645#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1804,7 +1574,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.35135135" vertical-offset="130" max-vertical-offset="5148">
           <caret line="38" column="19" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1812,7 +1581,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.35135135" vertical-offset="2470" max-vertical-offset="5564">
           <caret line="147" column="25" selection-start-line="147" selection-start-column="25" selection-end-line="147" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1820,7 +1588,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3501094" vertical-offset="100" max-vertical-offset="676">
           <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1828,7 +1595,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="428" max-vertical-offset="910">
           <caret line="29" column="9" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1836,9 +1605,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="302" max-vertical-offset="1196">
           <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1858,7 +1625,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="572">
           <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1867,8 +1636,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1232" max-vertical-offset="2262">
           <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
           <folding>
-            <element signature="e#2638#2639#0" expanded="true" />
-            <element signature="e#2663#2664#0" expanded="true" />
+            <element signature="e#2638#2639#0" expanded="false" />
+            <element signature="e#2663#2664#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1883,9 +1652,160 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/persistence/src/test/DriverManagementServiceTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4721907" vertical-offset="3" max-vertical-offset="2132">
-          <caret line="59" column="12" selection-start-line="59" selection-start-column="12" selection-end-line="59" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="712" max-vertical-offset="2132">
+          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/DriverManagementServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="233" max-vertical-offset="2002">
+          <caret line="23" column="66" selection-start-line="23" selection-start-column="66" selection-end-line="23" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/OrderManagementServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="207" max-vertical-offset="1586">
+          <caret line="22" column="65" selection-start-line="22" selection-start-column="65" selection-end-line="22" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/LoggerFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="497" max-vertical-offset="1378">
+          <caret line="50" column="27" selection-start-line="50" selection-start-column="27" selection-end-line="50" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.4" vertical-offset="0" max-vertical-offset="598">
+          <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/LoginFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="250" max-vertical-offset="1534">
+          <caret line="26" column="60" selection-start-line="26" selection-start-column="60" selection-end-line="26" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/ApplicationContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3255" max-vertical-offset="4030">
+          <caret line="142" column="0" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
+          <folding>
+            <element signature="e#1262#1263#0" expanded="true" />
+            <element signature="e#1304#1305#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/resources/META-INF/persistence.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1475596" vertical-offset="0" max-vertical-offset="881">
+          <caret line="5" column="101" selection-start-line="5" selection-start-column="101" selection-end-line="5" selection-end-column="101" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/persistence.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.088535756" vertical-offset="78" max-vertical-offset="1690">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.2985244" vertical-offset="1225" max-vertical-offset="2106">
+          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/entities/CargoEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.394737" vertical-offset="421" max-vertical-offset="2158">
+          <caret line="30" column="14" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/entities/DriverEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-32.42105" vertical-offset="276" max-vertical-offset="2600">
+          <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding>
+            <element signature="e#1962#1963#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/entities/DriverStatusEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.5" vertical-offset="339" max-vertical-offset="2028">
+          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/login.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.9428573" vertical-offset="312" max-vertical-offset="1404">
+          <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/LoginServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="702" max-vertical-offset="3224">
+          <caret line="38" column="32" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2054">
+          <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/webapp.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3718">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1950">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31991053" vertical-offset="728" max-vertical-offset="2574">
+          <caret line="79" column="20" selection-start-line="79" selection-start-column="20" selection-end-line="79" selection-end-column="20" />
+          <folding>
+            <element signature="n#build#0;n#project#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

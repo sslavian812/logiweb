@@ -57,7 +57,7 @@ public class DriverManagementServiceTest {
             newDriver.getDriverStatusEntity().setStatus(DriverStatus.REST);
             driverManagementService.updateDriverStatus(newDriver.getDriverStatusEntity());
 
-            
+
 
             // remove one driver:
             drivers = driverManagementService.listDrivers();
