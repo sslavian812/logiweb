@@ -133,8 +133,31 @@ public class DriverManagementServiceImpl implements DriverManagementService {
         }
     }
 
+    @Override
+    public void updateDriverStatus(DriverStatusEntity driverStatusEntity) throws ServiceLayerException {
+        try {
+            getEntityManager().getTransaction().begin();
+            driverStatusDao.update(driverStatusEntity);
+            getEntityManager().getTransaction().commit();
+        } catch (DataAccessLayerException e) {
+            throw new ServiceLayerException(e);
+        } finally {
+            if (getEntityManager().getTransaction().isActive())
+                getEntityManager().getTransaction().rollback();
+        }
+    }
+
+    @Override
+    public DriverEntity findDriverByPersonalNumber(String personalNumber) throws ServiceLayerException {
+        try {
+            return driverDao.findByPersonalNumber(personalNumber);
+        } catch (DataAccessLayerException e) {
+            throw new ServiceLayerException(e);
+        }
+    }
+
     private void validateForEmptyFields(DriverEntity d) throws ServiceLayerException {
-       if (d.getFirstName() == null || d.getFirstName().isEmpty()) {
+        if (d.getFirstName() == null || d.getFirstName().isEmpty()) {
             throw new ServiceLayerException("Driver's first name can't be empty.");
         } else if (d.getLastName() == null || d.getLastName().isEmpty()) {
             throw new ServiceLayerException("Driver's last name can't be empty.");

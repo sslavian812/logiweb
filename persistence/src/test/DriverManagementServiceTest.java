@@ -2,6 +2,8 @@ import org.junit.Test;
 import org.testng.Assert;
 import ru.tsystems.shalamov.ApplicationContext;
 import ru.tsystems.shalamov.entities.DriverEntity;
+import ru.tsystems.shalamov.entities.DriverStatusEntity;
+import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.DriverManagementService;
 
@@ -35,8 +37,31 @@ public class DriverManagementServiceTest {
             List<DriverEntity> drivers = driverManagementService.listDrivers();
             Assert.assertEquals(drivers.size(), 4);
 
-            // remove one driver:
+            // check status of each driver:
+            for (DriverEntity d : drivers) {
+                Assert.assertEquals(d.getDriverStatusEntity().getStatus(), DriverStatus.REST);
+            }
+
+
+            // change a status: (artificial example)
             DriverEntity driver = drivers.get(0);
+            DriverStatusEntity driverStatus = driver.getDriverStatusEntity();
+            driverStatus.setStatus(DriverStatus.PRIMARY);
+            driverManagementService.updateDriverStatus(driverStatus);
+
+            // check new status:
+            DriverEntity newDriver = driverManagementService.findDriverByPersonalNumber(driver.getPersonalNumber());
+            Assert.assertEquals(newDriver.getDriverStatusEntity().getStatus(), DriverStatus.PRIMARY);
+
+            // change status back:
+            newDriver.getDriverStatusEntity().setStatus(DriverStatus.REST);
+            // todo: DOES NOT UPDATE THE DATABASE!!!
+            driverManagementService.updateDriverStatus(newDriver.getDriverStatusEntity());
+
+
+            // remove one driver:
+            drivers = driverManagementService.listDrivers();
+            driver = drivers.get(0);
             drivers.remove(driver);
             driverManagementService.deleteDriverByPersonalNumber(driver.getPersonalNumber());
 
