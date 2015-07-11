@@ -1,13 +1,13 @@
 function validateLoginForm() {
     var form = document.getElementById("login_form");
-    var login = form.elements.login.value;
+    //var login = form.elements.login.value;
     var password = form.elements.password.value;
 
-    if(!("manager" === login || "driver" === login))
-    {
-        alert('login should be either \"drider\" or \"manager\"');
-        return false;
-    }
+    //if(!("manager" === login || "driver" === login))
+    //{
+    //    alert('login should be either \"drider\" or \"manager\"');
+    //    return false;
+    //}
 
     if (!(/^[a-z0-9]+$/i.test(password))) {
         alert('\"password\" must be alphanumeric and not empty');

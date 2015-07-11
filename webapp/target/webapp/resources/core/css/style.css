@@ -218,7 +218,8 @@ input {
     font-size: 14px;
 }
 
-input[type=text], input[type=password] {
+
+input[type=text], input[type=password]{
     margin: 5px;
     padding: 0 10px;
     width: 200px;
@@ -270,4 +271,73 @@ input[type=submit]:active {
 
 .lt-ie9 input[type=text], .lt-ie9 input[type=password] {
     line-height: 34px;
+}
+
+
+.myselect {
+    margin: 5px;
+    padding: 0 10px;
+    width: 200px;
+    height: 34px;
+    color: #404040;
+    background: white;
+    border: 1px solid;
+    border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+    border-radius: 2px;
+    outline: 5px solid #eff4f7;
+    -moz-outline-radius: 3px;
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+    line-height: 34px;
+}
+
+
+/*boostrap copypaste*/
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.form-control:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+.form-control::-moz-placeholder {
+    color: #999;
+    opacity: 1;
+}
+.form-control:-ms-input-placeholder {
+    color: #999;
+}
+.form-control::-webkit-input-placeholder {
+    color: #999;
+}
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+    background-color: #eee;
+    opacity: 1;
+}
+.form-control[disabled],
+fieldset[disabled] .form-control {
+    cursor: not-allowed;
+}
+textarea.form-control {
+    height: auto;
 }

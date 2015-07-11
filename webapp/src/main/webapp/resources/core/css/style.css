@@ -47,57 +47,6 @@ table {
     border-spacing: 0;
 }
 
-.about {
-    margin: 70px auto 40px;
-    padding: 8px;
-    width: 260px;
-    font: 10px/18px 'Lucida Grande', Arial, sans-serif;
-    color: #666;
-    text-align: center;
-    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
-    background: #eee;
-    background: rgba(250, 250, 250, 0.8);
-    border-radius: 4px;
-    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
-    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
-    background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
-    -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 6px rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 1px rgba(255, 255, 255, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 6px rgba(0, 0, 0, 0.2);
-}
-.about a {
-    color: #333;
-    text-decoration: none;
-    border-radius: 2px;
-    -webkit-transition: background 0.1s;
-    -moz-transition: background 0.1s;
-    -o-transition: background 0.1s;
-    transition: background 0.1s;
-}
-.about a:hover {
-    text-decoration: none;
-    background: #fafafa;
-    background: rgba(255, 255, 255, 0.7);
-}
-
-.about-links {
-    height: 30px;
-}
-.about-links > a {
-    float: left;
-    width: 50%;
-    line-height: 30px;
-    font-size: 12px;
-}
-
-.about-author {
-    margin-top: 5px;
-}
-.about-author > a {
-    padding: 1px 3px;
-    margin: 0 -1px;
-}
-
 /*
  * Copyright (c) 2012-2013 Thibaut Courouble
  * http://www.cssflow.com
@@ -218,7 +167,8 @@ input {
     font-size: 14px;
 }
 
-input[type=text], input[type=password] {
+
+input[type=text], input[type=password]{
     margin: 5px;
     padding: 0 10px;
     width: 200px;
@@ -270,4 +220,55 @@ input[type=submit]:active {
 
 .lt-ie9 input[type=text], .lt-ie9 input[type=password] {
     line-height: 34px;
+}
+
+
+/*boostrap copypaste*/
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.form-control:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+.form-control::-moz-placeholder {
+    color: #999;
+    opacity: 1;
+}
+.form-control:-ms-input-placeholder {
+    color: #999;
+}
+.form-control::-webkit-input-placeholder {
+    color: #999;
+}
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+    background-color: #eee;
+    opacity: 1;
+}
+.form-control[disabled],
+fieldset[disabled] .form-control {
+    cursor: not-allowed;
+}
+textarea.form-control {
+    height: auto;
 }
