@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="/resources/core/css/style.css">
 </head>
 <body>
+<%@include  file="/WEB-INF/views/navBar.html" %>
+
 <section class="container">
     <div class="login" >
         <a href="/secure/showDrivers">

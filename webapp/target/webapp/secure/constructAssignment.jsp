@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="/resources/core/css/bootstrap.min.css">
 </head>
 <body>
+<%@include  file="/WEB-INF/views/navBar.html" %>
+
 <form class="form-control" method="post" action="/secure/assign">
     <legend>Make new assignment</legend>
     <div>

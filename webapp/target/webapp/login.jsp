@@ -8,7 +8,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Logiweb</title>
-    <%--<link rel="stylesheet" href="/resources/core/css/bootstrap.min.css">--%>
     <link rel="stylesheet" href="resources/core/css/style.css">
 
     <!--[if lt IE 9]>

@@ -15,6 +15,7 @@
 </head>
 <body>
 <script src="/resources/core/js/validation.js"></script>
+<%@include  file="/WEB-INF/views/navBar.html" %>
 
 <c:if test="${fn:length(assignments) > 0}">
     <table class="table table-striped">
@@ -33,15 +34,6 @@
     </table>
 </c:if>
 
-<form method="get"
-      action="/secure/showOrders">
-    <button type="submit" class="btn btn-danger">to orders</button>
-</form>
-
-<form method="get"
-      action="/">
-    <button type="submit" class="btn btn-warning">home</button>
-</form>
 
 </body>
 </html>
