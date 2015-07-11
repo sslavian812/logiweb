@@ -42,6 +42,7 @@ public final class ApplicationContext {
     private static final String PERSISTENCE_UNIT = "logiweb";
     public static final String ROLE = "role";
     public static final String ROLE_MANAGER = "manager";
+    public static final String ROLE_DRIVER = "driver";
 
 
     private EntityManagerFactory entityManagerFactory;

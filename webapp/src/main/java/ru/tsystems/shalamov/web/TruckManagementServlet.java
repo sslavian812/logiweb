@@ -34,8 +34,7 @@ public class TruckManagementServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/secure/trucks.jsp").forward(request, response);
         } catch (ServiceLayerException e) {
             //todo log
-            request.setAttribute("message", "fail list all trucks.");
-            getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
+            fail(request, response, "fail list all trucks", e.getMessage());
         }
     }
 
@@ -62,27 +61,30 @@ public class TruckManagementServlet extends HttpServlet {
 
             try {
                 truckManagementService.addTruck(new TruckEntity(crewSize, registrationNumber, capacity, TruckStatus.INTACT));
-                doGet(request, response);
             } catch (ServiceLayerException e) {
                 //todo log!!!!
-                request.setAttribute("message", "fail to add truck " + registrationNumber);
-                getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
+                fail(request, response, "fail to add truck ", e.getMessage());
             }
+            doGet(request, response);
         }
 
         if (path.endsWith("deleteTruck")) {
             String registrationNumber = request.getParameter("registrationNumber");
             try {
                 truckManagementService.deleteTruckByRegistrationNumber(registrationNumber);
-                doGet(request, response);
             } catch (ServiceLayerException e) {
                 //todo log!!!!
-                request.setAttribute("message", "fail to delete truck " + registrationNumber);
-                getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
+                fail(request, response, "fail to delete truck " + registrationNumber, e.getMessage());
             }
-
             response.sendRedirect("/secure/trucks.jsp");
+            doGet(request, response);
         }
     }
 
+    private void fail(HttpServletRequest request, HttpServletResponse response, String message, String cause)
+            throws ServletException, IOException {
+        request.setAttribute("message", message);
+        request.setAttribute("cause", cause);
+        getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
+    }
 }

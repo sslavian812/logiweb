@@ -54,33 +54,37 @@ public class DriverManagementServlet extends HttpServlet {
         }
 
         if (path.endsWith("addDriver")) {
-            String first = request.getParameter("firstName");
-            String last = request.getParameter("lastName");
-            String personal = request.getParameter("personalNumber");
+            String firstName = request.getParameter("firstName");
+            String lastName = request.getParameter("lastName");
+            String personalNumber = request.getParameter("personalNumber");
 
             try {
-                driverManagementService.addDriver(new DriverEntity(first, last, personal));
-                doGet(request, response);
+                driverManagementService.addDriver(new DriverEntity(firstName, lastName, personalNumber));
             } catch (ServiceLayerException e) {
                 //todo log!!!!
-                request.setAttribute("message", "fail to add driver " + personal);
-                getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
+                fail(request, response, "fail to add driver " + personalNumber, e.getMessage());
             }
+            doGet(request, response);
         }
 
         if (path.endsWith("deleteDriver")) {
             String personalNumber = request.getParameter("driver");
             try {
                 driverManagementService.deleteDriverByPersonalNumber(personalNumber);
-                doGet(request, response);
+
             } catch (ServiceLayerException e) {
                 //todo log!!!!
-                request.setAttribute("message", "fail to delete driver " + personalNumber);
-                getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
+                fail(request, response, "fail to delete driver ", e.getMessage());
             }
-
-            response.sendRedirect("/secure/drivers.jsp");
+            doGet(request, response);
         }
+    }
+
+    private void fail(HttpServletRequest request, HttpServletResponse response, String message, String cause)
+            throws ServletException, IOException {
+        request.setAttribute("message", message);
+        request.setAttribute("cause", cause);
+        getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
     }
 
 }

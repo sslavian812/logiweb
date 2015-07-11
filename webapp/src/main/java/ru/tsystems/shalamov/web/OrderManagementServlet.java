@@ -56,22 +56,21 @@ public class OrderManagementServlet extends HttpServlet {
         }
 
         if (path.endsWith("addOrder")) {
-            String identifier = request.getParameter("orderIdentifier");
+            String orderIdentifier = request.getParameter("orderIdentifier");
             String denomination = request.getParameter("denomination");
             int weignt = Integer.parseInt(request.getParameter("weight"));
 
             List<CargoEntity> cargoes = new ArrayList<>();
-            OrderEntity order = new OrderEntity(identifier);
+            OrderEntity order = new OrderEntity(orderIdentifier);
             cargoes.add(new CargoEntity(denomination, weignt, CargoStatus.PREPARED, order));
             try {
                 orderManagementService.createOrderWithCargoes(order, cargoes);
                 doGet(request, response);
             } catch (ServiceLayerException e) {
                 //todo log!!!!
-                request.setAttribute("message", "fail to add order " + identifier);
-                request.setAttribute("cause", e.getMessage());
-                getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
+                fail(request, response, "fail to add order " + orderIdentifier, e.getMessage());
             }
+            doGet(request, response);
         }
 
         if (path.endsWith("deleteOrder")) {
@@ -81,13 +80,17 @@ public class OrderManagementServlet extends HttpServlet {
                 doGet(request, response);
             } catch (ServiceLayerException e) {
                 //todo log!!!!
-                request.setAttribute("message", "fail to delete order " + orderIdentifier);
-                request.setAttribute("cause", e.getMessage());
-                getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
+                fail(request, response, "fail to delete order " + orderIdentifier, e.getMessage());
             }
-
-            response.sendRedirect("/secure/orders.jsp");
+            doGet(request, response);
         }
+    }
+
+    private void fail(HttpServletRequest request, HttpServletResponse response, String message, String cause)
+            throws ServletException, IOException {
+        request.setAttribute("message", message);
+        request.setAttribute("cause", cause);
+        getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
     }
 
 }

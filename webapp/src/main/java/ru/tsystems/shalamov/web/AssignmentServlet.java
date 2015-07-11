@@ -4,6 +4,7 @@ import ru.tsystems.shalamov.ApplicationContext;
 import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.entities.OrderEntity;
 import ru.tsystems.shalamov.entities.TruckEntity;
+import ru.tsystems.shalamov.entities.statuses.OrderStatus;
 import ru.tsystems.shalamov.services.DriverAssignment;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.DriverAssignmentService;
@@ -68,6 +69,10 @@ public class AssignmentServlet extends HttpServlet {
             try {
                 String orderIdentifier = request.getParameter("orderIdentifier");
                 OrderEntity order = orderManagementService.findOrderByOrderIdentifier(orderIdentifier);
+
+                if (!order.getStatus().equals(OrderStatus.UNASSIGNED)) {
+                    fail(request, response, "unable to assign", "already assigned");
+                }
 
                 List<TruckEntity> availableTrucks = orderManagementService.findTrucksForOrder(order);
                 List<DriverEntity> availableDrivers = orderManagementService.findDriversForOrder(order);

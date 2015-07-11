@@ -1,11 +1,8 @@
 package ru.tsystems.shalamov.web;
 
-import org.apache.log4j.Logger;
-
 import javax.servlet.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Enumeration;
 
@@ -29,16 +26,16 @@ public class LoggerFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         Enumeration<String> params = req.getParameterNames();
 
-        while(params.hasMoreElements()){
+        while (params.hasMoreElements()) {
             String name = params.nextElement();
             String value = servletRequest.getParameter(name);
-            this.context.log(req.getRemoteAddr() + "::Request Params::{"+name+"="+value+"}");
+            this.context.log(req.getRemoteAddr() + "::Request Params::{" + name + "=" + value + "}");
         }
 
         Cookie[] cookies = req.getCookies();
-        if(cookies != null){
-            for(Cookie cookie : cookies){
-                this.context.log(req.getRemoteAddr() + "::Cookie::{"+cookie.getName()+","+cookie.getValue()+"}");
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                this.context.log(req.getRemoteAddr() + "::Cookie::{" + cookie.getName() + "," + cookie.getValue() + "}");
             }
         }
 

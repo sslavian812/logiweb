@@ -54,13 +54,6 @@ public class DriverInfoServlet extends HttpServlet {
 
     }
 
-//    @Override
-//    public void doPost(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        //todo setattrigute
-//        doGet(request, response);
-//    }
-
     private void fail(HttpServletRequest request, HttpServletResponse response, String message, String cause)
             throws ServletException, IOException {
         request.setAttribute("message", message);

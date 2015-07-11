@@ -18,7 +18,7 @@ public class LoginFilter implements Filter {
     private static final String LOGIN_PAGE = "/login";
 
 
-    public void doFilter(ServletRequest request,  ServletResponse response, FilterChain chain)
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
         HttpServletRequest httpRequest = (HttpServletRequest) request;
@@ -28,7 +28,7 @@ public class LoginFilter implements Filter {
 
 
         boolean loggedIn = false;
-        if(session != null)
+        if (session != null)
             loggedIn = ApplicationContext.ROLE_MANAGER.equals(session.getAttribute(ApplicationContext.ROLE));
 
 
