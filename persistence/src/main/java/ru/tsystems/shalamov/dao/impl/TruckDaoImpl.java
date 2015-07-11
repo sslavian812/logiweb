@@ -42,33 +42,6 @@ public class TruckDaoImpl extends GenericDaoEntityManagerImpl<TruckEntity> imple
             throws DataAccessLayerException {
         try {
             EntityManager em = getEntityManager();
-//            CriteriaBuilder cb = em.getCriteriaBuilder();
-//
-//            CriteriaQuery<TruckEntity> query = cb.createQuery(TruckEntity.class);
-//            Root<TruckEntity> truckRoot = query.from(TruckEntity.class);
-//
-////            Join<TruckEntity, OrderEntity> orders = truckRoot.join(TruckEntity_.orderEntities);
-//            Join<TruckEntity, DriverStatusEntity> statuses = truckRoot.join(TruckEntity_.driverStatusEntities);
-//
-//            // TODO CRITERIA QUERY NOT WORKING
-//
-//            Predicate intactPredicate = cb.equal(truckRoot.get(TruckEntity_.status), TruckStatus.INTACT);
-//            Predicate capacityPredicate = cb.greaterThan(truckRoot.get(TruckEntity_.capacity), minimalCapacity);
-//            Predicate freePredicate = cb.not(truckRoot.in(statuses.get(DriverStatusEntity_.truckEntity)));
-//
-//            query.select(truckRoot);
-////                    .where(
-//////                            ,intactPredicate
-////                            //, capacityPredicate
-////                            //, freePredicate
-////                    );
-//
-//            TypedQuery<TruckEntity> typedQuery = getEntityManager().createQuery(query);
-////            return typedQuery.getResultList();
-//
-////            return this.findAll();
-
-
             TypedQuery<TruckEntity> q = em.createQuery(
                     "SELECT t FROM TruckEntity t "
                     +"LEFT OUTER JOIN t.driverStatusEntities s" +
