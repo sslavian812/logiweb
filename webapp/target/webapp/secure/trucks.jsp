@@ -24,9 +24,8 @@
             <td>capacity</td>
             <td>status</td>
             <td>registration number</td>
-            <td>
-                delete is possible
-            </td>
+            <td>edit</td>
+            <td>delete is possible</td>
         </tr>
 
         <c:forEach var="truck" items="${trucks}">
@@ -35,6 +34,12 @@
                 <td> ${truck.capacity}</td>
                 <td> ${truck.status}</td>
                 <td>${truck.registrationNumber}</td>
+                <td>
+                    <form method="post"
+                          action="">
+                        <button class="btn btn-warning">edit</button>
+                    </form>
+                </td>
                 <td>
                     <form method="post"
                           action="/secure/deleteTruck?registrationNumber=${truck.registrationNumber}">

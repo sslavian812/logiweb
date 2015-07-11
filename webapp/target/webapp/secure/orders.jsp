@@ -22,18 +22,21 @@
         <tr>
             <td>order identifier</td>
             <td>order status</td>
-            <td>
-                delete if possible
-            </td>
-            <td>
-                assign driver and truck
-            </td>
+            <td>edit</td>
+            <td>delete if possible</td>
+            <td>assign</td>
         </tr>
 
         <c:forEach var="order" items="${orders}">
             <tr>
                 <td>${order.orderIdentifier}</td>
                 <td>${order.status}</td>
+                <td>
+                    <form method="post"
+                          action="">
+                        <button class="btn btn-warning">edit</button>
+                    </form>
+                </td>
                 <td>
                     <form method="post"
                           action="/secure/deleteOrder?order=${order.orderIdentifier}">
