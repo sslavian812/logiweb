@@ -3,11 +3,13 @@ package ru.tsystems.shalamov.services.impl;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.*;
 import ru.tsystems.shalamov.entities.*;
+import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 import ru.tsystems.shalamov.entities.statuses.OrderStatus;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.OrderManagementService;
 
 import javax.persistence.EntityManager;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -146,6 +148,7 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     public void assignDriversAndTruckToOrder(List<DriverEntity> drivers,
                                              TruckEntity truck, OrderEntity order)
             throws ServiceLayerException {
+
         int crewSize = truck.getCrewSize();
         if (drivers.size() < crewSize) {
             throw new ServiceLayerException("not enough drivers provided to assign as crew");
@@ -157,14 +160,20 @@ public class OrderManagementServiceImpl implements OrderManagementService {
             order.setTruckEntity(truck);
             order.setStatus(OrderStatus.IN_PROGRESS);
             orderDao.update(order);
-            //getEntityManager().refresh(order);
 
             drivers.subList(0, crewSize);
-            for (DriverEntity driver : drivers) {
-                DriverStatusEntity driverStatus = driver.getDriverStatusEntity();
+
+            for (Iterator<DriverEntity> it = drivers.iterator(); it.hasNext(); ) {
+                DriverStatusEntity driverStatus = it.next().getDriverStatusEntity();
                 driverStatus.setTruckEntity(truck);
+                if (!it.hasNext()) {
+                    driverStatus.setStatus(DriverStatus.PRIMARY);
+                } else {
+                    driverStatus.setStatus(DriverStatus.AUXILIARY);
+                }
                 driverStatusDao.update(driverStatus);
             }
+
             getEntityManager().getTransaction().commit();
         } catch (DataAccessLayerException e) {
             throw new ServiceLayerException(e);

@@ -24,7 +24,7 @@
         <p>order: <c:out value="${assignment.orderIdentifier}"/></p>
 
 
-        <p>co-drivers:</p>
+        <p>involved drivers:</p>
         <table>
             <c:forEach var="codriver" items="${assignment.coDrivers}">
                 <tr>

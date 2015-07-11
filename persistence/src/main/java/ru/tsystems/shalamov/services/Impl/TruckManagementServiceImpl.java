@@ -106,7 +106,8 @@ public class TruckManagementServiceImpl implements TruckManagementService {
     }
 
     @Override
-    public TruckEntity findTruckByRegistrationNumber(String registrationNumber) throws ServiceLayerException {
+    public TruckEntity findTruckByRegistrationNumber(String registrationNumber)
+            throws ServiceLayerException {
         try {
             return truckDao.findByRegistrationNumber(registrationNumber);
         } catch (DataAccessLayerException e) {

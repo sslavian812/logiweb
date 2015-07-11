@@ -93,6 +93,16 @@ public class AssignmentServlet extends HttpServlet {
                 String[] driversPN = request.getParameterValues("driver");
                 String truckRN = request.getParameter("truck");
 
+                if (driversPN == null || driversPN.length == 0) {
+                    fail(request, response, "fail to assign", "no drivers provided");
+                    return;
+                }
+
+                if (truckRN == null || truckRN.isEmpty()) {
+                    fail(request, response, "fail to assign", "no truck provided");
+                    return;
+                }
+
                 int availableCrew = driversPN.length;
 
                 TruckEntity truck = truckManagementService.findTruckByRegistrationNumber(truckRN);
