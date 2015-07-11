@@ -1,0 +1,18 @@
+<form class="form-control" id="adder" method="post" onsubmit="return validateDriverForm()" action="/secure/addDriver">
+    <fieldset>
+        <legend>Add new driver</legend>
+        <label>First Name</label>
+        <input type="text" placeholder="Type somethin..." name="firstName">
+        <span class="help-block">Example: Ivan</span>
+
+        <label>Last Name</label>
+        <input type="text" placeholder="Type something..." name="lastName">
+        <span class="help-block">Example: Bezdomniy</span>
+
+        <label>Personal Number</label>
+        <input type="text" placeholder="Type something..." name="personalNumber">
+        <span class="help-block">Example: abacaba, 11111, etc...</span>
+
+        <button type="submit" class="btn">Submit</button>
+    </fieldset>
+</form>

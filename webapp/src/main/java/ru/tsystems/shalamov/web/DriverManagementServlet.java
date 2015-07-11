@@ -53,10 +53,11 @@ public class DriverManagementServlet extends HttpServlet {
             doGet(request, response);
         }
 
+        String personalNumber = request.getParameter("personalNumber");
+
         if (path.endsWith("addDriver")) {
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
-            String personalNumber = request.getParameter("personalNumber");
 
             try {
                 driverManagementService.addDriver(new DriverEntity(firstName, lastName, personalNumber));
@@ -68,13 +69,53 @@ public class DriverManagementServlet extends HttpServlet {
         }
 
         if (path.endsWith("deleteDriver")) {
-            String personalNumber = request.getParameter("driver");
             try {
                 driverManagementService.deleteDriverByPersonalNumber(personalNumber);
-
             } catch (ServiceLayerException e) {
                 //todo log!!!!
                 fail(request, response, "fail to delete driver ", e.getMessage());
+            }
+            doGet(request, response);
+        }
+
+        if (path.endsWith("editDriver")) {
+            try {
+                DriverEntity driver = driverManagementService.findDriverByPersonalNumber(personalNumber);
+                if (driver == null) {
+                    fail(request, response, "fail to edit driver", "no such driver");
+                    return;
+                }
+                request.setAttribute("driver", driver);
+                getServletContext().getRequestDispatcher("/secure/driverEdit.jsp").forward(request, response);
+            } catch (ServiceLayerException e) {
+                fail(request, response, "fail to edit driver", e.getMessage());
+            }
+        }
+
+        if (path.endsWith("updateDriver")) {
+            try {
+                String oldPersonalNumber = request.getParameter("oldPersonalNumber");
+                String firstName = request.getParameter("firstName");
+                String lastName = request.getParameter("lastName");
+
+                DriverEntity driver = driverManagementService.findDriverByPersonalNumber(oldPersonalNumber);
+                if (driver == null) {
+                    fail(request, response, "fail to edit driver", "no such driver");
+                    return;
+                }
+
+                if ((!oldPersonalNumber.equals(personalNumber))
+                        && driverManagementService.checkDriverExistence(personalNumber)) {
+                    fail(request, response, "fail to update driver",
+                            "driver with new personal number already exists");
+                }
+
+                driver.setFirstName(firstName);
+                driver.setLastName(lastName);
+                driver.setPersonalNumber(personalNumber);
+                driverManagementService.updateDriver(driver);
+            } catch (ServiceLayerException e) {
+                fail(request, response, "fail to edit driver", e.getMessage());
             }
             doGet(request, response);
         }

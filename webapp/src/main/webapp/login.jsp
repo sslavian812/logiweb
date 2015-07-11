@@ -22,8 +22,8 @@
         <%--form-control--%>
         <form id="login_form" method="post" onsubmit="return validateLoginForm()" action="/login">
                 <select class="form-control" name="login">
-                    <option value="driver">Driver</option>
                     <option value="manager">Manager</option>
+                    <option value="driver">Driver</option>
                 </select>
             <%--<p><input type="text" name="login"  value="" placeholder="Username or Personal Identifier" required></p>--%>
             <p><input type="password" name="password" value="" placeholder="Password or personal number"></p>

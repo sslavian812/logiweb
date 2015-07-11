@@ -20,19 +20,28 @@
 
     <table class="table table-striped">
         <tr>
-            <td>First name last name</td>
+            <td>First name</td>
+            <td>Last name</td>
             <td>personal number</td>
-            <td>
-                delete if possible
-            </td>
+            <td>status</td>
+            <td>edit</td>
+            <td>delete if possible</td>
         </tr>
         <c:forEach var="driver" items="${drivers}">
             <tr>
-                <td>${driver.firstName} ${driver.lastName}</td>
+                <td>${driver.firstName}</td>
+                <td>${driver.lastName}</td>
                 <td>${driver.personalNumber}</td>
+                <td>${driver.driverStatusEntity.status}</td>
                 <td>
                     <form method="post"
-                          action="/secure/deleteDriver?driver=${driver.personalNumber}">
+                          action="/secure/editDriver?personalNumber=${driver.personalNumber}">
+                        <button type="submit" class="btn btn-warning">edit</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="post"
+                          action="/secure/deleteDriver?personalNumber=${driver.personalNumber}">
                         <button type="submit" class="btn btn-danger">delete</button>
                     </form>
                 </td>
@@ -42,25 +51,7 @@
 
 </c:if>
 
-<%--<hr>--%>
+<%@include  file="/WEB-INF/views/driverForm.html" %>
 
-<form class="form-control" id="adder" method="post" onsubmit="return validateDriverForm()" action="/secure/addDriver">
-    <fieldset>
-        <legend>Add new driver</legend>
-        <label>First Name</label>
-        <input type="text" placeholder="Type something…" name="firstName">
-        <span class="help-block">Example: Ivan</span>
-
-        <label>Last Name</label>
-        <input type="text" placeholder="Type something…" name="lastName">
-        <span class="help-block">Example: Bezdomniy</span>
-
-        <label>Personal Number</label>
-        <input type="text" placeholder="Type something…" name="personalNumber">
-        <span class="help-block">Example: abacaba, 11111, etc...</span>
-
-        <button type="submit" class="btn">Submit</button>
-    </fieldset>
-</form>
 </body>
 </html>
