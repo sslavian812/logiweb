@@ -18,12 +18,15 @@ public class LoginServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private final String managerID = "manager";
+    private final String driverID = "driver";
     private final String password = "abacaba";
 
     DriverManagementService driverManagementService;
+    DriverAssignmentService driverAssignmentService;
 
     public void init() throws ServletException {
         driverManagementService = ApplicationContext.getInstance().getDriverManagementService();
+        driverAssignmentService = ApplicationContext.getInstance().getDriverAssignmentService();
     }
 
     @Override
@@ -67,61 +70,49 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("message", "fail to login as manager");
                 getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
             }
-        } else {
-            RequestDispatcher rd;
-
-            boolean existsDriver = false;
+        } else if (driverID.equals(lg)) {
 
             try {
-                existsDriver = driverManagementService.checkDriverExistence(lg);
-                // either existsDriver indicates driver existence or remains false in case of error
+                if (!driverManagementService.checkDriverExistence(pw)) {
+                    fail(request, response, "fail to get information about driver", "no driver with personal number " + pw);
+                }
+                DriverAssignment assignment = driverAssignmentService.getDriverAssignmentByPersonalNumber(pw);
+                if(assignment == null)
+                {
+                    fail(request, response, "fail to get information", "not found");
+                }
+                request.setAttribute("assignment", assignment);
+                getServletContext().getRequestDispatcher("/driver.jsp").forward(request, response);
             } catch (ServiceLayerException e) {
-                // todo distinct such case with absence of drivers case;
+                fail(request, response, "fail to get information", e.getMessage());
             }
-
-            if (!existsDriver) {
-                request.setAttribute("message", "no driver found with personal number " + lg);
-                rd = getServletContext().getRequestDispatcher("/fail.jsp");
-            } else {
-                rd = getServletContext().getRequestDispatcher("/driver.jsp");
-                DriverAssignmentService driverAssignmentService = ApplicationContext.getInstance().getDriverAssignmentService();
-                DriverAssignment assignment;
-                try {
-                    assignment = driverAssignmentService.getDriverAssignmentByPersonalNumber(lg);
-                } catch (ServiceLayerException e) {
-                    assignment = null;
-                }
-
-                if (!checkAssignment(assignment)) {
-                    request.setAttribute("message", "no assignments found for driver " + lg);
-                    rd = getServletContext().getRequestDispatcher("/fail.jsp");
-                }
-                setAllData(request, assignment);
-            }
-            rd.include(request, response);
         }
     }
 
-    private boolean checkAssignment(DriverAssignment assignment) {
-        if (assignment == null)
-            return false;
-        if (assignment.getOrderIdentifier() == null || assignment.getOrderIdentifier().isEmpty())
-            return false;
-        if (assignment.getTruckRegistrationNumber() == null || assignment.getTruckRegistrationNumber().isEmpty())
-            return false;
-        return true;
-    }
+//    private boolean checkAssignment(DriverAssignment assignment) {
+//        if (assignment == null)
+//            return false;
+//        if (assignment.getOrderIdentifier() == null || assignment.getOrderIdentifier().isEmpty())
+//            return false;
+//        if (assignment.getTruckRegistrationNumber() == null || assignment.getTruckRegistrationNumber().isEmpty())
+//            return false;
+//        return true;
+//    }
 
-    private void setAllData(HttpServletRequest request, DriverAssignment assignment) {
-        request.setAttribute("driver", assignment.getDriverPersonalNumber());
-        request.setAttribute("truck", assignment.getTruckRegistrationNumber());
-        request.setAttribute("order", assignment.getOrderIdentifier());
+//    private void setAllData(HttpServletRequest request, DriverAssignment assignment) {
+//        request.setAttribute("driver", assignment.getDriverPersonalNumber());
+//        request.setAttribute("truck", assignment.getTruckRegistrationNumber());
+//        request.setAttribute("order", assignment.getOrderIdentifier());
+//
+//        request.setAttribute("codrivers", assignment.getCoDrivers());
+//        request.setAttribute("cargos", assignment.getCargos());
+//    }
 
-        request.setAttribute("codrivers", assignment.getCoDrivers());
-        request.setAttribute("cargos", assignment.getCargos());
-    }
 
-    public void destroy() {
-        // do nothing.
+    private void fail(HttpServletRequest request, HttpServletResponse response, String message, String cause)
+            throws ServletException, IOException {
+        request.setAttribute("message", message);
+        request.setAttribute("cause", cause);
+        getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
     }
 }

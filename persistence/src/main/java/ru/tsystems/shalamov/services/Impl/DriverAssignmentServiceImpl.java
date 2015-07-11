@@ -55,12 +55,24 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
             driverAssignment.setDriverPersonalNumber(driverPersonalNumber);
 
             DriverEntity driver = driverDao.findByPersonalNumber(driverPersonalNumber);
+            if (driver == null) {
+                getEntityManager().getTransaction().rollback();
+                return null;
+            }
             DriverStatusEntity driverStatus = driver.getDriverStatusEntity();
 
             TruckEntity truck = driverStatus.getTruckEntity();
+            if (truck == null) {
+                getEntityManager().getTransaction().rollback();
+                return null;
+            }
             driverAssignment.setTruckRegistrationNumber(truck.getRegistrationNumber());
 
             OrderEntity order = orderDao.findByTruckId(truck.getId());
+            if (order == null) {
+                getEntityManager().getTransaction().rollback();
+                return null;
+            }
             driverAssignment.setOrderIdentifier(order.getOrderIdentifier());
 
             List<CargoEntity> cargos = order.getCargoEntities();

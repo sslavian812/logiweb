@@ -125,8 +125,7 @@ public class DriverManagementServiceImpl implements DriverManagementService {
         try {
             if (driverDao.findByPersonalNumber(personalNumber) == null)
                 return false;
-            else
-                return false;
+            return true;
         } catch (Exception e) {
             throw new ServiceLayerException(e);
         } finally {

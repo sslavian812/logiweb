@@ -157,6 +157,11 @@ body {
 }
 .login p {
     margin: 20px 0 0;
+    color: #fff;
+}
+
+.login table {
+    color: #fff;
 }
 .login p:first-child {
     margin-top: 0;

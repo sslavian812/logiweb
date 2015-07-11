@@ -31,6 +31,11 @@
     </servlet>
 
     <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>ru.tsystems.shalamov.web.LogoutServlet</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>DriverManagementServlet</servlet-name>
         <servlet-class>ru.tsystems.shalamov.web.DriverManagementServlet</servlet-class>
     </servlet>
@@ -50,10 +55,19 @@
         <servlet-class>ru.tsystems.shalamov.web.AssignmentServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>DriverInfoServlet</servlet-name>
+        <servlet-class>ru.tsystems.shalamov.web.DriverInfoServlet</servlet-class>
+    </servlet>
 
+    <!--LOGIN LOGOUT-->
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
 
@@ -123,5 +137,10 @@
     </servlet-mapping>
 
 
+    <!--DRIVER INFO-->
+    <servlet-mapping>
+        <servlet-name>DriverInfoServlet</servlet-name>
+        <url-pattern>/driverInfo</url-pattern>
+    </servlet-mapping>
 
 </web-app>

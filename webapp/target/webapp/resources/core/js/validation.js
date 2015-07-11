@@ -3,25 +3,17 @@ function validateLoginForm() {
     var login = form.elements.login.value;
     var password = form.elements.password.value;
 
-    //if (login == null || login == "") {
-    //    alert("login must be filled out");
-    //    return false;
-    //}
-
-    if (!(/^[a-z0-9]+$/i.test(login))) {
-        alert('Login must be alphanumeric and not empty');
+    if(!("manager" === login || "driver" === login))
+    {
+        alert('login should be either \"drider\" or \"manager\"');
         return false;
     }
 
-    // todo: this check is always false. WTF?
-    if ("manager" === login) {
-        if (password == null || password == "") {
-            alert("password must be filled out for managers");
-            return false;
-        } else {
-            return true;
-        }
+    if (!(/^[a-z0-9]+$/i.test(password))) {
+        alert('\"password\" must be alphanumeric and not empty');
+        return false;
     }
+
     return true;
 }
 
