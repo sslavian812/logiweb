@@ -46,11 +46,13 @@ public class TruckDaoImpl extends GenericDaoEntityManagerImpl<TruckEntity> imple
 
             Join orders = truckRoot.join("orderEntities");
 
-            return em.createQuery(query.select(truckRoot)
-                            .where(cb.equal(truckRoot.get("status"), TruckStatus.INTACT))
-                            .where(cb.ge(truckRoot.get("capacity"), minimalCapacity))
-                            .where(cb.isNull(orders.get("truck")))
-            ).getResultList();
+            // TODO CRITERIA QUERY NOT WORKING
+//            return em.createQuery(query.select(truckRoot)
+//                            .where(cb.equal(truckRoot.get("status"), TruckStatus.INTACT))
+//                            .where(cb.ge(truckRoot.get("capacity"), minimalCapacity))
+//                            .where(cb.isNull(orders.get("truckEntity")))
+//            ).getResultList();
+            return this.findAll();
         } catch (Exception e) {
             throw new DataAccessLayerException(e);
         }

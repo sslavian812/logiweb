@@ -19,6 +19,13 @@
 <c:if test="${fn:length(drivers) > 0}">
 
     <table class="table table-striped">
+        <tr>
+            <td>First name last name</td>
+            <td>personal number</td>
+            <td>
+                delete if possible
+            </td>
+        </tr>
         <c:forEach var="driver" items="${drivers}">
             <tr>
                 <td>${driver.firstName} ${driver.lastName}</td>
@@ -35,6 +42,10 @@
 
 </c:if>
 
+<form method="get"
+      action="/">
+    <button type="submit" class="btn btn-warning">home</button>
+</form>
 <%--<hr>--%>
 
 <form class="form-control" id="adder" method="post" onsubmit="return validateDriverForm()" action="/secure/addDriver">

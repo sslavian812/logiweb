@@ -18,6 +18,17 @@
 <c:if test="${fn:length(orders) > 0}">
 
     <table class="table table-striped">
+        <tr>
+            <td>order identifier</td>
+            <td>order status</td>
+            <td>
+                delete if possible
+            </td>
+            <td>
+                assign driver and truck
+            </td>
+        </tr>
+
         <c:forEach var="order" items="${orders}">
             <tr>
                 <td>${order.orderIdentifier}</td>
@@ -28,12 +39,21 @@
                         <button type="submit" class="btn btn-danger">delete</button>
                     </form>
                 </td>
+                <td>
+                    <form method="post"
+                          action="/secure/constructAssignment?orderIdentifier=${order.orderIdentifier}">
+                        <button type="submit" class="btn btn-success">assign</button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
     </table>
 
 </c:if>
-
+<form method="get"
+      action="/">
+    <button type="submit" class="btn btn-warning">home</button>
+</form>
 <%--<hr>--%>
 
 <form class="form-control" id="adder" method="post" onsubmit="return validateOrderForm()" action="/secure/addOrder">

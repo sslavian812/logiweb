@@ -55,6 +55,8 @@ public interface TruckManagementService {
      */
     void deleteTruckByRegistrationNumber(String truckRegistrationNumber) throws ServiceLayerException;
 
+    TruckEntity findTruckByRegistrationNumber(String registrationNumber) throws ServiceLayerException;
+
 //    /**
 //     * Provides list of trucks, meeting following criteria:
 //     * 1) Truck is intact (not broken).

@@ -42,7 +42,9 @@ public class DriverDaoImpl extends GenericDaoEntityManagerImpl<DriverEntity> imp
 
             //todo: by working hours.
 
-            return q.getResultList();
+            // TODO: CRITERIA QUERY NOT WORKING!!
+//            return q.getResultList();
+            return this.findAll();
         } catch (Exception e) {
             throw new DataAccessLayerException(e);
         }

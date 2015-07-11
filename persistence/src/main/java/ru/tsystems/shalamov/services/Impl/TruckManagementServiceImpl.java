@@ -104,4 +104,13 @@ public class TruckManagementServiceImpl implements TruckManagementService {
                 getEntityManager().getTransaction().rollback();
         }
     }
+
+    @Override
+    public TruckEntity findTruckByRegistrationNumber(String registrationNumber) throws ServiceLayerException {
+        try {
+            return truckDao.findByRegistrationNumber(registrationNumber);
+        } catch (DataAccessLayerException e) {
+            throw new ServiceLayerException(registrationNumber);
+        }
+    }
 }

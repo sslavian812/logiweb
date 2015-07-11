@@ -69,6 +69,7 @@ public class OrderManagementServlet extends HttpServlet {
             } catch (ServiceLayerException e) {
                 //todo log!!!!
                 request.setAttribute("message", "fail to add order " + identifier);
+                request.setAttribute("cause", e.getMessage());
                 getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
             }
         }

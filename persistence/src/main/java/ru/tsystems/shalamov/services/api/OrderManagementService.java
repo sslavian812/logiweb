@@ -73,4 +73,7 @@ public interface OrderManagementService {
 
 
     void deleteOrderByOrderIdentifierIfNotAssigned(String orderIdentifier) throws ServiceLayerException;
+
+    OrderEntity findOrderByOrderIdentifier(String orderIdentifier) throws ServiceLayerException;
+
 }

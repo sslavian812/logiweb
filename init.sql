@@ -79,7 +79,7 @@ CREATE TABLE `cargos` (
   PRIMARY KEY (`id`),
   KEY `order_id_idx` (`order_id`),
   CONSTRAINT `order_id` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION
 )
   ENGINE = InnoDB

@@ -45,6 +45,10 @@
         <servlet-class>ru.tsystems.shalamov.web.TruckManagementServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>AssignmentServlet</servlet-name>
+        <servlet-class>ru.tsystems.shalamov.web.AssignmentServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -102,6 +106,21 @@
     </servlet-mapping>
 
 
+    <!--ASSIGNMENT-->
+    <servlet-mapping>
+        <servlet-name>AssignmentServlet</servlet-name>
+        <url-pattern>/secure/showAssignments</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AssignmentServlet</servlet-name>
+        <url-pattern>/secure/assign</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AssignmentServlet</servlet-name>
+        <url-pattern>/secure/constructAssignment</url-pattern>
+    </servlet-mapping>
 
 
 

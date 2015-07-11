@@ -5,5 +5,6 @@ package ru.tsystems.shalamov.entities.statuses;
  */
 public enum OrderStatus {
     IN_PROGRESS,
-    COMPLETED
+    COMPLETED,
+    UNASSIGNED
 }

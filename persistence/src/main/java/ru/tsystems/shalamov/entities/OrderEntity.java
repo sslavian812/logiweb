@@ -18,7 +18,7 @@ public class OrderEntity implements Serializable {
 
     public OrderEntity(String orderIdentifier) {
         this.orderIdentifier = orderIdentifier;
-        this.status = OrderStatus.IN_PROGRESS;
+        this.status = OrderStatus.UNASSIGNED;
     }
 
     @Id

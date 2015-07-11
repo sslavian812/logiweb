@@ -17,6 +17,17 @@
 
 <c:if test="${fn:length(trucks) > 0}">
     <table class="table table-striped">
+
+        <tr>
+            <td>crew size</td>
+            <td>capacity</td>
+            <td>status</td>
+            <td>registration number</td>
+            <td>
+                delete is possible
+            </td>
+        </tr>
+
         <c:forEach var="truck" items="${trucks}">
             <tr>
                 <td>${truck.crewSize}</td>
@@ -34,7 +45,10 @@
     </table>
 
 </c:if>
-
+<form method="get"
+      action="/">
+    <button type="submit" class="btn btn-warning">home</button>
+</form>
 <%--<hr>--%>
 
 <form class="form-control" id="adder" method="post" onsubmit="return validateTruckForm()" action="/secure/addTruck">

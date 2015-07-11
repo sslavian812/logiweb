@@ -3,6 +3,7 @@ package ru.tsystems.shalamov.services.impl;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.*;
 import ru.tsystems.shalamov.entities.*;
+import ru.tsystems.shalamov.entities.statuses.OrderStatus;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.OrderManagementService;
 
@@ -63,9 +64,13 @@ public class OrderManagementServiceImpl implements OrderManagementService {
             if (orderDao.findByOrderIdentifier(order.getOrderIdentifier()) != null) {
                 throw new ServiceLayerException("Order Identifier already in use");
             }
+            order.setCargoEntities(cargoes);
+
             orderDao.create(order);
+
             for (CargoEntity e : cargoes)
                 cargoDao.create(e);
+
 
             getEntityManager().getTransaction().commit();
         } catch (DataAccessLayerException e) {
@@ -143,15 +148,16 @@ public class OrderManagementServiceImpl implements OrderManagementService {
             throws ServiceLayerException {
         int crewSize = truck.getCrewSize();
         if (drivers.size() < crewSize) {
-            throw new ServiceLayerException("not enough drivers provided to assing as crew");
+            throw new ServiceLayerException("not enough drivers provided to assign as crew");
         }
 
         try {
             getEntityManager().getTransaction().begin();
 
             order.setTruckEntity(truck);
+            order.setStatus(OrderStatus.IN_PROGRESS);
             orderDao.update(order);
-            getEntityManager().refresh(order);
+            //getEntityManager().refresh(order);
 
             drivers.subList(0, crewSize);
             for (DriverEntity driver : drivers) {
@@ -190,6 +196,15 @@ public class OrderManagementServiceImpl implements OrderManagementService {
         } finally {
             if (getEntityManager().getTransaction().isActive())
                 getEntityManager().getTransaction().rollback();
+        }
+    }
+
+    @Override
+    public OrderEntity findOrderByOrderIdentifier(String orderIdentifier) throws ServiceLayerException {
+        try {
+            return orderDao.findByOrderIdentifier(orderIdentifier);
+        } catch (DataAccessLayerException e) {
+            throw new ServiceLayerException(e);
         }
     }
 }
