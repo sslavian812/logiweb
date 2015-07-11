@@ -2,15 +2,18 @@ package ru.tsystems.shalamov.dao.impl;
 
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.TruckDao;
+import ru.tsystems.shalamov.entities.DriverStatusEntity;
+import ru.tsystems.shalamov.entities.DriverStatusEntity_;
 import ru.tsystems.shalamov.entities.TruckEntity;
+import ru.tsystems.shalamov.entities.TruckEntity_;
+import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 import ru.tsystems.shalamov.entities.statuses.TruckStatus;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Root;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -39,20 +42,43 @@ public class TruckDaoImpl extends GenericDaoEntityManagerImpl<TruckEntity> imple
             throws DataAccessLayerException {
         try {
             EntityManager em = getEntityManager();
-            CriteriaBuilder cb = em.getCriteriaBuilder();
+//            CriteriaBuilder cb = em.getCriteriaBuilder();
+//
+//            CriteriaQuery<TruckEntity> query = cb.createQuery(TruckEntity.class);
+//            Root<TruckEntity> truckRoot = query.from(TruckEntity.class);
+//
+////            Join<TruckEntity, OrderEntity> orders = truckRoot.join(TruckEntity_.orderEntities);
+//            Join<TruckEntity, DriverStatusEntity> statuses = truckRoot.join(TruckEntity_.driverStatusEntities);
+//
+//            // TODO CRITERIA QUERY NOT WORKING
+//
+//            Predicate intactPredicate = cb.equal(truckRoot.get(TruckEntity_.status), TruckStatus.INTACT);
+//            Predicate capacityPredicate = cb.greaterThan(truckRoot.get(TruckEntity_.capacity), minimalCapacity);
+//            Predicate freePredicate = cb.not(truckRoot.in(statuses.get(DriverStatusEntity_.truckEntity)));
+//
+//            query.select(truckRoot);
+////                    .where(
+//////                            ,intactPredicate
+////                            //, capacityPredicate
+////                            //, freePredicate
+////                    );
+//
+//            TypedQuery<TruckEntity> typedQuery = getEntityManager().createQuery(query);
+////            return typedQuery.getResultList();
+//
+////            return this.findAll();
 
-            CriteriaQuery<TruckEntity> query = cb.createQuery(TruckEntity.class);
-            Root<TruckEntity> truckRoot = query.from(TruckEntity.class);
 
-            Join orders = truckRoot.join("orderEntities");
+            TypedQuery<TruckEntity> q = em.createQuery(
+                    "SELECT t FROM TruckEntity t "
+                    +"LEFT OUTER JOIN t.driverStatusEntities s" +
+                            " WHERE s.id IS null"
+                            +" AND t.status=:status AND t.capacity >= :minCapacity"
+                            , TruckEntity.class);
+            q.setParameter("status", TruckStatus.INTACT);
+            q.setParameter("minCapacity", minimalCapacity);
+            return q.getResultList();
 
-            // TODO CRITERIA QUERY NOT WORKING
-//            return em.createQuery(query.select(truckRoot)
-//                            .where(cb.equal(truckRoot.get("status"), TruckStatus.INTACT))
-//                            .where(cb.ge(truckRoot.get("capacity"), minimalCapacity))
-//                            .where(cb.isNull(orders.get("truckEntity")))
-//            ).getResultList();
-            return this.findAll();
         } catch (Exception e) {
             throw new DataAccessLayerException(e);
         }
@@ -71,7 +97,7 @@ public class TruckDaoImpl extends GenericDaoEntityManagerImpl<TruckEntity> imple
                     truckEntityRoot.get("registrationNumber"), truckRegistrationNumber))).getSingleResult();
         } catch (NoResultException e) {
             return null;
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new DataAccessLayerException(e);
         }
     }
