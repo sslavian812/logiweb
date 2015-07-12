@@ -1,5 +1,6 @@
 package ru.tsystems.shalamov.web;
 
+import org.apache.log4j.Logger;
 import ru.tsystems.shalamov.ApplicationContext;
 import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.entities.OrderEntity;
@@ -30,6 +31,8 @@ public class AssignmentServlet extends HttpServlet {
     TruckManagementService truckManagementService;
     DriverManagementService driverManagementService;
 
+    private static final Logger LOG = Logger.getLogger(AssignmentServlet.class);
+
     @Override
     public void init() throws ServletException {
         driverAssignmentService = ApplicationContext.getInstance().getDriverAssignmentService();
@@ -46,7 +49,7 @@ public class AssignmentServlet extends HttpServlet {
             request.setAttribute("assignments", assignments);
             getServletContext().getRequestDispatcher("/secure/assignments.jsp").forward(request, response);
         } catch (ServiceLayerException e) {
-            //todo log
+            LOG.warn(e);
             fail(request, response, "fail to list all assignments.", e.getMessage());
         }
     }
@@ -86,7 +89,8 @@ public class AssignmentServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher("/secure/constructAssignment.jsp").forward(request, response);
 
             } catch (ServiceLayerException e) {
-                fail(request, response, "unable to show assignments", e.getMessage());
+                LOG.warn(e);
+                fail(request, response, "unable to construct assignment", e.getMessage());
             }
         }
 
@@ -112,24 +116,30 @@ public class AssignmentServlet extends HttpServlet {
 
                 TruckEntity truck = truckManagementService.findTruckByRegistrationNumber(truckRN);
                 if (truck == null) {
+                    LOG.warn("invalid truck provided for assignment: " + truckRN);
                     fail(request, response, "unable to assign", "no such truck");
-                    // todo log
+                    return;
                 }
 
                 int currentCrewSize = truck.getCrewSize();
                 if (currentCrewSize < availableCrew) {
-                    // todo log
+                    LOG.debug("Insufficient crew for truck provided: " +
+                            currentCrewSize + " vs " + truck.getCrewSize());
                     fail(request, response, "unable to assign", "Need more drivers for thi truck.");
+                    return;
                 }
 
                 OrderEntity order = orderManagementService.findOrderByOrderIdentifier(orderIdentifier);
                 if (truck.getCapacity() < order.getTotalweight()) {
+                    LOG.warn("insufficient truck capacity: " + truck.getCapacity()
+                            + " vs " + order.getTotalweight());
                     fail(request, response, "unable to assign", "insufficient capacity");
-                    // todo log
+                    return;
                 }
 
                 List<DriverEntity> drivers = new ArrayList<>(currentCrewSize);
-                for (int i = 0; i < driversPN.length; ++i) {
+
+                for (int i = 0; i < availableCrew; ++i) {
                     DriverEntity driver = driverManagementService.findDriverByPersonalNumber(driversPN[i]);
                     drivers.add(driver);
                 }
@@ -137,6 +147,7 @@ public class AssignmentServlet extends HttpServlet {
 
                 doGet(request, response);
             } catch (ServiceLayerException e) {
+                LOG.warn(e);
                 fail(request, response, "unable to show assignments", e.getMessage());
             }
         }
