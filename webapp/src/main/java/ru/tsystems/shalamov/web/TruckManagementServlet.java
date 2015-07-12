@@ -64,6 +64,7 @@ public class TruckManagementServlet extends HttpServlet {
             } catch (ServiceLayerException e) {
                 //todo log!!!!
                 fail(request, response, "fail to add truck ", e.getMessage());
+                return;
             }
             doGet(request, response);
         }
@@ -75,8 +76,8 @@ public class TruckManagementServlet extends HttpServlet {
             } catch (ServiceLayerException e) {
                 //todo log!!!!
                 fail(request, response, "fail to delete truck " + registrationNumber, e.getMessage());
+                return;
             }
-            response.sendRedirect("/secure/trucks.jsp");
             doGet(request, response);
         }
     }

@@ -17,7 +17,7 @@ public class TruckEntity implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private  int id;
+    private int id;
 
     @Column(name = "crew_size", nullable = false)
     private int crewSize;
@@ -44,12 +44,14 @@ public class TruckEntity implements Serializable {
 
     @PreRemove
     private void preRemove() {
-        for (OrderEntity o : orderEntities) {
-            o.setTruckEntity(null);
-        }
-        for (DriverStatusEntity d : driverStatusEntities) {
-            d.setTruckEntity(null);
-        }
+        if (orderEntities != null)
+            for (OrderEntity o : orderEntities) {
+                o.setTruckEntity(null);
+            }
+        if (driverStatusEntities != null)
+            for (DriverStatusEntity d : driverStatusEntities) {
+                d.setTruckEntity(null);
+            }
     }
 
     public TruckEntity() {
