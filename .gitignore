@@ -46,7 +46,11 @@
 #crashlytics-build.properties
 
 #logs
-logs/*
+logs/all.log
+logs/debug.log
+logs/error.log
+logs/info.log
+
 
 #target
 target/
