@@ -95,7 +95,8 @@ public class TruckManagementServiceImpl implements TruckManagementService {
                 LOG.debug("Unexpected: trying to delete not existing truck ", exc);
                 throw exc;
             }
-            if (truck.getDriverStatusEntities().size() != 0) {
+            // todo: figure out, why sometimes truck.getDriverStatusEntities may produce null;
+            if (truck.getDriverStatusEntities() != null && truck.getDriverStatusEntities().size() != 0) {
                 ServiceLayerException exc = new ServiceLayerException(
                         "Unable to delete truck with drivers assigned to it. Drivers should be unassigned first.");
                 exc.setStackTrace(Thread.currentThread().getStackTrace());
