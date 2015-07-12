@@ -108,6 +108,7 @@ public class DriverManagementServlet extends HttpServlet {
                         && driverManagementService.checkDriverExistence(personalNumber)) {
                     fail(request, response, "fail to update driver",
                             "driver with new personal number already exists");
+                    return;
                 }
 
                 driver.setFirstName(firstName);

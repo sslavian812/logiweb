@@ -34,7 +34,7 @@
                 <td>
                     <form method="post"
                           action="">
-                        <button class="btn btn-warning">edit</button>
+                        <button type="submit" class="btn btn-warning">edit</button>
                     </form>
                 </td>
                 <td>
