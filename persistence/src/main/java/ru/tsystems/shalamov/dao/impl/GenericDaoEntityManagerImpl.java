@@ -15,7 +15,7 @@ import java.util.List;
 public class GenericDaoEntityManagerImpl<T> implements GenericDao<T> {
 
     private Class<T> type;
-    EntityManager em;
+    private EntityManager em;
 
     public GenericDaoEntityManagerImpl(Class<T> type, EntityManager entityManager) {
         this.type = type;
@@ -42,19 +42,9 @@ public class GenericDaoEntityManagerImpl<T> implements GenericDao<T> {
 
     @Override
     public void update(T transientObject) throws DataAccessLayerException {
-//        try {
-//            getEntityManager().refresh(transientObject);
-//        } catch (Exception exception) {
-//            throw new DataAccessLayerException(exception);
-//        }
-        if (transientObject == null) {
-            throw new NullPointerException("Argument must be nt null");
-        }
-
         try {
             getEntityManager().merge(transientObject);
         } catch (Exception e) {
-            //todo log
             throw new DataAccessLayerException(e);
         }
     }
@@ -72,7 +62,7 @@ public class GenericDaoEntityManagerImpl<T> implements GenericDao<T> {
     public List<T> findAll() throws DataAccessLayerException {
 
         try {
-            EntityManager em = getEntityManager();
+            //EntityManager em = getEntityManager();
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
             CriteriaQuery<T> query = criteriaBuilder.createQuery(type);
             Root<T> tRoot = query.from(type);

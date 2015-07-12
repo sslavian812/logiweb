@@ -28,7 +28,7 @@ public class ShiftDaoImpl extends GenericDaoEntityManagerImpl<ShiftEntity> imple
     }
 
     @Override
-    public float GetWorkingHoursInMonthByDriver(Date date, DriverEntity driverEntity)
+    public float getWorkingHoursInMonthByDriver(Date date, DriverEntity driverEntity)
             throws DataAccessLayerException {
         try {
             EntityManager em = getEntityManager();
@@ -48,8 +48,9 @@ public class ShiftDaoImpl extends GenericDaoEntityManagerImpl<ShiftEntity> imple
 
             float dif = 0;
             for (ShiftEntity s : shifts) {
-                if (s.getShiftEnd() != null)
+                if (s.getShiftEnd() != null) {
                     dif += DateUtilities.diffInHours(s.getShiftBegin(), s.getShiftEnd());
+                }
             }
 
             return dif;

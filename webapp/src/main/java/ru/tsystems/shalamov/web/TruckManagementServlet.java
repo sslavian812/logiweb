@@ -33,7 +33,6 @@ public class TruckManagementServlet extends HttpServlet {
             request.setAttribute("trucks", trucks);
             getServletContext().getRequestDispatcher("/secure/trucks.jsp").forward(request, response);
         } catch (ServiceLayerException e) {
-            //todo log
             fail(request, response, "fail list all trucks", e.getMessage());
         }
     }
@@ -62,7 +61,6 @@ public class TruckManagementServlet extends HttpServlet {
             try {
                 truckManagementService.addTruck(new TruckEntity(crewSize, registrationNumber, capacity, TruckStatus.INTACT));
             } catch (ServiceLayerException e) {
-                //todo log!!!!
                 fail(request, response, "fail to add truck ", e.getMessage());
                 return;
             }
@@ -74,7 +72,6 @@ public class TruckManagementServlet extends HttpServlet {
             try {
                 truckManagementService.deleteTruckByRegistrationNumber(registrationNumber);
             } catch (ServiceLayerException e) {
-                //todo log!!!!
                 fail(request, response, "fail to delete truck " + registrationNumber, e.getMessage());
                 return;
             }

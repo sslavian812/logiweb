@@ -126,7 +126,7 @@ public class TruckManagementServiceImpl implements TruckManagementService {
             return truckDao.findByRegistrationNumber(registrationNumber);
         } catch (DataAccessLayerException e) {
             LOG.warn("Unexpected: ", e);
-            throw new ServiceLayerException(registrationNumber);
+            throw new ServiceLayerException(e);
         }
     }
 }

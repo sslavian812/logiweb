@@ -32,7 +32,6 @@ public class DriverManagementServlet extends HttpServlet {
             request.setAttribute("drivers", drivers);
             getServletContext().getRequestDispatcher("/secure/drivers.jsp").forward(request, response);
         } catch (ServiceLayerException e) {
-            //todo log
             request.setAttribute("message", "fail list all drivers.");
             getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
         }
@@ -62,7 +61,6 @@ public class DriverManagementServlet extends HttpServlet {
             try {
                 driverManagementService.addDriver(new DriverEntity(firstName, lastName, personalNumber));
             } catch (ServiceLayerException e) {
-                //todo log!!!!
                 fail(request, response, "fail to add driver " + personalNumber, e.getMessage());
             }
             doGet(request, response);
@@ -72,7 +70,6 @@ public class DriverManagementServlet extends HttpServlet {
             try {
                 driverManagementService.deleteDriverByPersonalNumber(personalNumber);
             } catch (ServiceLayerException e) {
-                //todo log!!!!
                 fail(request, response, "fail to delete driver ", e.getMessage());
             }
             doGet(request, response);

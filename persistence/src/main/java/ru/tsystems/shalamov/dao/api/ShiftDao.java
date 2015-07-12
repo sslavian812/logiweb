@@ -13,6 +13,6 @@ import java.util.Date;
  */
 public interface ShiftDao extends GenericDao<ShiftEntity> {
 
-    public float GetWorkingHoursInMonthByDriver(Date date, DriverEntity driverEntity)
+    float getWorkingHoursInMonthByDriver(Date date, DriverEntity driverEntity)
             throws DataAccessLayerException;
 }

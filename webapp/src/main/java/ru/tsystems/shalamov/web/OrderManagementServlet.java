@@ -34,7 +34,6 @@ public class OrderManagementServlet extends HttpServlet {
             request.setAttribute("orders", orders);
             getServletContext().getRequestDispatcher("/secure/orders.jsp").forward(request, response);
         } catch (ServiceLayerException e) {
-            //todo log
             request.setAttribute("message", "fail list all orders.");
             getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
         }
@@ -67,7 +66,6 @@ public class OrderManagementServlet extends HttpServlet {
                 orderManagementService.createOrderWithCargoes(order, cargoes);
                 doGet(request, response);
             } catch (ServiceLayerException e) {
-                //todo log!!!!
                 fail(request, response, "fail to add order " + orderIdentifier, e.getMessage());
             }
             doGet(request, response);
@@ -79,7 +77,6 @@ public class OrderManagementServlet extends HttpServlet {
                 orderManagementService.deleteOrderByOrderIdentifierIfNotAssigned(orderIdentifier);
                 doGet(request, response);
             } catch (ServiceLayerException e) {
-                //todo log!!!!
                 fail(request, response, "fail to delete order " + orderIdentifier, e.getMessage());
             }
             doGet(request, response);

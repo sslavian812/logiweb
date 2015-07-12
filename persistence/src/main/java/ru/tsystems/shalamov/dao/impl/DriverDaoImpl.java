@@ -1,6 +1,5 @@
 package ru.tsystems.shalamov.dao.impl;
 
-import org.apache.log4j.Logger;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.DriverDao;
 import ru.tsystems.shalamov.entities.DriverEntity;
@@ -24,20 +23,21 @@ import java.util.List;
  */
 public class DriverDaoImpl extends GenericDaoEntityManagerImpl<DriverEntity> implements DriverDao {
 
-    private static Logger logger = Logger.getLogger(DriverDaoImpl.class);
 
     public DriverDaoImpl(EntityManager entityManager) {
         super(DriverEntity.class, entityManager);
     }
 
     @Override
-    public List<DriverEntity> findByMaxWorkingHoursWhereNotAssignedToOrder() throws DataAccessLayerException {
+    public List<DriverEntity> findByMaxWorkingHoursWhereNotAssignedToOrder()
+            throws DataAccessLayerException {
 
         try {
             EntityManager em = getEntityManager();
 
             TypedQuery<DriverEntity> q = em.createQuery(
-                    "SELECT d FROM DriverEntity d JOIN d.driverStatusEntity s WHERE s.status IN :driverStatuses", DriverEntity.class);
+                    "SELECT d FROM DriverEntity d JOIN d.driverStatusEntity s " +
+                            "WHERE s.status IN :driverStatuses", DriverEntity.class);
             q.setParameter("driverStatuses", Arrays.asList(DriverStatus.REST));
 
             //todo: by working hours.
@@ -49,7 +49,8 @@ public class DriverDaoImpl extends GenericDaoEntityManagerImpl<DriverEntity> imp
     }
 
     @Override
-    public DriverEntity findByPersonalNumber(String driverPersonalNumber) throws DataAccessLayerException {
+    public DriverEntity findByPersonalNumber(String driverPersonalNumber)
+            throws DataAccessLayerException {
         try {
             EntityManager em = getEntityManager();
 
@@ -67,7 +68,8 @@ public class DriverDaoImpl extends GenericDaoEntityManagerImpl<DriverEntity> imp
     }
 
     @Override
-    public List<DriverEntity> findByCurrentTruck(int truckId) throws DataAccessLayerException {
+    public List<DriverEntity> findByCurrentTruck(int truckId)
+            throws DataAccessLayerException {
         try {
             EntityManager em = getEntityManager();
 

@@ -13,8 +13,7 @@ public class DateUtilities {
 
     public static float diffInHours(Date startDate, Date endDate) {
         long resultMills = endDate.getTime() - startDate.getTime();
-        float resultHours = (float) resultMills / 1000 / 60 / 60;
-        return resultHours;
+        return(float) resultMills / 1000 / 60 / 60;
     }
 
 

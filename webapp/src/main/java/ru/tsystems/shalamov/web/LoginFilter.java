@@ -35,11 +35,7 @@ public class LoginFilter implements Filter {
         if (loggedIn) {
             chain.doFilter(request, response);
         } else {
-            try {
-                httpResponse.sendRedirect(LOGIN_PAGE);
-            } catch (IOException e) {
-                //todo handle and log
-            }
+            httpResponse.sendRedirect(LOGIN_PAGE);
         }
     }
 
