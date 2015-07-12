@@ -1,0 +1,9 @@
+ru\tsystems\shalamov\web\AssignmentServlet.class
+ru\tsystems\shalamov\web\TruckManagementServlet.class
+ru\tsystems\shalamov\web\LoginFilter.class
+ru\tsystems\shalamov\web\LoginServlet.class
+ru\tsystems\shalamov\web\LoggerFilter.class
+ru\tsystems\shalamov\web\DriverInfoServlet.class
+ru\tsystems\shalamov\web\LogoutServlet.class
+ru\tsystems\shalamov\web\OrderManagementServlet.class
+ru\tsystems\shalamov\web\DriverManagementServlet.class

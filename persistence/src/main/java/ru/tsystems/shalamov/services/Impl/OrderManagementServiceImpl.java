@@ -1,5 +1,6 @@
 package ru.tsystems.shalamov.services.impl;
 
+import org.apache.log4j.Logger;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.*;
 import ru.tsystems.shalamov.entities.*;
@@ -11,17 +12,20 @@ import ru.tsystems.shalamov.services.api.OrderManagementService;
 import javax.persistence.EntityManager;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by viacheslav on 01.07.2015.
  */
 public class OrderManagementServiceImpl implements OrderManagementService {
 
-    DriverDao driverDao;
-    TruckDao truckDao;
-    DriverStatusDao driverStatusDao;
-    OrderDao orderDao;
-    CargoDao cargoDao;
+    private DriverDao driverDao;
+    private TruckDao truckDao;
+    private DriverStatusDao driverStatusDao;
+    private OrderDao orderDao;
+    private CargoDao cargoDao;
+
+    private static final Logger LOG = Logger.getLogger(OrderManagementServiceImpl.class);
 
     private EntityManager em;
 
@@ -50,7 +54,9 @@ public class OrderManagementServiceImpl implements OrderManagementService {
             }
             orderDao.create(order);
             getEntityManager().getTransaction().commit();
+            LOG.info("Order created. Order Identifier: " + order.getOrderIdentifier());
         } catch (DataAccessLayerException e) {
+            LOG.warn("Unexpected: ", e);
             throw new ServiceLayerException(e);
         } finally {
             if (getEntityManager().getTransaction().isActive())
@@ -75,7 +81,14 @@ public class OrderManagementServiceImpl implements OrderManagementService {
 
 
             getEntityManager().getTransaction().commit();
+
+            LOG.info("Order created. Order Identifier: " + order.getOrderIdentifier());
+            for (CargoEntity e : cargoes)
+                LOG.info("Cargo for order [" + order.getOrderIdentifier()
+                        + "] created: [" + e.getDenomination() + "]");
+
         } catch (DataAccessLayerException e) {
+            LOG.warn("Unexpected: ", e);
             throw new ServiceLayerException(e);
         } finally {
             if (getEntityManager().getTransaction().isActive())
@@ -89,7 +102,10 @@ public class OrderManagementServiceImpl implements OrderManagementService {
             getEntityManager().getTransaction().begin();
             orderDao.update(order);
             getEntityManager().getTransaction().commit();
+
+            LOG.info("Order updated. Order Identifier(may be new): " + order.getOrderIdentifier());
         } catch (DataAccessLayerException e) {
+            LOG.warn("Unexpected: ", e);
             throw new ServiceLayerException(e);
         } finally {
             if (getEntityManager().getTransaction().isActive())
@@ -104,7 +120,10 @@ public class OrderManagementServiceImpl implements OrderManagementService {
             List<OrderEntity> list = orderDao.findAll();
             getEntityManager().getTransaction().commit();
             return list;
+            //todo is a transaction required here?
+            //return orderDao.findAll();
         } catch (DataAccessLayerException e) {
+            LOG.warn("Unexpected: ", e);
             throw new ServiceLayerException(e);
         } finally {
             if (getEntityManager().getTransaction().isActive())
@@ -121,6 +140,7 @@ public class OrderManagementServiceImpl implements OrderManagementService {
             getEntityManager().getTransaction().commit();
             return suitableTrucks;
         } catch (DataAccessLayerException e) {
+            LOG.warn("Unexpected: ", e);
             throw new ServiceLayerException(e);
         } finally {
             if (getEntityManager().getTransaction().isActive())
@@ -137,6 +157,7 @@ public class OrderManagementServiceImpl implements OrderManagementService {
             getEntityManager().getTransaction().commit();
             return list;
         } catch (DataAccessLayerException e) {
+            LOG.warn("Unexpected: ", e);
             throw new ServiceLayerException(e);
         } finally {
             if (getEntityManager().getTransaction().isActive())
@@ -175,7 +196,16 @@ public class OrderManagementServiceImpl implements OrderManagementService {
             }
 
             getEntityManager().getTransaction().commit();
+
+            String assignedDrivers = drivers.stream()
+                    .map(d -> d.getPersonalNumber())
+                    .reduce((a, b) -> a + ", " + b).get();
+
+            LOG.info("Assignment: order:[" + order.getOrderIdentifier()
+                    + "] trucks:[" + truck.getRegistrationNumber()
+                    + "] drivers:{" + assignedDrivers + "}");
         } catch (DataAccessLayerException e) {
+            LOG.warn("Unexpected: ", e);
             throw new ServiceLayerException(e);
         } finally {
             if (getEntityManager().getTransaction().isActive())
@@ -184,14 +214,14 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     }
 
     @Override
-    public void deleteOrderByOrderIdentifierIfNotAssigned(String orderIdentifier) throws ServiceLayerException {
+    public void deleteOrderByOrderIdentifierIfNotAssigned(String orderIdentifier)
+            throws ServiceLayerException {
         try {
             getEntityManager().getTransaction().begin(); // just a lock;
             OrderEntity order = orderDao.findByOrderIdentifier(orderIdentifier);
             if (order == null) {
-                // todo log;
                 throw new ServiceLayerException("There are no orders with" +
-                        " order identifier [" + orderIdentifier + "]");
+                        " order identifier: [" + orderIdentifier + "]");
             }
             if (order.getTruckEntity() == null)
                 orderDao.delete(order);
@@ -200,7 +230,9 @@ public class OrderManagementServiceImpl implements OrderManagementService {
                         order.getOrderIdentifier() + ". There is a truck assigned to it.");
             }
             getEntityManager().getTransaction().commit();
+            LOG.info("Order deleted. Order Identifier: " + order.getOrderIdentifier());
         } catch (DataAccessLayerException e) {
+            LOG.warn("Unexpected: ", e);
             throw new ServiceLayerException(e);
         } finally {
             if (getEntityManager().getTransaction().isActive())
@@ -209,10 +241,12 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     }
 
     @Override
-    public OrderEntity findOrderByOrderIdentifier(String orderIdentifier) throws ServiceLayerException {
+    public OrderEntity findOrderByOrderIdentifier(String orderIdentifier)
+            throws ServiceLayerException {
         try {
             return orderDao.findByOrderIdentifier(orderIdentifier);
         } catch (DataAccessLayerException e) {
+            LOG.warn("Unexpected: ", e);
             throw new ServiceLayerException(e);
         }
     }

@@ -65,11 +65,14 @@ public class LoginServlet extends HttpServlet {
         } else if (lg.equals(ApplicationContext.ROLE_DRIVER)) {
             try {
                 if (!driverManagementService.checkDriverExistence(pw)) {
-                    fail(request, response, "fail to get information about driver", "no driver with personal number " + pw);
+                    fail(request, response, "fail to get information about driver",
+                            "no driver with personal number " + pw);
+                    return;
                 }
                 DriverAssignment assignment = driverAssignmentService.getDriverAssignmentByPersonalNumber(pw);
                 if (assignment == null) {
                     fail(request, response, "fail to get information", "not found");
+                    return;
                 }
                 request.setAttribute("assignment", assignment);
                 getServletContext().getRequestDispatcher("/driver.jsp").forward(request, response);

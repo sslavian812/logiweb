@@ -1,5 +1,6 @@
 package ru.tsystems.shalamov.services.impl;
 
+import org.apache.log4j.Logger;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.DriverDao;
 import ru.tsystems.shalamov.dao.api.OrderDao;
@@ -22,6 +23,8 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
     private OrderDao orderDao;
 
     private EntityManager em;
+
+    private static final Logger LOG = Logger.getLogger(DriverAssignmentServiceImpl.class);
 
     private EntityManager getEntityManager() {
         return em;
@@ -47,7 +50,8 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
      * @throws ru.tsystems.shalamov.services.ServiceLayerException
      */
     @Override
-    public DriverAssignment getDriverAssignmentByPersonalNumber(String driverPersonalNumber) throws ServiceLayerException {
+    public DriverAssignment getDriverAssignmentByPersonalNumber(String driverPersonalNumber)
+            throws ServiceLayerException {
         try {
             getEntityManager().getTransaction().begin(); // just lock to database to diasllow changes.
             DriverAssignment driverAssignment = new DriverAssignment();
@@ -56,21 +60,18 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
 
             DriverEntity driver = driverDao.findByPersonalNumber(driverPersonalNumber);
             if (driver == null) {
-                getEntityManager().getTransaction().rollback();
                 return null;
             }
             DriverStatusEntity driverStatus = driver.getDriverStatusEntity();
 
             TruckEntity truck = driverStatus.getTruckEntity();
             if (truck == null) {
-                getEntityManager().getTransaction().rollback();
                 return null;
             }
             driverAssignment.setTruckRegistrationNumber(truck.getRegistrationNumber());
 
             OrderEntity order = orderDao.findByTruckId(truck.getId());
             if (order == null) {
-                getEntityManager().getTransaction().rollback();
                 return null;
             }
             driverAssignment.setOrderIdentifier(order.getOrderIdentifier());
@@ -82,8 +83,10 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
             driverAssignment.setCoDrivers(coDrivers);
 
             getEntityManager().getTransaction().commit();
+            LOG.debug("Drive assignment information successfully got from database");
             return driverAssignment;
         } catch (DataAccessLayerException e) {
+            LOG.warn("Unexpected: ", e);
             throw new ServiceLayerException(e);
         } finally {
             if (getEntityManager().getTransaction().isActive())
@@ -93,36 +96,42 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
     }
 
     @Override
-    public List<String> getCoDriversPersonalNumbers(String driverPersonalNumber) throws ServiceLayerException {
+    public List<String> getCoDriversPersonalNumbers(String driverPersonalNumber)
+            throws ServiceLayerException {
         DriverAssignment driverAssignment = getDriverAssignmentByPersonalNumber(driverPersonalNumber);
         return driverAssignment.getCoDrivers()
                 .stream().map(d -> d.getPersonalNumber()).collect(Collectors.toList());
     }
 
     @Override
-    public String getTruckRegistrationNumber(String driverPersonalNumber) throws ServiceLayerException {
+    public String getTruckRegistrationNumber(String driverPersonalNumber)
+            throws ServiceLayerException {
         return getDriverAssignmentByPersonalNumber(driverPersonalNumber).getTruckRegistrationNumber();
 
     }
 
     @Override
-    public String getOrderIdentifier(String driverPersonalNumber) throws ServiceLayerException {
+    public String getOrderIdentifier(String driverPersonalNumber)
+            throws ServiceLayerException {
         return getDriverAssignmentByPersonalNumber(driverPersonalNumber).getOrderIdentifier();
     }
 
     @Override
-    public List<CargoEntity> getCargoes(String driverPersonalNumber) throws ServiceLayerException {
+    public List<CargoEntity> getCargoes(String driverPersonalNumber)
+            throws ServiceLayerException {
         return getDriverAssignmentByPersonalNumber(driverPersonalNumber).getCargos();
     }
 
     @Override
-    public List<String> getCargoesDenominations(String driverPersonalNumber) throws ServiceLayerException {
+    public List<String> getCargoesDenominations(String driverPersonalNumber)
+            throws ServiceLayerException {
         return getDriverAssignmentByPersonalNumber(driverPersonalNumber).getCargos()
                 .stream().map(c -> c.getDenomination()).collect(Collectors.toList());
     }
 
     @Override
-    public List<DriverAssignment> findAllDriverAssignments() throws ServiceLayerException {
+    public List<DriverAssignment> findAllDriverAssignments()
+            throws ServiceLayerException {
         try {
             List<OrderEntity> orders = orderDao.findAll();
             //return orders.stream().map(o -> findDriverAssignmentByOrderIdentifier(o.getOrderIdentifier()));
@@ -136,28 +145,27 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
 
             return assignments;
         } catch (DataAccessLayerException e) {
-            // todo log;
+            LOG.warn("Unexpected: ", e);
             throw new ServiceLayerException(e);
         }
     }
 
     @Override
-    public DriverAssignment findDriverAssignmentByOrderIdentifier(String orderIdentifier) throws ServiceLayerException {
+    public DriverAssignment findDriverAssignmentByOrderIdentifier(String orderIdentifier)
+            throws ServiceLayerException {
         try {
-            getEntityManager().getTransaction().begin(); // just lock to database to diasllow changes.
+            getEntityManager().getTransaction().begin(); // just lock to database to disallow changes.
             DriverAssignment driverAssignment = new DriverAssignment();
             driverAssignment.setDriverPersonalNumber(null);
 
             OrderEntity order = orderDao.findByOrderIdentifier(orderIdentifier);
             if (order == null) {
-                getEntityManager().getTransaction().rollback();
                 return null;
             }
             driverAssignment.setOrderIdentifier(order.getOrderIdentifier());
 
             TruckEntity truck = order.getTruckEntity();
             if (truck == null) {
-                getEntityManager().getTransaction().rollback();
                 return null;
             }
             driverAssignment.setTruckRegistrationNumber(truck.getRegistrationNumber());
@@ -171,6 +179,7 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
             getEntityManager().getTransaction().commit();
             return driverAssignment;
         } catch (DataAccessLayerException e) {
+            LOG.warn("Unexpected: ", e);
             throw new ServiceLayerException(e);
         } finally {
             if (getEntityManager().getTransaction().isActive())
