@@ -24,7 +24,7 @@
     </appender>
 
     <appender name="ERROR-FILE-APPENDER" class="org.apache.log4j.FileAppender">
-        <param name="file" value="/logs/error.log"/>
+        <param name="file" value="/TS/logiweb/logs/error.log"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{ISO8601} [%5p] %c %m at %l%n"/>
         </layout>
@@ -35,7 +35,7 @@
     </appender>
 
     <appender name="INFO-FILE-APPENDER" class="org.apache.log4j.FileAppender">
-        <param name="file" value="/logs/info.log"/>
+        <param name="file" value="/TS/logiweb/logs/info.log"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{ISO8601} [%5p] %c %m at %l%n"/>
         </layout>
@@ -47,7 +47,7 @@
 
 
     <appender name="DEBUG-FILE-APPENDER" class="org.apache.log4j.FileAppender">
-        <param name="file" value="/logs/debug.log"/>
+        <param name="file" value="/TS/logiweb/logs/debug.log"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{ISO8601} [%5p] %c %m at %l%n"/>
         </layout>
@@ -58,7 +58,7 @@
     </appender>
 
     <appender name="ALL-FILE-APPENDER" class="org.apache.log4j.FileAppender">
-        <param name="file" value="/logs/all.log"/>
+        <param name="file" value="/TS/logiweb/logs/all.log"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{ISO8601} [%5p] %c %m at %l%n"/>
         </layout>
@@ -77,6 +77,7 @@
     <category name="ru.tsystems.shalamov">
         <appender-ref ref="ERROR-FILE-APPENDER" />
         <appender-ref ref="INFO-FILE-APPENDER" />
+        <appender-ref ref="DEBUG-FILE-APPENDER" />
     </category>
 
     <category name="org.hibernate.SQL">
