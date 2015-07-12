@@ -56,7 +56,7 @@ public class OrderDaoImpl extends GenericDaoEntityManagerImpl<OrderEntity> imple
                     orderEntityRoot.get("orderIdentifier"), orderIdentifier))).getSingleResult();
         } catch (NoResultException e) {
             return null;
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new DataAccessLayerException(e);
         }
     }

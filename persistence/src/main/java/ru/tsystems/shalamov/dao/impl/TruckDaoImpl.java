@@ -2,18 +2,15 @@ package ru.tsystems.shalamov.dao.impl;
 
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.TruckDao;
-import ru.tsystems.shalamov.entities.DriverStatusEntity;
-import ru.tsystems.shalamov.entities.DriverStatusEntity_;
 import ru.tsystems.shalamov.entities.TruckEntity;
-import ru.tsystems.shalamov.entities.TruckEntity_;
-import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 import ru.tsystems.shalamov.entities.statuses.TruckStatus;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
-import java.util.Arrays;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 /**
@@ -44,10 +41,10 @@ public class TruckDaoImpl extends GenericDaoEntityManagerImpl<TruckEntity> imple
             EntityManager em = getEntityManager();
             TypedQuery<TruckEntity> q = em.createQuery(
                     "SELECT t FROM TruckEntity t "
-                    +"LEFT OUTER JOIN t.driverStatusEntities s" +
+                            + "LEFT OUTER JOIN t.driverStatusEntities s" +
                             " WHERE s.id IS null"
-                            +" AND t.status=:status AND t.capacity >= :minCapacity"
-                            , TruckEntity.class);
+                            + " AND t.status=:status AND t.capacity >= :minCapacity"
+                    , TruckEntity.class);
             q.setParameter("status", TruckStatus.INTACT);
             q.setParameter("minCapacity", minimalCapacity);
             return q.getResultList();

@@ -14,7 +14,7 @@ public class ShiftEntity implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private  int id;
+    private int id;
 
     @Column(name = "shift_begin", nullable = false)
     private Timestamp shiftBegin;

@@ -12,7 +12,6 @@ import ru.tsystems.shalamov.services.api.OrderManagementService;
 import javax.persistence.EntityManager;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by viacheslav on 01.07.2015.

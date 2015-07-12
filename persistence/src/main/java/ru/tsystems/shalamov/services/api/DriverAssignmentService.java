@@ -38,7 +38,7 @@ public interface DriverAssignmentService {
 
     List<String> getCargoesDenominations(String driverPersonalNumber) throws ServiceLayerException;
 
-    List<DriverAssignment> findAllDriverAssignments() throws  ServiceLayerException;
+    List<DriverAssignment> findAllDriverAssignments() throws ServiceLayerException;
 
     DriverAssignment findDriverAssignmentByOrderIdentifier(String orderIdentifier) throws ServiceLayerException;
 }
