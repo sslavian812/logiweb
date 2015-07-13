@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Created by viacheslav on 04.07.2015.
  */
-public class DateUtilities {
+public final class DateUtilities {
 
     private DateUtilities() {
     }
