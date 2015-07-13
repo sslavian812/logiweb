@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/resources/core/css/bootstrap.min.css">
 </head>
 <body>
-<form class="form-control" method="post" action="/secure/updateDriver">
+<form class="form-control" method="post" onsubmit="return validateDriverForm()" action="/secure/updateDriver">
     <fieldset>
         <legend>Edit driver: ${driver.personalNumber}</legend>
 

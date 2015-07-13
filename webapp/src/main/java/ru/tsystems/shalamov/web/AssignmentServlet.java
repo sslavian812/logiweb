@@ -108,6 +108,7 @@ public class AssignmentServlet extends HttpServlet {
                 }
 
                 if (truckRN == null || truckRN.isEmpty()) {
+                    LOG.debug("NOo truck provided.");
                     fail(request, response, "fail to assign", "no truck provided");
                     return;
                 }
@@ -121,11 +122,11 @@ public class AssignmentServlet extends HttpServlet {
                     return;
                 }
 
-                int currentCrewSize = truck.getCrewSize();
-                if (currentCrewSize < availableCrew) {
+                int requiredCrewSize = truck.getCrewSize();
+                if (requiredCrewSize > availableCrew) {
                     LOG.debug("Insufficient crew for truck provided: " +
-                            currentCrewSize + " vs " + truck.getCrewSize());
-                    fail(request, response, "unable to assign", "Need more drivers for thi truck.");
+                            requiredCrewSize + " vs " + truck.getCrewSize());
+                    fail(request, response, "unable to assign", "Need more drivers for the truck.");
                     return;
                 }
 
@@ -137,9 +138,9 @@ public class AssignmentServlet extends HttpServlet {
                     return;
                 }
 
-                List<DriverEntity> drivers = new ArrayList<>(currentCrewSize);
+                List<DriverEntity> drivers = new ArrayList<>(requiredCrewSize);
 
-                for (int i = 0; i < availableCrew; ++i) {
+                for (int i = 0; i < requiredCrewSize; ++i) {
                     DriverEntity driver = driverManagementService.findDriverByPersonalNumber(driversPN[i]);
                     drivers.add(driver);
                 }

@@ -40,11 +40,9 @@
                     <url>http://localhost:8080/manager/html</url>
                     <server>TomcatServer</server>
                     <warFile>target/webapp.war</warFile>
-                    <path>/</path>
+                    <path>/logiweb</path>
                 </configuration>
             </plugin>
-
-
         </plugins>
     </build>
 
