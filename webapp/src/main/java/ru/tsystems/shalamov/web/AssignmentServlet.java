@@ -26,10 +26,10 @@ import java.util.List;
  */
 public class AssignmentServlet extends HttpServlet {
 
-    DriverAssignmentService driverAssignmentService;
-    OrderManagementService orderManagementService;
-    TruckManagementService truckManagementService;
-    DriverManagementService driverManagementService;
+    private DriverAssignmentService driverAssignmentService;
+    private OrderManagementService orderManagementService;
+    private TruckManagementService truckManagementService;
+    private DriverManagementService driverManagementService;
 
     private static final Logger LOG = Logger.getLogger(AssignmentServlet.class);
 

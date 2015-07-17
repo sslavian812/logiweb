@@ -3,5 +3,6 @@
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
     <file url="file://$PROJECT_DIR$/logs" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/persistence" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/package-info.java" charset="UTF-8" />
   </component>
 </project>

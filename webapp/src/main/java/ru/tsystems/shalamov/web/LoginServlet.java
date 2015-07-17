@@ -17,8 +17,8 @@ public class LoginServlet extends HttpServlet {
 
     private static final String PASSWORD = "abacaba";
 
-    DriverManagementService driverManagementService;
-    DriverAssignmentService driverAssignmentService;
+    private DriverManagementService driverManagementService;
+    private DriverAssignmentService driverAssignmentService;
 
     public void init() throws ServletException {
         driverManagementService = ApplicationContext.getInstance().getDriverManagementService();

@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class TruckManagementServlet extends HttpServlet {
 
-    TruckManagementService truckManagementService;
+    private TruckManagementService truckManagementService;
 
     @Override
     public void init() throws ServletException {

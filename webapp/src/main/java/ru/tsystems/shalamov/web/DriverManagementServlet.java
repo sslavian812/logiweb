@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class DriverManagementServlet extends HttpServlet {
 
-    DriverManagementService driverManagementService;
+    private DriverManagementService driverManagementService;
 
     @Override
     public void init() throws ServletException {

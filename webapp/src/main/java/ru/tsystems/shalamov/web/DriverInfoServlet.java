@@ -18,8 +18,8 @@ import java.io.IOException;
  */
 public class DriverInfoServlet extends HttpServlet {
 
-    DriverAssignmentService driverAssignmentService;
-    DriverManagementService driverManagementService;
+    private DriverAssignmentService driverAssignmentService;
+    private DriverManagementService driverManagementService;
 
     @Override
     public void init() throws ServletException {

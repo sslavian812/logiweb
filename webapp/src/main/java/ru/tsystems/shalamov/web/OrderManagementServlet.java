@@ -19,7 +19,7 @@ import java.util.List;
  * Created by viacheslav on 09.07.2015.
  */
 public class OrderManagementServlet extends HttpServlet {
-    OrderManagementService orderManagementService;
+    private OrderManagementService orderManagementService;
 
     @Override
     public void init() throws ServletException {
