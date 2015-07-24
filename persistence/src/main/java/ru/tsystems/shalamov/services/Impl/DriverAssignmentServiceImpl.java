@@ -10,14 +10,35 @@ import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.DriverAssignmentService;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 /**
  * Created by viacheslav on 01.07.2015.
  */
+@Service
 public class DriverAssignmentServiceImpl implements DriverAssignmentService {
+
+    /**
+     * Public constructor.
+     *
+     * @param driverDao DAO for
+     *                  {@link ru.tsystems.shalamov.entities.DriverEntity}
+     * @param orderDao  DAO for
+     *                  {@link ru.tsystems.shalamov.entities.OrderEntity}
+     */
+    @Autowired
+    public DriverAssignmentServiceImpl(final DriverDao driverDao,
+                                       final OrderDao orderDao) {
+
+        this.driverDao = driverDao;
+        this.orderDao = orderDao;
+    }
 
     /**
      * DAO object for Driver entity.
@@ -30,42 +51,11 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
     private OrderDao orderDao;
 
     /**
-     * {@link javax.persistence.EntityManager} object.
-     */
-    private EntityManager em;
-
-    /**
      * Log4j {@link org.apache.log4j.Logger}  for logging.
      */
     private static final Logger LOG = Logger.getLogger(
             DriverAssignmentServiceImpl.class);
 
-    /**
-     * Provides private EntityManagerInstance.
-     *
-     * @return entity manager
-     */
-    private EntityManager getEntityManager() {
-        return em;
-    }
-
-    /**
-     * Public constructor.
-     *
-     * @param driverDao DAO for
-     *                  {@link ru.tsystems.shalamov.entities.DriverEntity}
-     * @param orderDao  DAO for
-     *                  {@link ru.tsystems.shalamov.entities.OrderEntity}
-     * @param em        {@link javax.persistence.EntityManager}
-     */
-    public DriverAssignmentServiceImpl(final DriverDao driverDao,
-                                       final OrderDao orderDao,
-                                       final EntityManager em) {
-
-        this.driverDao = driverDao;
-        this.orderDao = orderDao;
-        this.em = em;
-    }
 
 
     /**
@@ -81,11 +71,10 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
      * @throws ru.tsystems.shalamov.services.ServiceLayerException
      */
     @Override
+    @Transactional
     public DriverAssignment getDriverAssignmentByPersonalNumber(
             final String driverPersonalNumber) throws ServiceLayerException {
         try {
-            // just lock to database to diasllow changes:
-            getEntityManager().getTransaction().begin();
             DriverAssignment driverAssignment = new DriverAssignment();
 
             driverAssignment.setDriverPersonalNumber(driverPersonalNumber);
@@ -117,18 +106,13 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
                     driverDao.findByCurrentTruck(truck.getId());
             driverAssignment.setCoDrivers(coDrivers);
 
-            getEntityManager().getTransaction().commit();
-            LOG.debug("Drive assignment information "
+
+            LOG.debug("Driver assignment information "
                     + "successfully got from database");
             return driverAssignment;
         } catch (DataAccessLayerException e) {
             LOG.warn("Unexpected: ", e);
             throw new ServiceLayerException(e);
-        } finally {
-            if (getEntityManager().getTransaction().isActive()) {
-                getEntityManager().getTransaction().rollback();
-            }
-
         }
     }
 
@@ -174,6 +158,7 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
     }
 
     @Override
+    @Transactional
     public List<DriverAssignment> findAllDriverAssignments()
             throws ServiceLayerException {
         try {
@@ -198,11 +183,10 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
     }
 
     @Override
+    @Transactional
     public DriverAssignment findDriverAssignmentByOrderIdentifier(
             final String orderIdentifier) throws ServiceLayerException {
         try {
-            // just lock to database to disallow changes.
-            getEntityManager().getTransaction().begin();
             DriverAssignment driverAssignment = new DriverAssignment();
             driverAssignment.setDriverPersonalNumber(null);
 
@@ -226,15 +210,10 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
                     driverDao.findByCurrentTruck(truck.getId());
             driverAssignment.setCoDrivers(coDrivers);
 
-            getEntityManager().getTransaction().commit();
             return driverAssignment;
         } catch (DataAccessLayerException e) {
             LOG.warn("Unexpected: ", e);
             throw new ServiceLayerException(e);
-        } finally {
-            if (getEntityManager().getTransaction().isActive()) {
-                getEntityManager().getTransaction().rollback();
-            }
         }
     }
 }

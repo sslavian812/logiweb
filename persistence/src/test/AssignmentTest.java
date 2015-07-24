@@ -1,7 +1,7 @@
 import org.codehaus.plexus.util.CollectionUtils;
 import org.junit.Assert;
 import org.junit.Test;
-import ru.tsystems.shalamov.ApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.tsystems.shalamov.entities.CargoEntity;
 import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.entities.OrderEntity;
@@ -24,16 +24,20 @@ import java.util.List;
  * Created by viacheslav on 12.07.2015.
  */
 public class AssignmentTest {
+
+    @Autowired
+    DriverManagementService driverManagementService;
+    @Autowired
+    TruckManagementService truckManagementService;
+    @Autowired
+    OrderManagementService orderManagementService;
+    @Autowired
+    DriverAssignmentService driverAssignmentService;
+
     @Test
     public void testBasicUsage() {
         // requires empty database
         try {
-            DriverManagementService driverManagementService = ApplicationContext.getInstance().getDriverManagementService();
-            TruckManagementService truckManagementService = ApplicationContext.getInstance().getTruckManagementService();
-            OrderManagementService orderManagementService = ApplicationContext.getInstance().getOrderManagementService();
-            DriverAssignmentService driverAssignmentService = ApplicationContext.getInstance().getDriverAssignmentService();
-
-
             DriverEntity driver1 = new DriverEntity("f1", "l1", "driver1");
             DriverEntity driver2 = new DriverEntity("f2", "l2", "driver2");
             driverManagementService.addDriver(driver1);

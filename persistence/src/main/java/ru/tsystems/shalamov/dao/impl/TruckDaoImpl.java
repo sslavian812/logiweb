@@ -1,5 +1,7 @@
 package ru.tsystems.shalamov.dao.impl;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.TruckDao;
 import ru.tsystems.shalamov.entities.TruckEntity;
@@ -19,11 +21,15 @@ import java.util.List;
  * <p/>
  * Created by viacheslav on 27.06.2015.
  */
-public class TruckDaoImpl extends GenericDaoEntityManagerImpl<TruckEntity> implements TruckDao {
+@Repository
+public class TruckDaoImpl extends GenericDaoImpl<TruckEntity> implements TruckDao {
 
-    public TruckDaoImpl(EntityManager entityManager) {
-        super(TruckEntity.class, entityManager);
+    public TruckDaoImpl(Class<TruckEntity> type) {
+        super(type);
     }
+
+    public TruckDaoImpl()
+    {super();}
 
     @Override
     public List<TruckEntity> findAll() throws DataAccessLayerException {

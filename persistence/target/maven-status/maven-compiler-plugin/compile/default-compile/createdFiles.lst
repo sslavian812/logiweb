@@ -23,7 +23,6 @@ ru\tsystems\shalamov\ApplicationContext$1.class
 ru\tsystems\shalamov\dao\impl\OrderDaoImpl.class
 ru\tsystems\shalamov\entities\OrderEntity.class
 ru\tsystems\shalamov\services\api\DriverAssignmentService.class
-ru\tsystems\shalamov\dao\EntityManagerUtil.class
 ru\tsystems\shalamov\entities\CargoEntity.class
 ru\tsystems\shalamov\ApplicationContext$LazyHolder.class
 ru\tsystems\shalamov\dao\DataAccessLayerException.class
@@ -43,6 +42,6 @@ ru\tsystems\shalamov\dao\impl\CargoDaoImpl.class
 ru\tsystems\shalamov\dao\api\GenericDao.class
 ru\tsystems\shalamov\services\api\DriverActivityService.class
 ru\tsystems\shalamov\DateUtilities.class
-ru\tsystems\shalamov\dao\impl\GenericDaoEntityManagerImpl.class
+ru\tsystems\shalamov\dao\impl\GenericDaoImpl.class
 ru\tsystems\shalamov\services\impl\TruckManagementServiceImpl.class
 ru\tsystems\shalamov\entities\DriverStatusEntity_.class

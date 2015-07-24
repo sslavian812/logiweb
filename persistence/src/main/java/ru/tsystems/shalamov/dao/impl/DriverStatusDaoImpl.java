@@ -1,10 +1,9 @@
 package ru.tsystems.shalamov.dao.impl;
 
 
+import org.springframework.stereotype.Component;
 import ru.tsystems.shalamov.dao.api.DriverStatusDao;
 import ru.tsystems.shalamov.entities.DriverStatusEntity;
-
-import javax.persistence.EntityManager;
 
 /**
  * Abstract generic DAO implementation for {@link ru.tsystems.shalamov.entities.DriverStatusEntity}.
@@ -12,9 +11,12 @@ import javax.persistence.EntityManager;
  * <p/>
  * Created by viacheslav on 28.06.2015.
  */
-public class DriverStatusDaoImpl extends GenericDaoEntityManagerImpl<DriverStatusEntity> implements DriverStatusDao {
-
-    public DriverStatusDaoImpl(EntityManager entityManager) {
-        super(DriverStatusEntity.class, entityManager);
+@Component
+public class DriverStatusDaoImpl extends GenericDaoImpl<DriverStatusEntity> implements DriverStatusDao {
+    public DriverStatusDaoImpl(Class<DriverStatusEntity> type) {
+        super(type);
     }
+
+    public DriverStatusDaoImpl()
+    {super();}
 }

@@ -1,5 +1,6 @@
 package ru.tsystems.shalamov.dao.impl;
 
+import org.springframework.stereotype.Repository;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.DriverDao;
 import ru.tsystems.shalamov.entities.DriverEntity;
@@ -21,11 +22,15 @@ import java.util.List;
  * <p/>
  * Created by viacheslav on 28.06.2015.
  */
-public class DriverDaoImpl extends GenericDaoEntityManagerImpl<DriverEntity> implements DriverDao {
+@Repository
+public class DriverDaoImpl extends GenericDaoImpl<DriverEntity> implements DriverDao {
 
+    public DriverDaoImpl(Class<DriverEntity> type) {
+        super(type);
+    }
 
-    public DriverDaoImpl(EntityManager entityManager) {
-        super(DriverEntity.class, entityManager);
+    public DriverDaoImpl() {
+        super();
     }
 
     @Override

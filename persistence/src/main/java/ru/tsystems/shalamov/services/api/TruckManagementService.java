@@ -21,7 +21,7 @@ public interface TruckManagementService {
      *
      * @return list of trucks.
      */
-    List<TruckEntity> getAllTrucks() throws ServiceLayerException;
+    List<TruckEntity> listTrucks() throws ServiceLayerException;
 
     /**
      * Adds a new truck.

@@ -1,5 +1,7 @@
 package ru.tsystems.shalamov.dao.impl;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.OrderDao;
 import ru.tsystems.shalamov.entities.OrderEntity;
@@ -18,11 +20,16 @@ import javax.persistence.criteria.Root;
  * <p/>
  * Created by viacheslav on 28.06.2015.
  */
-public class OrderDaoImpl extends GenericDaoEntityManagerImpl<OrderEntity> implements OrderDao {
+@Repository
+public class OrderDaoImpl extends GenericDaoImpl<OrderEntity> implements OrderDao {
 
-    public OrderDaoImpl(EntityManager entityManager) {
-        super(OrderEntity.class, entityManager);
+
+    public OrderDaoImpl(Class<OrderEntity> type) {
+        super(type);
     }
+
+    public OrderDaoImpl()
+    {super();}
 
     @Override
     public OrderEntity findByTruckId(int truckId) throws DataAccessLayerException {

@@ -1,94 +1,68 @@
 package ru.tsystems.shalamov.web;
 
-import ru.tsystems.shalamov.ApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import ru.tsystems.shalamov.entities.CargoEntity;
 import ru.tsystems.shalamov.entities.OrderEntity;
 import ru.tsystems.shalamov.entities.statuses.CargoStatus;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.OrderManagementService;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by viacheslav on 09.07.2015.
  */
-public class OrderManagementServlet extends HttpServlet {
+@Controller
+public class OrderManagementServlet {
+    @Autowired
     private OrderManagementService orderManagementService;
 
-    @Override
-    public void init() throws ServletException {
-        orderManagementService = ApplicationContext.getInstance().getOrderManagementService();
-    }
 
-    @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    @RequestMapping(value = "secure/showOrders", method = RequestMethod.GET)
+    public ModelAndView showOrders(HttpServletRequest request, HttpServletResponse response) {
         try {
             List<OrderEntity> orders = orderManagementService.listOrders();
-            request.setAttribute("orders", orders);
-            getServletContext().getRequestDispatcher("/secure/orders.jsp").forward(request, response);
+            ModelAndView mav = new ModelAndView("/secure/orders");
+            mav.addObject("orders", orders);
+            return mav;
         } catch (ServiceLayerException e) {
-            request.setAttribute("message", "fail list all orders.");
-            getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
+            return Util.fail(response, "fail list all orders.", e.getMessage());
         }
     }
 
+    @RequestMapping(value = "secure/addOrder", method = RequestMethod.POST)
+    public ModelAndView addOrder(HttpServletRequest request, HttpServletResponse response) {
+        String orderIdentifier = request.getParameter("orderIdentifier");
+        String denomination = request.getParameter("denomination");
+        int weight = Integer.parseInt(request.getParameter("weight"));
 
-    @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        String path = request.getRequestURI();
-        if (path == null || path.isEmpty()) {
-            doGet(request, response);
-            return;
-        }
-
-        if (path.endsWith("showOrders")) {
-            doGet(request, response);
-        }
-
-        if (path.endsWith("addOrder")) {
-            String orderIdentifier = request.getParameter("orderIdentifier");
-            String denomination = request.getParameter("denomination");
-            int weignt = Integer.parseInt(request.getParameter("weight"));
-
-            List<CargoEntity> cargoes = new ArrayList<>();
-            OrderEntity order = new OrderEntity(orderIdentifier);
-            cargoes.add(new CargoEntity(denomination, weignt, CargoStatus.PREPARED, order));
-            try {
-                orderManagementService.createOrderWithCargoes(order, cargoes);
-                doGet(request, response);
-            } catch (ServiceLayerException e) {
-                fail(request, response, "fail to add order " + orderIdentifier, e.getMessage());
-            }
-            doGet(request, response);
-        }
-
-        if (path.endsWith("deleteOrder")) {
-            String orderIdentifier = request.getParameter("order");
-            try {
-                orderManagementService.deleteOrderByOrderIdentifierIfNotAssigned(orderIdentifier);
-                doGet(request, response);
-            } catch (ServiceLayerException e) {
-                fail(request, response, "fail to delete order " + orderIdentifier, e.getMessage());
-            }
-            doGet(request, response);
+        List<CargoEntity> cargoes = new ArrayList<>();
+        OrderEntity order = new OrderEntity(orderIdentifier);
+        cargoes.add(new CargoEntity(denomination, weight, CargoStatus.PREPARED, order));
+        try {
+            orderManagementService.createOrderWithCargoes(order, cargoes);
+            return new ModelAndView("redirect:/secure/showOrders");
+        } catch (ServiceLayerException | NumberFormatException e) {
+            return Util.fail(response, "fail to add order " + orderIdentifier, e.getMessage());
         }
     }
 
-    private void fail(HttpServletRequest request, HttpServletResponse response, String message, String cause)
-            throws ServletException, IOException {
-        request.setAttribute("message", message);
-        request.setAttribute("cause", cause);
-        getServletContext().getRequestDispatcher("/WEB-INF/views/jsp/fail.jsp").forward(request, response);
+    @RequestMapping(value = "secure/deleteOrder", method = RequestMethod.POST)
+    public ModelAndView deleteOrder(HttpServletRequest request, HttpServletResponse response) {
+        String orderIdentifier = request.getParameter("order");
+        try {
+            orderManagementService.deleteOrderByOrderIdentifierIfNotAssigned(orderIdentifier);
+            return new ModelAndView("redirect:/secure/showOrders");
+        } catch (ServiceLayerException e) {
+            return Util.fail(response, "fail to delete order " + orderIdentifier, e.getMessage());
+        }
     }
-
 }
 

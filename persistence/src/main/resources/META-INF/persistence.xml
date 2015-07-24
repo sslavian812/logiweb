@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence"
+<persistence version="2.1"
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <persistence-unit name="logiweb">
-        <!--<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>  TODO: DO I need it??-->
+        <!--<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
+        <!--TODO: DO I need it??-->
+
         <class>ru.tsystems.shalamov.entities.CargoEntity</class>
         <class>ru.tsystems.shalamov.entities.DriverEntity</class>
         <class>ru.tsystems.shalamov.entities.OrderEntity</class>
         <class>ru.tsystems.shalamov.entities.TruckEntity</class>
         <class>ru.tsystems.shalamov.entities.ShiftEntity</class>
         <class>ru.tsystems.shalamov.entities.DriverStatusEntity</class>
+        <class>ru.tsystems.shalamov.entities.User</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/logiweb"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>

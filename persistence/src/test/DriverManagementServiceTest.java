@@ -1,4 +1,5 @@
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 import ru.tsystems.shalamov.ApplicationContext;
 import ru.tsystems.shalamov.entities.DriverEntity;
@@ -14,11 +15,13 @@ import java.util.List;
  */
 public class DriverManagementServiceTest {
 
+    @Autowired
+    DriverManagementService driverManagementService;
     @Test
     public void testBasicUsage() {
         try {
-            DriverManagementService driverManagementService =
-                    ApplicationContext.getInstance().getDriverManagementService();
+//            DriverManagementService driverManagementService =
+//                    ApplicationContext.getInstance().getDriverManagementService();
 
             // clear te database:
             List<DriverEntity> somedrivers = driverManagementService.listDrivers();

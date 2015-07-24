@@ -1,6 +1,8 @@
 package ru.tsystems.shalamov.dao.impl;
 
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import ru.tsystems.shalamov.DateUtilities;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.ShiftDao;
@@ -21,11 +23,15 @@ import java.util.List;
  * <p/>
  * Created by viacheslav on 28.06.2015.
  */
-public class ShiftDaoImpl extends GenericDaoEntityManagerImpl<ShiftEntity> implements ShiftDao {
+@Repository
+public class ShiftDaoImpl extends GenericDaoImpl<ShiftEntity> implements ShiftDao {
 
-    public ShiftDaoImpl(EntityManager entityManager) {
-        super(ShiftEntity.class, entityManager);
+    public ShiftDaoImpl(Class<ShiftEntity> type) {
+        super(type);
     }
+
+    public ShiftDaoImpl()
+    {super();}
 
     @Override
     public float getWorkingHoursInMonthByDriver(Date date, DriverEntity driverEntity)

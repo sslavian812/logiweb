@@ -1,6 +1,8 @@
 package ru.tsystems.shalamov.services.impl;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.DriverDao;
 import ru.tsystems.shalamov.dao.api.DriverStatusDao;
@@ -10,13 +12,29 @@ import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.DriverManagementService;
 
-import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by viacheslav on 01.07.2015.
  */
+@Service
 public class DriverManagementServiceImpl implements DriverManagementService {
+
+    /**
+     * Public constructor.
+     *
+     * @param driverDao       DAO object for
+     *                        {@link ru.tsystems.shalamov.entities.DriverEntity}.
+     * @param driverStatusDao DAO object for
+     *                        {@link ru.tsystems.shalamov.entities.DriverStatusEntity}.
+     */
+    @Autowired
+    public DriverManagementServiceImpl(final DriverDao driverDao,
+                                       final DriverStatusDao driverStatusDao) {
+        this.driverDao = driverDao;
+        this.driverStatusDao = driverStatusDao;
+    }
 
     /**
      * DAO object for {@link ru.tsystems.shalamov.entities.DriverEntity}.
@@ -29,41 +47,10 @@ public class DriverManagementServiceImpl implements DriverManagementService {
     private DriverStatusDao driverStatusDao;
 
     /**
-     * {@link javax.persistence.EntityManager} object.
-     */
-    private EntityManager em;
-
-    /**
      * Log4j {@link org.apache.log4j.Logger}  for logging.
      */
     private static final Logger LOG =
             Logger.getLogger(DriverManagementServiceImpl.class);
-
-    /**
-     * Provides private EntityManagerInstance.
-     *
-     * @return entity manager
-     */
-    private EntityManager getEntityManager() {
-        return em;
-    }
-
-    /**
-     * Public constructor.
-     *
-     * @param driverDao       DAO object for
-     * {@link ru.tsystems.shalamov.entities.DriverEntity}.
-     * @param driverStatusDao DAO object for
-     * {@link ru.tsystems.shalamov.entities.DriverStatusEntity}.
-     * @param em {@link javax.persistence.EntityManager} object.
-     */
-    public DriverManagementServiceImpl(final DriverDao driverDao,
-                                       final DriverStatusDao driverStatusDao,
-                                       final EntityManager em) {
-        this.driverDao = driverDao;
-        this.driverStatusDao = driverStatusDao;
-        this.em = em;
-    }
 
     /**
      * Private string constant sed to display errors.
@@ -71,32 +58,24 @@ public class DriverManagementServiceImpl implements DriverManagementService {
     private static final String UNEXPECTED = "Unexpected: ";
 
     @Override
+    @Transactional
     public List<DriverEntity> listDrivers() throws ServiceLayerException {
         try {
-            getEntityManager().getTransaction().begin(); // just a lock
-            List<DriverEntity> list = driverDao.findAll();
-            getEntityManager().getTransaction().commit();
-            return list;
+            return driverDao.findAll();
             // todo: is the transaction necessary here?
-            //return driverDao.findAll();
         } catch (DataAccessLayerException e) {
             LOG.warn(UNEXPECTED, e);
             throw new ServiceLayerException(e);
-        } finally {
-            if (getEntityManager().getTransaction().isActive()) {
-                getEntityManager().getTransaction().rollback();
-            }
         }
     }
 
     @Override
+    @Transactional
     public void addDriver(final DriverEntity driver)
             throws ServiceLayerException {
         validateForEmptyFields(driver);
 
         try {
-            getEntityManager().getTransaction().begin();
-
             if (driverDao.
                     findByPersonalNumber(driver.getPersonalNumber()) != null) {
                 throw new ServiceLayerException(
@@ -107,8 +86,6 @@ public class DriverManagementServiceImpl implements DriverManagementService {
             driverDao.create(driver);
             driverStatusDao.create(driverStatus);
 
-            getEntityManager().getTransaction().commit();
-
             LOG.info("Driver created. " + driver.getFirstName()
                     + " " + driver.getLastName()
                     + " PN:" + driver.getPersonalNumber());
@@ -116,22 +93,17 @@ public class DriverManagementServiceImpl implements DriverManagementService {
         } catch (DataAccessLayerException e) {
             LOG.warn(UNEXPECTED, e);
             throw new ServiceLayerException(e);
-        } finally {
-            if (getEntityManager().getTransaction().isActive()) {
-                getEntityManager().getTransaction().rollback();
-            }
         }
     }
 
     @Override
+    @Transactional
     public void updateDriver(final DriverEntity driver)
             throws ServiceLayerException {
         validateForEmptyFields(driver);
 
         try {
-            getEntityManager().getTransaction().begin();
             driverDao.update(driver);
-            getEntityManager().getTransaction().commit();
 
             LOG.info("Driver updated. " + driver.getFirstName() + " "
                     + driver.getLastName()
@@ -139,14 +111,11 @@ public class DriverManagementServiceImpl implements DriverManagementService {
         } catch (DataAccessLayerException e) {
             LOG.warn(UNEXPECTED, e);
             throw new ServiceLayerException(e);
-        } finally {
-            if (getEntityManager().getTransaction().isActive()) {
-                getEntityManager().getTransaction().rollback();
-            }
         }
     }
 
     @Override
+    @Transactional
     public void deleteDriverByPersonalNumber(final String driverPersonalNumber)
             throws ServiceLayerException {
         try {
@@ -170,13 +139,9 @@ public class DriverManagementServiceImpl implements DriverManagementService {
                 throw exc;
             }
 
-            getEntityManager().getTransaction().begin();
-
             DriverStatusEntity driverStatus = driver.getDriverStatusEntity();
             driverStatusDao.delete(driverStatus);
             driverDao.delete(driver);
-
-            getEntityManager().getTransaction().commit();
 
             LOG.info("Driver deleted. "
                     + driver.getFirstName() + " " + driver.getLastName()
@@ -184,14 +149,11 @@ public class DriverManagementServiceImpl implements DriverManagementService {
         } catch (DataAccessLayerException e) {
             LOG.warn(UNEXPECTED, e);
             throw new ServiceLayerException(e);
-        } finally {
-            if (getEntityManager().getTransaction().isActive()) {
-                getEntityManager().getTransaction().rollback();
-            }
         }
     }
 
     @Override
+    @Transactional
     public boolean checkDriverExistence(final String personalNumber)
             throws ServiceLayerException {
         try {
@@ -203,23 +165,19 @@ public class DriverManagementServiceImpl implements DriverManagementService {
     }
 
     @Override
+    @Transactional
     public void updateDriverStatus(final DriverStatusEntity driverStatusEntity)
             throws ServiceLayerException {
         try {
-            getEntityManager().getTransaction().begin();
             driverStatusDao.update(driverStatusEntity);
-            getEntityManager().getTransaction().commit();
         } catch (DataAccessLayerException e) {
             LOG.warn(UNEXPECTED, e);
             throw new ServiceLayerException(e);
-        } finally {
-            if (getEntityManager().getTransaction().isActive()) {
-                getEntityManager().getTransaction().rollback();
-            }
         }
     }
 
     @Override
+    @Transactional
     public DriverEntity findDriverByPersonalNumber(final String personalNumber)
             throws ServiceLayerException {
         try {

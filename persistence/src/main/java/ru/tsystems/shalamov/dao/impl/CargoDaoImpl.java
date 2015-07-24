@@ -1,5 +1,7 @@
 package ru.tsystems.shalamov.dao.impl;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import ru.tsystems.shalamov.dao.api.CargoDao;
 import ru.tsystems.shalamov.entities.CargoEntity;
 
@@ -11,8 +13,17 @@ import javax.persistence.EntityManager;
  * <p/>
  * Created by viacheslav on 28.06.2015.
  */
-public class CargoDaoImpl extends GenericDaoEntityManagerImpl<CargoEntity> implements CargoDao {
-    public CargoDaoImpl(EntityManager entityManager) {
-        super(CargoEntity.class, entityManager);
+@Repository
+public class CargoDaoImpl extends GenericDaoImpl<CargoEntity> implements CargoDao {
+
+    public CargoDaoImpl(Class<CargoEntity> type) {
+        super(type);
     }
+
+    public CargoDaoImpl()
+    {super();}
+
+//    public EntityManager getEntityManager() {
+//        return super.getEntityManager();
+//    }
 }
