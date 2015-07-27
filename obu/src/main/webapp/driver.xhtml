@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+        <head>
+            <title>Driver Information</title>
+            <link rel="stylesheet" href="/resources/core/css/bootstrap.min.css"/>
+            <link rel="stylesheet" href="/resources/core/css/style.css"/>
+        </head>
+<h:body>
+    <ui:param name="PN" value="#{driverInfoBean.personalNumber}"/>
+
+    <f:view encoding="UTF-8" contentType="text/html">
+        <h:panelGroup layout="block" styleClass="container">
+            <h:panelGroup layout="block" styleClass="login">
+                <h:panelGroup layout="block" styleClass="row">
+
+                    <h:panelGroup layout="block" styleClass="col-sm-6">
+
+                        <p>driver: #{driverInfoBean.personalNumber} </p>
+
+                        <p>truck: #{driverInfoBean.truckRegistrationNumber}</p>
+
+                        <p>order: #{driverInfoBean.orderIdentifier}</p>
+
+
+                        <p>involved drivers:</p>
+                        <ui:repeat value="#{driverInfoBean.involvedDrivers}" var="driver">
+                            #{driver}
+                        </ui:repeat>
+
+
+                        <h:form  method="post">
+                            <h:inputHidden value='#{driverInfoBean.personalNumber}'/>
+                            <p class="submit">
+                                <h:commandButton action="#{driverInfoBean.swapShift}"
+                                                 value="invert shift: #{driverInfoBean.driverStatus}"/>
+                            </p>
+
+                            <p class="submit">
+                                <h:commandButton action="#{driverInfoBean.swapStatus}"
+                                                 value="invert status: #{driverInfoBean.driverStatus}"/>
+                            </p>
+                        </h:form>
+
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" styleClass="col-sm-6">
+
+                        <p>cargoes:</p>
+                        <ui:repeat value="#{driverInfoBean.cargoes}" var="cargo">
+                            #{cargo}
+                        </ui:repeat>
+
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:panelGroup>
+    </f:view>
+</h:body>
+</html>

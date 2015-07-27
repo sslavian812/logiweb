@@ -34,7 +34,7 @@ public class OrderEntity implements Serializable {
     private OrderStatus status;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderEntity", targetEntity = CargoEntity.class,
-            fetch = FetchType.LAZY)
+            fetch = FetchType.EAGER)
     private List<CargoEntity> cargoEntities;
 
     //todo restrict

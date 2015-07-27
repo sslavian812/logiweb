@@ -15,6 +15,7 @@
         <!-- these are directory names, not artifactIds -->
         <module>persistence</module>
         <module>webapp</module>
+        <module>obu</module>
     </modules>
 
 
