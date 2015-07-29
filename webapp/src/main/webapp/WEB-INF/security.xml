@@ -28,6 +28,9 @@
 
         <access-denied-handler error-page="/WEB-INF/views/403.jsp"/>
 
+        <!--<intercept-url pattern="/services**" access="permitAll" />-->
+        <intercept-url pattern="/services/**" access="permitAll" />
+
         <intercept-url pattern="/resources/core/css/**" access="permitAll" />
         <intercept-url pattern="/resources/core/js/**" access="permitAll" />
 
