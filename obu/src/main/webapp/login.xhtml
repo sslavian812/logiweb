@@ -22,7 +22,9 @@
                 <h1>Login to Logiweb</h1>
                 <h:form method="post">
                     <p>
-                        <h:inputText value='#{driverInfoBean.personalNumber}' placeholder="PN"/>
+                        <h:inputText value='#{driverInfoBean.personalNumber}' placeholder="PN">
+                            <!--<f:validateBean>todo</f:validateBean>-->
+                                </h:inputText>
                     </p>
                     <p class="submit">
                         <h:commandButton action="#{driverInfoBean.getAssignmentInforamation}" value="Show"/>

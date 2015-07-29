@@ -1,15 +1,16 @@
 package ru.tsystems.shalamov.dao.impl;
 
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import ru.tsystems.shalamov.DateUtilities;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.ShiftDao;
 import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.entities.ShiftEntity;
+import ru.tsystems.shalamov.entities.ShiftEntity_;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
@@ -30,8 +31,9 @@ public class ShiftDaoImpl extends GenericDaoImpl<ShiftEntity> implements ShiftDa
         super(type);
     }
 
-    public ShiftDaoImpl()
-    {super();}
+    public ShiftDaoImpl() {
+        super();
+    }
 
     @Override
     public float getWorkingHoursInMonthByDriver(Date date, DriverEntity driverEntity)
@@ -60,6 +62,26 @@ public class ShiftDaoImpl extends GenericDaoImpl<ShiftEntity> implements ShiftDa
             }
 
             return dif;
+        } catch (Exception e) {
+            throw new DataAccessLayerException(e);
+        }
+    }
+
+    @Override
+    public ShiftEntity findActiveShiftByDriver(String personalNumber) throws DataAccessLayerException {
+        try {
+            EntityManager em = getEntityManager();
+
+            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            CriteriaQuery<ShiftEntity> criteriaQuery = criteriaBuilder.createQuery(ShiftEntity.class);
+
+            Root<ShiftEntity> shiftEntityRoot = criteriaQuery.from(ShiftEntity.class);
+            return em.createQuery(criteriaQuery.select(shiftEntityRoot).where(criteriaBuilder.and(
+                    criteriaBuilder.equal(shiftEntityRoot.get(ShiftEntity_.driverEntity), personalNumber),
+                    criteriaBuilder.isNull(shiftEntityRoot.get(ShiftEntity_.shiftEnd))
+            ))).getSingleResult();
+        } catch (NoResultException e) {
+            return null;
         } catch (Exception e) {
             throw new DataAccessLayerException(e);
         }

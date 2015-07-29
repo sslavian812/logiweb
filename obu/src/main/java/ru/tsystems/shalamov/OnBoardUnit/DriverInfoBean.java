@@ -4,6 +4,8 @@ import ru.tsystems.shalamov.entities.statuses.CargoStatus;
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,8 +14,13 @@ import java.util.List;
  * Created by viacheslav on 25.07.2015.
  */
 @ManagedBean
+@SessionScoped
 public class DriverInfoBean {
+
+    // todo сделать model
     DriverStatus driverStatus;
+
+    @NotNull(message = "!!!!!!!!!!")
     String personalNumber;
 
     String orderIdentifier;
@@ -39,12 +46,12 @@ public class DriverInfoBean {
         cargoes.put("some_cargo", CargoStatus.PREPARED);
         cargoes.put("some_other_cargo", CargoStatus.SHIPPED);
 
-        return "success";
+        return "driver";
     }
 
     public String swapStatus() {
        // this.personalNumber = personalNumber;
-        getAssignmentInforamation();
+        //getAssignmentInforamation();
 
         if (driverStatus != DriverStatus.REST) {
             if (driverStatus == DriverStatus.AUXILIARY)
@@ -55,12 +62,12 @@ public class DriverInfoBean {
 
         // todo query WS to change driverStatus
 
-        return "updated";
+        return "driver";
     }
 
     public String swapShift() {
       //  this.personalNumber = personalNumber;
-        getAssignmentInforamation();
+       // getAssignmentInforamation();
 
         if (driverStatus == DriverStatus.REST) {
             driverStatus = DriverStatus.PRIMARY;
@@ -70,7 +77,7 @@ public class DriverInfoBean {
 
         // todo query WS to change driverStatus
 
-        return "updated";
+        return "driver";
     }
 
     public DriverStatus getDriverStatus() {

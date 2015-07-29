@@ -16,6 +16,9 @@ public class CargoEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column(name = "cargo_identifier", nullable = false)
+    private String cargoIdentifier;
+
     @Column(nullable = false)
     private String denomination;
 
@@ -107,5 +110,13 @@ public class CargoEntity implements Serializable {
 
     public void setOrderEntity(OrderEntity orderEntity) {
         this.orderEntity = orderEntity;
+    }
+
+    public String getCargoIdentifier() {
+        return cargoIdentifier;
+    }
+
+    public void setCargoIdentifier(String cargoIdentifier) {
+        this.cargoIdentifier = cargoIdentifier;
     }
 }

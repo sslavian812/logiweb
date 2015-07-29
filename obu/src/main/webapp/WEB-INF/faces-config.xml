@@ -15,20 +15,14 @@ http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
     <!--</navigation-rule>-->
 
 
-    <navigation-rule>
-        <from-view-id>/login.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>success</from-outcome>
-            <to-view-id>/driver.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+    <!--<navigation-rule>-->
+        <!--<from-view-id>/login.xhtml</from-view-id>-->
+        <!--<navigation-case>-->
+            <!--<from-outcome>success</from-outcome>-->
+            <!--<to-view-id>/driver.xhtml</to-view-id>-->
+        <!--</navigation-case>-->
+    <!--</navigation-rule>-->
 
-    <navigation-rule>
-        <from-view-id>/driver.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>updated</from-outcome>
-            <to-view-id>/driver.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+
 
 </faces-config>

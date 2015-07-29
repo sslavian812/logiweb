@@ -23,11 +23,11 @@ import ru.tsystems.shalamov.services.ServiceLayerException;
  */
 public interface DriverActivityService {
 
-    void beginShift(String personalNumber, DriverStatus driverStatus) throws ServiceLayerException;
+    void beginShift(String personalNumber) throws ServiceLayerException;
 
-    void changeState(String personalNumber, DriverStatus driverStatus) throws ServiceLayerException;
+    void driverStatusChanged(String personalNumber, DriverStatus driverStatus) throws ServiceLayerException;
 
     void endShift(String personalNumber) throws ServiceLayerException;
 
-    void cargoStatusChanged(int cargoId, CargoStatus cargoStatus) throws ServiceLayerException;
+    void cargoStatusChanged(String cargoIdentifier, CargoStatus cargoStatus) throws ServiceLayerException;
 }

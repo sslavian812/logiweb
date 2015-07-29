@@ -59,6 +59,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/obu" />
     <file type="web" url="file://$PROJECT_DIR$/webapp" />
+    <file type="web" url="file://$PROJECT_DIR$/ws" />
   </component>
   <component name="IdProvider" IDEtalkID="CA67754EE808C426A630E330ED19A251" />
   <component name="MavenProjectsManager">

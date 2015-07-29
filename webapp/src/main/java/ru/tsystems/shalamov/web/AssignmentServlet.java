@@ -71,7 +71,7 @@ public class AssignmentServlet {
             availableTrucks = availableTrucks.subList(0, Math.min(10, availableTrucks.size()));
             availableDrivers = availableDrivers.subList(0, Math.min(10, availableDrivers.size()));
 
-            ModelAndView mav = new ModelAndView("/secure/constructAssignment.jsp");
+            ModelAndView mav = new ModelAndView("secure/constructAssignment");
 
             mav.addObject("trucks", availableTrucks);
             mav.addObject("drivers", availableDrivers);

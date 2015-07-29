@@ -76,4 +76,12 @@ public class ShiftEntity implements Serializable {
         result = 31 * result + (shiftEnd != null ? shiftEnd.hashCode() : 0);
         return result;
     }
+
+    public DriverEntity getDriverEntity() {
+        return driverEntity;
+    }
+
+    public void setDriverEntity(DriverEntity driverEntity) {
+        this.driverEntity = driverEntity;
+    }
 }

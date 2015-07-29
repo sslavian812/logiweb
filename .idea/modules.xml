@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/obu/obu.iml" filepath="$PROJECT_DIR$/obu/obu.iml" />
       <module fileurl="file://$PROJECT_DIR$/parent.iml" filepath="$PROJECT_DIR$/parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/webapp/webapp.iml" filepath="$PROJECT_DIR$/webapp/webapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ws/ws.iml" filepath="$PROJECT_DIR$/ws/ws.iml" />
     </modules>
   </component>
 </project>
