@@ -2,6 +2,7 @@ package ru.tsystems.shalamov.services.impl;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.CargoDao;
 import ru.tsystems.shalamov.dao.api.DriverDao;
@@ -22,6 +23,7 @@ import java.util.Date;
 /**
  * Created by viacheslav on 29.07.2015.
  */
+@Service
 public class DriverActivityServiceImpl implements DriverActivityService {
     @Autowired
     private DriverDao driverDao;
