@@ -1,0 +1,276 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws.shalamov.tsystems.ru/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="DriverActivityWebServiceImplService" targetNamespace="http://ws.shalamov.tsystems.ru/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.shalamov.tsystems.ru/" elementFormDefault="unqualified" targetNamespace="http://ws.shalamov.tsystems.ru/" version="1.0">
+
+  <xs:element name="cargoStatusChangedToDelivered" type="tns:cargoStatusChangedToDelivered"/>
+
+  <xs:element name="cargoStatusChangedToDeliveredResponse" type="tns:cargoStatusChangedToDeliveredResponse"/>
+
+  <xs:element name="cargoStatusChangedToShipped" type="tns:cargoStatusChangedToShipped"/>
+
+  <xs:element name="cargoStatusChangedToShippedResponse" type="tns:cargoStatusChangedToShippedResponse"/>
+
+  <xs:element name="driverStatusToAuxiliary" type="tns:driverStatusToAuxiliary"/>
+
+  <xs:element name="driverStatusToAuxiliaryResponse" type="tns:driverStatusToAuxiliaryResponse"/>
+
+  <xs:element name="driverStatusToPrimary" type="tns:driverStatusToPrimary"/>
+
+  <xs:element name="driverStatusToPrimaryResponse" type="tns:driverStatusToPrimaryResponse"/>
+
+  <xs:element name="driverStatusToRest" type="tns:driverStatusToRest"/>
+
+  <xs:element name="driverStatusToRestResponse" type="tns:driverStatusToRestResponse"/>
+
+  <xs:element name="shiftBegin" type="tns:shiftBegin"/>
+
+  <xs:element name="shiftBeginResponse" type="tns:shiftBeginResponse"/>
+
+  <xs:element name="shiftEnd" type="tns:shiftEnd"/>
+
+  <xs:element name="shiftEndResponse" type="tns:shiftEndResponse"/>
+
+  <xs:complexType name="shiftBegin">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PersonalNumber" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="shiftBeginResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="driverStatusToAuxiliary">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PersonalNumber" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="driverStatusToAuxiliaryResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="shiftEnd">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PersonalNumber" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="shiftEndResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="driverStatusToRest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PersonalNumber" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="driverStatusToRestResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="cargoStatusChangedToDelivered">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CargoIdentifier" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cargoStatusChangedToDeliveredResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="cargoStatusChangedToShipped">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CargoIdentifier" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cargoStatusChangedToShippedResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="driverStatusToPrimary">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PersonalNumber" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="driverStatusToPrimaryResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="shiftBegin">
+    <wsdl:part element="tns:shiftBegin" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="driverStatusToPrimaryResponse">
+    <wsdl:part element="tns:driverStatusToPrimaryResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cargoStatusChangedToShippedResponse">
+    <wsdl:part element="tns:cargoStatusChangedToShippedResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="driverStatusToAuxiliary">
+    <wsdl:part element="tns:driverStatusToAuxiliary" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cargoStatusChangedToDeliveredResponse">
+    <wsdl:part element="tns:cargoStatusChangedToDeliveredResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="shiftEndResponse">
+    <wsdl:part element="tns:shiftEndResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cargoStatusChangedToShipped">
+    <wsdl:part element="tns:cargoStatusChangedToShipped" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="driverStatusToPrimary">
+    <wsdl:part element="tns:driverStatusToPrimary" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="shiftBeginResponse">
+    <wsdl:part element="tns:shiftBeginResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="driverStatusToAuxiliaryResponse">
+    <wsdl:part element="tns:driverStatusToAuxiliaryResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="shiftEnd">
+    <wsdl:part element="tns:shiftEnd" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="driverStatusToRest">
+    <wsdl:part element="tns:driverStatusToRest" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cargoStatusChangedToDelivered">
+    <wsdl:part element="tns:cargoStatusChangedToDelivered" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="driverStatusToRestResponse">
+    <wsdl:part element="tns:driverStatusToRestResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="DriverActivityWebService">
+    <wsdl:operation name="shiftBegin">
+      <wsdl:input message="tns:shiftBegin" name="shiftBegin">
+    </wsdl:input>
+      <wsdl:output message="tns:shiftBeginResponse" name="shiftBeginResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="driverStatusToAuxiliary">
+      <wsdl:input message="tns:driverStatusToAuxiliary" name="driverStatusToAuxiliary">
+    </wsdl:input>
+      <wsdl:output message="tns:driverStatusToAuxiliaryResponse" name="driverStatusToAuxiliaryResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="shiftEnd">
+      <wsdl:input message="tns:shiftEnd" name="shiftEnd">
+    </wsdl:input>
+      <wsdl:output message="tns:shiftEndResponse" name="shiftEndResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="driverStatusToRest">
+      <wsdl:input message="tns:driverStatusToRest" name="driverStatusToRest">
+    </wsdl:input>
+      <wsdl:output message="tns:driverStatusToRestResponse" name="driverStatusToRestResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cargoStatusChangedToDelivered">
+      <wsdl:input message="tns:cargoStatusChangedToDelivered" name="cargoStatusChangedToDelivered">
+    </wsdl:input>
+      <wsdl:output message="tns:cargoStatusChangedToDeliveredResponse" name="cargoStatusChangedToDeliveredResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cargoStatusChangedToShipped">
+      <wsdl:input message="tns:cargoStatusChangedToShipped" name="cargoStatusChangedToShipped">
+    </wsdl:input>
+      <wsdl:output message="tns:cargoStatusChangedToShippedResponse" name="cargoStatusChangedToShippedResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="driverStatusToPrimary">
+      <wsdl:input message="tns:driverStatusToPrimary" name="driverStatusToPrimary">
+    </wsdl:input>
+      <wsdl:output message="tns:driverStatusToPrimaryResponse" name="driverStatusToPrimaryResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DriverActivityWebServiceImplServiceSoapBinding" type="tns:DriverActivityWebService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="shiftBegin">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="shiftBegin">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="shiftBeginResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="shiftEnd">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="shiftEnd">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="shiftEndResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="driverStatusToAuxiliary">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="driverStatusToAuxiliary">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="driverStatusToAuxiliaryResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="driverStatusToRest">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="driverStatusToRest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="driverStatusToRestResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cargoStatusChangedToDelivered">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="cargoStatusChangedToDelivered">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cargoStatusChangedToDeliveredResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cargoStatusChangedToShipped">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="cargoStatusChangedToShipped">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cargoStatusChangedToShippedResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="driverStatusToPrimary">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="driverStatusToPrimary">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="driverStatusToPrimaryResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DriverActivityWebServiceImplService">
+    <wsdl:port binding="tns:DriverActivityWebServiceImplServiceSoapBinding" name="DriverActivityWebServiceImplPort">
+      <soap:address location="http://localhost:8080/ws/services/activity"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

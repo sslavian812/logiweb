@@ -1,6 +1,8 @@
 package ru.tsystems.shalamov.services.impl;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.DriverDao;
 import ru.tsystems.shalamov.dao.api.OrderDao;
@@ -9,14 +11,9 @@ import ru.tsystems.shalamov.services.DriverAssignment;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.DriverAssignmentService;
 
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * Created by viacheslav on 01.07.2015.
@@ -57,7 +54,6 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
             DriverAssignmentServiceImpl.class);
 
 
-
     /**
      * provides "driver assignment card". Card Consists of:
      * private String driverPersonalNumber; +
@@ -72,7 +68,7 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
      */
     @Override
     @Transactional
-    public DriverAssignment getDriverAssignmentByPersonalNumber(
+    public DriverAssignment findDriverAssignmentByPersonalNumber(
             final String driverPersonalNumber) throws ServiceLayerException {
         try {
             DriverAssignment driverAssignment = new DriverAssignment();
@@ -84,9 +80,10 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
             if (driver == null) {
                 return null;
             }
-            DriverStatusEntity driverStatus = driver.getDriverStatusEntity();
+            DriverStatusEntity driverStatusEntity = driver.getDriverStatusEntity();
+            driverAssignment.setDriverStatus(driverStatusEntity.getStatus());
 
-            TruckEntity truck = driverStatus.getTruckEntity();
+            TruckEntity truck = driverStatusEntity.getTruckEntity();
             if (truck == null) {
                 return null;
             }
@@ -116,46 +113,46 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
         }
     }
 
-    @Override
-    public List<String> getCoDriversPersonalNumbers(
-            final String driverPersonalNumber) throws ServiceLayerException {
-        DriverAssignment driverAssignment =
-                getDriverAssignmentByPersonalNumber(driverPersonalNumber);
-        return driverAssignment.getCoDrivers()
-                .stream().map(d -> d.getPersonalNumber())
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public String getTruckRegistrationNumber(final String driverPersonalNumber)
-            throws ServiceLayerException {
-        return getDriverAssignmentByPersonalNumber(driverPersonalNumber)
-                .getTruckRegistrationNumber();
-
-    }
-
-    @Override
-    public String getOrderIdentifier(final String driverPersonalNumber)
-            throws ServiceLayerException {
-        return getDriverAssignmentByPersonalNumber(driverPersonalNumber)
-                .getOrderIdentifier();
-    }
-
-    @Override
-    public List<CargoEntity> getCargoes(final String driverPersonalNumber)
-            throws ServiceLayerException {
-        return getDriverAssignmentByPersonalNumber(driverPersonalNumber)
-                .getCargos();
-    }
-
-    @Override
-    public List<String> getCargoesDenominations(
-            final String driverPersonalNumber) throws ServiceLayerException {
-        return getDriverAssignmentByPersonalNumber(driverPersonalNumber)
-                .getCargos()
-                .stream().map(c -> c.getDenomination())
-                .collect(Collectors.toList());
-    }
+//    @Override
+//    public List<String> getCoDriversPersonalNumbers(
+//            final String driverPersonalNumber) throws ServiceLayerException {
+//        DriverAssignment driverAssignment =
+//                findDriverAssignmentByPersonalNumber(driverPersonalNumber);
+//        return driverAssignment.getCoDrivers()
+//                .stream().map(d -> d.getPersonalNumber())
+//                .collect(Collectors.toList());
+//    }
+//
+//    @Override
+//    public String getTruckRegistrationNumber(final String driverPersonalNumber)
+//            throws ServiceLayerException {
+//        return findDriverAssignmentByPersonalNumber(driverPersonalNumber)
+//                .getTruckRegistrationNumber();
+//
+//    }
+//
+//    @Override
+//    public String getOrderIdentifier(final String driverPersonalNumber)
+//            throws ServiceLayerException {
+//        return findDriverAssignmentByPersonalNumber(driverPersonalNumber)
+//                .getOrderIdentifier();
+//    }
+//
+//    @Override
+//    public List<CargoEntity> getCargoes(final String driverPersonalNumber)
+//            throws ServiceLayerException {
+//        return findDriverAssignmentByPersonalNumber(driverPersonalNumber)
+//                .getCargos();
+//    }
+//
+//    @Override
+//    public List<String> getCargoesDenominations(
+//            final String driverPersonalNumber) throws ServiceLayerException {
+//        return findDriverAssignmentByPersonalNumber(driverPersonalNumber)
+//                .getCargos()
+//                .stream().map(c -> c.getDenomination())
+//                .collect(Collectors.toList());
+//    }
 
     @Override
     @Transactional

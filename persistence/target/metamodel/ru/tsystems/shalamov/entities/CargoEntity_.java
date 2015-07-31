@@ -12,6 +12,7 @@ public abstract class CargoEntity_ {
 	public static volatile SingularAttribute<CargoEntity, OrderEntity> orderEntity;
 	public static volatile SingularAttribute<CargoEntity, Integer> weight;
 	public static volatile SingularAttribute<CargoEntity, Integer> id;
+	public static volatile SingularAttribute<CargoEntity, String> cargoIdentifier;
 	public static volatile SingularAttribute<CargoEntity, String> denomination;
 	public static volatile SingularAttribute<CargoEntity, CargoStatus> status;
 

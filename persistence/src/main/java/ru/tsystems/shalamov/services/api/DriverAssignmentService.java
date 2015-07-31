@@ -19,24 +19,24 @@ import java.util.List;
  */
 public interface DriverAssignmentService {
 
-    DriverAssignment getDriverAssignmentByPersonalNumber(String driverPersonalNumber) throws ServiceLayerException;
+    DriverAssignment findDriverAssignmentByPersonalNumber(String driverPersonalNumber) throws ServiceLayerException;
 
-    List<String> getCoDriversPersonalNumbers(String driverPersonalNumber) throws ServiceLayerException;
-
-    String getTruckRegistrationNumber(String driverPersonalNumber) throws ServiceLayerException;
-
-    /**
-     * Provides Identifier of the order, if the order if complete(
-     * cargos added, tuck assigned, truck crew formed).
-     *
-     * @param driverPersonalNumber
-     * @return
-     */
-    String getOrderIdentifier(String driverPersonalNumber) throws ServiceLayerException;
-
-    List<CargoEntity> getCargoes(String driverPersonalNumber) throws ServiceLayerException;
-
-    List<String> getCargoesDenominations(String driverPersonalNumber) throws ServiceLayerException;
+//    List<String> getCoDriversPersonalNumbers(String driverPersonalNumber) throws ServiceLayerException;
+//
+//    String getTruckRegistrationNumber(String driverPersonalNumber) throws ServiceLayerException;
+//
+//    /**
+//     * Provides Identifier of the order, if the order if complete(
+//     * cargos added, tuck assigned, truck crew formed).
+//     *
+//     * @param driverPersonalNumber
+//     * @return
+//     */
+//    String getOrderIdentifier(String driverPersonalNumber) throws ServiceLayerException;
+//
+//    List<CargoEntity> getCargoes(String driverPersonalNumber) throws ServiceLayerException;
+//
+//    List<String> getCargoesDenominations(String driverPersonalNumber) throws ServiceLayerException;
 
     List<DriverAssignment> findAllDriverAssignments() throws ServiceLayerException;
 

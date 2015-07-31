@@ -63,9 +63,9 @@ public class AssignmentTest {
                     .findDriverAssignmentByOrderIdentifier(order.getOrderIdentifier());
 
             DriverAssignment assignmentByDriver1 = driverAssignmentService
-                    .getDriverAssignmentByPersonalNumber(driver1.getPersonalNumber());
+                    .findDriverAssignmentByPersonalNumber(driver1.getPersonalNumber());
             DriverAssignment assignmentByDriver2 = driverAssignmentService
-                    .getDriverAssignmentByPersonalNumber(driver2.getPersonalNumber());
+                    .findDriverAssignmentByPersonalNumber(driver2.getPersonalNumber());
 
             Assert.assertNotNull(assignment);
             Assert.assertNotNull(assignmentByDriver1);

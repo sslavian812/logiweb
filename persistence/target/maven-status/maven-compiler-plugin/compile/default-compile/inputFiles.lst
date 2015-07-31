@@ -1,3 +1,4 @@
+C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\services\UserDetailsServiceImpl.java
 C:\TS\logiweb\persistence\target\metamodel\ru\tsystems\shalamov\entities\TruckEntity_.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\services\impl\TruckManagementServiceImpl.java
 C:\TS\logiweb\persistence\target\metamodel\ru\tsystems\shalamov\entities\OrderEntity_.java
@@ -6,11 +7,14 @@ C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\dao\impl\OrderDaoIm
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\entities\statuses\CargoStatus.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\entities\DriverStatusEntity.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\entities\statuses\TruckStatus.java
+C:\TS\logiweb\persistence\target\metamodel\ru\tsystems\shalamov\entities\User_.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\services\api\package-info.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\services\impl\DriverAssignmentServiceImpl.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\dao\impl\TruckDaoImpl.java
+C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\services\impl\DriverActivityServiceImpl.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\dao\api\DriverDao.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\services\api\DriverAssignmentService.java
+C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\dao\impl\UserDaoImpl.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\dao\package-info.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\entities\CargoEntity.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\dao\api\OrderDao.java
@@ -31,6 +35,7 @@ C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\services\impl\packa
 C:\TS\logiweb\persistence\target\metamodel\ru\tsystems\shalamov\entities\DriverEntity_.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\dao\api\TruckDao.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\DateUtilities.java
+C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\dao\api\UserDao.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\ApplicationContext.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\dao\api\package-info.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\dao\DataAccessLayerException.java
@@ -43,11 +48,13 @@ C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\services\impl\Drive
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\dao\api\ShiftDao.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\dao\impl\package-info.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\services\api\DriverManagementService.java
+C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\entities\statuses\UserAuthority.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\dao\impl\ShiftDaoImpl.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\dao\impl\GenericDaoImpl.java
 C:\TS\logiweb\persistence\target\metamodel\ru\tsystems\shalamov\entities\ShiftEntity_.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\services\package-info.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\entities\statuses\package-info.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\dao\impl\DriverStatusDaoImpl.java
+C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\entities\User.java
 C:\TS\logiweb\persistence\src\main\java\ru\tsystems\shalamov\services\ServiceLayerException.java
 C:\TS\logiweb\persistence\target\metamodel\ru\tsystems\shalamov\entities\DriverStatusEntity_.java

@@ -33,6 +33,6 @@ public interface DriverActivityWebService {
     @WebMethod
     void cargoStatusChangedToDelivered(@WebParam(name = "CargoIdentifier") String cargoIdentifier);
 
-//    @WebMethod
-//    DriverAssignment driverAssignmentInformation(@WebParam(name = "PersonalNumber") String personalNumber);
+    @WebMethod
+    DriverAssignment driverAssignmentInformation(@WebParam(name = "PersonalNumber") String personalNumber);
 }

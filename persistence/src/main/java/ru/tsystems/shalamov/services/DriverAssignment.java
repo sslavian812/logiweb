@@ -2,6 +2,7 @@ package ru.tsystems.shalamov.services;
 
 import ru.tsystems.shalamov.entities.CargoEntity;
 import ru.tsystems.shalamov.entities.DriverEntity;
+import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 
 import java.util.List;
 
@@ -19,6 +20,9 @@ public class DriverAssignment {
     private String truckRegistrationNumber;
     private String orderIdentifier;
     private List<CargoEntity> cargos;
+
+
+    private DriverStatus driverStatus;
 
     public String getDriverPersonalNumber() {
         return driverPersonalNumber;
@@ -58,5 +62,13 @@ public class DriverAssignment {
 
     public void setCargos(List<CargoEntity> cargos) {
         this.cargos = cargos;
+    }
+
+    public DriverStatus getDriverStatus() {
+        return driverStatus;
+    }
+
+    public void setDriverStatus(DriverStatus driverStatus) {
+        this.driverStatus = driverStatus;
     }
 }

@@ -38,7 +38,7 @@ public class TruckEntity implements Serializable {
     private List<OrderEntity> orderEntities;
 
     @OneToMany(mappedBy = "truckEntity", targetEntity = DriverStatusEntity.class,
-            fetch = FetchType.LAZY)
+            fetch = FetchType.EAGER)
     private List<DriverStatusEntity> driverStatusEntities;
 
 

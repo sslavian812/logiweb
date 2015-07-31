@@ -7,7 +7,7 @@ import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 import ru.tsystems.shalamov.services.DriverAssignment;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.DriverActivityService;
-import ru.tsystems.shalamov.services.impl.DriverAssignmentServiceImpl;
+import ru.tsystems.shalamov.services.api.DriverAssignmentService;
 
 import javax.jws.WebService;
 import javax.ws.rs.ServerErrorException;
@@ -28,6 +28,9 @@ public class DriverActivityWebServiceImpl implements DriverActivityWebService {
 
     @Autowired
     DriverActivityService driverActivityService;
+
+    @Autowired
+    DriverAssignmentService driverAssignmentService;
     // todo: null pointer. unable to autowire.
 
 
@@ -37,7 +40,7 @@ public class DriverActivityWebServiceImpl implements DriverActivityWebService {
             driverActivityService.beginShift(personalNumber);
         } catch (ServiceLayerException e) {
             LOG.warn(UNEXPECTED, e);
-            throw new ServerErrorException(406);
+            throw new ServerErrorException(406, e);
         }
     }
 
@@ -47,7 +50,7 @@ public class DriverActivityWebServiceImpl implements DriverActivityWebService {
             driverActivityService.endShift(personalNumber);
         } catch (ServiceLayerException e) {
             LOG.warn(UNEXPECTED, e);
-            throw new ServerErrorException(406);
+            throw new ServerErrorException(406, e);
         }
     }
 
@@ -57,7 +60,7 @@ public class DriverActivityWebServiceImpl implements DriverActivityWebService {
             driverActivityService.driverStatusChanged(personalNumber, DriverStatus.REST);
         } catch (ServiceLayerException e) {
             LOG.warn(UNEXPECTED, e);
-            throw new ServerErrorException(406);
+            throw new ServerErrorException(406, e);
         }
     }
 
@@ -67,7 +70,7 @@ public class DriverActivityWebServiceImpl implements DriverActivityWebService {
             driverActivityService.driverStatusChanged(personalNumber, DriverStatus.PRIMARY);
         } catch (ServiceLayerException e) {
             LOG.warn(UNEXPECTED, e);
-            throw new ServerErrorException(406);
+            throw new ServerErrorException(406, e);
         }
     }
 
@@ -77,7 +80,7 @@ public class DriverActivityWebServiceImpl implements DriverActivityWebService {
             driverActivityService.driverStatusChanged(personalNumber, DriverStatus.AUXILIARY);
         } catch (ServiceLayerException e) {
             LOG.warn(UNEXPECTED, e);
-            throw new ServerErrorException(406);
+            throw new ServerErrorException(406, e);
         }
     }
 
@@ -87,7 +90,7 @@ public class DriverActivityWebServiceImpl implements DriverActivityWebService {
             driverActivityService.cargoStatusChanged(cargoIdentifier, CargoStatus.SHIPPED);
         } catch (ServiceLayerException e) {
             LOG.warn(UNEXPECTED, e);
-            throw new ServerErrorException(406);
+            throw new ServerErrorException(406, e);
         }
     }
 
@@ -97,12 +100,17 @@ public class DriverActivityWebServiceImpl implements DriverActivityWebService {
             driverActivityService.cargoStatusChanged(cargoIdentifier, CargoStatus.DELIVERED);
         } catch (ServiceLayerException e) {
             LOG.warn(UNEXPECTED, e);
-            throw new ServerErrorException(406);
+            throw new ServerErrorException(406, e);
         }
     }
 
-//    @Override
-//    public DriverAssignment driverAssignmentInformation(String personalNumber) {
-//        return null;
-//    }
+    @Override
+    public DriverAssignment driverAssignmentInformation(String personalNumber) {
+        try {
+            return driverAssignmentService.findDriverAssignmentByPersonalNumber(personalNumber);
+        } catch (ServiceLayerException e) {
+            LOG.warn(UNEXPECTED, e);
+            throw new ServerErrorException(406, e);
+        }
+    }
 }
