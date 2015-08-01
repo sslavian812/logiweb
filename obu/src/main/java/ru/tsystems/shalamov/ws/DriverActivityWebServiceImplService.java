@@ -17,6 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
+// @org.springframework.stereotype.Service  - does not help
 @WebServiceClient(name = "DriverActivityWebServiceImplService", targetNamespace = "http://ws.shalamov.tsystems.ru/", wsdlLocation = "http://localhost:8080/ws/services/activity?wsdl")
 public class DriverActivityWebServiceImplService
     extends Service

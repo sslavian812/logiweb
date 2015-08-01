@@ -42,6 +42,16 @@ public class DriverModel {
         this.driverStatus = driverStatus;
     }
 
+    public DriverModel(String firstName, String lastName,
+                       String personalNumber, DriverStatus driverStatus,
+                       String truckRegistrationNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.personalNumber = personalNumber;
+        this.driverStatus = driverStatus;
+        this.truckRegistrationNumber = truckRegistrationNumber;
+    }
+
     public DriverModel(DriverEntity driverEntity) {
         this.firstName = driverEntity.getFirstName();
         this.lastName = driverEntity.getLastName();

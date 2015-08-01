@@ -3,16 +3,15 @@ package ru.tsystems.shalamov.onBoardUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.tsystems.shalamov.entities.statuses.CargoStatus;
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
+import ru.tsystems.shalamov.model.CargoModel;
 import ru.tsystems.shalamov.model.DriverAssignmentModel;
+import ru.tsystems.shalamov.model.DriverModel;
 import ru.tsystems.shalamov.ws.DriverActivityWebService;
 import ru.tsystems.shalamov.ws.DriverActivityWebServiceImplService;
-import ru.tsystems.shalamov.ws.DriverAssignment;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,26 +23,18 @@ import java.util.stream.Collectors;
 public class DriverInfoBean {
 
     @Autowired
-    DriverActivityWebServiceImplService webService;
+    DriverActivityWebServiceImplService webService; // TODO make proper DI
 
-    // todo сделать model
     DriverStatus driverStatus;
-
-    @NotNull(message = "!!!!!!!!!!")
     String personalNumber;
-
     String orderIdentifier;
-
     String truckRegistrationNumber;
     List<String> involvedDrivers = new ArrayList<>();
-
     List<String> cargoesList = new ArrayList<>();
-
-
     List<CargoStatus> cargoesStatuses = new ArrayList<>();
 
 
-    public String getAssignmentInforamation() {
+    public String getAssignmentInformation() {
         // when called, PN should be already set.
         if (personalNumber == null || personalNumber.isEmpty())
             return "fail";
@@ -52,18 +43,32 @@ public class DriverInfoBean {
         DriverActivityWebService client = webService.getDriverActivityWebServiceImplPort();
         ru.tsystems.shalamov.ws.DriverAssignmentModel serialized = client.getDriverAssignmentInformation(personalNumber);
 
-        // todo is there a better way to convert generated data to my mdels??
+        // todo is there a better way to convert generated data to my models??
+        DriverAssignmentModel assignment = new DriverAssignmentModel();
 
-        DriverAssignmentModel assignment = new DriverAssignmentModel(
-//                serialized.getDriverPersonalNumber(),
-//                serialized.getTruckRegistrationNumber(),
-//                serialized.getOrderIdentifier(),
-//                serialized.getDriverStatus().value(),
-//                serialized.getCargoes(),
-//                serialized.getCoDrivers()
-        );
+        // converting to my model class:
+        assignment.setDriverPersonalNumber(serialized.getDriverPersonalNumber());
+        assignment.setTruckRegistrationNumber(serialized.getTruckRegistrationNumber());
+        assignment.setOrderIdentifier(serialized.getOrderIdentifier());
+        assignment.setDriverStatus(ru.tsystems.shalamov.entities.statuses.DriverStatus.valueOf(
+                serialized.getDriverStatus().value()));
+        assignment.setCoDrivers(serialized.getCoDrivers().stream()
+                .map(d -> new DriverModel(d.getFirstName(),
+                        d.getLastName(),
+                        d.getPersonalNumber(),
+                        DriverStatus.valueOf(d.getDriverStatus().value()),
+                        d.getTruckRegistrationNumber()))
+                .collect(Collectors.toList()));
+        assignment.setCargoes(serialized.getCargoes().stream()
+                .map(c -> new CargoModel(c.getCargoIdentifier(),
+                        c.getDenomination(),
+                        c.getWeight(),
+                        CargoStatus.valueOf(c.getStatus().value()),
+                        c.getOrderIdentifier()))
+                .collect(Collectors.toList()));
+
+
         driverStatus = assignment.getDriverStatus();
-
         orderIdentifier = assignment.getOrderIdentifier();
         truckRegistrationNumber = assignment.getTruckRegistrationNumber();
         involvedDrivers = assignment.getCoDrivers().stream()
@@ -76,43 +81,38 @@ public class DriverInfoBean {
                 .map(c -> c.getStatus())
                 .collect(Collectors.toList());
 
-//        driverStatus = DriverStatus.PRIMARY;
-//        orderIdentifier = "some order";
-//        truckRegistrationNumber = "some truck";
-//        involvedDrivers.add(personalNumber);
-//        cargoes.put("some_cargo", CargoStatus.PREPARED);
-//        cargoes.put("some_other_cargo", CargoStatus.SHIPPED);
-
         return "driver";
     }
 
     public String swapStatus() {
-        // this.personalNumber = personalNumber;
-        //getAssignmentInforamation();
+        DriverActivityWebService client = webService.getDriverActivityWebServiceImplPort();
 
         if (driverStatus != DriverStatus.REST) {
-            if (driverStatus == DriverStatus.AUXILIARY)
-                driverStatus = DriverStatus.PRIMARY;
-            else
-                driverStatus = DriverStatus.AUXILIARY;
+            if (driverStatus == DriverStatus.AUXILIARY) {
+                client.driverStatusToPrimary(personalNumber);
+//                driverStatus = DriverStatus.PRIMARY;
+            } else {
+                client.driverStatusToAuxiliary(personalNumber);
+//                driverStatus = DriverStatus.AUXILIARY;
+            }
+            getAssignmentInformation();
         }
-
-        // todo query WS to change driverStatus
 
         return "driver";
     }
 
     public String swapShift() {
-        //  this.personalNumber = personalNumber;
-        // getAssignmentInforamation();
+        DriverActivityWebService client = webService.getDriverActivityWebServiceImplPort();
 
         if (driverStatus == DriverStatus.REST) {
-            driverStatus = DriverStatus.PRIMARY;
+            client.shiftBegin(personalNumber);
+//            driverStatus = DriverStatus.PRIMARY;
         } else {
-            driverStatus = DriverStatus.REST;
+            client.shiftEnd(personalNumber);
+//            driverStatus = DriverStatus.REST;
         }
 
-        // todo query WS to change driverStatus
+        getAssignmentInformation();
 
         return "driver";
     }

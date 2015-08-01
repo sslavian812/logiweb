@@ -13,6 +13,13 @@
         <welcome-file>faces/login.xhtml</welcome-file>
     </welcome-file-list>
 
+    <!--<context-param>-->
+        <!--<param-name>contextConfigLocation</param-name>-->
+        <!--<param-value>-->
+            <!--classpath:META-INF/applicationContext.xml - does not help -->
+        <!--</param-value>-->
+    <!--</context-param>-->
+
 
     <!--
        FacesServlet is main servlet responsible to handle all request.

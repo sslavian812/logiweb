@@ -17,6 +17,7 @@ import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.DriverActivityService;
 
+import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -41,6 +42,7 @@ public class DriverActivityServiceImpl implements DriverActivityService {
             Logger.getLogger(DriverAssignmentServiceImpl.class);
 
     @Override
+    @Transactional
     public void beginShift(String personalNumber) throws ServiceLayerException {
         try {
             DriverEntity driver = driverDao.findByPersonalNumber(personalNumber);
@@ -70,6 +72,7 @@ public class DriverActivityServiceImpl implements DriverActivityService {
     }
 
     @Override
+    @Transactional
     public void endShift(String personalNumber) throws ServiceLayerException {
         try {
             DriverEntity driver = driverDao.findByPersonalNumber(personalNumber);
@@ -95,6 +98,7 @@ public class DriverActivityServiceImpl implements DriverActivityService {
     }
 
     @Override
+    @Transactional
     public void driverStatusChanged(
             String personalNumber, DriverStatus driverStatus)
             throws ServiceLayerException {
@@ -126,6 +130,7 @@ public class DriverActivityServiceImpl implements DriverActivityService {
     }
 
     @Override
+    @Transactional
     public void cargoStatusChanged(
             String cargoIdentifier, CargoStatus cargoStatus)
             throws ServiceLayerException {

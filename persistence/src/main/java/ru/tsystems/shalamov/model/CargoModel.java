@@ -36,7 +36,7 @@ public class CargoModel {
         this.denomination = denomination;
         this.weight = weight;
         this.status = status;
-        this.cargoIdentifier = cargoIdentifier;
+        this.orderIdentifier = orderIdentifier;
     }
 
 
