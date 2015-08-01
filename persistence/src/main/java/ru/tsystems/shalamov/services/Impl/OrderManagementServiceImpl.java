@@ -9,7 +9,6 @@ import ru.tsystems.shalamov.entities.statuses.OrderStatus;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.OrderManagementService;
 
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.Iterator;
 import java.util.List;

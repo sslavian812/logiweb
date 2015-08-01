@@ -38,11 +38,13 @@ public class CargoEntity implements Serializable {
     public CargoEntity() {
     }
 
-    public CargoEntity(String denomination, int weight, CargoStatus status, OrderEntity order) {
+    public CargoEntity(String denomination, int weight, CargoStatus status,
+                       OrderEntity order, String cargoIdentifier) {
         this.denomination = denomination;
         this.weight = weight;
         this.status = status;
         this.orderEntity = order;
+        this.cargoIdentifier = cargoIdentifier;
     }
 
 

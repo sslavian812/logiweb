@@ -43,7 +43,7 @@ public class AssignmentServlet {
     public ModelAndView showAssignments(HttpServletRequest request, HttpServletResponse response) {
         try {
             List<DriverAssignment> assignments = driverAssignmentService.findAllDriverAssignments();
-            ModelAndView mav = new ModelAndView("secure/AssignmentsList");
+            ModelAndView mav = new ModelAndView("secure/assignments");
             mav.addObject("assignments", assignments);
             return mav;
         } catch (ServiceLayerException e) {

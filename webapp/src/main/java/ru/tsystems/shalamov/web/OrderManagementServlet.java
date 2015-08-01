@@ -45,7 +45,8 @@ public class OrderManagementServlet {
 
         List<CargoEntity> cargoes = new ArrayList<>();
         OrderEntity order = new OrderEntity(orderIdentifier);
-        cargoes.add(new CargoEntity(denomination, weight, CargoStatus.PREPARED, order));
+        cargoes.add(new CargoEntity(denomination, weight, CargoStatus.PREPARED,
+                order, orderIdentifier + denomination + weight));
         try {
             orderManagementService.createOrderWithCargoes(order, cargoes);
             return new ModelAndView("redirect:/secure/showOrders");

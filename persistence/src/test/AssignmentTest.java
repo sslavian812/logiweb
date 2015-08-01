@@ -47,8 +47,8 @@ public class AssignmentTest {
             truckManagementService.addTruck(truck);
 
             OrderEntity order = new OrderEntity("bricks");
-            CargoEntity cargo1 = new CargoEntity("bricks", 1500, CargoStatus.PREPARED, order);
-            CargoEntity cargo2 = new CargoEntity("wood", 500, CargoStatus.PREPARED, order);
+            CargoEntity cargo1 = new CargoEntity("bricks", 1500, CargoStatus.PREPARED, order, "12123");
+            CargoEntity cargo2 = new CargoEntity("wood", 500, CargoStatus.PREPARED, order, "11313");
             List<CargoEntity> cargoes = new ArrayList<>(2);
             cargoes.add(cargo1);
             cargoes.add(cargo2);
