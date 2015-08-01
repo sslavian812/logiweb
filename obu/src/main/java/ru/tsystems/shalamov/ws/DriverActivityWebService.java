@@ -37,6 +37,20 @@ public interface DriverActivityWebService {
     /**
      * 
      * @param personalNumber
+     * @return
+     *     returns ru.tsystems.shalamov.ws.DriverAssignmentModel
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getDriverAssignmentInformation", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.GetDriverAssignmentInformation")
+    @ResponseWrapper(localName = "getDriverAssignmentInformationResponse", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.GetDriverAssignmentInformationResponse")
+    public DriverAssignmentModel getDriverAssignmentInformation(
+            @WebParam(name = "PersonalNumber", targetNamespace = "")
+            String personalNumber);
+
+    /**
+     * 
+     * @param personalNumber
      */
     @WebMethod
     @RequestWrapper(localName = "shiftEnd", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.ShiftEnd")
@@ -53,20 +67,6 @@ public interface DriverActivityWebService {
     @RequestWrapper(localName = "driverStatusToAuxiliary", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.DriverStatusToAuxiliary")
     @ResponseWrapper(localName = "driverStatusToAuxiliaryResponse", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.DriverStatusToAuxiliaryResponse")
     public void driverStatusToAuxiliary(
-            @WebParam(name = "PersonalNumber", targetNamespace = "")
-            String personalNumber);
-
-    /**
-     * 
-     * @param personalNumber
-     * @return
-     *     returns ru.tsystems.shalamov.ws.DriverAssignment
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "driverAssignmentInformation", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.DriverAssignmentInformation")
-    @ResponseWrapper(localName = "driverAssignmentInformationResponse", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.DriverAssignmentInformationResponse")
-    public DriverAssignment driverAssignmentInformation(
             @WebParam(name = "PersonalNumber", targetNamespace = "")
             String personalNumber);
 

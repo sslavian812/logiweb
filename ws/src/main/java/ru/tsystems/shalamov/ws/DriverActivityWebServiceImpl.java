@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.tsystems.shalamov.entities.statuses.CargoStatus;
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
+import ru.tsystems.shalamov.model.DriverAssignmentModel;
 import ru.tsystems.shalamov.services.DriverAssignment;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.DriverActivityService;
@@ -105,9 +106,9 @@ public class DriverActivityWebServiceImpl implements DriverActivityWebService {
     }
 
     @Override
-    public DriverAssignment driverAssignmentInformation(String personalNumber) {
+    public DriverAssignmentModel getDriverAssignmentInformation(String personalNumber) {
         try {
-            return driverAssignmentService.findDriverAssignmentByPersonalNumber(personalNumber);
+            return driverAssignmentService.findDriverAssignmentModelByPersonalNumber(personalNumber);
         } catch (ServiceLayerException e) {
             LOG.warn(UNEXPECTED, e);
             throw new ServerErrorException(406, e);

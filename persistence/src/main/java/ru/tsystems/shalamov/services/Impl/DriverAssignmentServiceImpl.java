@@ -7,6 +7,7 @@ import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.DriverDao;
 import ru.tsystems.shalamov.dao.api.OrderDao;
 import ru.tsystems.shalamov.entities.*;
+import ru.tsystems.shalamov.model.DriverAssignmentModel;
 import ru.tsystems.shalamov.services.DriverAssignment;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.DriverAssignmentService;
@@ -111,6 +112,13 @@ public class DriverAssignmentServiceImpl implements DriverAssignmentService {
             LOG.warn("Unexpected: ", e);
             throw new ServiceLayerException(e);
         }
+    }
+
+    @Override
+    public DriverAssignmentModel findDriverAssignmentModelByPersonalNumber(String driverPersonalNumber) throws ServiceLayerException {
+        DriverAssignment assignment = findDriverAssignmentByPersonalNumber(driverPersonalNumber);
+        DriverAssignmentModel assignmentModel = new DriverAssignmentModel(assignment);
+        return assignmentModel;
     }
 
 //    @Override

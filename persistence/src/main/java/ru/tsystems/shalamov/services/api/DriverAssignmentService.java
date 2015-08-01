@@ -1,6 +1,7 @@
 package ru.tsystems.shalamov.services.api;
 
 import ru.tsystems.shalamov.entities.CargoEntity;
+import ru.tsystems.shalamov.model.DriverAssignmentModel;
 import ru.tsystems.shalamov.services.DriverAssignment;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 
@@ -19,7 +20,10 @@ import java.util.List;
  */
 public interface DriverAssignmentService {
 
+    @Deprecated
     DriverAssignment findDriverAssignmentByPersonalNumber(String driverPersonalNumber) throws ServiceLayerException;
+
+    DriverAssignmentModel findDriverAssignmentModelByPersonalNumber(String driverPersonalNumber) throws ServiceLayerException;
 
 //    List<String> getCoDriversPersonalNumbers(String driverPersonalNumber) throws ServiceLayerException;
 //

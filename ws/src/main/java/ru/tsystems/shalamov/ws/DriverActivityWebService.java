@@ -1,6 +1,7 @@
 package ru.tsystems.shalamov.ws;
 
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
+import ru.tsystems.shalamov.model.DriverAssignmentModel;
 import ru.tsystems.shalamov.services.DriverAssignment;
 
 import javax.jws.WebMethod;
@@ -34,5 +35,5 @@ public interface DriverActivityWebService {
     void cargoStatusChangedToDelivered(@WebParam(name = "CargoIdentifier") String cargoIdentifier);
 
     @WebMethod
-    DriverAssignment driverAssignmentInformation(@WebParam(name = "PersonalNumber") String personalNumber);
+    DriverAssignmentModel getDriverAssignmentInformation(@WebParam(name = "PersonalNumber") String personalNumber);
 }

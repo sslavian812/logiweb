@@ -29,16 +29,16 @@ public class ObjectFactory {
     private final static QName _CargoStatusChangedToShippedResponse_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "cargoStatusChangedToShippedResponse");
     private final static QName _CargoStatusChangedToDeliveredResponse_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "cargoStatusChangedToDeliveredResponse");
     private final static QName _DriverStatusToAuxiliary_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "driverStatusToAuxiliary");
-    private final static QName _DriverAssignmentInformation_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "driverAssignmentInformation");
+    private final static QName _GetDriverAssignmentInformationResponse_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "getDriverAssignmentInformationResponse");
     private final static QName _ShiftEndResponse_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "shiftEndResponse");
     private final static QName _CargoStatusChangedToShipped_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "cargoStatusChangedToShipped");
     private final static QName _DriverStatusToPrimary_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "driverStatusToPrimary");
     private final static QName _ShiftBeginResponse_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "shiftBeginResponse");
     private final static QName _DriverStatusToAuxiliaryResponse_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "driverStatusToAuxiliaryResponse");
+    private final static QName _GetDriverAssignmentInformation_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "getDriverAssignmentInformation");
     private final static QName _ShiftEnd_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "shiftEnd");
     private final static QName _DriverStatusToRest_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "driverStatusToRest");
     private final static QName _CargoStatusChangedToDelivered_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "cargoStatusChangedToDelivered");
-    private final static QName _DriverAssignmentInformationResponse_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "driverAssignmentInformationResponse");
     private final static QName _DriverStatusToRestResponse_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "driverStatusToRestResponse");
 
     /**
@@ -73,6 +73,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ru.tsystems.shalamov.ws.GetDriverAssignmentInformationResponse }
+     * 
+     */
+    public GetDriverAssignmentInformationResponse createGetDriverAssignmentInformationResponse() {
+        return new GetDriverAssignmentInformationResponse();
+    }
+
+    /**
      * Create an instance of {@link ru.tsystems.shalamov.ws.CargoStatusChangedToDeliveredResponse }
      * 
      */
@@ -86,14 +94,6 @@ public class ObjectFactory {
      */
     public DriverStatusToAuxiliary createDriverStatusToAuxiliary() {
         return new DriverStatusToAuxiliary();
-    }
-
-    /**
-     * Create an instance of {@link ru.tsystems.shalamov.ws.DriverAssignmentInformation }
-     * 
-     */
-    public DriverAssignmentInformation createDriverAssignmentInformation() {
-        return new DriverAssignmentInformation();
     }
 
     /**
@@ -137,6 +137,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ru.tsystems.shalamov.ws.GetDriverAssignmentInformation }
+     * 
+     */
+    public GetDriverAssignmentInformation createGetDriverAssignmentInformation() {
+        return new GetDriverAssignmentInformation();
+    }
+
+    /**
      * Create an instance of {@link ru.tsystems.shalamov.ws.ShiftEnd }
      * 
      */
@@ -150,14 +158,6 @@ public class ObjectFactory {
      */
     public DriverStatusToRest createDriverStatusToRest() {
         return new DriverStatusToRest();
-    }
-
-    /**
-     * Create an instance of {@link ru.tsystems.shalamov.ws.DriverAssignmentInformationResponse }
-     * 
-     */
-    public DriverAssignmentInformationResponse createDriverAssignmentInformationResponse() {
-        return new DriverAssignmentInformationResponse();
     }
 
     /**
@@ -177,51 +177,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ru.tsystems.shalamov.ws.TruckEntity }
+     * Create an instance of {@link ru.tsystems.shalamov.ws.DriverAssignmentModel }
      * 
      */
-    public TruckEntity createTruckEntity() {
-        return new TruckEntity();
+    public DriverAssignmentModel createDriverAssignmentModel() {
+        return new DriverAssignmentModel();
     }
 
     /**
-     * Create an instance of {@link ru.tsystems.shalamov.ws.CargoEntity }
+     * Create an instance of {@link ru.tsystems.shalamov.ws.DriverModel }
      * 
      */
-    public CargoEntity createCargoEntity() {
-        return new CargoEntity();
+    public DriverModel createDriverModel() {
+        return new DriverModel();
     }
 
     /**
-     * Create an instance of {@link ru.tsystems.shalamov.ws.DriverAssignment }
+     * Create an instance of {@link ru.tsystems.shalamov.ws.CargoModel }
      * 
      */
-    public DriverAssignment createDriverAssignment() {
-        return new DriverAssignment();
-    }
-
-    /**
-     * Create an instance of {@link ru.tsystems.shalamov.ws.DriverStatusEntity }
-     * 
-     */
-    public DriverStatusEntity createDriverStatusEntity() {
-        return new DriverStatusEntity();
-    }
-
-    /**
-     * Create an instance of {@link ru.tsystems.shalamov.ws.OrderEntity }
-     * 
-     */
-    public OrderEntity createOrderEntity() {
-        return new OrderEntity();
-    }
-
-    /**
-     * Create an instance of {@link ru.tsystems.shalamov.ws.DriverEntity }
-     * 
-     */
-    public DriverEntity createDriverEntity() {
-        return new DriverEntity();
+    public CargoModel createCargoModel() {
+        return new CargoModel();
     }
 
     /**
@@ -270,12 +246,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link javax.xml.bind.JAXBElement }{@code <}{@link ru.tsystems.shalamov.ws.DriverAssignmentInformation }{@code >}}
+     * Create an instance of {@link javax.xml.bind.JAXBElement }{@code <}{@link ru.tsystems.shalamov.ws.GetDriverAssignmentInformationResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://ws.shalamov.tsystems.ru/", name = "driverAssignmentInformation")
-    public JAXBElement<DriverAssignmentInformation> createDriverAssignmentInformation(DriverAssignmentInformation value) {
-        return new JAXBElement<DriverAssignmentInformation>(_DriverAssignmentInformation_QNAME, DriverAssignmentInformation.class, null, value);
+    @XmlElementDecl(namespace = "http://ws.shalamov.tsystems.ru/", name = "getDriverAssignmentInformationResponse")
+    public JAXBElement<GetDriverAssignmentInformationResponse> createGetDriverAssignmentInformationResponse(GetDriverAssignmentInformationResponse value) {
+        return new JAXBElement<GetDriverAssignmentInformationResponse>(_GetDriverAssignmentInformationResponse_QNAME, GetDriverAssignmentInformationResponse.class, null, value);
     }
 
     /**
@@ -324,6 +300,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link javax.xml.bind.JAXBElement }{@code <}{@link ru.tsystems.shalamov.ws.GetDriverAssignmentInformation }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://ws.shalamov.tsystems.ru/", name = "getDriverAssignmentInformation")
+    public JAXBElement<GetDriverAssignmentInformation> createGetDriverAssignmentInformation(GetDriverAssignmentInformation value) {
+        return new JAXBElement<GetDriverAssignmentInformation>(_GetDriverAssignmentInformation_QNAME, GetDriverAssignmentInformation.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link javax.xml.bind.JAXBElement }{@code <}{@link ru.tsystems.shalamov.ws.ShiftEnd }{@code >}}
      * 
      */
@@ -348,15 +333,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://ws.shalamov.tsystems.ru/", name = "cargoStatusChangedToDelivered")
     public JAXBElement<CargoStatusChangedToDelivered> createCargoStatusChangedToDelivered(CargoStatusChangedToDelivered value) {
         return new JAXBElement<CargoStatusChangedToDelivered>(_CargoStatusChangedToDelivered_QNAME, CargoStatusChangedToDelivered.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link javax.xml.bind.JAXBElement }{@code <}{@link ru.tsystems.shalamov.ws.DriverAssignmentInformationResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://ws.shalamov.tsystems.ru/", name = "driverAssignmentInformationResponse")
-    public JAXBElement<DriverAssignmentInformationResponse> createDriverAssignmentInformationResponse(DriverAssignmentInformationResponse value) {
-        return new JAXBElement<DriverAssignmentInformationResponse>(_DriverAssignmentInformationResponse_QNAME, DriverAssignmentInformationResponse.class, null, value);
     }
 
     /**

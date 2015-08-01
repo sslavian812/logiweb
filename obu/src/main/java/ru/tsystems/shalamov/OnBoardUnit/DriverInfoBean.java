@@ -3,6 +3,7 @@ package ru.tsystems.shalamov.onBoardUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.tsystems.shalamov.entities.statuses.CargoStatus;
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
+import ru.tsystems.shalamov.model.DriverAssignmentModel;
 import ru.tsystems.shalamov.ws.DriverActivityWebService;
 import ru.tsystems.shalamov.ws.DriverActivityWebServiceImplService;
 import ru.tsystems.shalamov.ws.DriverAssignment;
@@ -49,20 +50,30 @@ public class DriverInfoBean {
 
         webService = new DriverActivityWebServiceImplService();
         DriverActivityWebService client = webService.getDriverActivityWebServiceImplPort();
-        DriverAssignment assignment = client.driverAssignmentInformation(personalNumber);
+        ru.tsystems.shalamov.ws.DriverAssignmentModel serialized = client.getDriverAssignmentInformation(personalNumber);
 
-        driverStatus = DriverStatus.valueOf(assignment.getDriverStatus().value());
+        // todo is there a better way to convert generated data to my mdels??
+
+        DriverAssignmentModel assignment = new DriverAssignmentModel(
+//                serialized.getDriverPersonalNumber(),
+//                serialized.getTruckRegistrationNumber(),
+//                serialized.getOrderIdentifier(),
+//                serialized.getDriverStatus().value(),
+//                serialized.getCargoes(),
+//                serialized.getCoDrivers()
+        );
+        driverStatus = assignment.getDriverStatus();
 
         orderIdentifier = assignment.getOrderIdentifier();
         truckRegistrationNumber = assignment.getTruckRegistrationNumber();
         involvedDrivers = assignment.getCoDrivers().stream()
                 .map(d -> d.getPersonalNumber()).collect(Collectors.toList());
 
-        cargoesList = assignment.getCargos().stream()
+        cargoesList = assignment.getCargoes().stream()
                 .map(c -> c.getCargoIdentifier()).collect(Collectors.toList());
 
-        cargoesStatuses = assignment.getCargos().stream()
-                .map(c -> ru.tsystems.shalamov.entities.statuses.CargoStatus.valueOf(c.getStatus().value()))
+        cargoesStatuses = assignment.getCargoes().stream()
+                .map(c -> c.getStatus())
                 .collect(Collectors.toList());
 
 //        driverStatus = DriverStatus.PRIMARY;
