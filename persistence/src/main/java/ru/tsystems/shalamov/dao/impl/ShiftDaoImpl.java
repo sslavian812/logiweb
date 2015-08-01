@@ -86,4 +86,24 @@ public class ShiftDaoImpl extends GenericDaoImpl<ShiftEntity> implements ShiftDa
             throw new DataAccessLayerException(e);
         }
     }
+
+    @Override
+    public ShiftEntity findActiveShiftByDriver(DriverEntity driver) throws DataAccessLayerException {
+        try {
+            EntityManager em = getEntityManager();
+
+            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            CriteriaQuery<ShiftEntity> criteriaQuery = criteriaBuilder.createQuery(ShiftEntity.class);
+
+            Root<ShiftEntity> shiftEntityRoot = criteriaQuery.from(ShiftEntity.class);
+            return em.createQuery(criteriaQuery.select(shiftEntityRoot).where(criteriaBuilder.and(
+                    criteriaBuilder.equal(shiftEntityRoot.get(ShiftEntity_.driverEntity), driver),
+                    criteriaBuilder.isNull(shiftEntityRoot.get(ShiftEntity_.shiftEnd))
+            ))).getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        } catch (Exception e) {
+            throw new DataAccessLayerException(e);
+        }
+    }
 }

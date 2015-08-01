@@ -16,5 +16,8 @@ public interface ShiftDao extends GenericDao<ShiftEntity> {
     float getWorkingHoursInMonthByDriver(Date date, DriverEntity driverEntity)
             throws DataAccessLayerException;
 
+    @Deprecated
     ShiftEntity findActiveShiftByDriver(String personalNumber) throws DataAccessLayerException;
+
+    ShiftEntity findActiveShiftByDriver(DriverEntity driver) throws DataAccessLayerException;
 }

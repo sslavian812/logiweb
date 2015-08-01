@@ -79,7 +79,9 @@ public class DriverActivityServiceImpl implements DriverActivityService {
             if (driver == null)
                 throw new ServiceLayerException("no such driver found");
 
-            ShiftEntity shift = shiftDao.findActiveShiftByDriver(personalNumber);
+//            ShiftEntity shift = shiftDao.findActiveShiftByDriver(personalNumber);
+            ShiftEntity shift = shiftDao.findActiveShiftByDriver(driver);
+
             if (shift == null)
                 throw new ServiceLayerException("this driver has no active shift now!");
 
