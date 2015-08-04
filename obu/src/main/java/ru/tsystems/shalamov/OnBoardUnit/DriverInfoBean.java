@@ -1,6 +1,5 @@
 package ru.tsystems.shalamov.onBoardUnit;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import ru.tsystems.shalamov.entities.statuses.CargoStatus;
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 import ru.tsystems.shalamov.model.CargoModel;
@@ -9,6 +8,7 @@ import ru.tsystems.shalamov.model.DriverModel;
 import ru.tsystems.shalamov.ws.DriverActivityWebService;
 import ru.tsystems.shalamov.ws.DriverActivityWebServiceImplService;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @SessionScoped
 public class DriverInfoBean {
 
-    @Autowired
+    @EJB
     DriverActivityWebServiceImplService webService; // TODO make proper DI
 
     DriverStatus driverStatus;
@@ -39,7 +39,10 @@ public class DriverInfoBean {
         if (personalNumber == null || personalNumber.isEmpty())
             return "fail";
 
-        webService = new DriverActivityWebServiceImplService();
+
+        // todo это все не надо. заменить нахрен свои классы на генеренные.
+
+
         DriverActivityWebService client = webService.getDriverActivityWebServiceImplPort();
         ru.tsystems.shalamov.ws.DriverAssignmentModel serialized = client.getDriverAssignmentInformation(personalNumber);
 

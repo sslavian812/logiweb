@@ -3,6 +3,7 @@ package ru.tsystems.shalamov.ws;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import javax.ejb.Stateless;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import javax.xml.ws.WebEndpoint;
@@ -17,7 +18,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-// @org.springframework.stereotype.Service  - does not help
+@Stateless
 @WebServiceClient(name = "DriverActivityWebServiceImplService", targetNamespace = "http://ws.shalamov.tsystems.ru/", wsdlLocation = "http://localhost:8080/ws/services/activity?wsdl")
 public class DriverActivityWebServiceImplService
     extends Service

@@ -15,7 +15,7 @@ public class Main {
         Session session = sessions.openSession();
         session.beginTransaction();
         session.getTransaction().commit();*/
-        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/applicationContext.xml");
+        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("META-INF/applicationContext.xml");
         CargoDao cargoDao = ctx.getBean(CargoDao.class);
 //        System.out.println(((CargoDaoImpl)cargoDao).getEntityManager());
     }
