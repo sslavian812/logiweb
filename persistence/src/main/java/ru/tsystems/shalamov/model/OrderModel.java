@@ -1,5 +1,6 @@
 package ru.tsystems.shalamov.model;
 
+import ru.tsystems.shalamov.entities.OrderEntity;
 import ru.tsystems.shalamov.entities.statuses.OrderStatus;
 
 import javax.validation.constraints.NotNull;
@@ -17,6 +18,11 @@ public class OrderModel {
         this.status = OrderStatus.UNASSIGNED;
     }
 
+    public OrderModel(OrderEntity orderEntity) {
+        this.orderIdentifier = orderEntity.getOrderIdentifier();
+        this.status = orderEntity.getStatus();
+    }
+
     @NotNull
     @Pattern(regexp = "[a-zA-Z0-9]+", message = "alphanumeric characters only")
     private String orderIdentifier;
@@ -27,7 +33,7 @@ public class OrderModel {
     private List<CargoModel> cargoes;
 
     @Pattern(regexp = "[a-zA-Z0-9]{2}[0-9]{5}]", message = "two letters and five digits")
-    private String truckRgistrationNumber;
+    private String truckRegistrationNumber;
 
     /**
      * Provides total weight of all cargoes included int the order.
@@ -66,11 +72,11 @@ public class OrderModel {
         this.cargoes = cargoes;
     }
 
-    public String getTruckRgistrationNumber() {
-        return truckRgistrationNumber;
+    public String getTruckRegistrationNumber() {
+        return truckRegistrationNumber;
     }
 
-    public void setTruckRgistrationNumber(String truckRgistrationNumber) {
-        this.truckRgistrationNumber = truckRgistrationNumber;
+    public void setTruckRegistrationNumber(String truckRegistrationNumber) {
+        this.truckRegistrationNumber = truckRegistrationNumber;
     }
 }

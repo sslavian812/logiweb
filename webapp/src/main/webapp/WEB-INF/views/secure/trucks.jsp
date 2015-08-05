@@ -42,7 +42,7 @@
                 </td>
                 <td>
                     <form method="post"
-                          action="/secure/deleteTruck?registrationNumber=${truck.registrationNumber}">
+                          action="/secure/trucks/delete/${truck.registrationNumber}">
                         <button type="submit" class="btn btn-danger">delete</button>
                     </form>
                 </td>
@@ -54,7 +54,8 @@
 
 <%--<hr>--%>
 
-<form class="form-control" id="adder" method="post" onsubmit="return validateTruckForm()" action="/secure/addTruck">
+<form class="form-control" id="adder" method="post" onsubmit="return validateTruckForm()"
+      action="/secure/trucks/add">
     <fieldset>
         <legend>Add new truck</legend>
         <label>Crew size</label>

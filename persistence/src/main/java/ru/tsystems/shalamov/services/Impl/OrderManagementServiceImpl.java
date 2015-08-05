@@ -1,20 +1,25 @@
 package ru.tsystems.shalamov.services.impl;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.*;
 import ru.tsystems.shalamov.entities.*;
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 import ru.tsystems.shalamov.entities.statuses.OrderStatus;
+import ru.tsystems.shalamov.model.*;
 import ru.tsystems.shalamov.services.ServiceLayerException;
+import ru.tsystems.shalamov.services.Util;
+import ru.tsystems.shalamov.services.api.DriverManagementService;
 import ru.tsystems.shalamov.services.api.OrderManagementService;
+import ru.tsystems.shalamov.services.api.TruckManagementService;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.stream.Collectors;
 
 /**
  * Created by viacheslav on 01.07.2015.
@@ -23,153 +28,100 @@ import org.springframework.stereotype.Service;
 public class OrderManagementServiceImpl implements OrderManagementService {
 
     @Autowired
-    public OrderManagementServiceImpl(DriverDao driverDao, OrderDao orderDao,
-                                      TruckDao truckDao, DriverStatusDao driverStatusDao,
+    public OrderManagementServiceImpl(OrderDao orderDao,
                                       CargoDao cargoDao) {
-        this.driverDao = driverDao;
         this.orderDao = orderDao;
-        this.truckDao = truckDao;
-        this.driverStatusDao = driverStatusDao;
         this.cargoDao = cargoDao;
     }
 
-    private DriverDao driverDao;
-    private TruckDao truckDao;
-    private DriverStatusDao driverStatusDao;
     private OrderDao orderDao;
     private CargoDao cargoDao;
 
     private static final Logger LOG = Logger.getLogger(OrderManagementServiceImpl.class);
 
 
+
+
+
+
     @Override
     @Transactional
-    public void createOrder(OrderEntity order) throws ServiceLayerException {
+    public void createOrderWithCargoes(OrderModel order, List<CargoModel> cargoes) throws ServiceLayerException {
         try {
             if (orderDao.findByOrderIdentifier(order.getOrderIdentifier()) != null) {
                 throw new ServiceLayerException("Order Identifier already in use");
             }
-            orderDao.create(order);
-            LOG.info("Order created. Order Identifier: " + order.getOrderIdentifier());
-        } catch (DataAccessLayerException e) {
-            LOG.warn("Unexpected: ", e);
-            throw new ServiceLayerException(e);
-        }
-    }
+            OrderEntity orderEntity = new OrderEntity(order.getOrderIdentifier());
+            List<CargoEntity> cargoEntities = cargoes.stream()
+                    .map(c -> new CargoEntity(
+                            c.getDenomination(),
+                            c.getWeight(),
+                            c.getStatus(),
+                            orderEntity,
+                            Util.generateCargoIdentifier(
+                                    order.getOrderIdentifier(),
+                                    c.getDenomination(),
+                                    c.getWeight())
+                    )).collect(Collectors.toList());
+            cargoEntities.forEach(c -> c.setOrderEntity(orderEntity));
+            orderEntity.setCargoEntities(cargoEntities);
+            orderDao.create(orderEntity);
 
-    @Override
-    @Transactional
-    public void createOrderWithCargoes(OrderEntity order, List<CargoEntity> cargoes)
-            throws ServiceLayerException {
-        try {
-            if (orderDao.findByOrderIdentifier(order.getOrderIdentifier()) != null) {
-                throw new ServiceLayerException("Order Identifier already in use");
-            }
-            order.setCargoEntities(cargoes);
-            orderDao.create(order);
-
-            for (CargoEntity e : cargoes)
+            for (CargoEntity e : cargoEntities)
                 cargoDao.create(e);
 
             LOG.info("Order created. Order Identifier: " + order.getOrderIdentifier());
-            for (CargoEntity e : cargoes)
+
+            for (CargoEntity e : cargoEntities)
                 LOG.info("Cargo for order [" + order.getOrderIdentifier()
                         + "] created: [" + e.getDenomination() + "]");
 
         } catch (DataAccessLayerException e) {
-            LOG.warn("Unexpected: ", e);
+            LOG.warn(Util.UNEXPECTED, e);
             throw new ServiceLayerException(e);
         }
     }
 
     @Override
     @Transactional
-    public void updateOrder(OrderEntity order) throws ServiceLayerException {
-        try {
-            orderDao.update(order);
-            LOG.info("Order updated. Order Identifier(may be new): " + order.getOrderIdentifier());
-        } catch (DataAccessLayerException e) {
-            LOG.warn("Unexpected: ", e);
-            throw new ServiceLayerException(e);
-        }
-    }
+    public void updateOrder(OrderModel order, String oldOrderIdentifier) throws ServiceLayerException {
 
-    @Override
-    @Transactional
-    public List<OrderEntity> listOrders() throws ServiceLayerException {
-        try {
-            return orderDao.findAll();
-            //todo is a transaction necessary here?
-        } catch (DataAccessLayerException e) {
-            LOG.warn("Unexpected: ", e);
-            throw new ServiceLayerException(e);
-        }
-    }
+        OrderEntity orderEntity = findOrderByOrderIdentifier(oldOrderIdentifier);
 
-    @Override
-    @Transactional
-    public List<TruckEntity> findTrucksForOrder(OrderEntity order)
-            throws ServiceLayerException {
-        try {
-            return truckDao.findByMinCapacityWhereStatusOkAndNotAssignedToOrder(order.getTotalweight());
-        } catch (DataAccessLayerException e) {
-            LOG.warn("Unexpected: ", e);
-            throw new ServiceLayerException(e);
-        }
-    }
-
-    @Override
-    @Transactional
-    public List<DriverEntity> findDriversForOrder(OrderEntity order)
-            throws ServiceLayerException {
-        try {
-            return driverDao.findByMaxWorkingHoursWhereNotAssignedToOrder();
-        } catch (DataAccessLayerException e) {
-            LOG.warn("Unexpected: ", e);
-            throw new ServiceLayerException(e);
-        }
-    }
-
-    @Override
-    @Transactional
-    public void assignDriversAndTruckToOrder(List<DriverEntity> drivers,
-                                             TruckEntity truck, OrderEntity order)
-            throws ServiceLayerException {
-
-        // TODO: filter incoming drivers by status "REST".
-        // TODO: filter trucks if unassigned
-        int crewSize = truck.getCrewSize();
-        if (drivers.size() < crewSize) {
-            throw new ServiceLayerException("not enough drivers provided to assign as crew");
+        if (orderEntity == null) {
+            LOG.warn("Failed update of order + [" + oldOrderIdentifier + "]. Order does not exists.");
+            throw new ServiceLayerException("No such order.");
         }
 
-        try {
-            order.setTruckEntity(truck);
-            order.setStatus(OrderStatus.IN_PROGRESS);
-            orderDao.update(order);
-
-            drivers.subList(0, crewSize);
-
-            for (Iterator<DriverEntity> it = drivers.iterator(); it.hasNext(); ) {
-                DriverStatusEntity driverStatus = it.next().getDriverStatusEntity();
-                driverStatus.setTruckEntity(truck);
-                if (!it.hasNext()) {
-                    driverStatus.setStatus(DriverStatus.PRIMARY);
-                } else {
-                    driverStatus.setStatus(DriverStatus.AUXILIARY);
-                }
-                driverStatusDao.update(driverStatus);
+        if (!oldOrderIdentifier.equals(order.getOrderIdentifier())) {
+            if (findOrderByOrderIdentifier(order.getOrderIdentifier()) != null) {
+                LOG.warn("Fail to change order identifier. [" + order.getOrderIdentifier() + "] already exists.");
+                throw new ServiceLayerException("Fail to update order. "
+                        + "Order with new personal number already exists");
             }
+        }
 
-            String assignedDrivers = drivers.stream()
-                    .map(d -> d.getPersonalNumber())
-                    .reduce((a, b) -> a + ", " + b).get();
+        orderEntity.setOrderIdentifier(order.getOrderIdentifier());
 
-            LOG.info("Assignment: order:[" + order.getOrderIdentifier()
-                    + "] trucks:[" + truck.getRegistrationNumber()
-                    + "] drivers:{" + assignedDrivers + "}");
+        try {
+            orderDao.update(orderEntity);
+
+            LOG.info("Order updated. [" + order.getOrderIdentifier() + "] ");
         } catch (DataAccessLayerException e) {
-            LOG.warn("Unexpected: ", e);
+            LOG.warn(Util.UNEXPECTED, e);
+            throw new ServiceLayerException(e);
+        }
+    }
+
+    @Override
+    @Transactional
+    public List<OrderModel> findAllOrders() throws ServiceLayerException {
+        try {
+            return orderDao.findAll().stream()
+                    .map(o -> new OrderModel(o))
+                    .collect(Collectors.toList());
+        } catch (DataAccessLayerException e) {
+            LOG.warn(Util.UNEXPECTED, e);
             throw new ServiceLayerException(e);
         }
     }
@@ -192,19 +144,94 @@ public class OrderManagementServiceImpl implements OrderManagementService {
             }
             LOG.info("Order deleted. Order Identifier: " + order.getOrderIdentifier());
         } catch (DataAccessLayerException e) {
-            LOG.warn("Unexpected: ", e);
+            LOG.warn(Util.UNEXPECTED, e);
             throw new ServiceLayerException(e);
         }
     }
 
     @Override
     @Transactional
-    public OrderEntity findOrderByOrderIdentifier(String orderIdentifier)
+    public OrderModel findOrderModelByOrderIdentifier(String orderIdentifier) throws ServiceLayerException {
+        try {
+            return new OrderModel(orderDao.findByOrderIdentifier(orderIdentifier));
+        } catch (DataAccessLayerException e) {
+            LOG.warn(Util.UNEXPECTED, e);
+            throw new ServiceLayerException(e);
+        }
+    }
+
+
+
+
+
+
+    @Transactional
+    private OrderEntity findOrderByOrderIdentifier(String orderIdentifier)
             throws ServiceLayerException {
         try {
             return orderDao.findByOrderIdentifier(orderIdentifier);
         } catch (DataAccessLayerException e) {
-            LOG.warn("Unexpected: ", e);
+            LOG.warn(Util.UNEXPECTED, e);
+            throw new ServiceLayerException(e);
+        }
+    }
+
+    @Transactional
+    private void createOrder(OrderEntity order) throws ServiceLayerException {
+        try {
+            if (orderDao.findByOrderIdentifier(order.getOrderIdentifier()) != null) {
+                throw new ServiceLayerException("Order Identifier already in use");
+            }
+            orderDao.create(order);
+            LOG.info("Order created. Order Identifier: " + order.getOrderIdentifier());
+        } catch (DataAccessLayerException e) {
+            LOG.warn(Util.UNEXPECTED, e);
+            throw new ServiceLayerException(e);
+        }
+    }
+
+
+    @Transactional
+    private void createOrderWithCargoes(OrderEntity order, List<CargoEntity> cargoes)
+            throws ServiceLayerException {
+        try {
+            if (orderDao.findByOrderIdentifier(order.getOrderIdentifier()) != null) {
+                throw new ServiceLayerException("Order Identifier already in use");
+            }
+            order.setCargoEntities(cargoes);
+            orderDao.create(order);
+
+            for (CargoEntity e : cargoes)
+                cargoDao.create(e);
+
+            LOG.info("Order created. Order Identifier: " + order.getOrderIdentifier());
+            for (CargoEntity e : cargoes)
+                LOG.info("Cargo for order [" + order.getOrderIdentifier()
+                        + "] created: [" + e.getDenomination() + "]");
+
+        } catch (DataAccessLayerException e) {
+            LOG.warn(Util.UNEXPECTED, e);
+            throw new ServiceLayerException(e);
+        }
+    }
+
+    @Transactional
+    private void updateOrder(OrderEntity order) throws ServiceLayerException {
+        try {
+            orderDao.update(order);
+            LOG.info("Order updated. Order Identifier(may be new): " + order.getOrderIdentifier());
+        } catch (DataAccessLayerException e) {
+            LOG.warn(Util.UNEXPECTED, e);
+            throw new ServiceLayerException(e);
+        }
+    }
+
+    @Transactional
+    private List<OrderEntity> listOrders() throws ServiceLayerException {
+        try {
+            return orderDao.findAll();
+        } catch (DataAccessLayerException e) {
+            LOG.warn(Util.UNEXPECTED, e);
             throw new ServiceLayerException(e);
         }
     }

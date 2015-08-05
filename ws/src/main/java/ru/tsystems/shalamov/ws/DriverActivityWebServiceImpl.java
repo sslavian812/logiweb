@@ -5,10 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.tsystems.shalamov.entities.statuses.CargoStatus;
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 import ru.tsystems.shalamov.model.DriverAssignmentModel;
-import ru.tsystems.shalamov.services.DriverAssignment;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.DriverActivityService;
-import ru.tsystems.shalamov.services.api.DriverAssignmentService;
+import ru.tsystems.shalamov.services.api.DriverInfoService;
 
 import javax.jws.WebService;
 import javax.ws.rs.ServerErrorException;
@@ -31,7 +30,7 @@ public class DriverActivityWebServiceImpl implements DriverActivityWebService {
     DriverActivityService driverActivityService;
 
     @Autowired
-    DriverAssignmentService driverAssignmentService;
+    DriverInfoService driverAssignmentService;
     // todo: null pointer. unable to autowire.
 
 

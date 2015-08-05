@@ -16,7 +16,7 @@
 <body>
 <%@include  file="/WEB-INF/views/navBar.html" %>
 
-<form class="form-control" method="post" action="/secure/assign">
+<form class="form-control" method="post" action="/secure/assignmets/create">
     <legend>Make new assignment</legend>
     <div>
         <label>Order</label>

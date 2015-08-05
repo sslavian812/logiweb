@@ -5,6 +5,7 @@ import ru.tsystems.shalamov.services.DriverAssignment;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +35,12 @@ public class DriverAssignmentModel {
     private DriverStatus driverStatus;
 
     public DriverAssignmentModel() {
+        driverPersonalNumber=null;
+        coDrivers = new ArrayList<>();
+        truckRegistrationNumber = null;
+        orderIdentifier = null;
+        cargoes = new ArrayList<>();
+        driverStatus = DriverStatus.REST;
     }
 
 

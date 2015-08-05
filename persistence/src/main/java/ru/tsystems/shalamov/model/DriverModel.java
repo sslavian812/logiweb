@@ -35,6 +35,14 @@ public class DriverModel {
     private String truckRegistrationNumber;
 
     public DriverModel(String firstName, String lastName,
+                       String personalNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.personalNumber = personalNumber;
+        this.driverStatus = DriverStatus.REST;
+    }
+
+    public DriverModel(String firstName, String lastName,
                        String personalNumber, DriverStatus driverStatus) {
         this.firstName = firstName;
         this.lastName = lastName;

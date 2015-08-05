@@ -9,11 +9,14 @@ import ru.tsystems.shalamov.dao.api.DriverStatusDao;
 import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.entities.DriverStatusEntity;
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
+import ru.tsystems.shalamov.model.DriverModel;
 import ru.tsystems.shalamov.services.ServiceLayerException;
+import ru.tsystems.shalamov.services.Util;
 import ru.tsystems.shalamov.services.api.DriverManagementService;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by viacheslav on 01.07.2015.
@@ -52,64 +55,81 @@ public class DriverManagementServiceImpl implements DriverManagementService {
     private static final Logger LOG =
             Logger.getLogger(DriverManagementServiceImpl.class);
 
-    /**
-     * Private string constant sed to display errors.
-     */
-    private static final String UNEXPECTED = "Unexpected: ";
+
+
+
 
     @Override
     @Transactional
-    public List<DriverEntity> listDrivers() throws ServiceLayerException {
+    public List<DriverModel> findAllDrivers() throws ServiceLayerException {
         try {
-            return driverDao.findAll();
-            // todo: is the transaction necessary here?
+            return driverDao.findAll().stream()
+                    .map(d -> new DriverModel(d)).collect(Collectors.toList());
         } catch (DataAccessLayerException e) {
-            LOG.warn(UNEXPECTED, e);
+            LOG.warn(Util.UNEXPECTED, e);
             throw new ServiceLayerException(e);
         }
     }
 
     @Override
     @Transactional
-    public void addDriver(final DriverEntity driver)
-            throws ServiceLayerException {
-        validateForEmptyFields(driver);
+    public void addDriver(DriverModel driver) throws ServiceLayerException {
+        DriverEntity driverEntity = new DriverEntity(driver.getFirstName(), driver.getLastName(), driver.getPersonalNumber());
+        validateForEmptyFields(driverEntity);
 
         try {
             if (driverDao.
                     findByPersonalNumber(driver.getPersonalNumber()) != null) {
+                LOG.info("failed to create driver [" + driver.getPersonalNumber()
+                        + "]. Personal number already in use.");
                 throw new ServiceLayerException(
-                        "personal Number already in use");
+                        "personal number already in use");
             }
 
-            DriverStatusEntity driverStatus = new DriverStatusEntity(driver);
-            driverDao.create(driver);
+
+            DriverStatusEntity driverStatus = new DriverStatusEntity(driverEntity);
+            driverDao.create(driverEntity);
             driverStatusDao.create(driverStatus);
 
             LOG.info("Driver created. " + driver.getFirstName()
                     + " " + driver.getLastName()
-                    + " PN:" + driver.getPersonalNumber());
+                    + "  [" + driver.getPersonalNumber()+ "]");
 
         } catch (DataAccessLayerException e) {
-            LOG.warn(UNEXPECTED, e);
+            LOG.warn(Util.UNEXPECTED, e);
             throw new ServiceLayerException(e);
         }
     }
 
     @Override
     @Transactional
-    public void updateDriver(final DriverEntity driver)
-            throws ServiceLayerException {
-        validateForEmptyFields(driver);
+    public void updateDriver(DriverModel driver, String oldPersonalNumber) throws ServiceLayerException {
+        DriverEntity driverEntity = findDriverByPersonalNumber(oldPersonalNumber);
+
+        if (driverEntity == null) {
+            LOG.warn("Failed update of driver + ["+oldPersonalNumber+"]. Driver does not exists.");
+            throw new ServiceLayerException("No such driver.");
+        }
+
+        if ((!oldPersonalNumber.equals(driver.getPersonalNumber()))
+                && checkDriverExists(driver.getTruckRegistrationNumber())) {
+            LOG.warn("Fail to change personal number for driver. ["+driver.getPersonalNumber()+"] already exists.");
+            throw new ServiceLayerException("Fail to update driver. "
+                    + "Driver with new personal number already exists");
+        }
+
+        driverEntity.setFirstName(driver.getFirstName());
+        driverEntity.setLastName(driver.getLastName());
+        driverEntity.setPersonalNumber(driver.getPersonalNumber());
 
         try {
-            driverDao.update(driver);
+            driverDao.update(driverEntity);
 
             LOG.info("Driver updated. " + driver.getFirstName() + " "
                     + driver.getLastName()
-                    + " PN:" + driver.getPersonalNumber());
+                    + "  [" + driver.getPersonalNumber()+"]");
         } catch (DataAccessLayerException e) {
-            LOG.warn(UNEXPECTED, e);
+            LOG.warn(Util.UNEXPECTED, e);
             throw new ServiceLayerException(e);
         }
     }
@@ -125,7 +145,7 @@ public class DriverManagementServiceImpl implements DriverManagementService {
                 ServiceLayerException exc = new ServiceLayerException(
                         "No drivers with such personal number found.");
                 exc.setStackTrace(Thread.currentThread().getStackTrace());
-                LOG.warn(UNEXPECTED, exc);
+                LOG.warn(Util.UNEXPECTED, exc);
                 throw exc;
             }
 
@@ -135,7 +155,7 @@ public class DriverManagementServiceImpl implements DriverManagementService {
                 ServiceLayerException exc = new ServiceLayerException(
                         "Unable to delete driver, while processing order.");
                 exc.setStackTrace(Thread.currentThread().getStackTrace());
-                LOG.warn(UNEXPECTED, exc);
+                LOG.warn(Util.UNEXPECTED, exc);
                 throw exc;
             }
 
@@ -147,43 +167,58 @@ public class DriverManagementServiceImpl implements DriverManagementService {
                     + driver.getFirstName() + " " + driver.getLastName()
                     + " PN:" + driver.getPersonalNumber());
         } catch (DataAccessLayerException e) {
-            LOG.warn(UNEXPECTED, e);
+            LOG.warn(Util.UNEXPECTED, e);
             throw new ServiceLayerException(e);
         }
     }
 
     @Override
     @Transactional
-    public boolean checkDriverExistence(final String personalNumber)
+    public boolean checkDriverExists(final String personalNumber)
             throws ServiceLayerException {
         try {
             return driverDao.findByPersonalNumber(personalNumber) != null;
         } catch (Exception e) {
-            LOG.warn(UNEXPECTED, e);
+            LOG.warn(Util.UNEXPECTED, e);
             throw new ServiceLayerException(e);
         }
     }
 
+
     @Override
     @Transactional
-    public void updateDriverStatus(final DriverStatusEntity driverStatusEntity)
+    public DriverModel findDriverModelByPersonalNumber(String personalNumber) throws ServiceLayerException {
+
+        try {
+            return new DriverModel(driverDao.findByPersonalNumber(personalNumber));
+        } catch (DataAccessLayerException e) {
+            LOG.warn(Util.UNEXPECTED, e);
+            throw new ServiceLayerException(e);
+        }
+    }
+
+
+
+
+
+    @Transactional
+    private void updateDriverStatus(final DriverStatusEntity driverStatusEntity)
             throws ServiceLayerException {
         try {
             driverStatusDao.update(driverStatusEntity);
         } catch (DataAccessLayerException e) {
-            LOG.warn(UNEXPECTED, e);
+            LOG.warn(Util.UNEXPECTED, e);
             throw new ServiceLayerException(e);
         }
     }
 
-    @Override
     @Transactional
-    public DriverEntity findDriverByPersonalNumber(final String personalNumber)
+    private DriverEntity findDriverByPersonalNumber(final String personalNumber)
             throws ServiceLayerException {
         try {
             return driverDao.findByPersonalNumber(personalNumber);
         } catch (DataAccessLayerException e) {
-            LOG.warn(UNEXPECTED, e);
+            LOG.warn(Util.UNEXPECTED, e);
             throw new ServiceLayerException(e);
         }
     }
@@ -209,7 +244,7 @@ public class DriverManagementServiceImpl implements DriverManagementService {
                 throw new ServiceLayerException("Personal number not set.");
             }
         } catch (ServiceLayerException e) {
-            LOG.warn(UNEXPECTED, e);
+            LOG.warn(Util.UNEXPECTED, e);
             throw e;
         }
     }

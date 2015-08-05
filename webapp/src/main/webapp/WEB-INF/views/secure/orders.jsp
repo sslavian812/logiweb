@@ -39,13 +39,13 @@
                 </td>
                 <td>
                     <form method="post"
-                          action="/secure/deleteOrder?order=${order.orderIdentifier}">
+                          action="/secure/orders/delete/${order.orderIdentifier}">
                         <button type="submit" class="btn btn-danger">delete</button>
                     </form>
                 </td>
                 <td>
                     <form method="post"
-                          action="/secure/constructAssignment?orderIdentifier=${order.orderIdentifier}">
+                          action="/secure/assignmets/construct/${order.orderIdentifier}">
                         <button type="submit" class="btn btn-success">assign</button>
                     </form>
                 </td>
@@ -57,7 +57,7 @@
 
 <%--<hr>--%>
 
-<form class="form-control" id="adder" method="post" onsubmit="return validateOrderForm()" action="/secure/addOrder">
+<form class="form-control" id="adder" method="post" onsubmit="return validateOrderForm()" action="/secure/orders/add">
     <fieldset>
         <legend>Add new order</legend>
         <label>Order Identifier</label>

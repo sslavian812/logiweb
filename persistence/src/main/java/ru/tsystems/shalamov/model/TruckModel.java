@@ -1,5 +1,6 @@
 package ru.tsystems.shalamov.model;
 
+import ru.tsystems.shalamov.entities.TruckEntity;
 import ru.tsystems.shalamov.entities.statuses.TruckStatus;
 
 import javax.validation.constraints.NotNull;
@@ -35,10 +36,19 @@ public class TruckModel {
 
 
     public TruckModel(String registrationNumber, int crewSize, int capacity, TruckStatus truckStatus) {
-        this.capacity = capacity;
-        this.crewSize = crewSize;
-        this.status = truckStatus;
         this.registrationNumber = registrationNumber;
+        this.crewSize = crewSize;
+        this.capacity = capacity;
+        this.status = truckStatus;
+    }
+
+    public TruckModel(TruckEntity truckEntity)
+    {
+        this(
+                truckEntity.getRegistrationNumber(),
+                truckEntity.getCrewSize(),
+                truckEntity.getCapacity(),
+                truckEntity.getStatus());
     }
 
     public String getRegistrationNumber() {

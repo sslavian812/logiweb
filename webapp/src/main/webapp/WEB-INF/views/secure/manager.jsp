@@ -18,16 +18,16 @@
 
 <section class="container">
     <div class="login" >
-        <a href="/secure/showDrivers">
+        <a href="/secure/drivers/">
             <button type="button" class="btn btn-info btn-block submit">Drivers</button>
         </a>
-        <a href="/secure/showOrders">
+        <a href="/secure/orders/">
             <button type="button" class="btn btn-info btn-block">Orders</button>
         </a>
-        <a href="/secure/showTrucks">
+        <a href="/secure/trucks/">
             <button type="button" class="btn btn-info btn-block">Trucks</button>
         </a>
-        <a href="/secure/showAssignments">
+        <a href="/secure/assignmets/">
             <button type="button" class="btn btn-info btn-block">Assignments</button>
         </a>
     </div>

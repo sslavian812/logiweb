@@ -1,12 +1,6 @@
 package ru.tsystems.shalamov.onBoardUnit;
 
-import ru.tsystems.shalamov.entities.statuses.CargoStatus;
-import ru.tsystems.shalamov.entities.statuses.DriverStatus;
-import ru.tsystems.shalamov.model.CargoModel;
-import ru.tsystems.shalamov.model.DriverAssignmentModel;
-import ru.tsystems.shalamov.model.DriverModel;
-import ru.tsystems.shalamov.ws.DriverActivityWebService;
-import ru.tsystems.shalamov.ws.DriverActivityWebServiceImplService;
+import ru.tsystems.shalamov.ws.*;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -23,7 +17,7 @@ import java.util.stream.Collectors;
 public class DriverInfoBean {
 
     @EJB
-    DriverActivityWebServiceImplService webService; // TODO make proper DI
+    DriverActivityWebServiceImplService webService;
 
     DriverStatus driverStatus;
     String personalNumber;
@@ -39,53 +33,28 @@ public class DriverInfoBean {
         if (personalNumber == null || personalNumber.isEmpty())
             return "fail";
 
-
-        // todo это все не надо. заменить нахрен свои классы на генеренные.
-
-
         DriverActivityWebService client = webService.getDriverActivityWebServiceImplPort();
-        ru.tsystems.shalamov.ws.DriverAssignmentModel serialized = client.getDriverAssignmentInformation(personalNumber);
-
-        // todo is there a better way to convert generated data to my models??
-        DriverAssignmentModel assignment = new DriverAssignmentModel();
-
-        // converting to my model class:
-        assignment.setDriverPersonalNumber(serialized.getDriverPersonalNumber());
-        assignment.setTruckRegistrationNumber(serialized.getTruckRegistrationNumber());
-        assignment.setOrderIdentifier(serialized.getOrderIdentifier());
-        assignment.setDriverStatus(ru.tsystems.shalamov.entities.statuses.DriverStatus.valueOf(
-                serialized.getDriverStatus().value()));
-        assignment.setCoDrivers(serialized.getCoDrivers().stream()
-                .map(d -> new DriverModel(d.getFirstName(),
-                        d.getLastName(),
-                        d.getPersonalNumber(),
-                        DriverStatus.valueOf(d.getDriverStatus().value()),
-                        d.getTruckRegistrationNumber()))
-                .collect(Collectors.toList()));
-        assignment.setCargoes(serialized.getCargoes().stream()
-                .map(c -> new CargoModel(c.getCargoIdentifier(),
-                        c.getDenomination(),
-                        c.getWeight(),
-                        CargoStatus.valueOf(c.getStatus().value()),
-                        c.getOrderIdentifier()))
-                .collect(Collectors.toList()));
-
+        DriverAssignmentModel assignment = client.getDriverAssignmentInformation(personalNumber);
 
         driverStatus = assignment.getDriverStatus();
         orderIdentifier = assignment.getOrderIdentifier();
         truckRegistrationNumber = assignment.getTruckRegistrationNumber();
-        involvedDrivers = assignment.getCoDrivers().stream()
-                .map(d -> d.getPersonalNumber()).collect(Collectors.toList());
+        if (assignment.getCoDrivers() != null) {
+            involvedDrivers = assignment.getCoDrivers().stream()
+                    .map(d -> d.getPersonalNumber()).collect(Collectors.toList());
+        }
 
-        cargoesList = assignment.getCargoes().stream()
-                .map(c -> c.getCargoIdentifier()).collect(Collectors.toList());
+        if (assignment.getCargoes() != null) {
+            cargoesList = assignment.getCargoes().stream()
+                    .map(c -> c.getCargoIdentifier()).collect(Collectors.toList());
 
-        cargoesStatuses = assignment.getCargoes().stream()
-                .map(c -> c.getStatus())
-                .collect(Collectors.toList());
-
+            cargoesStatuses = assignment.getCargoes().stream()
+                    .map(c -> c.getStatus())
+                    .collect(Collectors.toList());
+        }
         return "driver";
     }
+
 
     public String swapStatus() {
         DriverActivityWebService client = webService.getDriverActivityWebServiceImplPort();
@@ -93,10 +62,8 @@ public class DriverInfoBean {
         if (driverStatus != DriverStatus.REST) {
             if (driverStatus == DriverStatus.AUXILIARY) {
                 client.driverStatusToPrimary(personalNumber);
-//                driverStatus = DriverStatus.PRIMARY;
             } else {
                 client.driverStatusToAuxiliary(personalNumber);
-//                driverStatus = DriverStatus.AUXILIARY;
             }
             getAssignmentInformation();
         }
@@ -109,10 +76,8 @@ public class DriverInfoBean {
 
         if (driverStatus == DriverStatus.REST) {
             client.shiftBegin(personalNumber);
-//            driverStatus = DriverStatus.PRIMARY;
         } else {
             client.shiftEnd(personalNumber);
-//            driverStatus = DriverStatus.REST;
         }
 
         getAssignmentInformation();

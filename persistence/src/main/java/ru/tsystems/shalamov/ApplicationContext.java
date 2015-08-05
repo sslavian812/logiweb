@@ -1,17 +1,5 @@
 package ru.tsystems.shalamov;
 
-import ru.tsystems.shalamov.dao.api.*;
-import ru.tsystems.shalamov.dao.impl.*;
-import ru.tsystems.shalamov.services.api.*;
-import ru.tsystems.shalamov.services.impl.DriverAssignmentServiceImpl;
-import ru.tsystems.shalamov.services.impl.DriverManagementServiceImpl;
-import ru.tsystems.shalamov.services.impl.OrderManagementServiceImpl;
-import ru.tsystems.shalamov.services.impl.TruckManagementServiceImpl;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 /**
  * Created by viacheslav on 04.07.2015.
  */

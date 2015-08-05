@@ -1,6 +1,7 @@
 package ru.tsystems.shalamov.services.api;
 
 import ru.tsystems.shalamov.entities.TruckEntity;
+import ru.tsystems.shalamov.model.TruckModel;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 
 import java.util.List;
@@ -16,33 +17,11 @@ import java.util.List;
  */
 public interface TruckManagementService {
 
-    /**
-     * Provides all the trucks.
-     *
-     * @return list of trucks.
-     */
-    List<TruckEntity> listTrucks() throws ServiceLayerException;
+    List<TruckModel> findAllTrucks() throws ServiceLayerException;
 
-    /**
-     * Adds a new truck.
-     *
-     * @param truck {@link ru.tsystems.shalamov.entities.TruckEntity} instance,
-     *              describing new truck. The id will be generated
-     *              Automatically.
-     */
-    void addTruck(TruckEntity truck) throws ServiceLayerException;
+    void addTruck(TruckModel truck) throws ServiceLayerException;
 
-    /**
-     * Updates information about the tuck.
-     *
-     * @param truck {@link ru.tsystems.shalamov.entities.TruckEntity} instance,
-     *              describing the truck. There should be one in the database
-     *              with the same id. Otherwise, the {@link
-     *              ru.tsystems.shalamov.services.ServiceLayerException}
-     *              will be thrown.
-     * @throws ru.tsystems.shalamov.services.ServiceLayerException if incorrect id provided.
-     */
-    void updateTruck(TruckEntity truck) throws ServiceLayerException;
+    void updateTruck(TruckModel truck, String oldRegistrationNumber) throws ServiceLayerException;
 
     /**
      * Removes Specified truck.
@@ -55,17 +34,5 @@ public interface TruckManagementService {
      */
     void deleteTruckByRegistrationNumber(String truckRegistrationNumber) throws ServiceLayerException;
 
-    TruckEntity findTruckByRegistrationNumber(String registrationNumber) throws ServiceLayerException;
-
-//    /**
-//     * Provides list of trucks, meeting following criteria:
-//     * 1) Truck is intact (not broken).
-//     * 2) Truck has sufficient capacity.
-//     * 3) Truck is not assigned on any other orders.
-//     *
-//     * @param minimalCapacity minimal capacity to handle the cargoes in order.
-//     * @return list of suitable trucks.
-//     */
-//    List<TruckEntity> findAvailableTrucks(int minimalCapacity);
-
+    TruckModel findTruckModelByRegistrationNumber(String registrationNumber) throws ServiceLayerException;
 }

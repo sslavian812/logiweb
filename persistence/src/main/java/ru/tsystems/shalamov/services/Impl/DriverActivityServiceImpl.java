@@ -39,7 +39,7 @@ public class DriverActivityServiceImpl implements DriverActivityService {
      * Log4j {@link org.apache.log4j.Logger}  for logging.
      */
     private static final Logger LOG =
-            Logger.getLogger(DriverAssignmentServiceImpl.class);
+            Logger.getLogger(DriverInfoServiceImpl.class);
 
     @Override
     @Transactional
@@ -79,7 +79,6 @@ public class DriverActivityServiceImpl implements DriverActivityService {
             if (driver == null)
                 throw new ServiceLayerException("no such driver found");
 
-//            ShiftEntity shift = shiftDao.findActiveShiftByDriver(personalNumber);
             ShiftEntity shift = shiftDao.findActiveShiftByDriver(driver);
 
             if (shift == null)

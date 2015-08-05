@@ -32,16 +32,16 @@
                 <td>${driver.firstName}</td>
                 <td>${driver.lastName}</td>
                 <td>${driver.personalNumber}</td>
-                <td>${driver.driverStatusEntity.status}</td>
+                <td>${driver.driverStatus}</td>
                 <td>
                     <form method="post"
-                          action="/secure/editDriver?personalNumber=${driver.personalNumber}">
+                          action="/secure/drivers/edit/${driver.personalNumber}">
                         <button type="submit" class="btn btn-warning">edit</button>
                     </form>
                 </td>
                 <td>
                     <form method="post"
-                          action="/secure/deleteDriver?personalNumber=${driver.personalNumber}">
+                          action="/secure/drivers/delete/${driver.personalNumber}">
                         <button type="submit" class="btn btn-danger">delete</button>
                     </form>
                 </td>
