@@ -46,6 +46,7 @@ public class TruckManagementServiceImpl implements TruckManagementService {
     }
 
     @Override
+    @Transactional
     public void addTruck(TruckModel truck) throws ServiceLayerException {
         try {
             if (truckDao.findByRegistrationNumber(truck.getRegistrationNumber()) != null) {

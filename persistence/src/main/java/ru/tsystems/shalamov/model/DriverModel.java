@@ -39,7 +39,7 @@ public class DriverModel {
         this.firstName = firstName;
         this.lastName = lastName;
         this.personalNumber = personalNumber;
-        this.driverStatus = DriverStatus.REST;
+        this.driverStatus = DriverStatus.UNASSIGNED;
     }
 
     public DriverModel(String firstName, String lastName,

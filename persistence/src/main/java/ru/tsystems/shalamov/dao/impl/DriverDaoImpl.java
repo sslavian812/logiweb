@@ -1,9 +1,11 @@
 package ru.tsystems.shalamov.dao.impl;
 
 import org.springframework.stereotype.Repository;
+import ru.tsystems.shalamov.DateUtilities;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.DriverDao;
 import ru.tsystems.shalamov.entities.DriverEntity;
+import ru.tsystems.shalamov.entities.ShiftEntity;
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 
 import javax.persistence.EntityManager;
@@ -14,7 +16,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Abstract generic DAO implementation for {@link ru.tsystems.shalamov.entities.DriverEntity}.
@@ -43,11 +47,16 @@ public class DriverDaoImpl extends GenericDaoImpl<DriverEntity> implements Drive
             TypedQuery<DriverEntity> q = em.createQuery(
                     "SELECT d FROM DriverEntity d JOIN d.driverStatusEntity s " +
                             "WHERE s.status IN :driverStatuses", DriverEntity.class);
-            q.setParameter("driverStatuses", Arrays.asList(DriverStatus.REST));
+            q.setParameter("driverStatuses", Arrays.asList(DriverStatus.UNASSIGNED));
 
-            //todo: by working hours.
+            //todo: test filtering
 
-            return q.getResultList();
+            // todo: сделать поле в базе и обновлять его при окончании смены. гораздо оптимальней.
+
+            List<DriverEntity> freeDrivers = q.getResultList();
+            freeDrivers = freeDrivers.stream()
+                    .filter(d -> hastime(d)).collect(Collectors.toList());
+            return freeDrivers;
         } catch (Exception e) {
             throw new DataAccessLayerException(e);
         }
@@ -90,5 +99,19 @@ public class DriverDaoImpl extends GenericDaoImpl<DriverEntity> implements Drive
         } catch (Exception e) {
             throw new DataAccessLayerException(e);
         }
+    }
+
+    private boolean hastime(DriverEntity driverEntity) {
+        EntityManager em = getEntityManager();
+
+        TypedQuery<ShiftEntity> q = em.createQuery(
+                "SELECT s FROM ShiftEntity s " +
+                        "WHERE s.driverEntity = :driver AND s.shiftBegin >= :month", ShiftEntity.class);
+        q.setParameter("driver", driverEntity);
+        q.setParameter("month", DateUtilities.getFirstDayOfMonthDate(new Date()));
+
+        List<ShiftEntity> shifts = q.getResultList();
+
+        return DateUtilities.getWorkingHours(shifts) < DateUtilities.MAX_HOURS;
     }
 }

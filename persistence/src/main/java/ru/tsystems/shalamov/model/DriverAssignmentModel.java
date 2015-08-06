@@ -40,7 +40,7 @@ public class DriverAssignmentModel {
         truckRegistrationNumber = null;
         orderIdentifier = null;
         cargoes = new ArrayList<>();
-        driverStatus = DriverStatus.REST;
+        driverStatus = DriverStatus.UNASSIGNED;
     }
 
 

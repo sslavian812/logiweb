@@ -27,7 +27,8 @@ public enum DriverStatus {
 
     REST,
     AUXILIARY,
-    PRIMARY;
+    PRIMARY,
+    UNASSIGNED;
 
     public String value() {
         return name();

@@ -45,7 +45,7 @@
                 </td>
                 <td>
                     <form method="post"
-                          action="/secure/assignmets/construct/${order.orderIdentifier}">
+                          action="/secure/assignments/construct/${order.orderIdentifier}">
                         <button type="submit" class="btn btn-success">assign</button>
                     </form>
                 </td>

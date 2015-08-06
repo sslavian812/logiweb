@@ -46,7 +46,7 @@ public class DriverManagementController {
 
         try {
             driverManagementService.addDriver(new DriverModel(firstName, lastName, personalNumber));
-            return new ModelAndView("redirect:/secure/showDrivers");
+            return new ModelAndView("redirect:/secure/drivers/");
         } catch (ServiceLayerException e) {
             return Util.fail("fail to add driver " + personalNumber, e.getMessage());
         }
@@ -56,7 +56,7 @@ public class DriverManagementController {
     public ModelAndView deleteDriver(@PathVariable("id") String personalNumber) {
         try {
             driverManagementService.deleteDriverByPersonalNumber(personalNumber);
-            return new ModelAndView("redirect:/secure/showDrivers");
+            return new ModelAndView("redirect:/secure/drivers/");
         } catch (ServiceLayerException e) {
             return Util.fail("fail to delete driver", e.getMessage());
         }

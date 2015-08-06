@@ -6,5 +6,6 @@ package ru.tsystems.shalamov.entities.statuses;
 public enum DriverStatus {
     REST,
     AUXILIARY,
-    PRIMARY
+    PRIMARY,
+    UNASSIGNED
 }

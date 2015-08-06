@@ -50,7 +50,7 @@ public class DriverActivityServiceImpl implements DriverActivityService {
                 throw new ServiceLayerException("no such driver found");
 
 
-            ShiftEntity shift = shiftDao.findActiveShiftByDriver(personalNumber);
+            ShiftEntity shift = shiftDao.findActiveShiftByDriver(driver);
             if (shift != null)
                 throw new ServiceLayerException("this driver is already on the shift.");
 
@@ -83,6 +83,8 @@ public class DriverActivityServiceImpl implements DriverActivityService {
 
             if (shift == null)
                 throw new ServiceLayerException("this driver has no active shift now!");
+
+            // todo meaningful exceptions are necessary
 
             Date date = new Date();
             Timestamp t = new Timestamp(date.getTime());

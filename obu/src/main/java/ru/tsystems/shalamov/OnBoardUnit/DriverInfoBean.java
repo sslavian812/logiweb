@@ -59,7 +59,7 @@ public class DriverInfoBean {
     public String swapStatus() {
         DriverActivityWebService client = webService.getDriverActivityWebServiceImplPort();
 
-        if (driverStatus != DriverStatus.REST) {
+        if (driverStatus != DriverStatus.REST && driverStatus != DriverStatus.UNASSIGNED) {
             if (driverStatus == DriverStatus.AUXILIARY) {
                 client.driverStatusToPrimary(personalNumber);
             } else {
@@ -74,10 +74,13 @@ public class DriverInfoBean {
     public String swapShift() {
         DriverActivityWebService client = webService.getDriverActivityWebServiceImplPort();
 
-        if (driverStatus == DriverStatus.REST) {
-            client.shiftBegin(personalNumber);
-        } else {
-            client.shiftEnd(personalNumber);
+
+        if(driverStatus != DriverStatus.UNASSIGNED) {
+            if (driverStatus == DriverStatus.REST) {
+                client.shiftBegin(personalNumber);
+            } else {
+                client.shiftEnd(personalNumber);
+            }
         }
 
         getAssignmentInformation();

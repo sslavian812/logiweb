@@ -20,7 +20,7 @@ import java.util.List;
  * Created by viacheslav on 10.07.2015.
  */
 @Controller
-@RequestMapping("/secure/assignmets")
+@RequestMapping("/secure/assignments")
 public class AssignmentController {
 
     @Autowired
@@ -90,7 +90,7 @@ public class AssignmentController {
 
             assignmentService.assignDriversAndTruckToOrder(availableToAssignModel);
 
-            return new ModelAndView("redirect:/secure/assignments");
+            return new ModelAndView("redirect:/secure/assignments/");
         } catch (ServiceLayerException e) {
             LOG.warn(e);
             return Util.fail("unable to show assignments", e.getMessage());

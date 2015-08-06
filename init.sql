@@ -75,7 +75,7 @@ CREATE TABLE `cargos` (
   `id`           INT(11)     NOT NULL AUTO_INCREMENT,
   `order_id`     INT(11)     NOT NULL,
   `denomination` VARCHAR(45) NOT NULL,
-  'cargo_identifier' VARCHAR(45) NOT NULL,
+  `cargo_identifier` VARCHAR(45) NOT NULL,
   `weight`       INT(11)     NOT NULL,
   `status`       VARCHAR(15) NOT NULL,
   PRIMARY KEY (`id`),

@@ -56,9 +56,6 @@ public class DriverManagementServiceImpl implements DriverManagementService {
             Logger.getLogger(DriverManagementServiceImpl.class);
 
 
-
-
-
     @Override
     @Transactional
     public List<DriverModel> findAllDrivers() throws ServiceLayerException {
@@ -74,7 +71,8 @@ public class DriverManagementServiceImpl implements DriverManagementService {
     @Override
     @Transactional
     public void addDriver(DriverModel driver) throws ServiceLayerException {
-        DriverEntity driverEntity = new DriverEntity(driver.getFirstName(), driver.getLastName(), driver.getPersonalNumber());
+        DriverEntity driverEntity = new DriverEntity(driver.getFirstName(),
+                driver.getLastName(), driver.getPersonalNumber());
         validateForEmptyFields(driverEntity);
 
         try {
@@ -93,7 +91,7 @@ public class DriverManagementServiceImpl implements DriverManagementService {
 
             LOG.info("Driver created. " + driver.getFirstName()
                     + " " + driver.getLastName()
-                    + "  [" + driver.getPersonalNumber()+ "]");
+                    + "  [" + driver.getPersonalNumber() + "]");
 
         } catch (DataAccessLayerException e) {
             LOG.warn(Util.UNEXPECTED, e);
@@ -107,13 +105,13 @@ public class DriverManagementServiceImpl implements DriverManagementService {
         DriverEntity driverEntity = findDriverByPersonalNumber(oldPersonalNumber);
 
         if (driverEntity == null) {
-            LOG.warn("Failed update of driver + ["+oldPersonalNumber+"]. Driver does not exists.");
+            LOG.warn("Failed update of driver + [" + oldPersonalNumber + "]. Driver does not exists.");
             throw new ServiceLayerException("No such driver.");
         }
 
         if ((!oldPersonalNumber.equals(driver.getPersonalNumber()))
-                && checkDriverExists(driver.getTruckRegistrationNumber())) {
-            LOG.warn("Fail to change personal number for driver. ["+driver.getPersonalNumber()+"] already exists.");
+                && findDriverByPersonalNumber(driver.getPersonalNumber()) != null) {
+            LOG.warn("Fail to change personal number for driver. [" + driver.getPersonalNumber() + "] already exists.");
             throw new ServiceLayerException("Fail to update driver. "
                     + "Driver with new personal number already exists");
         }
@@ -127,7 +125,7 @@ public class DriverManagementServiceImpl implements DriverManagementService {
 
             LOG.info("Driver updated. " + driver.getFirstName() + " "
                     + driver.getLastName()
-                    + "  [" + driver.getPersonalNumber()+"]");
+                    + "  [" + driver.getPersonalNumber() + "]");
         } catch (DataAccessLayerException e) {
             LOG.warn(Util.UNEXPECTED, e);
             throw new ServiceLayerException(e);
@@ -196,9 +194,6 @@ public class DriverManagementServiceImpl implements DriverManagementService {
             throw new ServiceLayerException(e);
         }
     }
-
-
-
 
 
     @Transactional

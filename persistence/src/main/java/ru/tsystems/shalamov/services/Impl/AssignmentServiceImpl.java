@@ -152,8 +152,15 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
                                               TruckEntity truck, OrderEntity order)
             throws ServiceLayerException {
 
-        // TODO: filter incoming drivers by status "REST".
-        // TODO: filter trucks if unassigned
+        if (truck.getDriverStatusEntities().size() != 0) {
+            throw new ServiceLayerException("truck ["
+                    + truck.getRegistrationNumber() + "] is already in use");
+        }
+
+        drivers = drivers.stream()
+                .filter(d -> d.getDriverStatusEntity().getStatus() == DriverStatus.UNASSIGNED)
+                .collect(Collectors.toList());
+
         int crewSize = truck.getCrewSize();
         if (drivers.size() < crewSize) {
             throw new ServiceLayerException("not enough drivers provided to assign as crew");
@@ -169,11 +176,7 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
             for (Iterator<DriverEntity> it = drivers.iterator(); it.hasNext(); ) {
                 DriverStatusEntity driverStatus = it.next().getDriverStatusEntity();
                 driverStatus.setTruckEntity(truck);
-                if (!it.hasNext()) {
-                    driverStatus.setStatus(DriverStatus.PRIMARY);
-                } else {
-                    driverStatus.setStatus(DriverStatus.AUXILIARY);
-                }
+                driverStatus.setStatus(DriverStatus.REST);
                 driverStatusDao.update(driverStatus);
             }
 

@@ -1,7 +1,10 @@
 package ru.tsystems.shalamov;
 
+import ru.tsystems.shalamov.entities.ShiftEntity;
+
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by viacheslav on 04.07.2015.
@@ -9,6 +12,18 @@ import java.util.Date;
 public final class DateUtilities {
 
     private DateUtilities() {
+    }
+
+    public static final float MAX_HOURS = 176;
+
+    public static float getWorkingHours(List<ShiftEntity> shifts)
+    {
+        float acc = 0;
+        for(ShiftEntity s : shifts) {
+            acc += diffInHours(s.getShiftBegin(), s.getShiftEnd());
+        }
+
+        return acc;
     }
 
     public static float diffInHours(Date startDate, Date endDate) {

@@ -51,7 +51,7 @@ public class DriverStatusEntity implements Serializable {
     }
 
     public DriverStatusEntity(DriverEntity driver) {
-        this.status = DriverStatus.REST;
+        this.status = DriverStatus.UNASSIGNED;
         this.driverEntity = driver;
         this.truckEntity = null;
         driver.setDriverStatusEntity(this);

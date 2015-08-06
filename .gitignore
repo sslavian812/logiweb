@@ -54,3 +54,6 @@ logs/info.log
 
 #target
 target/
+obu/target
+ws/target
+webapp/target

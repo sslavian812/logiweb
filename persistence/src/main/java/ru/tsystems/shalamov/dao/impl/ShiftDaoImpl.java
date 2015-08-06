@@ -68,6 +68,7 @@ public class ShiftDaoImpl extends GenericDaoImpl<ShiftEntity> implements ShiftDa
     }
 
     @Override
+    @Deprecated
     public ShiftEntity findActiveShiftByDriver(String personalNumber) throws DataAccessLayerException {
         try {
             EntityManager em = getEntityManager();
