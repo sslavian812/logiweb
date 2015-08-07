@@ -26,7 +26,7 @@ public interface DriverManagementService {
 
     void deleteDriverByPersonalNumber(String driverPersonalNumber) throws ServiceLayerException;
 
-    boolean checkDriverExists(String personalNumber) throws ServiceLayerException;
+//    boolean checkDriverExists(String personalNumber) throws ServiceLayerException;
 
 
     DriverModel findDriverModelByPersonalNumber(String personalNumber) throws ServiceLayerException;

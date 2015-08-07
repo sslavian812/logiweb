@@ -66,10 +66,12 @@ public class DriverModel {
         this.personalNumber = driverEntity.getPersonalNumber();
 
         DriverStatusEntity t = driverEntity.getDriverStatusEntity();
+        if (t == null)
+            this.driverStatus = DriverStatus.UNASSIGNED;
+        else
+            this.driverStatus = t.getStatus();
 
-        this.driverStatus = t.getStatus();
-
-        if (t.getTruckEntity() != null) {
+        if (t!= null  && t.getTruckEntity() != null) {
             this.truckRegistrationNumber = t.getTruckEntity().getRegistrationNumber();
         } else
             truckRegistrationNumber = null;
@@ -121,5 +123,20 @@ public class DriverModel {
 
     public void setTruckRegistrationNumber(String truckRegistrationNumber) {
         this.truckRegistrationNumber = truckRegistrationNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DriverModel that = (DriverModel) o;
+
+        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
+        if (personalNumber != null ? !personalNumber.equals(that.personalNumber) : that.personalNumber != null)
+            return false;
+
+        return true;
     }
 }

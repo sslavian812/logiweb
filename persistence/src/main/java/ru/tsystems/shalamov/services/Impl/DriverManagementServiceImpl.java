@@ -148,8 +148,7 @@ public class DriverManagementServiceImpl implements DriverManagementService {
             }
 
             DriverStatus status = driver.getDriverStatusEntity().getStatus();
-            if (status.equals(DriverStatus.PRIMARY)
-                    || status.equals(DriverStatus.AUXILIARY)) {
+            if (!status.equals(DriverStatus.UNASSIGNED)) {
                 ServiceLayerException exc = new ServiceLayerException(
                         "Unable to delete driver, while processing order.");
                 exc.setStackTrace(Thread.currentThread().getStackTrace());
@@ -170,17 +169,7 @@ public class DriverManagementServiceImpl implements DriverManagementService {
         }
     }
 
-    @Override
-    @Transactional
-    public boolean checkDriverExists(final String personalNumber)
-            throws ServiceLayerException {
-        try {
-            return driverDao.findByPersonalNumber(personalNumber) != null;
-        } catch (Exception e) {
-            LOG.warn(Util.UNEXPECTED, e);
-            throw new ServiceLayerException(e);
-        }
-    }
+
 
 
     @Override
@@ -213,6 +202,17 @@ public class DriverManagementServiceImpl implements DriverManagementService {
         try {
             return driverDao.findByPersonalNumber(personalNumber);
         } catch (DataAccessLayerException e) {
+            LOG.warn(Util.UNEXPECTED, e);
+            throw new ServiceLayerException(e);
+        }
+    }
+
+    @Transactional
+    private boolean checkDriverExists(final String personalNumber)
+            throws ServiceLayerException {
+        try {
+            return driverDao.findByPersonalNumber(personalNumber) != null;
+        } catch (Exception e) {
             LOG.warn(Util.UNEXPECTED, e);
             throw new ServiceLayerException(e);
         }
