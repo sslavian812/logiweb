@@ -136,7 +136,7 @@ public class OrderManagementServiceImpl implements OrderManagementService {
                 throw new ServiceLayerException("There are no orders with" +
                         " order identifier: [" + orderIdentifier + "]");
             }
-            if (order.getTruckEntity() == null)
+            if (order.getStatus() == OrderStatus.UNASSIGNED)
                 orderDao.delete(order);
             else {
                 throw new ServiceLayerException("cant delete order " +
@@ -164,7 +164,6 @@ public class OrderManagementServiceImpl implements OrderManagementService {
 
 
 
-
     @Transactional
     private OrderEntity findOrderByOrderIdentifier(String orderIdentifier)
             throws ServiceLayerException {
@@ -175,6 +174,9 @@ public class OrderManagementServiceImpl implements OrderManagementService {
             throw new ServiceLayerException(e);
         }
     }
+
+
+
 
     @Transactional
     private void createOrder(OrderEntity order) throws ServiceLayerException {

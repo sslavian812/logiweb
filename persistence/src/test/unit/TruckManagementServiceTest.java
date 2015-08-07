@@ -175,7 +175,7 @@ public class TruckManagementServiceTest {
     @Test(expected = ServiceLayerException.class)
     public void testDeletingNotExistingTruck() throws ServiceLayerException {
         try {
-            doNothing().when(truckDao).update(Mockito.any(TruckEntity.class));
+            doNothing().when(truckDao).delete(Mockito.any(TruckEntity.class));
             when(truckDao.findByRegistrationNumber(Mockito.any(String.class))).thenReturn(null);
             TruckEntity truck = new TruckEntity(1, "xx11111", 1000, TruckStatus.INTACT);
             truckManagementService.deleteTruckByRegistrationNumber(truck.getRegistrationNumber());

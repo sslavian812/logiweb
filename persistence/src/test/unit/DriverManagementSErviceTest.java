@@ -192,7 +192,7 @@ public class DriverManagementServiceTest {
     @Test(expected = ServiceLayerException.class)
     public void testDeletingNotExistingDriver() throws ServiceLayerException{
         try {
-            doNothing().when(driverDao).update(Mockito.any(DriverEntity.class));
+            doNothing().when(driverDao).delete(Mockito.any(DriverEntity.class));
             DriverEntity driver = new DriverEntity("vasia", "vaskov", "1111");
             when(driverDao.findByPersonalNumber(Mockito.any(String.class))).thenReturn(null);
             driverManagementService.deleteDriverByPersonalNumber(driver.getPersonalNumber());

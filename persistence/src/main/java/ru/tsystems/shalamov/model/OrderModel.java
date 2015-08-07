@@ -79,4 +79,18 @@ public class OrderModel {
     public void setTruckRegistrationNumber(String truckRegistrationNumber) {
         this.truckRegistrationNumber = truckRegistrationNumber;
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        OrderModel that = (OrderModel) o;
+
+        if (status != null ? !status.equals(that.status) : that.status != null) return false;
+        if (orderIdentifier != null ? !orderIdentifier.equals(that.orderIdentifier) : that.orderIdentifier != null)
+            return false;
+        return true;
+    }
 }
