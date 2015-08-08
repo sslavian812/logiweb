@@ -122,6 +122,8 @@ public class DriverInfoServiceTest {
             when(driverDao.findByPersonalNumber(Mockito.any(String.class))).thenReturn(driver1);
             when(orderDao.findByTruckId(Mockito.any(Integer.class))).thenReturn(orderEntity);
 
+            drivers.add(driver1);
+            drivers.add(driver2);
 
             when(driverDao.findByCurrentTruck(Mockito.any(Integer.class))).thenReturn(drivers);
 
@@ -131,13 +133,13 @@ public class DriverInfoServiceTest {
             Assert.assertEquals(assignmentModel.getOrderIdentifier(), orderEntity.getOrderIdentifier());
             Assert.assertEquals(assignmentModel.getTruckRegistrationNumber(), truck.getRegistrationNumber());
 
-            Assert.assertEquals(assignmentModel.getCargoes().size(), 2);
+            Assert.assertEquals(assignmentModel.getCoDrivers().size(), 2);
 
         } catch (ServiceLayerException | DataAccessLayerException e) {
             throw new RuntimeException(e);
         }
     }
-    
+
 
     // todo findAllDriverAssignments  (simple one call)
     // todo findDriverAssignmentModelByPersonalNumber (simple one call)
