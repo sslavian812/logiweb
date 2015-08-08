@@ -78,10 +78,6 @@ public class DriverInfoServiceImpl implements DriverInfoService {
             LOG.warn("Unexpected: ", e);
             throw new ServiceLayerException(e);
         }
-
-//        return findAllDriverAssignments().stream()
-//                .map(d -> new DriverAssignmentModel(d))
-//                .collect(Collectors.toList());
     }
 
     /**
@@ -105,8 +101,6 @@ public class DriverInfoServiceImpl implements DriverInfoService {
             return null;
         else
             return assignmentModel;
-
-        //return new DriverAssignmentModel(findDriverAssignmentByPersonalNumber(driverPersonalNumber));
     }
 
     @Override
@@ -199,6 +193,4 @@ public class DriverInfoServiceImpl implements DriverInfoService {
             throw new ServiceLayerException(e);
         }
     }
-
-
 }
