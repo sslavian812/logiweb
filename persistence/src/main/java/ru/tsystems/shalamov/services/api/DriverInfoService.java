@@ -25,4 +25,6 @@ public interface DriverInfoService {
     DriverAssignmentModel findDriverAssignmentModelByPersonalNumber(String driverPersonalNumber) throws ServiceLayerException;
 
     DriverAssignmentModel getPossibleInformationForDriver(String driverPersonalNumber) throws ServiceLayerException;
+
+    public DriverAssignmentModel findDriverAssignmentModelByOrderIdentifier(String orderIdentifier) throws ServiceLayerException;
 }

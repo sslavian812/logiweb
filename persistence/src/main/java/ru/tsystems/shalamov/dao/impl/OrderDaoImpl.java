@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.OrderDao;
 import ru.tsystems.shalamov.entities.OrderEntity;
+import ru.tsystems.shalamov.entities.OrderEntity_;
 import ru.tsystems.shalamov.entities.statuses.OrderStatus;
 
 import javax.persistence.EntityManager;
@@ -13,6 +14,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 /**
  * Abstract generic DAO implementation for {@link ru.tsystems.shalamov.entities.OrderEntity}.
@@ -63,6 +65,23 @@ public class OrderDaoImpl extends GenericDaoImpl<OrderEntity> implements OrderDa
                     orderEntityRoot.get("orderIdentifier"), orderIdentifier))).getSingleResult();
         } catch (NoResultException e) {
             return null;
+        } catch (Exception e) {
+            throw new DataAccessLayerException(e);
+        }
+    }
+
+    @Override
+    public List<OrderEntity> findAllUncompleted() throws DataAccessLayerException {
+        try {
+            EntityManager em = getEntityManager();
+
+            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            CriteriaQuery<OrderEntity> criteriaQuery = criteriaBuilder.createQuery(OrderEntity.class);
+
+            Root orderEntityRoot = criteriaQuery.from(OrderEntity.class);
+
+            return em.createQuery(criteriaQuery.where(
+                    criteriaBuilder.notEqual(orderEntityRoot.get(OrderEntity_.status), OrderStatus.COMPLETED))).getResultList();
         } catch (Exception e) {
             throw new DataAccessLayerException(e);
         }

@@ -97,7 +97,7 @@ public class DriverInfoServiceImpl implements DriverInfoService {
     public DriverAssignmentModel findDriverAssignmentModelByPersonalNumber(String driverPersonalNumber)
             throws ServiceLayerException {
         DriverAssignmentModel assignmentModel = getPossibleInformationForDriver(driverPersonalNumber);
-        if (assignmentModel.getTruckRegistrationNumber() == null)
+        if (assignmentModel.getTruckRegistrationNumber().equals(NONE))
             return null;
         else
             return assignmentModel;
@@ -160,7 +160,8 @@ public class DriverInfoServiceImpl implements DriverInfoService {
 
 
     @Transactional
-    private DriverAssignmentModel findDriverAssignmentModelByOrderIdentifier(
+    @Override
+    public DriverAssignmentModel findDriverAssignmentModelByOrderIdentifier(
             final String orderIdentifier) throws ServiceLayerException {
         try {
             DriverAssignmentModel driverAssignment = new DriverAssignmentModel();

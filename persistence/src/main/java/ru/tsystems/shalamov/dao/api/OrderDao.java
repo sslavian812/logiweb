@@ -3,6 +3,8 @@ package ru.tsystems.shalamov.dao.api;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.entities.OrderEntity;
 
+import java.util.List;
+
 /**
  * Introduces some domain-specific operations for {@link ru.tsystems.shalamov.entities.OrderEntity}.
  * <p/>
@@ -13,4 +15,6 @@ public interface OrderDao extends GenericDao<OrderEntity> {
     OrderEntity findByTruckId(int truckId) throws DataAccessLayerException;
 
     OrderEntity findByOrderIdentifier(String orderIdentifier) throws DataAccessLayerException;
+
+    List<OrderEntity> findAllUncompleted() throws DataAccessLayerException;
 }
