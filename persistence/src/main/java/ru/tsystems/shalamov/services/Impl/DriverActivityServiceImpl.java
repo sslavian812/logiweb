@@ -35,6 +35,13 @@ public class DriverActivityServiceImpl implements DriverActivityService {
     @Autowired
     private CargoDao cargoDao;
 
+    public DriverActivityServiceImpl(DriverDao driverDao, ShiftDao shiftDao, DriverStatusDao driverStatusDao, CargoDao cargoDao) {
+        this.driverDao = driverDao;
+        this.shiftDao = shiftDao;
+        this.driverStatusDao = driverStatusDao;
+        this.cargoDao = cargoDao;
+    }
+
     /**
      * Log4j {@link org.apache.log4j.Logger}  for logging.
      */
@@ -80,11 +87,9 @@ public class DriverActivityServiceImpl implements DriverActivityService {
                 throw new ServiceLayerException("no such driver found");
 
             ShiftEntity shift = shiftDao.findActiveShiftByDriver(driver);
-
             if (shift == null)
                 throw new ServiceLayerException("this driver has no active shift now!");
 
-            // todo meaningful exceptions are necessary
 
             Date date = new Date();
             Timestamp t = new Timestamp(date.getTime());
@@ -106,6 +111,11 @@ public class DriverActivityServiceImpl implements DriverActivityService {
             String personalNumber, DriverStatus driverStatus)
             throws ServiceLayerException {
         try {
+            if (driverStatus == DriverStatus.REST)
+                throw new ServiceLayerException("status REST is " +
+                        "not allowed to manipulate directly. End you shift first.");
+
+
             DriverEntity driver =
                     driverDao.findByPersonalNumber(personalNumber);
             if (driver == null)
@@ -113,13 +123,10 @@ public class DriverActivityServiceImpl implements DriverActivityService {
 
             DriverStatusEntity statusEntity = driver.getDriverStatusEntity();
 
-            if (driverStatus == DriverStatus.REST)
-                throw new ServiceLayerException("status REST is " +
-                        "not allowed to set directly. End you shift first.");
 
             if (statusEntity.getStatus() == DriverStatus.REST)
-                throw new ServiceLayerException("status change is not allowed."
-                        + "begin your shift first.");
+                throw new ServiceLayerException("status REST is not allowed to manipulate directly."
+                        + " Begin your shift first.");
 
             String oldStatus = statusEntity.getStatus().toString();
             statusEntity.setStatus(driverStatus);
