@@ -35,6 +35,8 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
 
     private static final Logger LOG = Logger.getLogger(AssignmentServiceImpl.class);
 
+    public static final int MAX = 10;
+
 
     @Autowired
     public AssignmentServiceImpl(DriverDao driverDao, OrderDao orderDao,
@@ -59,7 +61,7 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
             }
 
             if (!order.getStatus().equals(OrderStatus.UNASSIGNED)) {
-                throw new ServiceLayerException("Unable to assign. Order is already assigned.");
+                throw new ServiceLayerException("Order is not available to be assigned. Already Assigned.");
             }
 
             List<TruckModel> availableTrucks = findTrucksForOrder(order).stream()
@@ -68,8 +70,8 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
             List<DriverModel> availableDrivers = findDriversForOrder(order).stream()
                     .map(d -> new DriverModel(d)).collect(Collectors.toList());
 
-            availableTrucks = availableTrucks.subList(0, Math.min(10, availableTrucks.size()));
-            availableDrivers = availableDrivers.subList(0, Math.min(10, availableDrivers.size()));
+            availableTrucks = availableTrucks.subList(0, Math.min(MAX, availableTrucks.size()));
+            availableDrivers = availableDrivers.subList(0, Math.min(MAX, availableDrivers.size()));
 
             return new AvailableToAssignModel(orderIdentifier, availableDrivers, availableTrucks);
         } catch (DataAccessLayerException e) {

@@ -11,7 +11,6 @@
 
         <access-denied-handler error-page="/WEB-INF/views/403.jsp"/>
 
-        <!--<intercept-url pattern="/services**" access="permitAll" />-->
         <intercept-url pattern="/services/**" access="permitAll" />
 
         <intercept-url pattern="/resources/core/css/**" access="permitAll" />
@@ -32,16 +31,6 @@
         <remember-me />
     </http>
 
-    <!--<authentication-manager>-->
-        <!--<authentication-provider>-->
-            <!--<user-service>-->
-                <!--&lt;!&ndash;<user name="admin" password="adminium" disabled="true" authorities="ROLE_ADMIN,ROLE_MANAGER"/>&ndash;&gt;-->
-                <!--<user name="manager" password="abacaba" authorities="ROLE_MANAGER"/>-->
-                <!--&lt;!&ndash;<user name="drivers" password="driver"  disabled="true" authorities="ROLE_DRIVER"/>&ndash;&gt;-->
-            <!--</user-service>-->
-            <!--&lt;!&ndash;<password-encoder ref="encoder" />&ndash;&gt;-->
-        <!--</authentication-provider>-->
-    <!--</authentication-manager>-->
 
     <authentication-manager>
         <authentication-provider user-service-ref="userDetailsServiceImpl" >
