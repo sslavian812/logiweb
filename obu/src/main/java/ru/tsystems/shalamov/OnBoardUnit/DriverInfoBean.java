@@ -19,6 +19,9 @@ public class DriverInfoBean {
     @EJB
     DriverActivityWebServiceImplService webService;
 
+    @javax.xml.ws.WebServiceRef(DriverActivityWebServiceImplService.class)
+    DriverActivityWebService port;
+
     DriverStatus driverStatus;
     String personalNumber;
     String orderIdentifier;
@@ -33,8 +36,9 @@ public class DriverInfoBean {
         if (personalNumber == null || personalNumber.isEmpty())
             return "fail";
 
-        DriverActivityWebService client = webService.getDriverActivityWebServiceImplPort();
-        DriverAssignmentModel assignment = client.getDriverAssignmentInformation(personalNumber);
+//        DriverActivityWebService client = webService.getDriverActivityWebServiceImplPort();
+//        DriverAssignmentModel assignment = client.getDriverAssignmentInformation(personalNumber);
+        DriverAssignmentModel assignment = port.getDriverAssignmentInformation(personalNumber);
 
         driverStatus = assignment.getDriverStatus();
         orderIdentifier = assignment.getOrderIdentifier();

@@ -36,25 +36,5 @@
 
     <context:component-scan base-package="ru.tsystems.shalamov"/>
     <context:annotation-config />
-    <context:spring-configured />
-
     <tx:annotation-driven transaction-manager="transactionManager" />
-
-    <!--<bean id="roleHierarchy"-->
-                <!--class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl">-->
-        <!--<property name="hierarchy">-->
-            <!--<value>-->
-                <!--ROLE_ADMIN > ROLE_MANAGER-->
-                <!--ROLE_MANAGER > ROLE_ANONYMOUS-->
-            <!--</value>-->
-        <!--</property>-->
-    <!--</bean>-->
-
-
-    <!--<bean id="roleVoter" class="org.springframework.security.access.vote.RoleHierarchyVoter">-->
-        <!--<constructor-arg ref="roleHierarchy" />-->
-    <!--</bean>-->
-
-
-
 </beans>
