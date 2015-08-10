@@ -35,6 +35,7 @@ public class DriverActivityServiceImpl implements DriverActivityService {
     @Autowired
     private CargoDao cargoDao;
 
+    @Autowired
     public DriverActivityServiceImpl(DriverDao driverDao, ShiftDao shiftDao, DriverStatusDao driverStatusDao, CargoDao cargoDao) {
         this.driverDao = driverDao;
         this.shiftDao = shiftDao;

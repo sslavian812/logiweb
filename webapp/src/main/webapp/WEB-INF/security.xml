@@ -6,23 +6,6 @@
                  http://www.springframework.org/schema/security
                  http://www.springframework.org/schema/security/spring-security.xsd">
 
-             <!--xmlns:util="http://www.springframework.org/schema/util"-->
-             <!--xsi:schemaLocation="-->
-                 <!--http://www.springframework.org/schema/util-->
-                 <!--http://www.springframework.org/schema/util/spring-util.xsd">-->
-
-
-    <!--<http use-expressions="true" auto-config="true">-->
-        <!--<access-denied-handler error-page="/WEB-INF/views/403.jsp"/>-->
-
-        <!--<intercept-url pattern="/index" access="hasRole('ROLE_MANAGER','ROLE_ANONYMOUS')"/>-->
-        <!--<intercept-url pattern="/secure/*" access="ROLE_MANAGER"/>-->
-        <!--<form-login login-page="/login" default-target-url="/index" authentication-failure-url="/login.jsp?error=true"/>-->
-        <!--<logout logout-url="/logout" logout-success-url="/index"/>-->
-        <!--<anonymous username="guest" granted-authority="ROLE_ANONYMOUS"/>-->
-        <!--<remember-me/>-->
-    <!--</http>-->
-
     <http  use-expressions="true">
         <csrf disabled="true"/>
 
@@ -65,6 +48,21 @@
             <!--<password-encoder ref="encoder" />-->
         </authentication-provider>
     </authentication-manager>
+
+    <beans:bean id="roleHierarchy"
+          class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl">
+        <beans:property name="hierarchy">
+            <beans:value>
+                ROLE_ADMIN > ROLE_MANAGER
+                ROLE_MANAGER > ROLE_ANONYMOUS
+            </beans:value>
+        </beans:property>
+    </beans:bean>
+
+
+    <beans:bean id="roleVoter" class="org.springframework.security.access.vote.RoleHierarchyVoter">
+        <beans:constructor-arg ref="roleHierarchy" />
+    </beans:bean>
 
     <!--<beans:bean id="encoder"-->
                 <!--class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">-->
