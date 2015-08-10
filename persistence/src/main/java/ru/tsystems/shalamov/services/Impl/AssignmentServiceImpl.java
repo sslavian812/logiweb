@@ -19,7 +19,6 @@ import ru.tsystems.shalamov.services.Util;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,7 +82,6 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
     @Transactional
     public void assignDriversAndTruckToOrder(AvailableToAssignModel availableToAssignModel) throws ServiceLayerException {
         try {
-            int availableCrew = availableToAssignModel.getChosenDriverPersonalNumbers().size();
             TruckEntity truck = truckDao.findByRegistrationNumber(
                     availableToAssignModel.getChosenTruckRegistrationNumber());
 
@@ -93,11 +91,9 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
                 throw new ServiceLayerException("Unable to assign. No such truck.");
             }
 
-            int requiredCrewSize = truck.getCrewSize();
-            if (requiredCrewSize > availableCrew) {
-                LOG.warn("Insufficient crew for truck provided: " +
-                        requiredCrewSize + " vs " + truck.getCrewSize());
-                throw new ServiceLayerException("Unable to assign. Need more drivers for the truck.");
+            if (truck.getDriverStatusEntities().size() != 0) {
+                throw new ServiceLayerException("truck ["
+                        + truck.getRegistrationNumber() + "] is already in use");
             }
 
             OrderEntity order = orderDao.findByOrderIdentifier(
@@ -109,13 +105,21 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
                 throw new ServiceLayerException("unable to assign. Insufficient capacity");
             }
 
-            List<DriverEntity> drivers = new ArrayList<>(requiredCrewSize);
+            List<DriverEntity> drivers = new ArrayList<>();
 
-            for (int i = 0; i < requiredCrewSize; ++i) {
-                DriverEntity driver = driverDao.findByPersonalNumber(
-                        availableToAssignModel.getChosenDriverPersonalNumbers().get(i));
-                drivers.add(driver);
+            for (String d : availableToAssignModel.getChosenDriverPersonalNumbers()) {
+                DriverEntity driver = driverDao.findByPersonalNumber(d);
+                if (driver.getDriverStatusEntity().getStatus() == DriverStatus.UNASSIGNED)
+                    drivers.add(driver);
             }
+
+            if(drivers.size() < truck.getCrewSize()) {
+                LOG.warn("Insufficient crew for truck provided: " +
+                        drivers.size() + " instead of at least " + truck.getCrewSize());
+                throw new ServiceLayerException("not enough drivers provided to assign as crew");
+            }
+
+            drivers.subList(0, truck.getCrewSize());
 
             assignDriversAndTruckToOrder(drivers, truck, order);
         } catch (DataAccessLayerException e) {
@@ -151,30 +155,15 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
     private void assignDriversAndTruckToOrder(List<DriverEntity> drivers,
                                               TruckEntity truck, OrderEntity order)
             throws ServiceLayerException {
-
-        if (truck.getDriverStatusEntities().size() != 0) {
-            throw new ServiceLayerException("truck ["
-                    + truck.getRegistrationNumber() + "] is already in use");
-        }
-
-        drivers = drivers.stream()
-                .filter(d -> d.getDriverStatusEntity().getStatus() == DriverStatus.UNASSIGNED)
-                .collect(Collectors.toList());
-
-        int crewSize = truck.getCrewSize();
-        if (drivers.size() < crewSize) {
-            throw new ServiceLayerException("not enough drivers provided to assign as crew");
-        }
-
         try {
+
             order.setTruckEntity(truck);
             order.setStatus(OrderStatus.IN_PROGRESS);
             orderDao.update(order);
 
-            drivers.subList(0, crewSize);
 
-            for (Iterator<DriverEntity> it = drivers.iterator(); it.hasNext(); ) {
-                DriverStatusEntity driverStatus = it.next().getDriverStatusEntity();
+            for (DriverEntity d : drivers) {
+                DriverStatusEntity driverStatus = d.getDriverStatusEntity();
                 driverStatus.setTruckEntity(truck);
                 driverStatus.setStatus(DriverStatus.REST);
                 driverStatusDao.update(driverStatus);
@@ -192,6 +181,4 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
             throw new ServiceLayerException(e);
         }
     }
-
-
 }
