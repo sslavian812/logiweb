@@ -36,5 +36,13 @@ public interface DriverActivityWebService {
     void cargoStatusChangedToDelivered(@WebParam(name = "CargoIdentifier") String cargoIdentifier) throws ServiceFault;
 
     @WebMethod
+    void cargoStatusChangedToPrepared(@WebParam(name = "CargoIdentifier") String cargoIdentifier) throws ServiceFault;
+
+    @WebMethod
+    void completeOrder(@WebParam(name = "orderIdentifier") String orderIdentifier) throws ServiceFault;
+
+
+
+    @WebMethod
     DriverAssignmentModel getDriverAssignmentInformation(@WebParam(name = "PersonalNumber") String personalNumber) throws ServiceFault;
 }

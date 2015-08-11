@@ -21,6 +21,7 @@ public class DriverStatusEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private DriverStatus status;
 
+
     @OneToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "driver_id_for_status")
     private DriverEntity driverEntity;
@@ -75,6 +76,14 @@ public class DriverStatusEntity implements Serializable {
         int result = id;
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
+    }
+
+    public DriverEntity getDriverEntity() {
+        return driverEntity;
+    }
+
+    public void setDriverEntity(DriverEntity driverEntity) {
+        this.driverEntity = driverEntity;
     }
 
     public TruckEntity getTruckEntity() {

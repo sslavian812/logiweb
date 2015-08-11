@@ -4,22 +4,18 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
-import ru.tsystems.shalamov.dao.api.CargoDao;
-import ru.tsystems.shalamov.dao.api.DriverDao;
-import ru.tsystems.shalamov.dao.api.DriverStatusDao;
-import ru.tsystems.shalamov.dao.api.ShiftDao;
-import ru.tsystems.shalamov.entities.CargoEntity;
-import ru.tsystems.shalamov.entities.DriverEntity;
-import ru.tsystems.shalamov.entities.DriverStatusEntity;
-import ru.tsystems.shalamov.entities.ShiftEntity;
+import ru.tsystems.shalamov.dao.api.*;
+import ru.tsystems.shalamov.entities.*;
 import ru.tsystems.shalamov.entities.statuses.CargoStatus;
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
+import ru.tsystems.shalamov.entities.statuses.OrderStatus;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.DriverActivityService;
 
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by viacheslav on 29.07.2015.
@@ -36,12 +32,20 @@ public class DriverActivityServiceImpl implements DriverActivityService {
     private CargoDao cargoDao;
 
     @Autowired
+    private OrderDao orderDao;
+
+    public void setOrderDao(OrderDao orderDao) {
+        this.orderDao = orderDao;
+    }
+
+    @Autowired
     public DriverActivityServiceImpl(DriverDao driverDao, ShiftDao shiftDao, DriverStatusDao driverStatusDao, CargoDao cargoDao) {
         this.driverDao = driverDao;
         this.shiftDao = shiftDao;
         this.driverStatusDao = driverStatusDao;
         this.cargoDao = cargoDao;
     }
+
 
     /**
      * Log4j {@link org.apache.log4j.Logger}  for logging.
@@ -160,5 +164,38 @@ public class DriverActivityServiceImpl implements DriverActivityService {
             throw new ServiceLayerException(e);
         }
 
+    }
+
+    @Override
+    @Transactional
+    public void completeOrder(String orderIdentifier) throws ServiceLayerException {
+        try {
+
+            // todo test this methos
+            OrderEntity order = orderDao.findByOrderIdentifier(orderIdentifier);
+            if (order == null) {
+                throw new ServiceLayerException("no suck order");
+            }
+
+            if (!order.getStatus().equals(OrderStatus.IN_PROGRESS)) {
+                throw new ServiceLayerException("order has " + order.getStatus() + " status. Unable to set it to " + OrderStatus.COMPLETED);
+            }
+
+            TruckEntity truck = order.getTruckEntity();
+            List<DriverStatusEntity> driverStatuses = truck.getDriverStatusEntities();
+
+            for (DriverStatusEntity d : driverStatuses) {
+                endShift(d.getDriverEntity().getPersonalNumber());
+                d.setStatus(DriverStatus.UNASSIGNED);
+                d.setTruckEntity(null);
+            }
+
+            truck.setDriverStatusEntities(null);
+            order.setStatus(OrderStatus.COMPLETED);
+
+            LOG.info("Order [" + orderIdentifier + "] has been completed. All drivers statuses set to UNASSIGNED");
+        } catch (DataAccessLayerException e) {
+            throw new ServiceLayerException(e);
+        }
     }
 }

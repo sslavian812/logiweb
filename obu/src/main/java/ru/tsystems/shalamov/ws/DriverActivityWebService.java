@@ -26,7 +26,7 @@ public interface DriverActivityWebService {
     /**
      * 
      * @param personalNumber
-     * @throws ServiceFault
+     * @throws ru.tsystems.shalamov.ws.ServiceFault
      */
     @WebMethod
     @RequestWrapper(localName = "shiftBegin", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.ShiftBegin")
@@ -42,7 +42,7 @@ public interface DriverActivityWebService {
      * @param personalNumber
      * @return
      *     returns ru.tsystems.shalamov.ws.DriverAssignmentModel
-     * @throws ServiceFault
+     * @throws ru.tsystems.shalamov.ws.ServiceFault
      */
     @WebMethod
     @WebResult(targetNamespace = "")
@@ -56,22 +56,22 @@ public interface DriverActivityWebService {
 
     /**
      * 
-     * @param personalNumber
-     * @throws ServiceFault
+     * @param orderIdentifier
+     * @throws ru.tsystems.shalamov.ws.ServiceFault
      */
     @WebMethod
-    @RequestWrapper(localName = "shiftEnd", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.ShiftEnd")
-    @ResponseWrapper(localName = "shiftEndResponse", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.ShiftEndResponse")
-    public void shiftEnd(
-            @WebParam(name = "PersonalNumber", targetNamespace = "")
-            String personalNumber)
+    @RequestWrapper(localName = "completeOrder", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.CompleteOrder")
+    @ResponseWrapper(localName = "completeOrderResponse", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.CompleteOrderResponse")
+    public void completeOrder(
+            @WebParam(name = "orderIdentifier", targetNamespace = "")
+            String orderIdentifier)
         throws ServiceFault
     ;
 
     /**
      * 
      * @param personalNumber
-     * @throws ServiceFault
+     * @throws ru.tsystems.shalamov.ws.ServiceFault
      */
     @WebMethod
     @RequestWrapper(localName = "driverStatusToAuxiliary", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.DriverStatusToAuxiliary")
@@ -85,7 +85,35 @@ public interface DriverActivityWebService {
     /**
      * 
      * @param personalNumber
-     * @throws ServiceFault
+     * @throws ru.tsystems.shalamov.ws.ServiceFault
+     */
+    @WebMethod
+    @RequestWrapper(localName = "shiftEnd", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.ShiftEnd")
+    @ResponseWrapper(localName = "shiftEndResponse", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.ShiftEndResponse")
+    public void shiftEnd(
+            @WebParam(name = "PersonalNumber", targetNamespace = "")
+            String personalNumber)
+        throws ServiceFault
+    ;
+
+    /**
+     * 
+     * @param cargoIdentifier
+     * @throws ru.tsystems.shalamov.ws.ServiceFault
+     */
+    @WebMethod
+    @RequestWrapper(localName = "cargoStatusChangedToPrepared", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.CargoStatusChangedToPrepared")
+    @ResponseWrapper(localName = "cargoStatusChangedToPreparedResponse", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.CargoStatusChangedToPreparedResponse")
+    public void cargoStatusChangedToPrepared(
+            @WebParam(name = "CargoIdentifier", targetNamespace = "")
+            String cargoIdentifier)
+        throws ServiceFault
+    ;
+
+    /**
+     * 
+     * @param personalNumber
+     * @throws ru.tsystems.shalamov.ws.ServiceFault
      */
     @WebMethod
     @RequestWrapper(localName = "driverStatusToRest", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.DriverStatusToRest")
@@ -99,7 +127,7 @@ public interface DriverActivityWebService {
     /**
      * 
      * @param cargoIdentifier
-     * @throws ServiceFault
+     * @throws ru.tsystems.shalamov.ws.ServiceFault
      */
     @WebMethod
     @RequestWrapper(localName = "cargoStatusChangedToDelivered", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.CargoStatusChangedToDelivered")
@@ -113,7 +141,7 @@ public interface DriverActivityWebService {
     /**
      * 
      * @param cargoIdentifier
-     * @throws ServiceFault
+     * @throws ru.tsystems.shalamov.ws.ServiceFault
      */
     @WebMethod
     @RequestWrapper(localName = "cargoStatusChangedToShipped", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.CargoStatusChangedToShipped")
@@ -127,7 +155,7 @@ public interface DriverActivityWebService {
     /**
      * 
      * @param personalNumber
-     * @throws ServiceFault
+     * @throws ru.tsystems.shalamov.ws.ServiceFault
      */
     @WebMethod
     @RequestWrapper(localName = "driverStatusToPrimary", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.DriverStatusToPrimary")

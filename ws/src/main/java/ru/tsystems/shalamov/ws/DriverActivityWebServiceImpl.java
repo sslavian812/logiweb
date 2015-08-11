@@ -87,6 +87,28 @@ public class DriverActivityWebServiceImpl implements DriverActivityWebService {
     }
 
     @Override
+    public void cargoStatusChangedToPrepared(String cargoIdentifier) throws ServiceFault {
+        try {
+            driverActivityService.cargoStatusChanged(cargoIdentifier, CargoStatus.PREPARED);
+        } catch (ServiceLayerException e) {
+            LOG.warn("unable to set cargo status to PREPARED", e);
+            throw new ServiceFault("unable to set cargo status to SHIPPED", new FaultBean(), e);
+
+        }
+    }
+
+    @Override
+    public void completeOrder(String orderIdentifier) throws ServiceFault {
+        try {
+            driverActivityService.completeOrder(orderIdentifier);
+        } catch (ServiceLayerException e) {
+            LOG.warn("unable to complete order " + orderIdentifier, e);
+            throw new ServiceFault("unable to complete order " + orderIdentifier, new FaultBean(), e);
+
+        }
+    }
+
+    @Override
     public void cargoStatusChangedToShipped(String cargoIdentifier) throws ServiceFault {
         try {
             driverActivityService.cargoStatusChanged(cargoIdentifier, CargoStatus.SHIPPED);

@@ -30,4 +30,6 @@ public interface DriverActivityService {
     void endShift(String personalNumber) throws ServiceLayerException;
 
     void cargoStatusChanged(String cargoIdentifier, CargoStatus cargoStatus) throws ServiceLayerException;
+
+    void completeOrder(String orderIdentifier) throws ServiceLayerException;
 }

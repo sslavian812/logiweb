@@ -85,8 +85,6 @@ public class DriverInfoBean {
 
     public String swapShift() {
 //        DriverActivityWebService client = webService.getDriverActivityWebServiceImplPort();
-
-
         try {
             if (driverStatus != DriverStatus.UNASSIGNED) {
                 if (driverStatus == DriverStatus.REST) {
@@ -95,9 +93,7 @@ public class DriverInfoBean {
                     client.shiftEnd(personalNumber);
                 }
             }
-
             getAssignmentInformation();
-
             return "driver";
         } catch (ServiceFault serviceFault) {
             return "fail";
@@ -105,33 +101,39 @@ public class DriverInfoBean {
     }
 
     public boolean ifAllCargoesDelivered() {
+        if(driverStatus.equals(DriverStatus.UNASSIGNED))
+            return false;
         return cargoesStatuses.stream()
                 .filter(c -> !c.equals(CargoStatus.DELIVERED))
                 .collect(Collectors.toList()).size() == 0;
     }
 
-
-    public String switchCargoStatus(String cargoIdentifier)
-    {
+    public String completeOrder() {
         try {
-            for(int i=0; i< cargoesList.size(); ++i)
-            {
-                if(cargoesList.get(i).equals(cargoIdentifier))
-                {
+            client.completeOrder(orderIdentifier);
+            getAssignmentInformation();
+            return "driver";
+        } catch (ServiceFault serviceFault) {
+            return "fail";
+        }
+    }
+
+
+    public String switchCargoStatus(String cargoIdentifier) {
+        try {
+            for (int i = 0; i < cargoesList.size(); ++i) {
+                if (cargoesList.get(i).equals(cargoIdentifier)) {
                     CargoStatus currentStatus = cargoesStatuses.get(i);
-                    if(currentStatus.equals(CargoStatus.PREPARED)) {
+                    if (currentStatus.equals(CargoStatus.PREPARED)) {
                         cargoesStatuses.set(i, CargoStatus.SHIPPED);
                         client.cargoStatusChangedToShipped(cargoIdentifier);
-                    }
-                    else if(currentStatus.equals(CargoStatus.SHIPPED)) {
+                    } else if (currentStatus.equals(CargoStatus.SHIPPED)) {
                         cargoesStatuses.set(i, CargoStatus.DELIVERED);
                         client.cargoStatusChangedToDelivered(cargoIdentifier);
+                    } else if (currentStatus.equals(CargoStatus.DELIVERED)) {
+                        cargoesStatuses.set(i, CargoStatus.PREPARED);
+                        client.cargoStatusChangedToPrepared(cargoIdentifier);
                     }
-//                    else if(currentStatus.equals(CargoStatus.DELIVERED))
-//                    {
-//                        cargoesStatuses.set(i, CargoStatus.PREPARED);
-//                    client.cargoStatusChangedToPrepared(cargoIdentifier);
-//                    }
                 }
 
             }

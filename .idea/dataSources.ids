@@ -7,42 +7,37 @@
     </database-info>
     <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
     <schema name="" catalog="logiweb"/>
+    <table name="cargos" schema="" catalog="logiweb" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="order_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="denomination" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cargo_identifier" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="weight" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="status" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+    </table>
     <table name="driver_statuses" schema="" catalog="logiweb" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="status" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
       <column name="current_truck" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="driver_id_for_status" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <index name="PRIMARY" unique="true" columns="id"/>
-      <index name="current_truck_idx" unique="false" columns="current_truck"/>
-      <index name="driver_id_idx" unique="false" columns="driver_id_for_status"/>
     </table>
     <table name="drivers" schema="" catalog="logiweb" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="first_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <column name="last_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <column name="personal_number" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <exported-key name="driver_id_for_shift" table="shifts" schema="" catalog="logiweb" columns="driver_id_for_shift"/>
-      <index name="personal_number" unique="true" columns="personal_number"/>
     </table>
     <table name="orders" schema="" catalog="logiweb" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="order_identifier" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <column name="status" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
       <column name="truck" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="truck" columns="truck" ref-table="trucks" ref-schema="" ref-catalog="logiweb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="order_identifier" unique="true" columns="order_identifier"/>
-      <index name="truck_idx" unique="false" columns="truck"/>
     </table>
     <table name="shifts" schema="" catalog="logiweb" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="driver_id_for_shift" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="shift_begin" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
       <column name="shift_end" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="driver_id_for_shift" columns="driver_id_for_shift" ref-table="drivers" ref-schema="" ref-catalog="logiweb" ref-columns="id" update-rule="3" delete-rule="0" deferrability="2"/>
-      <index name="driver_id_idx" unique="false" columns="driver_id_for_shift"/>
     </table>
     <table name="trucks" schema="" catalog="logiweb" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -50,16 +45,12 @@
       <column name="registration_number" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
       <column name="capacity" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="status" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <exported-key name="truck" table="orders" schema="" catalog="logiweb" columns="truck"/>
-      <index name="registration_number" unique="true" columns="registration_number"/>
     </table>
     <table name="users" schema="" catalog="logiweb" type="TABLE">
       <column name="username" sqlType="VARCHAR" precision="12" scale="0" nullable="false" jdbcType="12"/>
       <column name="password" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
       <column name="enabled" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
       <column name="authority" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="username"/>
     </table>
   </data-source>
 </component>

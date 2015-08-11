@@ -25,17 +25,21 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _ShiftBegin_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "shiftBegin");
+    private final static QName _CargoStatusChangedToPreparedResponse_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "cargoStatusChangedToPreparedResponse");
     private final static QName _DriverStatusToPrimaryResponse_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "driverStatusToPrimaryResponse");
     private final static QName _CargoStatusChangedToShippedResponse_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "cargoStatusChangedToShippedResponse");
     private final static QName _CargoStatusChangedToDeliveredResponse_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "cargoStatusChangedToDeliveredResponse");
     private final static QName _DriverStatusToAuxiliary_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "driverStatusToAuxiliary");
     private final static QName _GetDriverAssignmentInformationResponse_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "getDriverAssignmentInformationResponse");
+    private final static QName _CargoStatusChangedToPrepared_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "cargoStatusChangedToPrepared");
     private final static QName _ShiftEndResponse_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "shiftEndResponse");
     private final static QName _CargoStatusChangedToShipped_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "cargoStatusChangedToShipped");
+    private final static QName _CompleteOrderResponse_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "completeOrderResponse");
     private final static QName _DriverStatusToPrimary_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "driverStatusToPrimary");
     private final static QName _ShiftBeginResponse_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "shiftBeginResponse");
     private final static QName _DriverStatusToAuxiliaryResponse_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "driverStatusToAuxiliaryResponse");
     private final static QName _GetDriverAssignmentInformation_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "getDriverAssignmentInformation");
+    private final static QName _CompleteOrder_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "completeOrder");
     private final static QName _ShiftEnd_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "shiftEnd");
     private final static QName _ServiceFault_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "ServiceFault");
     private final static QName _DriverStatusToRest_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "driverStatusToRest");
@@ -63,6 +67,14 @@ public class ObjectFactory {
      */
     public ShiftBegin createShiftBegin() {
         return new ShiftBegin();
+    }
+
+    /**
+     * Create an instance of {@link ru.tsystems.shalamov.ws.CargoStatusChangedToPreparedResponse }
+     * 
+     */
+    public CargoStatusChangedToPreparedResponse createCargoStatusChangedToPreparedResponse() {
+        return new CargoStatusChangedToPreparedResponse();
     }
 
     /**
@@ -98,6 +110,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ru.tsystems.shalamov.ws.CargoStatusChangedToPrepared }
+     * 
+     */
+    public CargoStatusChangedToPrepared createCargoStatusChangedToPrepared() {
+        return new CargoStatusChangedToPrepared();
+    }
+
+    /**
      * Create an instance of {@link ru.tsystems.shalamov.ws.ShiftBeginResponse }
      * 
      */
@@ -122,11 +142,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ru.tsystems.shalamov.ws.CompleteOrderResponse }
+     * 
+     */
+    public CompleteOrderResponse createCompleteOrderResponse() {
+        return new CompleteOrderResponse();
+    }
+
+    /**
      * Create an instance of {@link ru.tsystems.shalamov.ws.DriverStatusToPrimary }
      * 
      */
     public DriverStatusToPrimary createDriverStatusToPrimary() {
         return new DriverStatusToPrimary();
+    }
+
+    /**
+     * Create an instance of {@link ru.tsystems.shalamov.ws.CompleteOrder }
+     * 
+     */
+    public CompleteOrder createCompleteOrder() {
+        return new CompleteOrder();
     }
 
     /**
@@ -219,6 +255,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link javax.xml.bind.JAXBElement }{@code <}{@link ru.tsystems.shalamov.ws.CargoStatusChangedToPreparedResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://ws.shalamov.tsystems.ru/", name = "cargoStatusChangedToPreparedResponse")
+    public JAXBElement<CargoStatusChangedToPreparedResponse> createCargoStatusChangedToPreparedResponse(CargoStatusChangedToPreparedResponse value) {
+        return new JAXBElement<CargoStatusChangedToPreparedResponse>(_CargoStatusChangedToPreparedResponse_QNAME, CargoStatusChangedToPreparedResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link javax.xml.bind.JAXBElement }{@code <}{@link ru.tsystems.shalamov.ws.DriverStatusToPrimaryResponse }{@code >}}
      * 
      */
@@ -264,6 +309,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link javax.xml.bind.JAXBElement }{@code <}{@link ru.tsystems.shalamov.ws.CargoStatusChangedToPrepared }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://ws.shalamov.tsystems.ru/", name = "cargoStatusChangedToPrepared")
+    public JAXBElement<CargoStatusChangedToPrepared> createCargoStatusChangedToPrepared(CargoStatusChangedToPrepared value) {
+        return new JAXBElement<CargoStatusChangedToPrepared>(_CargoStatusChangedToPrepared_QNAME, CargoStatusChangedToPrepared.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link javax.xml.bind.JAXBElement }{@code <}{@link ru.tsystems.shalamov.ws.ShiftEndResponse }{@code >}}
      * 
      */
@@ -279,6 +333,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://ws.shalamov.tsystems.ru/", name = "cargoStatusChangedToShipped")
     public JAXBElement<CargoStatusChangedToShipped> createCargoStatusChangedToShipped(CargoStatusChangedToShipped value) {
         return new JAXBElement<CargoStatusChangedToShipped>(_CargoStatusChangedToShipped_QNAME, CargoStatusChangedToShipped.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link javax.xml.bind.JAXBElement }{@code <}{@link ru.tsystems.shalamov.ws.CompleteOrderResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://ws.shalamov.tsystems.ru/", name = "completeOrderResponse")
+    public JAXBElement<CompleteOrderResponse> createCompleteOrderResponse(CompleteOrderResponse value) {
+        return new JAXBElement<CompleteOrderResponse>(_CompleteOrderResponse_QNAME, CompleteOrderResponse.class, null, value);
     }
 
     /**
@@ -315,6 +378,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://ws.shalamov.tsystems.ru/", name = "getDriverAssignmentInformation")
     public JAXBElement<GetDriverAssignmentInformation> createGetDriverAssignmentInformation(GetDriverAssignmentInformation value) {
         return new JAXBElement<GetDriverAssignmentInformation>(_GetDriverAssignmentInformation_QNAME, GetDriverAssignmentInformation.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link javax.xml.bind.JAXBElement }{@code <}{@link ru.tsystems.shalamov.ws.CompleteOrder }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://ws.shalamov.tsystems.ru/", name = "completeOrder")
+    public JAXBElement<CompleteOrder> createCompleteOrder(CompleteOrder value) {
+        return new JAXBElement<CompleteOrder>(_CompleteOrder_QNAME, CompleteOrder.class, null, value);
     }
 
     /**

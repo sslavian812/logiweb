@@ -70,7 +70,7 @@
 
                             <c:if test="#{driverInfoBean.ifAllCargoesDelivered()}">
                                 <p></p>
-                                <h:commandButton action="#{driverInfoBean.getAssignmentInformation}"
+                                <h:commandButton action="#{driverInfoBean.completeOrder}"
                                                  value="complete: #{driverInfoBean.orderIdentifier}"/>
                             </c:if>
 
