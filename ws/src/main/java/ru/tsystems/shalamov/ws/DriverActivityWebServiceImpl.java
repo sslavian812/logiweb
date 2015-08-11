@@ -10,7 +10,6 @@ import ru.tsystems.shalamov.services.api.DriverActivityService;
 import ru.tsystems.shalamov.services.api.DriverInfoService;
 
 import javax.jws.WebService;
-import javax.ws.rs.ServerErrorException;
 
 /**
  * Created by viacheslav on 29.07.2015.
@@ -31,86 +30,92 @@ public class DriverActivityWebServiceImpl implements DriverActivityWebService {
 
     @Autowired
     DriverInfoService driverAssignmentService;
-    // todo: null pointer. unable to autowire.
 
 
     @Override
-    public void shiftBegin(String personalNumber) {
+    public void shiftBegin(String personalNumber) throws ServiceFault {
         try {
             driverActivityService.beginShift(personalNumber);
         } catch (ServiceLayerException e) {
-            LOG.warn(UNEXPECTED, e);
-            throw new ServerErrorException(406, e);
+            LOG.warn("unable to begin shift", e);
+            throw new ServiceFault("unable to begin shift", new FaultBean(), e);
         }
     }
 
     @Override
-    public void shiftEnd(String personalNumber) {
+    public void shiftEnd(String personalNumber) throws ServiceFault {
         try {
             driverActivityService.endShift(personalNumber);
         } catch (ServiceLayerException e) {
-            LOG.warn(UNEXPECTED, e);
-            throw new ServerErrorException(406, e);
+            LOG.warn("unable to end shift", e);
+            throw new ServiceFault("unable to end shift", new FaultBean(), e);
+
         }
     }
 
     @Override
-    public void driverStatusToRest(String personalNumber) {
+    public void driverStatusToRest(String personalNumber) throws ServiceFault {
         try {
             driverActivityService.driverStatusChanged(personalNumber, DriverStatus.REST);
         } catch (ServiceLayerException e) {
-            LOG.warn(UNEXPECTED, e);
-            throw new ServerErrorException(406, e);
+            LOG.warn("unable to set driver status to REST", e);
+            throw new ServiceFault("unable to set driver status to REST", new FaultBean(), e);
+
         }
     }
 
     @Override
-    public void driverStatusToPrimary(String personalNumber) {
+    public void driverStatusToPrimary(String personalNumber) throws ServiceFault {
         try {
             driverActivityService.driverStatusChanged(personalNumber, DriverStatus.PRIMARY);
         } catch (ServiceLayerException e) {
-            LOG.warn(UNEXPECTED, e);
-            throw new ServerErrorException(406, e);
+            LOG.warn("unable to set driver Status to PRIMARY", e);
+            throw new ServiceFault("unable to set driver Status to PRIMARY", new FaultBean(), e);
+
         }
     }
 
     @Override
-    public void driverStatusToAuxiliary(String personalNumber) {
+    public void driverStatusToAuxiliary(String personalNumber) throws ServiceFault {
         try {
             driverActivityService.driverStatusChanged(personalNumber, DriverStatus.AUXILIARY);
         } catch (ServiceLayerException e) {
-            LOG.warn(UNEXPECTED, e);
-            throw new ServerErrorException(406, e);
+            LOG.warn("unable to ser driver status to AUXILIARY", e);
+            throw new ServiceFault("unable to ser driver status to AUXILIARY", new FaultBean(), e);
+
         }
     }
 
     @Override
-    public void cargoStatusChangedToShipped(String cargoIdentifier) {
+    public void cargoStatusChangedToShipped(String cargoIdentifier) throws ServiceFault {
         try {
             driverActivityService.cargoStatusChanged(cargoIdentifier, CargoStatus.SHIPPED);
         } catch (ServiceLayerException e) {
-            LOG.warn(UNEXPECTED, e);
-            throw new ServerErrorException(406, e);
+            LOG.warn("unable to set cargo status to SHIPPED", e);
+            throw new ServiceFault("unable to set cargo status to SHIPPED", new FaultBean(), e);
+
         }
     }
 
     @Override
-    public void cargoStatusChangedToDelivered(String cargoIdentifier) {
+    public void cargoStatusChangedToDelivered(String cargoIdentifier) throws ServiceFault {
         try {
             driverActivityService.cargoStatusChanged(cargoIdentifier, CargoStatus.DELIVERED);
         } catch (ServiceLayerException e) {
-            LOG.warn(UNEXPECTED, e);
-            throw new ServerErrorException(406, e);
+            LOG.warn("unable to set cargo status to DELIVERED", e);
+            throw new ServiceFault("unable to set cargo status to DELIVERED", new FaultBean(), e);
+
         }
     }
 
     @Override
-    public DriverAssignmentModel getDriverAssignmentInformation(String personalNumber) {
+    public DriverAssignmentModel getDriverAssignmentInformation(String personalNumber) throws ServiceFault {
         try {
-            return driverAssignmentService.findDriverAssignmentModelByPersonalNumber(personalNumber);
+            return driverAssignmentService.getPossibleInformationForDriver(personalNumber);
         } catch (ServiceLayerException e) {
-            LOG.warn(UNEXPECTED, e);
-            throw new ServerErrorException(406, e);
+            LOG.warn("unable to get assignment information for driver", e);
+            throw new ServiceFault("unable to get assignment information for driver", new FaultBean(), e);
+
         }
     }
 }

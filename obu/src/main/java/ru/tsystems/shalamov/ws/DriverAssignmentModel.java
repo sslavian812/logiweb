@@ -102,7 +102,7 @@ public class DriverAssignmentModel {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link DriverModel }
+     * {@link ru.tsystems.shalamov.ws.DriverModel }
      * 
      * 
      */

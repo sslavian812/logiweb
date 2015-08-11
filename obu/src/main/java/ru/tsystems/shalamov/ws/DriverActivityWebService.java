@@ -26,19 +26,23 @@ public interface DriverActivityWebService {
     /**
      * 
      * @param personalNumber
+     * @throws ServiceFault
      */
     @WebMethod
     @RequestWrapper(localName = "shiftBegin", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.ShiftBegin")
     @ResponseWrapper(localName = "shiftBeginResponse", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.ShiftBeginResponse")
     public void shiftBegin(
             @WebParam(name = "PersonalNumber", targetNamespace = "")
-            String personalNumber);
+            String personalNumber)
+        throws ServiceFault
+    ;
 
     /**
      * 
      * @param personalNumber
      * @return
      *     returns ru.tsystems.shalamov.ws.DriverAssignmentModel
+     * @throws ServiceFault
      */
     @WebMethod
     @WebResult(targetNamespace = "")
@@ -46,72 +50,92 @@ public interface DriverActivityWebService {
     @ResponseWrapper(localName = "getDriverAssignmentInformationResponse", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.GetDriverAssignmentInformationResponse")
     public DriverAssignmentModel getDriverAssignmentInformation(
             @WebParam(name = "PersonalNumber", targetNamespace = "")
-            String personalNumber);
+            String personalNumber)
+        throws ServiceFault
+    ;
 
     /**
      * 
      * @param personalNumber
+     * @throws ServiceFault
      */
     @WebMethod
     @RequestWrapper(localName = "shiftEnd", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.ShiftEnd")
     @ResponseWrapper(localName = "shiftEndResponse", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.ShiftEndResponse")
     public void shiftEnd(
             @WebParam(name = "PersonalNumber", targetNamespace = "")
-            String personalNumber);
+            String personalNumber)
+        throws ServiceFault
+    ;
 
     /**
      * 
      * @param personalNumber
+     * @throws ServiceFault
      */
     @WebMethod
     @RequestWrapper(localName = "driverStatusToAuxiliary", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.DriverStatusToAuxiliary")
     @ResponseWrapper(localName = "driverStatusToAuxiliaryResponse", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.DriverStatusToAuxiliaryResponse")
     public void driverStatusToAuxiliary(
             @WebParam(name = "PersonalNumber", targetNamespace = "")
-            String personalNumber);
+            String personalNumber)
+        throws ServiceFault
+    ;
 
     /**
      * 
      * @param personalNumber
+     * @throws ServiceFault
      */
     @WebMethod
     @RequestWrapper(localName = "driverStatusToRest", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.DriverStatusToRest")
     @ResponseWrapper(localName = "driverStatusToRestResponse", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.DriverStatusToRestResponse")
     public void driverStatusToRest(
             @WebParam(name = "PersonalNumber", targetNamespace = "")
-            String personalNumber);
+            String personalNumber)
+        throws ServiceFault
+    ;
 
     /**
      * 
      * @param cargoIdentifier
+     * @throws ServiceFault
      */
     @WebMethod
     @RequestWrapper(localName = "cargoStatusChangedToDelivered", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.CargoStatusChangedToDelivered")
     @ResponseWrapper(localName = "cargoStatusChangedToDeliveredResponse", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.CargoStatusChangedToDeliveredResponse")
     public void cargoStatusChangedToDelivered(
             @WebParam(name = "CargoIdentifier", targetNamespace = "")
-            String cargoIdentifier);
+            String cargoIdentifier)
+        throws ServiceFault
+    ;
 
     /**
      * 
      * @param cargoIdentifier
+     * @throws ServiceFault
      */
     @WebMethod
     @RequestWrapper(localName = "cargoStatusChangedToShipped", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.CargoStatusChangedToShipped")
     @ResponseWrapper(localName = "cargoStatusChangedToShippedResponse", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.CargoStatusChangedToShippedResponse")
     public void cargoStatusChangedToShipped(
             @WebParam(name = "CargoIdentifier", targetNamespace = "")
-            String cargoIdentifier);
+            String cargoIdentifier)
+        throws ServiceFault
+    ;
 
     /**
      * 
      * @param personalNumber
+     * @throws ServiceFault
      */
     @WebMethod
     @RequestWrapper(localName = "driverStatusToPrimary", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.DriverStatusToPrimary")
     @ResponseWrapper(localName = "driverStatusToPrimaryResponse", targetNamespace = "http://ws.shalamov.tsystems.ru/", className = "ru.tsystems.shalamov.ws.DriverStatusToPrimaryResponse")
     public void driverStatusToPrimary(
             @WebParam(name = "PersonalNumber", targetNamespace = "")
-            String personalNumber);
+            String personalNumber)
+        throws ServiceFault
+    ;
 
 }

@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;enumeration value="REST"/>
  *     &lt;enumeration value="AUXILIARY"/>
  *     &lt;enumeration value="PRIMARY"/>
+ *     &lt;enumeration value="UNASSIGNED"/>
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>

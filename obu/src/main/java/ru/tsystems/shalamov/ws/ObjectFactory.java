@@ -37,6 +37,7 @@ public class ObjectFactory {
     private final static QName _DriverStatusToAuxiliaryResponse_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "driverStatusToAuxiliaryResponse");
     private final static QName _GetDriverAssignmentInformation_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "getDriverAssignmentInformation");
     private final static QName _ShiftEnd_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "shiftEnd");
+    private final static QName _ServiceFault_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "ServiceFault");
     private final static QName _DriverStatusToRest_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "driverStatusToRest");
     private final static QName _CargoStatusChangedToDelivered_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "cargoStatusChangedToDelivered");
     private final static QName _DriverStatusToRestResponse_QNAME = new QName("http://ws.shalamov.tsystems.ru/", "driverStatusToRestResponse");
@@ -142,6 +143,14 @@ public class ObjectFactory {
      */
     public GetDriverAssignmentInformation createGetDriverAssignmentInformation() {
         return new GetDriverAssignmentInformation();
+    }
+
+    /**
+     * Create an instance of {@link ru.tsystems.shalamov.ws.FaultBean }
+     * 
+     */
+    public FaultBean createFaultBean() {
+        return new FaultBean();
     }
 
     /**
@@ -315,6 +324,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://ws.shalamov.tsystems.ru/", name = "shiftEnd")
     public JAXBElement<ShiftEnd> createShiftEnd(ShiftEnd value) {
         return new JAXBElement<ShiftEnd>(_ShiftEnd_QNAME, ShiftEnd.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link javax.xml.bind.JAXBElement }{@code <}{@link ru.tsystems.shalamov.ws.FaultBean }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://ws.shalamov.tsystems.ru/", name = "ServiceFault")
+    public JAXBElement<FaultBean> createServiceFault(FaultBean value) {
+        return new JAXBElement<FaultBean>(_ServiceFault_QNAME, FaultBean.class, null, value);
     }
 
     /**

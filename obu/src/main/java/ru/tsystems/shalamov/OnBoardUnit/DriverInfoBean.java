@@ -20,7 +20,7 @@ public class DriverInfoBean {
     DriverActivityWebServiceImplService webService;
 
     @javax.xml.ws.WebServiceRef(DriverActivityWebServiceImplService.class)
-    DriverActivityWebService port;
+    DriverActivityWebService client;
 
     DriverStatus driverStatus;
     String personalNumber;
@@ -32,64 +32,76 @@ public class DriverInfoBean {
 
 
     public String getAssignmentInformation() {
-        // when called, PN should be already set.
-        if (personalNumber == null || personalNumber.isEmpty())
-            return "fail";
+        try {
+            // when called, PN should be already set.
+            if (personalNumber == null || personalNumber.isEmpty())
+                return "fail";
 
 //        DriverActivityWebService client = webService.getDriverActivityWebServiceImplPort();
 //        DriverAssignmentModel assignment = client.getDriverAssignmentInformation(personalNumber);
-        DriverAssignmentModel assignment = port.getDriverAssignmentInformation(personalNumber);
+            DriverAssignmentModel assignment = client.getDriverAssignmentInformation(personalNumber);
 
-        driverStatus = assignment.getDriverStatus();
-        orderIdentifier = assignment.getOrderIdentifier();
-        truckRegistrationNumber = assignment.getTruckRegistrationNumber();
-        if (assignment.getCoDrivers() != null) {
-            involvedDrivers = assignment.getCoDrivers().stream()
-                    .map(d -> d.getPersonalNumber()).collect(Collectors.toList());
+            driverStatus = assignment.getDriverStatus();
+            orderIdentifier = assignment.getOrderIdentifier();
+            truckRegistrationNumber = assignment.getTruckRegistrationNumber();
+            if (assignment.getCoDrivers() != null) {
+                involvedDrivers = assignment.getCoDrivers().stream()
+                        .map(d -> d.getPersonalNumber()).collect(Collectors.toList());
+            }
+
+            if (assignment.getCargoes() != null) {
+                cargoesList = assignment.getCargoes().stream()
+                        .map(c -> c.getCargoIdentifier()).collect(Collectors.toList());
+
+                cargoesStatuses = assignment.getCargoes().stream()
+                        .map(c -> c.getStatus())
+                        .collect(Collectors.toList());
+            }
+            return "driver";
+        } catch (ServiceFault serviceFault) {
+            return "fail";
         }
-
-        if (assignment.getCargoes() != null) {
-            cargoesList = assignment.getCargoes().stream()
-                    .map(c -> c.getCargoIdentifier()).collect(Collectors.toList());
-
-            cargoesStatuses = assignment.getCargoes().stream()
-                    .map(c -> c.getStatus())
-                    .collect(Collectors.toList());
-        }
-        return "driver";
     }
 
 
     public String swapStatus() {
-        DriverActivityWebService client = webService.getDriverActivityWebServiceImplPort();
+//        DriverActivityWebService client = webService.getDriverActivityWebServiceImplPort();
 
-        if (driverStatus != DriverStatus.REST && driverStatus != DriverStatus.UNASSIGNED) {
-            if (driverStatus == DriverStatus.AUXILIARY) {
-                client.driverStatusToPrimary(personalNumber);
-            } else {
-                client.driverStatusToAuxiliary(personalNumber);
+        try {
+            if (driverStatus != DriverStatus.REST && driverStatus != DriverStatus.UNASSIGNED) {
+                if (driverStatus == DriverStatus.AUXILIARY) {
+                    client.driverStatusToPrimary(personalNumber);
+                } else {
+                    client.driverStatusToAuxiliary(personalNumber);
+                }
+                getAssignmentInformation();
             }
-            getAssignmentInformation();
-        }
 
-        return "driver";
+            return "driver";
+        } catch (ServiceFault serviceFault) {
+            return "fail";
+        }
     }
 
     public String swapShift() {
-        DriverActivityWebService client = webService.getDriverActivityWebServiceImplPort();
+//        DriverActivityWebService client = webService.getDriverActivityWebServiceImplPort();
 
 
-        if(driverStatus != DriverStatus.UNASSIGNED) {
-            if (driverStatus == DriverStatus.REST) {
-                client.shiftBegin(personalNumber);
-            } else {
-                client.shiftEnd(personalNumber);
+        try {
+            if(driverStatus != DriverStatus.UNASSIGNED) {
+                if (driverStatus == DriverStatus.REST) {
+                    client.shiftBegin(personalNumber);
+                } else {
+                    client.shiftEnd(personalNumber);
+                }
             }
+
+            getAssignmentInformation();
+
+            return "driver";
+        } catch (ServiceFault serviceFault) {
+            return "fail";
         }
-
-        getAssignmentInformation();
-
-        return "driver";
     }
 
     public DriverStatus getDriverStatus() {
