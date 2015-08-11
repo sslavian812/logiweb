@@ -4,13 +4,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-        <head>
-            <title>Driver Information</title>
-            <link rel="stylesheet" href="/resources/core/css/bootstrap.min.css"/>
-            <link rel="stylesheet" href="/resources/core/css/style.css"/>
-        </head>
+<head>
+    <title>Driver Information</title>
+    <link rel="stylesheet" href="/resources/core/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/resources/core/css/style.css"/>
+    <link rel="stylesheet" href="/resources/core/fonts/*"/>
+</head>
 <h:body>
     <ui:param name="PN" value="#{driverInfoBean.personalNumber}"/>
 
@@ -34,8 +37,9 @@
                         </ui:repeat>
 
 
-                        <h:form  method="post">
+                        <h:form method="post">
                             <h:inputHidden value='#{driverInfoBean.personalNumber}'/>
+
                             <p class="submit">
                                 <h:commandButton action="#{driverInfoBean.swapShift}"
                                                  value="invert shift: #{driverInfoBean.driverStatus}"/>
@@ -50,12 +54,30 @@
                     </h:panelGroup>
                     <h:panelGroup layout="block" styleClass="col-sm-6">
 
-                        <p>cargoes:</p>
-                        <ui:repeat value="#{driverInfoBean.cargoesList}" var="cargo">
-                            #{cargo}
-                        </ui:repeat>
+                        <h:form method="post">
+                            <h:panelGrid columns="2" border="1">
+                                <a4j:repeat value="#{driverInfoBean.cargoesList}" var="cargo" rowKeyVar="row">
+                                    <h:panelGroup>#{cargo}</h:panelGroup>
+                                    <h:panelGroup>
+                                        <p class="submit">
+                                            <h:commandButton action="#{driverInfoBean.switchCargoStatus(cargo)}"
+                                                             value="#{driverInfoBean.cargoesStatuses.get(row)}"/>
+                                        </p>
+                                    </h:panelGroup>
+                                </a4j:repeat>
 
+                            </h:panelGrid>
+
+                            <c:if test="#{driverInfoBean.ifAllCargoesDelivered()}">
+                                <p></p>
+                                <h:commandButton action="#{driverInfoBean.getAssignmentInformation}"
+                                                 value="complete: #{driverInfoBean.orderIdentifier}"/>
+                            </c:if>
+
+                        </h:form>
                     </h:panelGroup>
+
+
                 </h:panelGroup>
             </h:panelGroup>
         </h:panelGroup>

@@ -88,7 +88,7 @@ public class DriverInfoBean {
 
 
         try {
-            if(driverStatus != DriverStatus.UNASSIGNED) {
+            if (driverStatus != DriverStatus.UNASSIGNED) {
                 if (driverStatus == DriverStatus.REST) {
                     client.shiftBegin(personalNumber);
                 } else {
@@ -98,6 +98,44 @@ public class DriverInfoBean {
 
             getAssignmentInformation();
 
+            return "driver";
+        } catch (ServiceFault serviceFault) {
+            return "fail";
+        }
+    }
+
+    public boolean ifAllCargoesDelivered() {
+        return cargoesStatuses.stream()
+                .filter(c -> !c.equals(CargoStatus.DELIVERED))
+                .collect(Collectors.toList()).size() == 0;
+    }
+
+
+    public String switchCargoStatus(String cargoIdentifier)
+    {
+        try {
+            for(int i=0; i< cargoesList.size(); ++i)
+            {
+                if(cargoesList.get(i).equals(cargoIdentifier))
+                {
+                    CargoStatus currentStatus = cargoesStatuses.get(i);
+                    if(currentStatus.equals(CargoStatus.PREPARED)) {
+                        cargoesStatuses.set(i, CargoStatus.SHIPPED);
+                        client.cargoStatusChangedToShipped(cargoIdentifier);
+                    }
+                    else if(currentStatus.equals(CargoStatus.SHIPPED)) {
+                        cargoesStatuses.set(i, CargoStatus.DELIVERED);
+                        client.cargoStatusChangedToDelivered(cargoIdentifier);
+                    }
+//                    else if(currentStatus.equals(CargoStatus.DELIVERED))
+//                    {
+//                        cargoesStatuses.set(i, CargoStatus.PREPARED);
+//                    client.cargoStatusChangedToPrepared(cargoIdentifier);
+//                    }
+                }
+
+            }
+            getAssignmentInformation();
             return "driver";
         } catch (ServiceFault serviceFault) {
             return "fail";
