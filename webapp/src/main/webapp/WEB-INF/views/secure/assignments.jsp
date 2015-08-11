@@ -22,6 +22,7 @@
         <c:forEach var="assignment" items="${assignments}">
             <tr>
                 <td>${assignment.orderIdentifier}</td>
+                <td>${assignment.orderStatus}</td>
                 <td>${assignment.truckRegistrationNumber}</td>
                 <td>
                     <c:forEach items="${assignment.coDrivers}" var="driver" varStatus="status">

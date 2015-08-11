@@ -7,6 +7,7 @@ import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.DriverDao;
 import ru.tsystems.shalamov.dao.api.OrderDao;
 import ru.tsystems.shalamov.entities.*;
+import ru.tsystems.shalamov.entities.statuses.OrderStatus;
 import ru.tsystems.shalamov.model.CargoModel;
 import ru.tsystems.shalamov.model.DriverAssignmentModel;
 import ru.tsystems.shalamov.model.DriverModel;
@@ -69,6 +70,7 @@ public class DriverInfoServiceImpl implements DriverInfoService {
                                 o.getOrderIdentifier());
 
                 if (assignment != null) {
+                    assignment.setOrderStatus(o.getStatus());
                     assignments.add(assignment);
                 }
             }
@@ -158,7 +160,6 @@ public class DriverInfoServiceImpl implements DriverInfoService {
     }
 
 
-
     @Transactional
     @Override
     public DriverAssignmentModel findDriverAssignmentModelByOrderIdentifier(
@@ -184,10 +185,14 @@ public class DriverInfoServiceImpl implements DriverInfoService {
                     .map(c -> new CargoModel(c)).collect(Collectors.toList());
             driverAssignment.setCargoes(cargoes);
 
-            List<DriverEntity> coDrivers = driverDao.findByCurrentTruck(truck.getId());
-            driverAssignment.setCoDrivers(coDrivers.stream()
-                    .map(c -> new DriverModel(c)).collect(Collectors.toList()));
-
+            // todo if-else below is not covered properly by unit tests
+            if (order.getStatus().equals(OrderStatus.IN_PROGRESS)) {
+                List<DriverEntity> coDrivers = driverDao.findByCurrentTruck(truck.getId());
+                driverAssignment.setCoDrivers(coDrivers.stream()
+                        .map(c -> new DriverModel(c)).collect(Collectors.toList()));
+            } else {
+                driverAssignment.setCoDrivers(new ArrayList<>());
+            }
             return driverAssignment;
         } catch (DataAccessLayerException e) {
             LOG.warn("Unexpected: ", e);

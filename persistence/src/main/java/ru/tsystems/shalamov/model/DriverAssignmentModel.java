@@ -1,6 +1,7 @@
 package ru.tsystems.shalamov.model;
 
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
+import ru.tsystems.shalamov.entities.statuses.OrderStatus;
 import ru.tsystems.shalamov.services.DriverAssignment;
 
 import javax.validation.constraints.NotNull;
@@ -28,6 +29,9 @@ public class DriverAssignmentModel {
 
     @Pattern(regexp = "[a-zA-Z0-9]+", message = "alphanumeric characters only")
     private String orderIdentifier;
+
+
+    private OrderStatus orderStatus;
 
     private List<CargoModel> cargoes;
 
@@ -69,6 +73,14 @@ public class DriverAssignmentModel {
 
         this.cargoes = assignment.getCargos().stream().map(c -> new CargoModel(c)).collect(Collectors.toList());
         this.coDrivers = assignment.getCoDrivers().stream().map(d -> new DriverModel(d)).collect(Collectors.toList());
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public String getDriverPersonalNumber() {

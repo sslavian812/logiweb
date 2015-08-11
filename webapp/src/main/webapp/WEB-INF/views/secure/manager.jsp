@@ -27,7 +27,7 @@
         <a href="/secure/trucks/">
             <button type="button" class="btn btn-info btn-block">Trucks</button>
         </a>
-        <a href="/secure/assignmets/">
+        <a href="/secure/assignments/">
             <button type="button" class="btn btn-info btn-block">Assignments</button>
         </a>
     </div>
