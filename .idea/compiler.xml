@@ -20,6 +20,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="core" target="1.8" />
       <module name="logiweb" target="1.8" />
       <module name="obu" target="1.8" />
       <module name="parent" target="1.8" />

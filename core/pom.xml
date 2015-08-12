@@ -16,7 +16,7 @@
     <properties>
     </properties>
 
-    <artifactId>persistence</artifactId>
+    <artifactId>core</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
 
