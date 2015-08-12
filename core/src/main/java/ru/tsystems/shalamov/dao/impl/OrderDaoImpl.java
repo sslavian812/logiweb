@@ -1,6 +1,5 @@
 package ru.tsystems.shalamov.dao.impl;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.OrderDao;
@@ -30,23 +29,27 @@ public class OrderDaoImpl extends GenericDaoImpl<OrderEntity> implements OrderDa
         super(type);
     }
 
-    public OrderDaoImpl()
-    {super();}
+    public OrderDaoImpl() {
+        super();
+    }
 
     @Override
     public OrderEntity findByTruckId(int truckId) throws DataAccessLayerException {
         try {
             EntityManager em = getEntityManager();
 
-            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-            CriteriaQuery<OrderEntity> criteriaQuery = criteriaBuilder.createQuery(OrderEntity.class);
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<OrderEntity> criteriaQuery = cb.createQuery(OrderEntity.class);
 
             Root orderEntityRoot = criteriaQuery.from(OrderEntity.class);
             Join trucks = orderEntityRoot.join("truckEntity");
 
 
-            return em.createQuery(criteriaQuery.where(criteriaBuilder.equal(orderEntityRoot.get("status"), OrderStatus.IN_PROGRESS))
-                    .where(criteriaBuilder.equal(trucks.get("id"), truckId))).getSingleResult();
+            return em.createQuery(criteriaQuery.where(
+                    cb.and(
+                            cb.equal(orderEntityRoot.get("status"), OrderStatus.IN_PROGRESS)
+                            , cb.equal(trucks.get("id"), truckId)
+                    ))).getSingleResult();
         } catch (Exception e) {
             throw new DataAccessLayerException(e);
         }

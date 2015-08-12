@@ -2,6 +2,7 @@ package ru.tsystems.shalamov.model;
 
 import ru.tsystems.shalamov.entities.CargoEntity;
 import ru.tsystems.shalamov.entities.statuses.CargoStatus;
+import ru.tsystems.shalamov.services.Util;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -17,7 +18,7 @@ public class CargoModel {
     private String cargoIdentifier;
 
     @NotNull
-    @Pattern(regexp = "[a-zA-Z0-9]+", message = "alphanumeric characters only")
+    @Pattern(regexp = "[a-zA-Z0-9 ]+", message = "alphanumeric characters only and whitespaces")
     private String denomination;
 
     @NotNull
@@ -33,6 +34,14 @@ public class CargoModel {
 
     public CargoModel(String cargoIdentifier, String denomination, int weight, CargoStatus status, String orderIdentifier) {
         this.cargoIdentifier = cargoIdentifier;
+        this.denomination = denomination;
+        this.weight = weight;
+        this.status = status;
+        this.orderIdentifier = orderIdentifier;
+    }
+
+    public CargoModel(String denomination, int weight, CargoStatus status, String orderIdentifier) {
+        this.cargoIdentifier = Util.generateCargoIdentifier(orderIdentifier, denomination, weight);
         this.denomination = denomination;
         this.weight = weight;
         this.status = status;

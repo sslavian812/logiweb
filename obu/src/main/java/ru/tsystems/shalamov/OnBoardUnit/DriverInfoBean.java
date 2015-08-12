@@ -111,8 +111,7 @@ public class DriverInfoBean {
     public String completeOrder() {
         try {
             client.completeOrder(orderIdentifier);
-            getAssignmentInformation();
-            return "driver";
+            return getAssignmentInformation();
         } catch (ServiceFault serviceFault) {
             return "fail";
         }
