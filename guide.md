@@ -1,31 +1,15 @@
 # deploy guide
 
  - git clone git@github.com:sslavian812/logiweb.git
- - run <b>init.sql</b> to create db and some fake data
-
- - add to tomcat-users.xml:
- ```xml
-    <role rolename="manager-gui"/>
- 	<role rolename="manager-script"/>
- 	<user username="admin" password="admin" roles="manager-gui,manager-script" />
- ```
-
- - add to .m2/settings.xml:
- ```xml
- <servers>
-   		<server>
- 			<id>TomcatServer</id>
- 			<username>admin</username>
- 			<password>admin</password>
- 		</server>
- </servers>
-```
+ - run <b>init.sql</b> to create db tables
 
  - <b>mvn clean install</b>
- - <b>mvn tomcat7:deploy</b>
+ - <b>mvn wildfly:deploy</b>
  
- Edit ./persistence.xml to change db connection settings.
+ Edit META_INF/persistence.xml to change db connection settings.
  
- Default case: http://localhost:8080/
- 
- P.S.: to run tests, no fake date required, but the sometimes database connection needed.
+ Default urls:
+    http://localhost:8080/   - manager's page
+    http://localhost:8080/ws/services/   - web services
+    http://localhost:8080/ws/services/activity?wsdl   - wsdl file
+    http://localhost:8080/obu/   - On Board Unit - driver's page
