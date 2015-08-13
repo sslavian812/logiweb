@@ -92,6 +92,7 @@ public class DriverActivityServiceImpl implements DriverActivityService {
                 throw new ServiceLayerException("no such driver found");
 
             ShiftEntity shift = shiftDao.findActiveShiftByDriver(driver);
+            // todo: workaround - if status is REST throw no exception, just exit.
             if (shift == null)
                 throw new ServiceLayerException("this driver has no active shift now!");
 
@@ -174,7 +175,7 @@ public class DriverActivityServiceImpl implements DriverActivityService {
             // todo test this methos
             OrderEntity order = orderDao.findByOrderIdentifier(orderIdentifier);
             if (order == null) {
-                throw new ServiceLayerException("no suck order");
+                throw new ServiceLayerException("no such order");
             }
 
             if (!order.getStatus().equals(OrderStatus.IN_PROGRESS)) {

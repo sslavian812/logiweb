@@ -18,8 +18,19 @@ import java.util.List;
  */
 public interface DriverManagementService {
 
+    /**
+     * Provides list of all drivers.
+     * @return List of {@link ru.tsystems.shalamov.model.DriverModel},
+     * aggregating information about driver.
+     * @throws ServiceLayerException if some database errors occur.
+     */
     List<DriverModel> findAllDrivers() throws ServiceLayerException;
 
+    /**
+     * Creates new Driver by specified driver model.
+     * @param driver {@link ru.tsystems.shalamov.model.DriverModel}
+     * @throws ServiceLayerException if data is inconsistent.
+     */
     void addDriver(DriverModel driver) throws ServiceLayerException;
 
     void updateDriver(DriverModel driver, String oldPersonalNumber) throws ServiceLayerException;
