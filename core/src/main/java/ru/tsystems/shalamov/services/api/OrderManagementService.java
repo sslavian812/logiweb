@@ -16,6 +16,9 @@ public interface OrderManagementService {
 
     void createOrderWithCargoes(OrderModel order, List<CargoModel> cargoes) throws ServiceLayerException;
 
+    void addCargoToOrder(String orderIdentifier, CargoModel cargo) throws ServiceLayerException;
+
+    void deleteCargo(String cargoIdentifier) throws ServiceLayerException;
 
     void updateOrder(OrderModel order, String oldOrderIdentifier) throws ServiceLayerException;
 

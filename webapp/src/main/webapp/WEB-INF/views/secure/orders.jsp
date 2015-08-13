@@ -32,8 +32,8 @@
                 <td>${order.orderIdentifier}</td>
                 <td>${order.status}</td>
                 <td>
-                    <form method="post"
-                          action="">
+                    <form method="get"
+                          action="/secure/orders/edit/${order.orderIdentifier}">
                         <button type="submit" class="btn btn-warning">edit</button>
                     </form>
                 </td>

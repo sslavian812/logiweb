@@ -87,3 +87,27 @@ function validateOrderForm() {
 
     return true;
 }
+
+function validateCargoForm() {
+    var form = document.getElementById("adder");
+
+    var cargoIdentifier = form.elements.cargoIdentifier.value;
+    var denomination = form.elements.denomination.value;
+    var weight = form.elements.weight.value;
+
+
+    if (! (/^[a-z0-9]*$/i.test(cargoIdentifier))) {
+        alert('Order identifier must be alphanumeric or empty');
+        return false;
+    }
+    if (!(/^[a-z0-9 ]+$/i.test(denomination))) {
+        alert('Input must be alphanumeric with spaces and not empty');
+        return false;
+    }
+    if (!(/^[0-9]+$/i.test(weight))) {
+        alert('weight must be numeric and not empty');
+        return false;
+    }
+
+    return true;
+}

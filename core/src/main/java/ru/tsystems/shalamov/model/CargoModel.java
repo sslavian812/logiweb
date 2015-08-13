@@ -1,6 +1,7 @@
 package ru.tsystems.shalamov.model;
 
 import ru.tsystems.shalamov.entities.CargoEntity;
+import ru.tsystems.shalamov.entities.OrderEntity;
 import ru.tsystems.shalamov.entities.statuses.CargoStatus;
 import ru.tsystems.shalamov.services.Util;
 
@@ -33,6 +34,8 @@ public class CargoModel {
 
 
     public CargoModel(String cargoIdentifier, String denomination, int weight, CargoStatus status, String orderIdentifier) {
+        if (cargoIdentifier == null)
+            cargoIdentifier = Util.generateCargoIdentifier(orderIdentifier, denomination, weight);
         this.cargoIdentifier = cargoIdentifier;
         this.denomination = denomination;
         this.weight = weight;
@@ -56,6 +59,10 @@ public class CargoModel {
                 cargoEntity.getStatus(),
                 cargoEntity.getOrderEntity().getOrderIdentifier()
         );
+    }
+
+    public CargoEntity getEntity(OrderEntity order) {
+        return new CargoEntity(denomination, weight, status, order, cargoIdentifier);
     }
 
     public String getCargoIdentifier() {

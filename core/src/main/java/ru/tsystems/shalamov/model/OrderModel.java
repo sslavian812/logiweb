@@ -6,6 +6,7 @@ import ru.tsystems.shalamov.entities.statuses.OrderStatus;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by viacheslav on 22.06.2015.
@@ -21,6 +22,10 @@ public class OrderModel {
     public OrderModel(OrderEntity orderEntity) {
         this.orderIdentifier = orderEntity.getOrderIdentifier();
         this.status = orderEntity.getStatus();
+        this.cargoes = orderEntity.getCargoEntities().stream()
+                .map(c -> new CargoModel(c)).collect(Collectors.toList());
+        if(orderEntity.getTruckEntity()!= null)
+            this.truckRegistrationNumber = orderEntity.getTruckEntity().getRegistrationNumber();
     }
 
     @NotNull

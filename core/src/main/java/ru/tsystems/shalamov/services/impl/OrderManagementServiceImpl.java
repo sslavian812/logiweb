@@ -4,20 +4,18 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
-import ru.tsystems.shalamov.dao.api.*;
-import ru.tsystems.shalamov.entities.*;
-import ru.tsystems.shalamov.entities.statuses.DriverStatus;
+import ru.tsystems.shalamov.dao.api.CargoDao;
+import ru.tsystems.shalamov.dao.api.OrderDao;
+import ru.tsystems.shalamov.entities.CargoEntity;
+import ru.tsystems.shalamov.entities.OrderEntity;
 import ru.tsystems.shalamov.entities.statuses.OrderStatus;
-import ru.tsystems.shalamov.model.*;
+import ru.tsystems.shalamov.model.CargoModel;
+import ru.tsystems.shalamov.model.OrderModel;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.Util;
-import ru.tsystems.shalamov.services.api.DriverManagementService;
 import ru.tsystems.shalamov.services.api.OrderManagementService;
-import ru.tsystems.shalamov.services.api.TruckManagementService;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,10 +36,6 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     private CargoDao cargoDao;
 
     private static final Logger LOG = Logger.getLogger(OrderManagementServiceImpl.class);
-
-
-
-
 
 
     @Override
@@ -84,12 +78,67 @@ public class OrderManagementServiceImpl implements OrderManagementService {
 
     @Override
     @Transactional
+    public void addCargoToOrder(String orderIdentifier, CargoModel cargo) throws ServiceLayerException {
+        // todo test this method
+        try {
+            OrderEntity orderEntity = findOrderByOrderIdentifier(orderIdentifier);
+
+            if (orderEntity == null) {
+                LOG.warn("Failed adding Cargo To order [" + orderIdentifier + "]. Order does not exists.");
+                throw new ServiceLayerException("No such order.");
+            }
+
+            if (!orderEntity.getStatus().equals(OrderStatus.UNASSIGNED)) {
+                LOG.warn("Failed adding Cargo To order  [" + orderIdentifier + "]. Order is already assigned.");
+                throw new ServiceLayerException("Order is already assigned.");
+            }
+
+            CargoEntity cargoEntity = cargo.getEntity(orderEntity);
+            cargoDao.create(cargoEntity);
+            orderEntity.getCargoEntities().add(cargoEntity);
+            orderDao.update(orderEntity);
+        } catch (DataAccessLayerException e) {
+            LOG.warn(Util.UNEXPECTED, e);
+            throw new ServiceLayerException(e);
+        }
+
+    }
+
+    @Override
+    @Transactional
+    public void deleteCargo(String cargoIdentifier) throws ServiceLayerException {
+        // todo test this method
+        try {
+            CargoEntity cargoEntity = cargoDao.findCargoByCargoIdentifier(cargoIdentifier);
+
+            if (cargoEntity == null) {
+                LOG.warn("Failed deleting cargo [" + cargoIdentifier + "]. Cargo does not exists.");
+                throw new ServiceLayerException("No such cargo.");
+            }
+            OrderEntity orderEntity = cargoEntity.getOrderEntity();
+
+            if (!orderEntity.getStatus().equals(OrderStatus.UNASSIGNED)) {
+                LOG.warn("Failed deleting cargo [" +cargoIdentifier + "] from order. Order is already assigned.");
+                throw new ServiceLayerException("Order is already assigned.");
+            }
+
+            orderEntity.getCargoEntities().remove(cargoEntity);
+            orderDao.update(orderEntity);
+            cargoDao.delete(cargoEntity);
+        } catch (DataAccessLayerException e) {
+            LOG.warn(Util.UNEXPECTED, e);
+            throw new ServiceLayerException(e);
+        }
+    }
+
+    @Override
+    @Transactional
     public void updateOrder(OrderModel order, String oldOrderIdentifier) throws ServiceLayerException {
 
         OrderEntity orderEntity = findOrderByOrderIdentifier(oldOrderIdentifier);
 
         if (orderEntity == null) {
-            LOG.warn("Failed update of order + [" + oldOrderIdentifier + "]. Order does not exists.");
+            LOG.warn("Failed update of order [" + oldOrderIdentifier + "]. Order does not exists.");
             throw new ServiceLayerException("No such order.");
         }
 
@@ -161,9 +210,6 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     }
 
 
-
-
-
     @Transactional
     private OrderEntity findOrderByOrderIdentifier(String orderIdentifier)
             throws ServiceLayerException {
@@ -174,8 +220,6 @@ public class OrderManagementServiceImpl implements OrderManagementService {
             throw new ServiceLayerException(e);
         }
     }
-
-
 
 
     @Transactional

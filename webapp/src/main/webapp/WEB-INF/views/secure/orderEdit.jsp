@@ -1,0 +1,73 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: viacheslav
+  Date: 12.07.2015
+  Time: 0:12
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Edit order</title>
+    <link rel="stylesheet" href="/resources/core/css/bootstrap.min.css">
+</head>
+<body>
+<%@include file="/WEB-INF/views/navBar.html" %>
+<script src="/resources/core/js/validation.js"></script>
+
+<legend>Edit order: ${order.orderIdentifier}</legend>
+
+<label>Old order identifier:</label>
+<input type="text" name="oldOrderIdentifier" value="${order.orderIdentifier}" readonly>
+<br>
+
+
+<table class="table table-striped">
+    <tr>
+        <td>cargo identifier</td>
+        <td>cargo denomination</td>
+        <td>cargo weight(kg)</td>
+        <td>
+            delete
+        </td>
+    </tr>
+
+    <c:forEach var="cargo" items="${cargoes}">
+        <tr>
+            <td>${cargo.cargoIdentifier}</td>
+            <td>${cargo.denomination}</td>
+            <td>${cargo.weight}</td>
+            <td>
+                <form method="post"
+                      action="/secure/orders/${order.orderIdentifier}/cargo/delete/${cargo.cargoIdentifier}">
+                    <button type="submit" class="btn btn-danger">delete</button>
+                </form>
+            </td>
+        </tr>
+    </c:forEach>
+
+    <form method="post" id="adder" onsubmit="return validateCargoForm()"
+          action="/secure/orders/add/${order.orderIdentifier}/cargo">
+        <tr>
+            <td>
+                <input type="text" value="" name="cargoIdentifier">
+            </td>
+            <td>
+                <input type="text" value="" name="denomination">
+            </td>
+            <td>
+                <input type="text" value="" name="weight">
+            </td>
+            <td>
+                <button type="submit" class="btn btn-success">add</button>
+            </td>
+        </tr>
+    </form>
+
+</table>
+
+
+</body>
+</html>

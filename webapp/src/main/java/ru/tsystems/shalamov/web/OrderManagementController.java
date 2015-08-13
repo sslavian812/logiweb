@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ru.tsystems.shalamov.entities.CargoEntity;
-import ru.tsystems.shalamov.entities.OrderEntity;
 import ru.tsystems.shalamov.entities.statuses.CargoStatus;
 import ru.tsystems.shalamov.model.CargoModel;
 import ru.tsystems.shalamov.model.OrderModel;
@@ -51,7 +49,7 @@ public class OrderManagementController {
 
         List<CargoModel> cargoes = new ArrayList<>();
         OrderModel orderModel = new OrderModel(orderIdentifier);
-        cargoes.add(new CargoModel(denomination+weight, denomination, weight, CargoStatus.PREPARED,
+        cargoes.add(new CargoModel(denomination + weight, denomination, weight, CargoStatus.PREPARED,
                 orderIdentifier));
         try {
             orderManagementService.createOrderWithCargoes(orderModel, cargoes);
@@ -71,10 +69,59 @@ public class OrderManagementController {
         }
     }
 
+    @RequestMapping(value = "/{order}/cargo/delete/{cargo}", method = RequestMethod.POST)
+    public ModelAndView deleteCargo(@PathVariable("order") String orderIdentifier,
+            @PathVariable("cargo") String cargoIdentifier) {
+        try {
+            orderManagementService.deleteCargo(cargoIdentifier);
+            return new ModelAndView("redirect:/secure/orders/edit/" + orderIdentifier);
+        } catch (ServiceLayerException e) {
+            return Util.fail("fail to delete cargo " + cargoIdentifier, e.getMessage());
+        }
+    }
 
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView editOrder(@PathVariable("id") String orderIdentifier) {
-            return Util.fail("not implemented", "");
+        try {
+            OrderModel order = orderManagementService.findOrderModelByOrderIdentifier(orderIdentifier);
+            if (order == null) {
+                throw new ServiceLayerException("No such order");
+            }
+            ModelAndView mav = new ModelAndView("/secure/orderEdit");
+            mav.addObject("order", order);
+            mav.addObject("cargoes", order.getCargoes());
+            return mav;
+        } catch (ServiceLayerException e) {
+            return Util.fail("fail to edit order", e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/add/{id}/cargo", method = RequestMethod.POST)
+    public ModelAndView addCargo(@PathVariable("id") String orderIdentifier,
+                                 HttpServletRequest request, HttpServletResponse response) {
+        try {
+            OrderModel order = orderManagementService.findOrderModelByOrderIdentifier(orderIdentifier);
+            if (order == null) {
+                throw new ServiceLayerException("No such order");
+            }
+
+            String cargoIdentifier = request.getParameter("cargoIdentifier");
+            String denomination = request.getParameter("denomination");
+            int weight = Integer.parseInt(request.getParameter("weight"));
+
+            if (cargoIdentifier.isEmpty())
+                cargoIdentifier = null;
+
+            orderManagementService.addCargoToOrder(orderIdentifier,
+                    new CargoModel(cargoIdentifier,
+                            denomination, weight,
+                            CargoStatus.PREPARED, orderIdentifier));
+
+            return new ModelAndView("redirect:/secure/orders/edit/" + orderIdentifier);
+        } catch (ServiceLayerException e) {
+            return Util.fail("fail to edit order", e.getMessage());
+        }
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
