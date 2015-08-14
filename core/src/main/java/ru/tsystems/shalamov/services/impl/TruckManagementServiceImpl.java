@@ -112,7 +112,7 @@ public class TruckManagementServiceImpl implements TruckManagementService {
                 LOG.debug("Unexpected: trying to delete not existing truck ", exc);
                 throw exc;
             }
-            // todo: figure out, why sometimes truck.getDriverStatusEntities may produce null;
+
             if (truck.getDriverStatusEntities() != null && truck.getDriverStatusEntities().size() != 0) {
                 ServiceLayerException exc = new ServiceLayerException(
                         "Unable to delete truck with trucks assigned to it. Drivers should be unassigned first.");
@@ -134,7 +134,10 @@ public class TruckManagementServiceImpl implements TruckManagementService {
     @Transactional
     public TruckModel findTruckModelByRegistrationNumber(String registrationNumber) throws ServiceLayerException {
         try {
-            return new TruckModel(truckDao.findByRegistrationNumber(registrationNumber));
+            TruckEntity truckEntity = truckDao.findByRegistrationNumber(registrationNumber);
+            if (truckEntity == null)
+                return null;
+            return new TruckModel(truckEntity);
         } catch (DataAccessLayerException e) {
             LOG.warn(Util.UNEXPECTED, e);
             throw new ServiceLayerException(e);

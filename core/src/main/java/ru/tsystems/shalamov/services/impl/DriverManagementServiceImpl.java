@@ -170,14 +170,14 @@ public class DriverManagementServiceImpl implements DriverManagementService {
     }
 
 
-
-
     @Override
     @Transactional
     public DriverModel findDriverModelByPersonalNumber(String personalNumber) throws ServiceLayerException {
-
         try {
-            return new DriverModel(driverDao.findByPersonalNumber(personalNumber));
+            DriverEntity driverEntity = driverDao.findByPersonalNumber(personalNumber);
+            if (driverEntity == null)
+                return null;
+            return new DriverModel(driverEntity);
         } catch (DataAccessLayerException e) {
             LOG.warn(Util.UNEXPECTED, e);
             throw new ServiceLayerException(e);
