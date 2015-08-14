@@ -39,7 +39,7 @@ public class OrderManagementServiceImpl implements OrderManagementService {
 
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public void createOrderWithCargoes(OrderModel order, List<CargoModel> cargoes) throws ServiceLayerException {
         try {
             if (orderDao.findByOrderIdentifier(order.getOrderIdentifier()) != null) {
@@ -77,7 +77,7 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public void addCargoToOrder(String orderIdentifier, CargoModel cargo) throws ServiceLayerException {
         // todo test this method
         try {
@@ -105,7 +105,7 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public void deleteCargo(String cargoIdentifier) throws ServiceLayerException {
         // todo test this method
         try {
@@ -132,7 +132,7 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public void updateOrder(OrderModel order, String oldOrderIdentifier) throws ServiceLayerException {
 
         OrderEntity orderEntity = findOrderByOrderIdentifier(oldOrderIdentifier);
@@ -163,7 +163,7 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public List<OrderModel> findAllOrders() throws ServiceLayerException {
         try {
             return orderDao.findAll().stream()
@@ -176,7 +176,7 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public void deleteOrderByOrderIdentifierIfNotAssigned(String orderIdentifier)
             throws ServiceLayerException {
         try {
@@ -199,7 +199,7 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public OrderModel findOrderModelByOrderIdentifier(String orderIdentifier) throws ServiceLayerException {
         try {
             OrderEntity orderEntity = orderDao.findByOrderIdentifier(orderIdentifier);
@@ -213,7 +213,7 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     }
 
 
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     private OrderEntity findOrderByOrderIdentifier(String orderIdentifier)
             throws ServiceLayerException {
         try {

@@ -33,7 +33,7 @@ public class TruckManagementServiceImpl implements TruckManagementService {
             TruckManagementService.class);
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public List<TruckModel> findAllTrucks() throws ServiceLayerException {
         try {
             return truckDao.findAll().stream()
@@ -46,7 +46,7 @@ public class TruckManagementServiceImpl implements TruckManagementService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public void addTruck(TruckModel truck) throws ServiceLayerException {
         try {
             if (truckDao.findByRegistrationNumber(truck.getRegistrationNumber()) != null) {
@@ -65,7 +65,7 @@ public class TruckManagementServiceImpl implements TruckManagementService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public void updateTruck(TruckModel truck, String oldRegistrationNumber) throws ServiceLayerException {
         try {
             TruckEntity truckEntity = truckDao.findByRegistrationNumber(oldRegistrationNumber);
@@ -99,7 +99,7 @@ public class TruckManagementServiceImpl implements TruckManagementService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public void deleteTruckByRegistrationNumber(String truckRegistrationNumber)
             throws ServiceLayerException {
         try {
@@ -131,7 +131,7 @@ public class TruckManagementServiceImpl implements TruckManagementService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public TruckModel findTruckModelByRegistrationNumber(String registrationNumber) throws ServiceLayerException {
         try {
             TruckEntity truckEntity = truckDao.findByRegistrationNumber(registrationNumber);

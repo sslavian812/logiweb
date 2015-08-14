@@ -54,7 +54,7 @@ public class DriverActivityServiceImpl implements DriverActivityService {
             Logger.getLogger(DriverInfoServiceImpl.class);
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public void beginShift(String personalNumber) throws ServiceLayerException {
         try {
             DriverEntity driver = driverDao.findByPersonalNumber(personalNumber);
@@ -84,7 +84,7 @@ public class DriverActivityServiceImpl implements DriverActivityService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public void endShift(String personalNumber) throws ServiceLayerException {
         try {
             DriverEntity driver = driverDao.findByPersonalNumber(personalNumber);
@@ -117,7 +117,7 @@ public class DriverActivityServiceImpl implements DriverActivityService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public void driverStatusChanged(
             String personalNumber, DriverStatus driverStatus)
             throws ServiceLayerException {
@@ -151,7 +151,7 @@ public class DriverActivityServiceImpl implements DriverActivityService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public void cargoStatusChanged(
             String cargoIdentifier, CargoStatus cargoStatus)
             throws ServiceLayerException {
@@ -173,7 +173,7 @@ public class DriverActivityServiceImpl implements DriverActivityService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public void completeOrder(String orderIdentifier) throws ServiceLayerException {
         try {
 

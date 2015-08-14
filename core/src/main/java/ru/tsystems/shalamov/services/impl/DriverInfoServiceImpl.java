@@ -58,7 +58,7 @@ public class DriverInfoServiceImpl implements DriverInfoService {
             DriverInfoServiceImpl.class);
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public List<DriverAssignmentModel> findAllDriverAssignments() throws ServiceLayerException {
         try {
             List<OrderEntity> orders = orderDao.findAll();
@@ -95,7 +95,7 @@ public class DriverInfoServiceImpl implements DriverInfoService {
      * @throws ru.tsystems.shalamov.services.ServiceLayerException
      */
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public DriverAssignmentModel findDriverAssignmentModelByPersonalNumber(String driverPersonalNumber)
             throws ServiceLayerException {
         DriverAssignmentModel assignmentModel = getPossibleInformationForDriver(driverPersonalNumber);
@@ -106,7 +106,7 @@ public class DriverInfoServiceImpl implements DriverInfoService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public DriverAssignmentModel getPossibleInformationForDriver(String driverPersonalNumber)
             throws ServiceLayerException {
         try {
@@ -160,8 +160,8 @@ public class DriverInfoServiceImpl implements DriverInfoService {
     }
 
 
-    @Transactional
     @Override
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public DriverAssignmentModel findDriverAssignmentModelByOrderIdentifier(
             final String orderIdentifier) throws ServiceLayerException {
         try {

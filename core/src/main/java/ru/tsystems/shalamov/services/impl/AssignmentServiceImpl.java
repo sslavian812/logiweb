@@ -50,7 +50,7 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
 
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public AvailableToAssignModel findAvailableToAssign(String orderIdentifier) throws ServiceLayerException {
         try {
             OrderEntity order = orderDao.findByOrderIdentifier(orderIdentifier);
@@ -81,7 +81,7 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public void assignDriversAndTruckToOrder(AvailableToAssignModel availableToAssignModel) throws ServiceLayerException {
         try {
             TruckEntity truck = truckDao.findByRegistrationNumber(
@@ -131,7 +131,7 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
     }
 
 
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     private List<TruckEntity> findTrucksForOrder(OrderEntity order)
             throws ServiceLayerException {
         try {
@@ -142,7 +142,7 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
         }
     }
 
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     private List<DriverEntity> findDriversForOrder(OrderEntity order)
             throws ServiceLayerException {
         try {
@@ -153,7 +153,7 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
         }
     }
 
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     private void assignDriversAndTruckToOrder(List<DriverEntity> drivers,
                                               TruckEntity truck, OrderEntity order)
             throws ServiceLayerException {

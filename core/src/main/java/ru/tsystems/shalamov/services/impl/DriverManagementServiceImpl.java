@@ -57,7 +57,7 @@ public class DriverManagementServiceImpl implements DriverManagementService {
 
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public List<DriverModel> findAllDrivers() throws ServiceLayerException {
         try {
             return driverDao.findAll().stream()
@@ -100,7 +100,7 @@ public class DriverManagementServiceImpl implements DriverManagementService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public void updateDriver(DriverModel driver, String oldPersonalNumber) throws ServiceLayerException {
         DriverEntity driverEntity = findDriverByPersonalNumber(oldPersonalNumber);
 
@@ -133,7 +133,7 @@ public class DriverManagementServiceImpl implements DriverManagementService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public void deleteDriverByPersonalNumber(final String driverPersonalNumber)
             throws ServiceLayerException {
         try {
@@ -171,7 +171,7 @@ public class DriverManagementServiceImpl implements DriverManagementService {
 
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public DriverModel findDriverModelByPersonalNumber(String personalNumber) throws ServiceLayerException {
         try {
             DriverEntity driverEntity = driverDao.findByPersonalNumber(personalNumber);
@@ -185,7 +185,7 @@ public class DriverManagementServiceImpl implements DriverManagementService {
     }
 
 
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     private void updateDriverStatus(final DriverStatusEntity driverStatusEntity)
             throws ServiceLayerException {
         try {
@@ -196,7 +196,7 @@ public class DriverManagementServiceImpl implements DriverManagementService {
         }
     }
 
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     private DriverEntity findDriverByPersonalNumber(final String personalNumber)
             throws ServiceLayerException {
         try {
@@ -207,7 +207,7 @@ public class DriverManagementServiceImpl implements DriverManagementService {
         }
     }
 
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     private boolean checkDriverExists(final String personalNumber)
             throws ServiceLayerException {
         try {
