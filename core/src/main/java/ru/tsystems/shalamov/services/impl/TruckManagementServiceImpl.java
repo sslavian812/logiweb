@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.TruckDao;
 import ru.tsystems.shalamov.entities.TruckEntity;
+import ru.tsystems.shalamov.entities.statuses.TruckStatus;
 import ru.tsystems.shalamov.model.TruckModel;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.Util;
@@ -83,6 +84,11 @@ public class TruckManagementServiceImpl implements TruckManagementService {
                 }
             }
 
+            // todo this if is not covered by tests
+            if (truckEntity.getStatus().equals(TruckStatus.ASSIGNED)
+                    && truck.getStatus() != truckEntity.getStatus()) {
+                throw new ServiceLayerException("Fail to change truck status while processing order");
+            }
             truckEntity.setRegistrationNumber(truck.getRegistrationNumber());
             truckEntity.setCapacity(truck.getCapacity());
             truckEntity.setCrewSize(truck.getCrewSize());

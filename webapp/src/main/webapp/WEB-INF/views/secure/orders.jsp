@@ -24,20 +24,16 @@
             <tr>
                 <td>
                     <label>Order Identifier</label>
-                    <input type="text" placeholder="Type something…" name="orderIdentifier">
-                    <span class="help-block">Example: 0xbeadface</span>
+                    <input type="text" placeholder="Ex.: 0xbeadface" name="orderIdentifier">
                 </td>
-
 
                 <td>
                     <label>Cargo denomination</label>
-                    <input type="text" placeholder="Type something…" name="denomination">
-                    <span class="help-block">Example: bricks</span>
+                    <input type="text" placeholder="Ex.: bricks" name="denomination">
                 </td>
                 <td>
                     <label>Cargo weight (kg)</label>
-                    <input type="text" placeholder="Type something…" name="weight">
-                    <span class="help-block">Example: 1500</span>
+                    <input type="text" placeholder="Ex.: 1500" name="weight">
                 </td>
                 <td>
                     <button type="submit" class="btn btn-success">add</button>

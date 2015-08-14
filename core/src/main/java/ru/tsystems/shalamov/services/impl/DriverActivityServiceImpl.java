@@ -170,7 +170,6 @@ public class DriverActivityServiceImpl implements DriverActivityService {
         } catch (DataAccessLayerException e) {
             throw new ServiceLayerException(e);
         }
-
     }
 
     @Override

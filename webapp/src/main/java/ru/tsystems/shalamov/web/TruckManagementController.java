@@ -53,7 +53,7 @@ public class TruckManagementController {
         }
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public ModelAndView deleteTruck(@PathVariable("id") String registrationNumber) {
         try {
             truckManagementService.deleteTruckByRegistrationNumber(registrationNumber);
@@ -63,13 +63,39 @@ public class TruckManagementController {
         }
     }
 
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView editTruck(@PathVariable("id") String registrationNumber) {
-        return Util.fail("not implemented", "");
+        try {
+            TruckModel truck = truckManagementService.findTruckModelByRegistrationNumber(registrationNumber);
+            if (truck == null) {
+                throw new ServiceLayerException("No such truck.");
+            }
+            ModelAndView mav = new ModelAndView("secure/truckEdit");
+            mav.addObject("truck", truck);
+            return mav;
+        } catch (ServiceLayerException e) {
+            return Util.fail("fail to edit truck", e.getMessage());
+        }
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ModelAndView updateTruck(HttpServletRequest request) {
-        return Util.fail("not implemented", "");
+        try {
+            String oldRegistrationNumber = request.getParameter("oldRegistrationNumber");
+            String registrationNumber = request.getParameter("registrationNumber");
+            String crewSize = request.getParameter("crewSize");
+            String capacity = request.getParameter("capacity");
+            String status = request.getParameter("status");
+
+            TruckModel truckModel = new TruckModel(registrationNumber,
+                    Integer.parseInt(crewSize),
+                    Integer.parseInt(capacity),
+                    TruckStatus.valueOf(status));
+
+            truckManagementService.updateTruck(truckModel, oldRegistrationNumber);
+            return new ModelAndView("redirect:/secure/trucks/");
+        } catch (ServiceLayerException e) {
+            return Util.fail("fail to edit driver", e.getMessage());
+        }
     }
 }

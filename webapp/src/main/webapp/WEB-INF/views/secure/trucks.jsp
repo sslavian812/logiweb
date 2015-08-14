@@ -32,22 +32,17 @@
               action="/secure/trucks/add">
             <tr>
                 <td>
-                    <input type="text" placeholder="Type something…" name="crewSize">
-                    <span class="help-block">Example: 1</span>
+                    <input type="text" placeholder="Ex.: 1" name="crewSize">
                 </td>
 
-
                 <td>
-                    <input type="text" placeholder="Type something…" name="capacity">
-                    <span class="help-block">Example: 5000</span>
-
+                    <input type="text" placeholder="Ex.: 5000" name="capacity">
                 </td>
 
                 <td>INTACT</td>
 
                 <td>
-                    <input type="text" placeholder="Type something…" name="registrationNumber">
-                    <span class="help-block">Example: xx77777</span>
+                    <input type="text" placeholder="Ex.: xx77777" name="registrationNumber">
                 </td>
 
                 <td>
@@ -66,8 +61,8 @@
                 <td> ${truck.status}</td>
                 <td>${truck.registrationNumber}</td>
                 <td>
-                    <form method="post"
-                          action="">
+                    <form method="get"
+                          action="/secure/trucks/edit/${truck.registrationNumber}">
                         <button type="submit" class="btn btn-warning">edit</button>
                     </form>
                 </td>

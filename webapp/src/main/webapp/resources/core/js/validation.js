@@ -48,16 +48,16 @@ function validateTruckForm() {
     var capacity = form.elements.capacity.value;
 
 
-    if (! (/^[0-9]+$/.test(crewSize))) {
-        alert('crew size must be numeric and not empty');
+    if ((!(/^[0-9]+$/.test(crewSize))) || parseInt(crewSize) < 1 || parseInt(crewSize) > 10) {
+        alert('crew size must be numeric at leas 1 and at most 10');
         return false;
     }
     if (!(/^[a-z]{2}[0-9]{5}$/i.test(registrationNumber))) {
         alert('Registration number must consist of 2 letters and 5 digits');
         return false;
     }
-    if (!(/^[0-9]+$/.test(capacity))) {
-        alert('capacity must be numeric and not empty');
+    if ((!(/^[0-9]+$/.test(capacity))) || parseInt(capacity) < 0) {
+        alert('capacity must be numeric and non-negative');
         return false;
     }
 

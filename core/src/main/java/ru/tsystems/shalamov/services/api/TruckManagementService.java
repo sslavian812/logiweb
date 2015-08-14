@@ -40,6 +40,7 @@ public interface TruckManagementService {
      * @throws ServiceLayerException if
      *                               1) there is no truck with registration number {@code oldRegistrationNumber}
      *                               2) truck with {@code truck.registrationNumber} already exists.
+     *                               3) if updating status while truck is processing an order.
      */
     void updateTruck(TruckModel truck, String oldRegistrationNumber) throws ServiceLayerException;
 

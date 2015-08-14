@@ -32,16 +32,13 @@
               action="/secure/drivers/add">
             <tr>
                 <td>
-                    <input type="text" placeholder="name" name="firstName">
-                    <span class="help-block">Ex.: Ivan</span>
+                    <input type="text" placeholder="Ex.: Ivan" name="firstName">
                 </td>
                 <td>
-                    <input type="text" placeholder="surname" name="lastName">
-                    <span class="help-block">Ex.: Ivanov</span>
+                    <input type="text" placeholder="Ex.: Ivanov" name="lastName">
                 </td>
                 <td>
-                    <input type="text" placeholder="personal number" name="personalNumber">
-                    <span class="help-block">Ex.: vania55</span>
+                    <input type="text" placeholder="Ex.: vania55" name="personalNumber">
                 </td>
                 <td>
                     UNASSIGNED
