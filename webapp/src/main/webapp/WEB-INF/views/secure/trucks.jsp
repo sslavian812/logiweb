@@ -14,7 +14,7 @@
 </head>
 <body>
 <script src="/resources/core/js/validation.js"></script>
-<%@include  file="/WEB-INF/views/navBar.html" %>
+<%@include file="/WEB-INF/views/navBar.html" %>
 
 <c:if test="${fn:length(trucks) > 0}">
     <table class="table table-striped">
@@ -27,6 +27,37 @@
             <td>edit</td>
             <td>delete is possible</td>
         </tr>
+
+        <form class="form-control" id="adder" method="post" onsubmit="return validateTruckForm()"
+              action="/secure/trucks/add">
+            <tr>
+                <td>
+                    <input type="text" placeholder="Type something…" name="crewSize">
+                    <span class="help-block">Example: 1</span>
+                </td>
+
+
+                <td>
+                    <input type="text" placeholder="Type something…" name="capacity">
+                    <span class="help-block">Example: 5000</span>
+
+                </td>
+
+                <td>INTACT</td>
+
+                <td>
+                    <input type="text" placeholder="Type something…" name="registrationNumber">
+                    <span class="help-block">Example: xx77777</span>
+                </td>
+
+                <td>
+                <button type="submit" class="btn btn-success">add</button>
+                    </td>
+                <td>
+                <button class="btn btn-danger" disabled>delete</button>
+                </td>
+            </tr>
+        </form>
 
         <c:forEach var="truck" items="${trucks}">
             <tr>
@@ -54,24 +85,24 @@
 
 <%--<hr>--%>
 
-<form class="form-control" id="adder" method="post" onsubmit="return validateTruckForm()"
-      action="/secure/trucks/add">
-    <fieldset>
-        <legend>Add new truck</legend>
-        <label>Crew size</label>
-        <input type="text" placeholder="Type something…" name="crewSize">
-        <span class="help-block">Example: 1</span>
+<%--<form class="form-control" id="adder" method="post" onsubmit="return validateTruckForm()"--%>
+<%--action="/secure/trucks/add">--%>
+<%--<fieldset>--%>
+<%--<legend>Add new truck</legend>--%>
+<%--<label>Crew size</label>--%>
+<%--<input type="text" placeholder="Type something…" name="crewSize">--%>
+<%--<span class="help-block">Example: 1</span>--%>
 
-        <label>Registration number</label>
-        <input type="text" placeholder="Type something…" name="registrationNumber">
-        <span class="help-block">Example: xx77777</span>
+<%--<label>Registration number</label>--%>
+<%--<input type="text" placeholder="Type something…" name="registrationNumber">--%>
+<%--<span class="help-block">Example: xx77777</span>--%>
 
-        <label>capacity (kg)</label>
-        <input type="text" placeholder="Type something…" name="capacity">
-        <span class="help-block">Example: 5000</span>
+<%--<label>capacity (kg)</label>--%>
+<%--<input type="text" placeholder="Type something…" name="capacity">--%>
+<%--<span class="help-block">Example: 5000</span>--%>
 
-        <button type="submit" class="btn">Submit</button>
-    </fieldset>
-</form>
+<%--<button type="submit" class="btn">Submit</button>--%>
+<%--</fieldset>--%>
+<%--</form>--%>
 </body>
 </html>

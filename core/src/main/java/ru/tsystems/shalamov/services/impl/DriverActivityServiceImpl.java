@@ -74,7 +74,7 @@ public class DriverActivityServiceImpl implements DriverActivityService {
             shiftDao.create(shift);
 
             DriverStatusEntity statusEntity = driver.getDriverStatusEntity();
-            statusEntity.setStatus(DriverStatus.PRIMARY);
+            statusEntity.setStatus(DriverStatus.AUXILIARY);
             driverStatusDao.update(statusEntity);
 
             LOG.info("New active shift created for driver [" + personalNumber + "]");
@@ -91,8 +91,13 @@ public class DriverActivityServiceImpl implements DriverActivityService {
             if (driver == null)
                 throw new ServiceLayerException("no such driver found");
 
+            // in case of unhonest drivers: if order is being set completed while
+            // one of assigned drivers is not on shift
+            // workaround - if status is REST throw no exception, just exit.
+            if(driver.getDriverStatusEntity().getStatus().equals(DriverStatus.REST))
+                return;
+
             ShiftEntity shift = shiftDao.findActiveShiftByDriver(driver);
-            // todo: workaround - if status is REST throw no exception, just exit.
             if (shift == null)
                 throw new ServiceLayerException("this driver has no active shift now!");
 

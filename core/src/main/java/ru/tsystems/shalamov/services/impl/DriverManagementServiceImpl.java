@@ -69,7 +69,7 @@ public class DriverManagementServiceImpl implements DriverManagementService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = ServiceLayerException.class)
     public void addDriver(DriverModel driver) throws ServiceLayerException {
         DriverEntity driverEntity = new DriverEntity(driver.getFirstName(),
                 driver.getLastName(), driver.getPersonalNumber());

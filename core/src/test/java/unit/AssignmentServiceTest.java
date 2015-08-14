@@ -57,7 +57,8 @@ public class AssignmentServiceTest {
             when(orderDao.findByOrderIdentifier(Mockito.any(String.class))).thenReturn(null);
             assignmentService.findAvailableToAssign("order");
         } catch (DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+           // throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 

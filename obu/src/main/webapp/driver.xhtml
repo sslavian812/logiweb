@@ -2,85 +2,110 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:a4j="http://richfaces.org/a4j"
-        xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <head>
     <title>Driver Information</title>
     <link rel="stylesheet" href="/resources/core/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/resources/core/css/style.css"/>
-    <link rel="stylesheet" href="/resources/core/fonts/*"/>
 </head>
 <h:body>
-    <ui:param name="PN" value="#{driverInfoBean.personalNumber}"/>
+    <div align="center"><h1>Driver: #{driverInfoBean.personalNumber}</h1></div>
 
-    <f:view encoding="UTF-8" contentType="text/html">
-        <h:panelGroup layout="block" styleClass="container">
-            <h:panelGroup layout="block" styleClass="login">
-                <h:panelGroup layout="block" styleClass="row">
+    <h:panelGroup layout="block" styleClass="row">
 
-                    <h:panelGroup layout="block" styleClass="col-sm-6">
+        <h:panelGroup layout="block" styleClass="col-sm-6">
 
-                        <p>driver: #{driverInfoBean.personalNumber} </p>
+            <table class="table table-striped">
+                <tr>
+                    <td><label>Order:</label></td>
+                    <td>#{driverInfoBean.orderIdentifier}</td>
+                </tr>
+                <tr>
+                    <td><label>Truck:</label></td>
+                    <td>#{driverInfoBean.truckRegistrationNumber}</td>
+                </tr>
+                <tr>
+                    <td><label>Involved:</label></td>
+                    <td>#{driverInfoBean.involvedDrivers}</td>
+                </tr>
+                <tr>
+                    <td><label>Primary:</label></td>
+                    <td>#{driverInfoBean.primaryDriver}</td>
+                </tr>
+                <tr>
+                    <td><label>status:</label></td>
+                    <td>
+                        #{driverInfoBean.driverStatus}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <c:if test="#{driverInfoBean.driverStatus.value() eq driverInfoBean.auxiliary}">
+                            <h:form method="post">
+                                <h:commandButton styleClass="btn btn-info" action="#{driverInfoBean.becomePrimary()}"
+                                                 value="become primary"/>
+                            </h:form>
+                        </c:if>
+                    </td>
+                    <td>
+                        <c:if test="#{driverInfoBean.driverStatus.value() eq driverInfoBean.rest
+                        or driverInfoBean.driverStatus.value() eq driverInfoBean.auxiliary}">
+                            <h:form method="post">
+                                <h:commandButton styleClass="btn btn-warning" action="#{driverInfoBean.swapShift()}"
+                                                 value="#{driverInfoBean.getShiftChangeText()}"/>
+                            </h:form>
+                        </c:if>
+                    </td>
+                </tr>
+            </table>
 
-                        <p>truck: #{driverInfoBean.truckRegistrationNumber}</p>
-
-                        <p>order: #{driverInfoBean.orderIdentifier}</p>
-
-
-                        <p>involved drivers:</p>
-                        <ui:repeat value="#{driverInfoBean.involvedDrivers}" var="driver">
-                            #{driver}
-                        </ui:repeat>
-
-
-                        <h:form method="post">
-                            <h:inputHidden value='#{driverInfoBean.personalNumber}'/>
-
-                            <p class="submit">
-                                <h:commandButton action="#{driverInfoBean.swapShift}"
-                                                 value="invert shift: #{driverInfoBean.driverStatus}"/>
-                            </p>
-
-                            <p class="submit">
-                                <h:commandButton action="#{driverInfoBean.swapStatus}"
-                                                 value="invert status: #{driverInfoBean.driverStatus}"/>
-                            </p>
-                        </h:form>
-
-                    </h:panelGroup>
-                    <h:panelGroup layout="block" styleClass="col-sm-6">
-
-                        <h:form method="post">
-                            <h:panelGrid columns="2" border="1">
-                                <a4j:repeat value="#{driverInfoBean.cargoesList}" var="cargo" rowKeyVar="row">
-                                    <h:panelGroup>#{cargo}</h:panelGroup>
-                                    <h:panelGroup>
-                                        <p class="submit">
-                                            <h:commandButton action="#{driverInfoBean.switchCargoStatus(cargo)}"
-                                                             value="#{driverInfoBean.cargoesStatuses.get(row)}"/>
-                                        </p>
-                                    </h:panelGroup>
-                                </a4j:repeat>
-
-                            </h:panelGrid>
-
-                            <c:if test="#{driverInfoBean.ifAllCargoesDelivered()}">
-                                <p></p>
-                                <h:commandButton action="#{driverInfoBean.completeOrder}"
-                                                 value="complete: #{driverInfoBean.orderIdentifier}"/>
-                            </c:if>
-
-                        </h:form>
-                    </h:panelGroup>
-
-
-                </h:panelGroup>
-            </h:panelGroup>
         </h:panelGroup>
-    </f:view>
+        <h:panelGroup layout="block" styleClass="col-sm-6">
+
+            <table class="table table-striped">
+                <tr>
+                    <td><label>identifier</label></td>
+                    <td><label>status</label></td>
+                </tr>
+
+                <a4j:repeat value="#{driverInfoBean.cargoesList}" var="cargo" rowKeyVar="row">
+                    <tr class="#{driverInfoBean.mapStatusToColor(driverInfoBean.cargoesStatuses.get(row))}">
+                        <td>#{cargo}</td>
+                        <td>#{driverInfoBean.cargoesStatuses.get(row)}</td>
+                    </tr>
+                    <tr class="#{driverInfoBean.mapStatusToColor(
+                                                driverInfoBean.cargoesStatuses.get(row))}">
+                        <td><span class="help-block">set to:</span></td>
+                        <td>
+                            <h:form method="post">
+                                <h:commandButton
+                                        styleClass="btn btn-#{driverInfoBean.mapStatusToColor(
+                                            driverInfoBean.getNext(
+                                                driverInfoBean.cargoesStatuses.get(row)))}"
+                                        action="#{driverInfoBean.switchCargoStatus(cargo)}"
+                                        value="#{driverInfoBean.getNext(driverInfoBean.cargoesStatuses.get(row))}"/>
+                            </h:form>
+                        </td>
+                    </tr>
+                </a4j:repeat>
+            </table>
+
+
+            <c:if test="#{driverInfoBean.ifAllCargoesDelivered()}">
+                <p></p>
+                <h:form method="post">
+                    <h:commandButton styleClass="btn btn-success" action="#{driverInfoBean.completeOrder}"
+                                     value="complete: #{driverInfoBean.orderIdentifier}"/>
+                </h:form>
+            </c:if>
+
+        </h:panelGroup>
+
+
+    </h:panelGroup>
+
 </h:body>
 </html>
