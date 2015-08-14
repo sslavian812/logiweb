@@ -9,6 +9,7 @@ import ru.tsystems.shalamov.entities.*;
 import ru.tsystems.shalamov.entities.statuses.CargoStatus;
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 import ru.tsystems.shalamov.entities.statuses.OrderStatus;
+import ru.tsystems.shalamov.entities.statuses.TruckStatus;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.DriverActivityService;
 
@@ -197,6 +198,7 @@ public class DriverActivityServiceImpl implements DriverActivityService {
             }
 
             truck.setDriverStatusEntities(null);
+            truck.setStatus(TruckStatus.INTACT);
             order.setStatus(OrderStatus.COMPLETED);
 
             LOG.info("Order [" + orderIdentifier + "] has been completed. All drivers statuses set to UNASSIGNED");

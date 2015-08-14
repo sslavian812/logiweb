@@ -11,6 +11,7 @@ import ru.tsystems.shalamov.entities.OrderEntity;
 import ru.tsystems.shalamov.entities.TruckEntity;
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 import ru.tsystems.shalamov.entities.statuses.OrderStatus;
+import ru.tsystems.shalamov.entities.statuses.TruckStatus;
 import ru.tsystems.shalamov.model.AvailableToAssignModel;
 import ru.tsystems.shalamov.model.DriverModel;
 import ru.tsystems.shalamov.model.TruckModel;
@@ -162,6 +163,9 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
             order.setTruckEntity(truck);
             order.setStatus(OrderStatus.IN_PROGRESS);
             orderDao.update(order);
+
+            truck.setStatus(TruckStatus.ASSIGNED);
+            truckDao.update(truck);
 
 
             for (DriverEntity d : drivers) {

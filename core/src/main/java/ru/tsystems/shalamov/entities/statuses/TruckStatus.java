@@ -5,5 +5,6 @@ package ru.tsystems.shalamov.entities.statuses;
  */
 public enum TruckStatus {
     INTACT,
-    BROKEN
+    BROKEN,
+    ASSIGNED
 }
