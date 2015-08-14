@@ -19,13 +19,44 @@
 <c:if test="${fn:length(orders) > 0}">
 
     <table class="table table-striped">
+
+        <form class="form-control" id="adder" method="post" onsubmit="return validateOrderForm()" action="/secure/orders/add">
+            <tr>
+                <td>
+                    <label>Order Identifier</label>
+                    <input type="text" placeholder="Type something…" name="orderIdentifier">
+                    <span class="help-block">Example: 0xbeadface</span>
+                </td>
+
+
+                <td>
+                    <label>Cargo denomination</label>
+                    <input type="text" placeholder="Type something…" name="denomination">
+                    <span class="help-block">Example: bricks</span>
+                </td>
+                <td>
+                    <label>Cargo weight (kg)</label>
+                    <input type="text" placeholder="Type something…" name="weight">
+                    <span class="help-block">Example: 1500</span>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-success">add</button>
+                </td>
+                <td>
+
+                </td>
+            </tr>
+        </form>
+
+        <p></p>
         <tr>
-            <td>order identifier</td>
-            <td>order status</td>
-            <td>edit</td>
-            <td>delete if possible</td>
-            <td>assign</td>
+            <td><label>order identifier</label></td>
+            <td><label>order status</label></td>
+            <td><label>edit</label></td>
+            <td><label>delete if possible</label></td>
+            <td><label>assign</label></td>
         </tr>
+
 
         <c:forEach var="order" items="${orders}">
             <tr>
@@ -57,23 +88,23 @@
 
 <%--<hr>--%>
 
-<form class="form-control" id="adder" method="post" onsubmit="return validateOrderForm()" action="/secure/orders/add">
-    <fieldset>
-        <legend>Add new order</legend>
-        <label>Order Identifier</label>
-        <input type="text" placeholder="Type something…" name="orderIdentifier">
-        <span class="help-block">Example: 0xbeadface</span>
+<%--<form class="form-control" id="adder" method="post" onsubmit="return validateOrderForm()" action="/secure/orders/add">--%>
+    <%--<fieldset>--%>
+        <%--<legend>Add new order</legend>--%>
+        <%--<label>Order Identifier</label>--%>
+        <%--<input type="text" placeholder="Type something…" name="orderIdentifier">--%>
+        <%--<span class="help-block">Example: 0xbeadface</span>--%>
 
-        <label>Cargo denomination</label>
-        <input type="text" placeholder="Type something…" name="denomination">
-        <span class="help-block">Example: bricks</span>
+        <%--<label>Cargo denomination</label>--%>
+        <%--<input type="text" placeholder="Type something…" name="denomination">--%>
+        <%--<span class="help-block">Example: bricks</span>--%>
 
-        <label>Cargo weight (kg)</label>
-        <input type="text" placeholder="Type something…" name="weight">
-        <span class="help-block">Example: 1500</span>
+        <%--<label>Cargo weight (kg)</label>--%>
+        <%--<input type="text" placeholder="Type something…" name="weight">--%>
+        <%--<span class="help-block">Example: 1500</span>--%>
 
-        <button type="submit" class="btn">Submit</button>
-    </fieldset>
-</form>
+        <%--<button type="submit" class="btn">Submit</button>--%>
+    <%--</fieldset>--%>
+<%--</form>--%>
 </body>
 </html>

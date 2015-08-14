@@ -15,7 +15,7 @@
 </head>
 <body>
 <script src="/resources/core/js/validation.js"></script>
-<%@include  file="/WEB-INF/views/navBar.html" %>
+<%@include file="/WEB-INF/views/navBar.html" %>
 <c:if test="${fn:length(drivers) > 0}">
 
     <table class="table table-striped">
@@ -27,6 +27,34 @@
             <td>edit</td>
             <td>delete if possible</td>
         </tr>
+
+        <form class="form-control" id="adder" method="post" onsubmit="return validateDriverForm()"
+              action="/secure/drivers/add">
+            <tr>
+                <td>
+                    <input type="text" placeholder="name" name="firstName">
+                    <span class="help-block">Ex.: Ivan</span>
+                </td>
+                <td>
+                    <input type="text" placeholder="surname" name="lastName">
+                    <span class="help-block">Ex.: Ivanov</span>
+                </td>
+                <td>
+                    <input type="text" placeholder="personal number" name="personalNumber">
+                    <span class="help-block">Ex.: vania55</span>
+                </td>
+                <td>
+                    UNASSIGNED
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-success">add</button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" disabled>delete</button>
+                </td>
+            </tr>
+        </form>
+
         <c:forEach var="driver" items="${drivers}">
             <tr>
                 <td>${driver.firstName}</td>
@@ -50,8 +78,6 @@
     </table>
 
 </c:if>
-
-<%@include  file="/WEB-INF/views/driverForm.html" %>
 
 </body>
 </html>
