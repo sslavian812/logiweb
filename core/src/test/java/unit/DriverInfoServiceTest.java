@@ -49,7 +49,7 @@ public class DriverInfoServiceTest {
             driverInfoService.getPossibleInformationForDriver("vasia");
 
         } catch (DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -70,7 +70,7 @@ public class DriverInfoServiceTest {
             Assert.assertEquals(assignmentModel.getTruckRegistrationNumber(), DriverInfoServiceImpl.NONE);
 
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new RuntimeException(e);
+            Assert.fail();
         }
     }
 
@@ -89,7 +89,7 @@ public class DriverInfoServiceTest {
 
             driverInfoService.getPossibleInformationForDriver(driver.getPersonalNumber());
         } catch (DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -132,7 +132,7 @@ public class DriverInfoServiceTest {
             Assert.assertEquals(assignmentModel.getCoDrivers().size(), 2);
 
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new RuntimeException(e);
+            Assert.fail();
         }
     }
 
@@ -143,7 +143,7 @@ public class DriverInfoServiceTest {
             when(orderDao.findByOrderIdentifier(Mockito.any(String.class))).thenReturn(null);
             Assert.assertNull(driverInfoService.findDriverAssignmentModelByOrderIdentifier(""));
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new RuntimeException(e);
+            Assert.fail();
         }
     }
 
@@ -154,7 +154,7 @@ public class DriverInfoServiceTest {
             when(orderDao.findByOrderIdentifier(Mockito.any(String.class))).thenReturn(order);
             Assert.assertNull(driverInfoService.findDriverAssignmentModelByOrderIdentifier(""));
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new RuntimeException(e);
+            Assert.fail();
         }
     }
 
@@ -181,7 +181,7 @@ public class DriverInfoServiceTest {
             Assert.assertEquals(driverAssignmentModel.getTruckRegistrationNumber(), truck.getRegistrationNumber());
 
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new RuntimeException(e);
+            Assert.fail();
         }
     }
 
@@ -215,7 +215,7 @@ public class DriverInfoServiceTest {
                 Assert.assertEquals(driverAssignmentModel.getTruckRegistrationNumber(), truck.getRegistrationNumber());
             }
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new RuntimeException(e);
+            Assert.fail();
         }
     }
 
@@ -261,7 +261,7 @@ public class DriverInfoServiceTest {
             Assert.assertEquals(assignmentModel.getCoDrivers().size(), 2);
 
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new RuntimeException(e);
+            Assert.fail();
         }
     }
 
@@ -281,7 +281,7 @@ public class DriverInfoServiceTest {
             Assert.assertNull(assignmentModel);
 
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new RuntimeException(e);
+            Assert.fail();
         }
     }
 }

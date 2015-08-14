@@ -1,5 +1,6 @@
 package unit;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -55,7 +56,7 @@ public class DriverActivityServiceTest {
             when(driverDao.findByPersonalNumber(Mockito.any(String.class))).thenReturn(null);
             driverActivityService.beginShift("driver");
         } catch (DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -69,7 +70,7 @@ public class DriverActivityServiceTest {
 
             driverActivityService.beginShift(driver.getPersonalNumber());
         } catch (DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -93,7 +94,7 @@ public class DriverActivityServiceTest {
             inOrder.verify(shiftDao).create(Mockito.any(ShiftEntity.class));
             inOrder.verify(driverStatusDao).update(Mockito.any(DriverStatusEntity.class));
         } catch (DataAccessLayerException | ServiceLayerException e) {
-            throw new RuntimeException(e);
+            Assert.fail();
         }
     }
 
@@ -104,7 +105,7 @@ public class DriverActivityServiceTest {
             when(driverDao.findByPersonalNumber(Mockito.any(String.class))).thenReturn(null);
             driverActivityService.endShift("driver");
         } catch (DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -119,7 +120,7 @@ public class DriverActivityServiceTest {
 
             driverActivityService.endShift(driver.getPersonalNumber());
         } catch (DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -157,7 +158,7 @@ public class DriverActivityServiceTest {
             when(driverDao.findByPersonalNumber(Mockito.any(String.class))).thenReturn(null);
             driverActivityService.driverStatusChanged("driver", DriverStatus.PRIMARY);
         } catch (DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -176,7 +177,7 @@ public class DriverActivityServiceTest {
             when(driverDao.findByPersonalNumber(Mockito.any(String.class))).thenReturn(driver);
             driverActivityService.driverStatusChanged("driver", DriverStatus.PRIMARY);
         } catch (DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -206,7 +207,7 @@ public class DriverActivityServiceTest {
             when(cargoDao.findCargoByCargoIdentifier(Mockito.any(String.class))).thenReturn(null);
             driverActivityService.cargoStatusChanged("cargo", CargoStatus.DELIVERED);
         } catch (DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -222,7 +223,7 @@ public class DriverActivityServiceTest {
             inOrder.verify(cargoDao).findCargoByCargoIdentifier(Mockito.any());
             inOrder.verify(cargoDao).update(Mockito.any());
         } catch (DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 }

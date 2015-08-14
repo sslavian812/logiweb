@@ -57,7 +57,6 @@ public class AssignmentServiceTest {
             when(orderDao.findByOrderIdentifier(Mockito.any(String.class))).thenReturn(null);
             assignmentService.findAvailableToAssign("order");
         } catch (DataAccessLayerException e) {
-           // throw new ServiceLayerException(e);
             Assert.fail();
         }
     }
@@ -71,7 +70,7 @@ public class AssignmentServiceTest {
             when(orderDao.findByOrderIdentifier(Mockito.any(String.class))).thenReturn(order);
             assignmentService.findAvailableToAssign(order.getOrderIdentifier());
         } catch (DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -103,8 +102,7 @@ public class AssignmentServiceTest {
 
             Assert.assertEquals(available.getOrderIdentifier(), order.getOrderIdentifier());
         } catch (DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
-        }
+            Assert.fail();        }
     }
 
 
@@ -115,7 +113,7 @@ public class AssignmentServiceTest {
             AvailableToAssignModel model = new AvailableToAssignModel("order", "truck", new ArrayList<>());
             assignmentService.assignDriversAndTruckToOrder(model);
         } catch (DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -133,8 +131,7 @@ public class AssignmentServiceTest {
             AvailableToAssignModel model = new AvailableToAssignModel("order", truck.getRegistrationNumber(), new ArrayList<>());
             assignmentService.assignDriversAndTruckToOrder(model);
         } catch (DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
-        }
+            Assert.fail();        }
     }
 
     @Test(expected = ServiceLayerException.class)
@@ -157,7 +154,7 @@ public class AssignmentServiceTest {
                     new ArrayList<>());
             assignmentService.assignDriversAndTruckToOrder(model);
         } catch (DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -200,7 +197,7 @@ public class AssignmentServiceTest {
 
             assignmentService.assignDriversAndTruckToOrder(model);
         } catch (DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -252,7 +249,7 @@ public class AssignmentServiceTest {
             inOrder.verify(orderDao).update(Mockito.any());
             inOrder.verify(driverStatusDao, times(2)).update(Mockito.any());
         } catch (DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 }

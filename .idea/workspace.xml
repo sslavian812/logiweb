@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97b6ffa6-d5ad-44c9-a8d8-08dc0a3d0b68" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/AssignmentServiceImpl.java" afterPath="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/AssignmentServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/DriverActivityServiceImpl.java" afterPath="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/DriverActivityServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/DriverInfoServiceImpl.java" afterPath="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/DriverInfoServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/DriverManagementServiceImpl.java" afterPath="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/DriverManagementServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/OrderManagementServiceImpl.java" afterPath="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/OrderManagementServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/TruckManagementServiceImpl.java" afterPath="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/TruckManagementServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/test/java/unit/AssignmentServiceTest.java" afterPath="$PROJECT_DIR$/core/src/test/java/unit/AssignmentServiceTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/test/java/unit/DriverActivityServiceTest.java" afterPath="$PROJECT_DIR$/core/src/test/java/unit/DriverActivityServiceTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/test/java/unit/DriverInfoServiceTest.java" afterPath="$PROJECT_DIR$/core/src/test/java/unit/DriverInfoServiceTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/test/java/unit/DriverManagementServiceTest.java" afterPath="$PROJECT_DIR$/core/src/test/java/unit/DriverManagementServiceTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/test/java/unit/OrderManagementServiceTest.java" afterPath="$PROJECT_DIR$/core/src/test/java/unit/OrderManagementServiceTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/test/java/unit/TruckManagementServiceTest.java" afterPath="$PROJECT_DIR$/core/src/test/java/unit/TruckManagementServiceTest.java" />
     </list>
     <ignored path="logiweb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -65,120 +65,7 @@
     <favorites_list name="logiweb" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="DriverInfoServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/DriverInfoServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3396" max-vertical-offset="4290">
-              <caret line="162" column="13" selection-start-line="162" selection-start-column="13" selection-end-line="162" selection-end-column="13" />
-              <folding>
-                <element signature="docComment;class#DriverInfoServiceImpl#0" expanded="false" />
-                <element signature="docComment;method#DriverInfoServiceImpl#0;class#DriverInfoServiceImpl#0" expanded="false" />
-                <element signature="docComment;field#driverDao#0;class#DriverInfoServiceImpl#0" expanded="false" />
-                <element signature="docComment;field#orderDao#0;class#DriverInfoServiceImpl#0" expanded="false" />
-                <element signature="docComment;field#LOG#0;class#DriverInfoServiceImpl#0" expanded="false" />
-                <element signature="docComment;method#findDriverAssignmentModelByPersonalNumber#0;class#DriverInfoServiceImpl#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="driver.xhtml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/obu/src/main/webapp/driver.xhtml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="25.6" vertical-offset="2170" max-vertical-offset="3016">
-              <caret line="49" column="37" selection-start-line="49" selection-start-column="37" selection-end-line="49" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DriverInfoBean.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/obu/src/main/java/ru/tsystems/shalamov/OnBoardUnit/DriverInfoBean.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4137" max-vertical-offset="6656">
-              <caret line="31" column="31" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AssignmentServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/AssignmentServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3409" max-vertical-offset="4290">
-              <caret line="155" column="60" selection-start-line="155" selection-start-column="60" selection-end-line="155" selection-end-column="60" />
-              <folding>
-                <element signature="docComment;class#AssignmentServiceImpl#0" expanded="false" />
-                <element signature="method#AssignmentServiceImpl#0;class#AssignmentServiceImpl#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DriverActivityServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/DriverActivityServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4215" max-vertical-offset="5096">
-              <caret line="175" column="60" selection-start-line="175" selection-start-column="60" selection-end-line="175" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="orders.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/orders.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="33.514286" vertical-offset="1771" max-vertical-offset="3016">
-              <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DriverManagementServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/DriverManagementServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1021" max-vertical-offset="6136">
-              <caret line="209" column="60" selection-start-line="209" selection-start-column="60" selection-end-line="209" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OrderManagementServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/OrderManagementServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5668">
-              <caret line="41" column="60" selection-start-line="41" selection-start-column="60" selection-end-line="41" selection-end-column="60" />
-              <folding>
-                <element signature="e#9187#9207#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TruckManagementServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/TruckManagementServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="185" max-vertical-offset="3562">
-              <caret line="35" column="60" selection-start-line="35" selection-start-column="60" selection-end-line="35" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Util.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/Util.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.56072646" vertical-offset="0" max-vertical-offset="881">
-              <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -186,11 +73,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/obu/src/main/webapp/cargotable.html" />
-        <option value="$PROJECT_DIR$/ws/src/main/java/ru/tsystems/shalamov/ws/DriverActivityWebService.java" />
-        <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/services/api/DriverActivityService.java" />
-        <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/entities/DriverStatusEntity.java" />
-        <option value="$PROJECT_DIR$/ws/src/main/java/ru/tsystems/shalamov/ws/DriverActivityWebServiceImpl.java" />
         <option value="$PROJECT_DIR$/obu/src/main/java/ru/tsystems/shalamov/ws/DriverActivityWebServiceImplService.java" />
         <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/services/impl/DriverActivityServiceImpl.java" />
         <option value="$PROJECT_DIR$/obu/src/main/webapp/login.xhtml" />
@@ -226,7 +108,6 @@
         <option value="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/trucks.jsp" />
         <option value="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/Util.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/entities/TruckEntity.java" />
-        <option value="$PROJECT_DIR$/core/src/test/java/unit/AssignmentServiceTest.java" />
         <option value="$PROJECT_DIR$/obu/src/main/webapp/info.xhtml" />
         <option value="$PROJECT_DIR$/obu/src/main/webapp/fail.xhtml" />
         <option value="$PROJECT_DIR$/obu/src/main/webapp/driver.xhtml" />
@@ -237,6 +118,12 @@
         <option value="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/DriverManagementServiceImpl.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/OrderManagementServiceImpl.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/TruckManagementServiceImpl.java" />
+        <option value="$PROJECT_DIR$/core/src/test/java/unit/AssignmentServiceTest.java" />
+        <option value="$PROJECT_DIR$/core/src/test/java/unit/DriverActivityServiceTest.java" />
+        <option value="$PROJECT_DIR$/core/src/test/java/unit/DriverInfoServiceTest.java" />
+        <option value="$PROJECT_DIR$/core/src/test/java/unit/DriverManagementServiceTest.java" />
+        <option value="$PROJECT_DIR$/core/src/test/java/unit/OrderManagementServiceTest.java" />
+        <option value="$PROJECT_DIR$/core/src/test/java/unit/TruckManagementServiceTest.java" />
       </list>
     </option>
   </component>
@@ -442,74 +329,8 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
+              <option name="myItemId" value="test" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -517,7 +338,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="shalamov" />
+              <option name="myItemId" value="unit" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -539,19 +360,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logiweb" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
+              <option name="myItemId" value="core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="shalamov" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="services" />
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -626,7 +453,7 @@
       <recent name="ru.tsystems.shalamov.model" />
     </key>
   </component>
-  <component name="RunManager" selected="JBoss Server.all">
+  <component name="RunManager" selected="JUnit.Units">
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -1326,7 +1153,7 @@
     </configuration>
     <configuration default="false" name="Units" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="logiweb" />
+      <module name="core" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="" />
       <option name="PACKAGE_NAME" value="unit" />
@@ -1479,7 +1306,7 @@
       <workItem from="1438377684016" duration="66906000" />
       <workItem from="1438859734738" duration="42984000" />
       <workItem from="1439201486960" duration="30001000" />
-      <workItem from="1439317058534" duration="47549000" />
+      <workItem from="1439317058534" duration="47960000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1434903633348</created>
@@ -1539,7 +1366,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="708753000" />
+    <option name="totallyTimeSpent" value="709164000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1563,7 +1390,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="84" y="-11" width="1847" height="1102" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993776" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1591,7 +1418,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15280136" sideWeight="0.27105832" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32867885" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2722128" sideWeight="0.5929108" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2722128" sideWeight="0.5929108" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23608018" sideWeight="0.40708914" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47905478" sideWeight="0.5" order="19" side_tool="false" content_ui="tabs" />
@@ -1709,41 +1536,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="dbDummy://db-console:/50578bd7/f89984ad-da65-496e-86e3-7943a797abcf/">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6628042" vertical-offset="0" max-vertical-offset="2990">
-          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/init.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3489933" vertical-offset="0" max-vertical-offset="2938">
-          <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/model/OrderModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="78" max-vertical-offset="2262">
-          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/entities/DriverStatusEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="638" max-vertical-offset="2210">
-          <caret line="45" column="16" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="16" />
-          <folding>
-            <element signature="e#1058#1059#0" expanded="false" />
-            <element signature="e#1094#1095#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/resources/core/js/validation.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.1051455" vertical-offset="1004" max-vertical-offset="3068">
@@ -1949,14 +1741,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/test/java/unit/AssignmentServiceTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26560727" vertical-offset="0" max-vertical-offset="6240">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/api/AssignmentService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3802497" vertical-offset="107" max-vertical-offset="988">
@@ -2098,17 +1882,57 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/test/java/unit/TruckManagementServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.9597316" vertical-offset="3006" max-vertical-offset="5304">
+          <caret line="208" column="2" selection-start-line="208" selection-start-column="2" selection-end-line="208" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/test/java/unit/DriverActivityServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.483871" vertical-offset="4628" max-vertical-offset="5434">
+          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/test/java/unit/OrderManagementServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38926175" vertical-offset="3136" max-vertical-offset="5330">
+          <caret line="158" column="26" selection-start-line="158" selection-start-column="12" selection-end-line="158" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/test/java/unit/DriverManagementServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.4937966" vertical-offset="3164" max-vertical-offset="6760">
+          <caret line="223" column="2" selection-start-line="223" selection-start-column="2" selection-end-line="223" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/DriverManagementServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1021" max-vertical-offset="6136">
+        <state vertical-scroll-proportion="4.53689" vertical-offset="1021" max-vertical-offset="6136">
           <caret line="209" column="60" selection-start-line="209" selection-start-column="60" selection-end-line="209" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/test/java/unit/DriverInfoServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5368899" vertical-offset="2361" max-vertical-offset="6968">
+          <caret line="134" column="12" selection-start-line="134" selection-start-column="12" selection-end-line="134" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/OrderManagementServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5668">
+        <state vertical-scroll-proportion="0.70828605" vertical-offset="0" max-vertical-offset="5668">
           <caret line="41" column="60" selection-start-line="41" selection-start-column="60" selection-end-line="41" selection-end-column="60" />
           <folding>
             <element signature="e#9187#9207#0" expanded="false" />
@@ -2118,7 +1942,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/TruckManagementServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="185" max-vertical-offset="3562">
+        <state vertical-scroll-proportion="0.3802497" vertical-offset="185" max-vertical-offset="3562">
           <caret line="35" column="60" selection-start-line="35" selection-start-column="60" selection-end-line="35" selection-end-column="60" />
           <folding />
         </state>
@@ -2126,8 +1950,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/Util.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56072646" vertical-offset="0" max-vertical-offset="881">
-          <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.5902384" vertical-offset="0" max-vertical-offset="881">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/test/java/unit/AssignmentServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.76390463" vertical-offset="211" max-vertical-offset="6162">
+          <caret line="58" column="46" selection-start-line="58" selection-start-column="46" selection-end-line="58" selection-end-column="46" />
           <folding />
         </state>
       </provider>

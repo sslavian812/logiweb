@@ -76,7 +76,7 @@ public class OrderManagementServiceTest {
             Assert.assertEquals(received.size(), 0);
 
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new RuntimeException(e);
+            Assert.fail();
         }
     }
 
@@ -99,7 +99,7 @@ public class OrderManagementServiceTest {
                     new OrderModel(order));
 
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new RuntimeException(e);
+            Assert.fail();
         }
     }
 
@@ -128,7 +128,7 @@ public class OrderManagementServiceTest {
                     new OrderModel(order));
 
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new RuntimeException(e);
+            Assert.fail();
         }
     }
 
@@ -142,7 +142,7 @@ public class OrderManagementServiceTest {
             orderManagementService.createOrderWithCargoes(new OrderModel(order), new ArrayList<>());
 
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -156,7 +156,7 @@ public class OrderManagementServiceTest {
             orderManagementService.updateOrder(new OrderModel(order), order.getOrderIdentifier());
 
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -172,7 +172,7 @@ public class OrderManagementServiceTest {
             // truing to change oi "1" to "2" for order 1
             orderManagementService.updateOrder(new OrderModel(order2), order1.getOrderIdentifier());
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -185,7 +185,7 @@ public class OrderManagementServiceTest {
             when(orderDao.findByOrderIdentifier(Mockito.any(String.class))).thenReturn(null);
             orderManagementService.deleteOrderByOrderIdentifierIfNotAssigned(order.getOrderIdentifier());
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -201,7 +201,7 @@ public class OrderManagementServiceTest {
 
             orderManagementService.deleteOrderByOrderIdentifierIfNotAssigned(order.getOrderIdentifier());
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -217,7 +217,7 @@ public class OrderManagementServiceTest {
 
             orderManagementService.deleteOrderByOrderIdentifierIfNotAssigned(order.getOrderIdentifier());
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new RuntimeException(e);
+            Assert.fail();
         }
     }
 }

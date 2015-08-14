@@ -73,7 +73,7 @@ public class TruckManagementServiceTest {
             Assert.assertEquals(received.size(), 0);
 
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new RuntimeException(e);
+            Assert.fail();
         }
     }
 
@@ -96,7 +96,7 @@ public class TruckManagementServiceTest {
                     new TruckModel(truck));
 
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new RuntimeException(e);
+            Assert.fail();
         }
     }
 
@@ -123,7 +123,7 @@ public class TruckManagementServiceTest {
                     new TruckModel(truck));
 
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new RuntimeException(e);
+            Assert.fail();
         }
     }
 
@@ -137,7 +137,7 @@ public class TruckManagementServiceTest {
             truckManagementService.addTruck(new TruckModel(truck));
 
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -151,7 +151,7 @@ public class TruckManagementServiceTest {
             truckManagementService.updateTruck(new TruckModel(truck), truck.getRegistrationNumber());
 
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -167,7 +167,7 @@ public class TruckManagementServiceTest {
             // truing to change rn "11111" to "22222" for truck 1
             truckManagementService.updateTruck(new TruckModel(truck2), truck1.getRegistrationNumber());
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -180,7 +180,7 @@ public class TruckManagementServiceTest {
             TruckEntity truck = new TruckEntity(1, "xx11111", 1000, TruckStatus.INTACT);
             truckManagementService.deleteTruckByRegistrationNumber(truck.getRegistrationNumber());
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -201,7 +201,7 @@ public class TruckManagementServiceTest {
 
             truckManagementService.deleteTruckByRegistrationNumber(truck.getRegistrationNumber());
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new ServiceLayerException(e);
+            Assert.fail();
         }
     }
 
@@ -217,7 +217,7 @@ public class TruckManagementServiceTest {
 
             truckManagementService.deleteTruckByRegistrationNumber(truck.getRegistrationNumber());
         } catch (ServiceLayerException | DataAccessLayerException e) {
-            throw new RuntimeException(e);
+            Assert.fail();
         }
     }
 }
