@@ -19,7 +19,7 @@
 
 <legend>Edit order: ${order.orderIdentifier}</legend>
 
-<label>Old order identifier:</label>
+<label>Order identifier:</label>
 <input type="text" name="oldOrderIdentifier" value="${order.orderIdentifier}" readonly>
 <br>
 
@@ -52,13 +52,13 @@
           action="/secure/orders/add/${order.orderIdentifier}/cargo">
         <tr>
             <td>
-                <input type="text" value="" name="cargoIdentifier">
+                <input type="text" value="${generated}" name="cargoIdentifier">
             </td>
             <td>
-                <input type="text" value="" name="denomination">
+                <input required="true" type="text" value="" name="denomination">
             </td>
             <td>
-                <input type="text" value="" name="weight">
+                <input required="true" type="text" value="" name="weight">
             </td>
             <td>
                 <button type="submit" class="btn btn-success">add</button>

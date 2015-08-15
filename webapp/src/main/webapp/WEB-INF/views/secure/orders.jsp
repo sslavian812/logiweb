@@ -24,22 +24,23 @@
             <tr>
                 <td>
                     <label>Order Identifier</label>
-                    <input type="text" placeholder="Ex.: 0xbeadface" name="orderIdentifier">
+                    <input  type="text" placeholder="Ex.: 0xbeadface" value="${generated1}" name="orderIdentifier">
                 </td>
 
                 <td>
+                    <label>Cargo Identifier</label>
+                    <input type="text" placeholder="Ex.: 0xdeadbeef" value="${generated2}" name="cargoIdentifier">
+                </td>
+                <td>
                     <label>Cargo denomination</label>
-                    <input type="text" placeholder="Ex.: bricks" name="denomination">
+                    <input required="true" type="text" placeholder="Ex.: bricks" name="denomination">
                 </td>
                 <td>
                     <label>Cargo weight (kg)</label>
-                    <input type="text" placeholder="Ex.: 1500" name="weight">
+                    <input required="true" type="text" placeholder="Ex.: 1500" name="weight">
                 </td>
                 <td>
                     <button type="submit" class="btn btn-success">add</button>
-                </td>
-                <td>
-
                 </td>
             </tr>
         </form>
@@ -82,25 +83,5 @@
 
 </c:if>
 
-<%--<hr>--%>
-
-<%--<form class="form-control" id="adder" method="post" onsubmit="return validateOrderForm()" action="/secure/orders/add">--%>
-    <%--<fieldset>--%>
-        <%--<legend>Add new order</legend>--%>
-        <%--<label>Order Identifier</label>--%>
-        <%--<input type="text" placeholder="Type something…" name="orderIdentifier">--%>
-        <%--<span class="help-block">Example: 0xbeadface</span>--%>
-
-        <%--<label>Cargo denomination</label>--%>
-        <%--<input type="text" placeholder="Type something…" name="denomination">--%>
-        <%--<span class="help-block">Example: bricks</span>--%>
-
-        <%--<label>Cargo weight (kg)</label>--%>
-        <%--<input type="text" placeholder="Type something…" name="weight">--%>
-        <%--<span class="help-block">Example: 1500</span>--%>
-
-        <%--<button type="submit" class="btn">Submit</button>--%>
-    <%--</fieldset>--%>
-<%--</form>--%>
 </body>
 </html>

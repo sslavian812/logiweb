@@ -2,6 +2,7 @@ package ru.tsystems.shalamov.model;
 
 import ru.tsystems.shalamov.entities.OrderEntity;
 import ru.tsystems.shalamov.entities.statuses.OrderStatus;
+import ru.tsystems.shalamov.services.Util;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -15,7 +16,10 @@ public class OrderModel {
 
 
     public OrderModel(String orderIdentifier) {
-        this.orderIdentifier = orderIdentifier;
+        if (orderIdentifier == null || orderIdentifier.isEmpty())
+            this.orderIdentifier = Util.generateRandomId();
+        else
+            this.orderIdentifier = orderIdentifier;
         this.status = OrderStatus.UNASSIGNED;
     }
 

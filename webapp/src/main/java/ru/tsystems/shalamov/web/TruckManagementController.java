@@ -12,7 +12,6 @@ import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.TruckManagementService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -33,7 +32,7 @@ public class TruckManagementController {
             mav.addObject("trucks", trucks);
             return mav;
         } catch (ServiceLayerException e) {
-            return Util.fail("fail list all trucks", e.getMessage());
+            return ColnrollerUtil.fail("fail list all trucks", e.getMessage());
         }
     }
 
@@ -49,7 +48,7 @@ public class TruckManagementController {
                     capacity, TruckStatus.INTACT));
             return new ModelAndView("redirect:/secure/trucks/");
         } catch (ServiceLayerException e) {
-            return Util.fail("fail to add truck ", e.getMessage());
+            return ColnrollerUtil.fail("fail to add truck ", e.getMessage());
         }
     }
 
@@ -59,7 +58,7 @@ public class TruckManagementController {
             truckManagementService.deleteTruckByRegistrationNumber(registrationNumber);
             return new ModelAndView("redirect:/secure/trucks");
         } catch (ServiceLayerException e) {
-            return Util.fail("fail to delete truck " + registrationNumber, e.getMessage());
+            return ColnrollerUtil.fail("fail to delete truck " + registrationNumber, e.getMessage());
         }
     }
 
@@ -74,7 +73,7 @@ public class TruckManagementController {
             mav.addObject("truck", truck);
             return mav;
         } catch (ServiceLayerException e) {
-            return Util.fail("fail to edit truck", e.getMessage());
+            return ColnrollerUtil.fail("fail to edit truck", e.getMessage());
         }
     }
 
@@ -95,7 +94,7 @@ public class TruckManagementController {
             truckManagementService.updateTruck(truckModel, oldRegistrationNumber);
             return new ModelAndView("redirect:/secure/trucks/");
         } catch (ServiceLayerException e) {
-            return Util.fail("fail to edit driver", e.getMessage());
+            return ColnrollerUtil.fail("fail to edit driver", e.getMessage());
         }
     }
 }

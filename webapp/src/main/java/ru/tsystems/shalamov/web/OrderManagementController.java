@@ -10,6 +10,7 @@ import ru.tsystems.shalamov.entities.statuses.CargoStatus;
 import ru.tsystems.shalamov.model.CargoModel;
 import ru.tsystems.shalamov.model.OrderModel;
 import ru.tsystems.shalamov.services.ServiceLayerException;
+import ru.tsystems.shalamov.services.Util;
 import ru.tsystems.shalamov.services.api.OrderManagementService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,9 +34,11 @@ public class OrderManagementController {
             List<OrderModel> orders = orderManagementService.findAllOrders();
             ModelAndView mav = new ModelAndView("/secure/orders");
             mav.addObject("orders", orders);
+            mav.addObject("generated1", Util.generateRandomId());
+            mav.addObject("generated2", Util.generateRandomId());
             return mav;
         } catch (ServiceLayerException e) {
-            return Util.fail("fail list all orders.", e.getMessage());
+            return ColnrollerUtil.fail("fail list all orders.", e.getMessage());
         }
     }
 
@@ -43,19 +46,20 @@ public class OrderManagementController {
     public ModelAndView addOrder(HttpServletRequest request) {
 
         String orderIdentifier = request.getParameter("orderIdentifier");
+        String cargoIdentifier = request.getParameter("cargoIdentifier");
 
         String denomination = request.getParameter("denomination");
         int weight = Integer.parseInt(request.getParameter("weight"));
 
         List<CargoModel> cargoes = new ArrayList<>();
         OrderModel orderModel = new OrderModel(orderIdentifier);
-        cargoes.add(new CargoModel(denomination + weight, denomination, weight, CargoStatus.PREPARED,
+        cargoes.add(new CargoModel(cargoIdentifier, denomination, weight, CargoStatus.PREPARED,
                 orderIdentifier));
         try {
             orderManagementService.createOrderWithCargoes(orderModel, cargoes);
             return new ModelAndView("redirect:/secure/orders/");
         } catch (ServiceLayerException | NumberFormatException e) {
-            return Util.fail("fail to add order " + orderIdentifier, e.getMessage());
+            return ColnrollerUtil.fail("fail to add order " + orderModel.getOrderIdentifier(), e.getMessage());
         }
     }
 
@@ -65,7 +69,7 @@ public class OrderManagementController {
             orderManagementService.deleteOrderByOrderIdentifierIfNotAssigned(orderIdentifier);
             return new ModelAndView("redirect:/secure/orders/");
         } catch (ServiceLayerException e) {
-            return Util.fail("fail to delete order " + orderIdentifier, e.getMessage());
+            return ColnrollerUtil.fail("fail to delete order " + orderIdentifier, e.getMessage());
         }
     }
 
@@ -76,7 +80,7 @@ public class OrderManagementController {
             orderManagementService.deleteCargo(cargoIdentifier);
             return new ModelAndView("redirect:/secure/orders/edit/" + orderIdentifier);
         } catch (ServiceLayerException e) {
-            return Util.fail("fail to delete cargo " + cargoIdentifier, e.getMessage());
+            return ColnrollerUtil.fail("fail to delete cargo " + cargoIdentifier, e.getMessage());
         }
     }
 
@@ -91,9 +95,10 @@ public class OrderManagementController {
             ModelAndView mav = new ModelAndView("/secure/orderEdit");
             mav.addObject("order", order);
             mav.addObject("cargoes", order.getCargoes());
+            mav.addObject("generated", Util.generateRandomId());
             return mav;
         } catch (ServiceLayerException e) {
-            return Util.fail("fail to edit order", e.getMessage());
+            return ColnrollerUtil.fail("fail to edit order", e.getMessage());
         }
     }
 
@@ -110,9 +115,6 @@ public class OrderManagementController {
             String denomination = request.getParameter("denomination");
             int weight = Integer.parseInt(request.getParameter("weight"));
 
-            if (cargoIdentifier.isEmpty())
-                cargoIdentifier = null;
-
             orderManagementService.addCargoToOrder(orderIdentifier,
                     new CargoModel(cargoIdentifier,
                             denomination, weight,
@@ -120,13 +122,13 @@ public class OrderManagementController {
 
             return new ModelAndView("redirect:/secure/orders/edit/" + orderIdentifier);
         } catch (ServiceLayerException e) {
-            return Util.fail("fail to edit order", e.getMessage());
+            return ColnrollerUtil.fail("fail to edit order", e.getMessage());
         }
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ModelAndView updateOrder(HttpServletRequest request) {
-        return Util.fail("not implemented", "");
+        return ColnrollerUtil.fail("not implemented", "");
     }
 }
 

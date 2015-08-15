@@ -34,8 +34,8 @@ public class CargoModel {
 
 
     public CargoModel(String cargoIdentifier, String denomination, int weight, CargoStatus status, String orderIdentifier) {
-        if (cargoIdentifier == null)
-            cargoIdentifier = Util.generateCargoIdentifier(orderIdentifier, denomination, weight);
+        if (cargoIdentifier == null || cargoIdentifier.isEmpty())
+            cargoIdentifier = Util.generateRandomId();
         this.cargoIdentifier = cargoIdentifier;
         this.denomination = denomination;
         this.weight = weight;
@@ -44,7 +44,7 @@ public class CargoModel {
     }
 
     public CargoModel(String denomination, int weight, CargoStatus status, String orderIdentifier) {
-        this.cargoIdentifier = Util.generateCargoIdentifier(orderIdentifier, denomination, weight);
+        this.cargoIdentifier = Util.generateRandomId();
         this.denomination = denomination;
         this.weight = weight;
         this.status = status;

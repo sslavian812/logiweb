@@ -32,13 +32,13 @@
               action="/secure/drivers/add">
             <tr>
                 <td>
-                    <input type="text" placeholder="Ex.: Ivan" name="firstName">
+                    <input required="true" type="text" placeholder="Ex.: Ivan" name="firstName">
                 </td>
                 <td>
-                    <input type="text" placeholder="Ex.: Ivanov" name="lastName">
+                    <input required="true" type="text" placeholder="Ex.: Ivanov" name="lastName">
                 </td>
                 <td>
-                    <input type="text" placeholder="Ex.: vania55" name="personalNumber">
+                    <input required="true" type="text" placeholder="Ex.: vania55" value="${generated}" name="personalNumber">
                 </td>
                 <td>
                     UNASSIGNED

@@ -23,15 +23,15 @@
         <br>
 
         <label>First Name</label>
-        <input type="text" value="${driver.firstName}" name="firstName">
+        <input required="true" type="text" value="${driver.firstName}" name="firstName">
         <span class="help-block">Example: Ivan</span>
 
         <label>Last Name</label>
-        <input type="text" value="${driver.lastName}" name="lastName">
+        <input  required="true" type="text" value="${driver.lastName}" name="lastName">
         <span class="help-block">Example: Bezdomniy</span>
 
         <label>Personal Number</label>
-        <input type="text" value="${driver.personalNumber}" name="personalNumber">
+        <input required="true" type="text" value="${driver.personalNumber}" name="personalNumber">
         <span class="help-block">Example: abacaba, 11111, etc...</span>
 
         <button type="submit" class="btn">Submit</button>

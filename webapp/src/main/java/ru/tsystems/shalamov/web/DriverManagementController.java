@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.tsystems.shalamov.model.DriverModel;
 import ru.tsystems.shalamov.services.ServiceLayerException;
+import ru.tsystems.shalamov.services.Util;
 import ru.tsystems.shalamov.services.api.DriverManagementService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,9 +32,10 @@ public class DriverManagementController {
             List<DriverModel> drivers = driverManagementService.findAllDrivers();
             mav.setViewName("secure/drivers");
             mav.addObject("drivers", drivers);
+            mav.addObject("generated", Util.generateRandomId());
             return mav;
         } catch (ServiceLayerException e) {
-            return Util.fail("fail list all drivers.", e.getMessage());
+            return ColnrollerUtil.fail("fail list all drivers.", e.getMessage());
         }
     }
 
@@ -48,7 +50,7 @@ public class DriverManagementController {
             driverManagementService.addDriver(new DriverModel(firstName, lastName, personalNumber));
             return new ModelAndView("redirect:/secure/drivers/");
         } catch (ServiceLayerException e) {
-            return Util.fail("fail to add driver " + personalNumber, e.getMessage());
+            return ColnrollerUtil.fail("fail to add driver " + personalNumber, e.getMessage());
         }
     }
 
@@ -58,7 +60,7 @@ public class DriverManagementController {
             driverManagementService.deleteDriverByPersonalNumber(personalNumber);
             return new ModelAndView("redirect:/secure/drivers/");
         } catch (ServiceLayerException e) {
-            return Util.fail("fail to delete driver", e.getMessage());
+            return ColnrollerUtil.fail("fail to delete driver", e.getMessage());
         }
     }
 
@@ -73,7 +75,7 @@ public class DriverManagementController {
             mav.addObject("driver", driver);
             return mav;
         } catch (ServiceLayerException e) {
-            return Util.fail("fail to edit driver", e.getMessage());
+            return ColnrollerUtil.fail("fail to edit driver", e.getMessage());
         }
     }
 
@@ -90,7 +92,7 @@ public class DriverManagementController {
             driverManagementService.updateDriver(driverModel, oldPersonalNumber);
             return new ModelAndView("redirect:/secure/drivers/");
         } catch (ServiceLayerException e) {
-            return Util.fail("fail to edit driver", e.getMessage());
+            return ColnrollerUtil.fail("fail to edit driver", e.getMessage());
         }
     }
 }

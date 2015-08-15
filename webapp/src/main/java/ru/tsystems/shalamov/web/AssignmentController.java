@@ -39,7 +39,7 @@ public class AssignmentController {
             return mav;
         } catch (ServiceLayerException e) {
             LOG.warn(e);
-            return Util.fail("fail to edit driver", e.getMessage());
+            return ColnrollerUtil.fail("fail to edit driver", e.getMessage());
         }
     }
 
@@ -47,7 +47,7 @@ public class AssignmentController {
     public ModelAndView constructAssignment(@PathVariable("id") String orderIdentifier) {
         try {
             if (orderIdentifier == null || orderIdentifier.isEmpty()) {
-                return Util.fail("Unable to assign.", "Empty Order Identifier.");
+                return ColnrollerUtil.fail("Unable to assign.", "Empty Order Identifier.");
             }
 
             AvailableToAssignModel available = assignmentService.findAvailableToAssign(orderIdentifier);
@@ -58,7 +58,7 @@ public class AssignmentController {
             return mav;
         } catch (ServiceLayerException e) {
             LOG.warn(e);
-            return Util.fail("unable to construct assignment", e.getMessage());
+            return ColnrollerUtil.fail("unable to construct assignment", e.getMessage());
         }
     }
 
@@ -67,19 +67,19 @@ public class AssignmentController {
         try {
             String orderIdentifier = request.getParameter("orderIdentifier");
             if (orderIdentifier == null || orderIdentifier.isEmpty()) {
-                return Util.fail("fail to assign", "empty order identifier");
+                return ColnrollerUtil.fail("fail to assign", "empty order identifier");
             }
 
             String[] driversPN = request.getParameterValues("driver");
             String truckRN = request.getParameter("truck");
 
             if (driversPN == null || driversPN.length == 0) {
-                return Util.fail("fail to assign", "no drivers provided");
+                return ColnrollerUtil.fail("fail to assign", "no drivers provided");
             }
 
             if (truckRN == null || truckRN.isEmpty()) {
                 LOG.debug("NOo truck provided.");
-                return Util.fail("fail to assign", "no truck provided");
+                return ColnrollerUtil.fail("fail to assign", "no truck provided");
             }
 
             AvailableToAssignModel availableToAssignModel = new AvailableToAssignModel(
@@ -93,7 +93,7 @@ public class AssignmentController {
             return new ModelAndView("redirect:/secure/assignments/");
         } catch (ServiceLayerException e) {
             LOG.warn(e);
-            return Util.fail("unable to show assignments", e.getMessage());
+            return ColnrollerUtil.fail("unable to show assignments", e.getMessage());
         }
     }
 }

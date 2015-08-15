@@ -52,11 +52,8 @@ public class OrderManagementServiceImpl implements OrderManagementService {
                             c.getWeight(),
                             c.getStatus(),
                             orderEntity,
-                            Util.generateCargoIdentifier(
-                                    order.getOrderIdentifier(),
-                                    c.getDenomination(),
-                                    c.getWeight())
-                    )).collect(Collectors.toList());
+                            c.getCargoIdentifier())
+                    ).collect(Collectors.toList());
             cargoEntities.forEach(c -> c.setOrderEntity(orderEntity));
             orderEntity.setCargoEntities(cargoEntities);
             orderDao.create(orderEntity);

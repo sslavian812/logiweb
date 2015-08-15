@@ -26,15 +26,15 @@ function validateDriverForm() {
 
 
     if (! (/^[a-z0-9]+$/i.test(firstName))) {
-        alert('Input must be alphanumeric and not empty');
+        alert('first name must be alphanumeric and not empty');
         return false;
     }
     if (!(/^[a-z0-9]+$/i.test(lastName))) {
-        alert('Input must be alphanumeric and not empty');
+        alert('last name must be alphanumeric and not empty');
         return false;
     }
-    if (!(/^[a-z0-9]+$/i.test(personalNumber))) {
-        alert('Input must be alphanumeric and not empty');
+    if (!(/^[a-z0-9\-]+$/i.test(personalNumber))) {
+        alert('personal number must consist of only numbers, letters and dashes("-")');
         return false;
     }
 
@@ -68,20 +68,25 @@ function validateTruckForm() {
 function validateOrderForm() {
     var form = document.getElementById("adder");
     var orderIdentifier = form.elements.orderIdentifier.value;
-    //var denomination = form.elements.denomination.value;
+    var cargoIdentifier = form.elements.cargoIdentifier.value;
+    var denomination = form.elements.denomination.value;
     var weight = form.elements.weight.value;
 
 
-    if (! (/^[a-z0-9]+$/i.test(orderIdentifier))) {
-        alert('Order identifier must be alphanumeric and not empty');
+    if (! (/^[a-z0-9\-]*$/i.test(orderIdentifier))) {
+        alert('Order identifier must be alphanumeric with dashes("-")');
         return false;
     }
-    //if (!(/^[a-z0-9]+$/i.test(denomination))) {
-    //    alert('Input must be alphanumeric and not empty');
-    //    return false;
-    //}
-    if (!(/^[0-9]+$/i.test(weight))) {
-        alert('weight must be numeric and not empty');
+    if (!(/^[a-z0-9\-]*$/i.test(cargoIdentifier))) {
+        alert('cargo identifier must be alphanumeric with dashes("-")');
+        return false;
+    }
+    if (!(/^[a-z0-9 ]+$/i.test(denomination))) {
+        alert('denomination must be alphanumeric and not empty');
+        return false;
+    }
+    if ((!(/^[0-9]+$/i.test(weight))) || parseInt(weight) < 1) {
+        alert('weight must be numeric and at least 1');
         return false;
     }
 
@@ -96,12 +101,12 @@ function validateCargoForm() {
     var weight = form.elements.weight.value;
 
 
-    if (! (/^[a-z0-9]*$/i.test(cargoIdentifier))) {
-        alert('Order identifier must be alphanumeric or empty');
+    if (! (/^[a-z0-9\-]*$/i.test(cargoIdentifier))) {
+        alert('Cargo identifier must be alphanumeric with dashes("-")');
         return false;
     }
     if (!(/^[a-z0-9 ]+$/i.test(denomination))) {
-        alert('Input must be alphanumeric with spaces and not empty');
+        alert('denomination must be alphanumeric with spaces and not empty');
         return false;
     }
     if (!(/^[0-9]+$/i.test(weight))) {
