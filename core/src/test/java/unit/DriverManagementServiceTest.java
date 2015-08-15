@@ -153,7 +153,7 @@ public class DriverManagementServiceTest {
 
             driverManagementService.addDriver(new DriverModel(driver));
 
-        } catch (ServiceLayerException | DataAccessLayerException e) {
+        } catch (DataAccessLayerException e) {
             Assert.fail();
         }
     }
@@ -167,7 +167,7 @@ public class DriverManagementServiceTest {
 
             driverManagementService.updateDriver(new DriverModel(driver), driver.getPersonalNumber());
 
-        } catch (ServiceLayerException | DataAccessLayerException e) {
+        } catch (DataAccessLayerException e) {
             Assert.fail();
         }
     }
@@ -183,7 +183,7 @@ public class DriverManagementServiceTest {
 
             // truing to change pn "1111" to "2222" for driver 1
             driverManagementService.updateDriver(new DriverModel(driver2), driver1.getPersonalNumber());
-        } catch (ServiceLayerException | DataAccessLayerException e) {
+        } catch (DataAccessLayerException e) {
             Assert.fail();
         }
     }
@@ -196,7 +196,7 @@ public class DriverManagementServiceTest {
             DriverEntity driver = new DriverEntity("vasia", "vaskov", "1111");
             when(driverDao.findByPersonalNumber(Mockito.any(String.class))).thenReturn(null);
             driverManagementService.deleteDriverByPersonalNumber(driver.getPersonalNumber());
-        } catch (ServiceLayerException | DataAccessLayerException e) {
+        } catch (DataAccessLayerException e) {
             Assert.fail();
         }
     }
@@ -215,7 +215,7 @@ public class DriverManagementServiceTest {
             when(driverDao.findByPersonalNumber(driver.getPersonalNumber())).thenReturn(driver);
 
             driverManagementService.deleteDriverByPersonalNumber(driver.getPersonalNumber());
-        } catch (ServiceLayerException | DataAccessLayerException e) {
+        } catch (DataAccessLayerException e) {
             Assert.fail();
         }
     }

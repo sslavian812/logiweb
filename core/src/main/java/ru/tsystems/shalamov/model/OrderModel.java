@@ -22,9 +22,10 @@ public class OrderModel {
     public OrderModel(OrderEntity orderEntity) {
         this.orderIdentifier = orderEntity.getOrderIdentifier();
         this.status = orderEntity.getStatus();
-        this.cargoes = orderEntity.getCargoEntities().stream()
-                .map(c -> new CargoModel(c)).collect(Collectors.toList());
-        if(orderEntity.getTruckEntity()!= null)
+        if (orderEntity.getCargoEntities() != null)
+            this.cargoes = orderEntity.getCargoEntities().stream()
+                    .map(c -> new CargoModel(c)).collect(Collectors.toList());
+        if (orderEntity.getTruckEntity() != null)
             this.truckRegistrationNumber = orderEntity.getTruckEntity().getRegistrationNumber();
     }
 

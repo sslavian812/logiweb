@@ -75,7 +75,7 @@ public class DriverActivityServiceTest {
     }
 
     @Test
-    public void beginShiftForDriver() throws ServiceLayerException {
+    public void beginShiftForDriver() {
         try {
             DriverEntity driver = new DriverEntity("vasia", "vasia", "vasia");
             DriverStatusEntity status = new DriverStatusEntity(driver);
@@ -113,7 +113,8 @@ public class DriverActivityServiceTest {
     public void endShiftForFreeDriver() throws ServiceLayerException {
         try {
             DriverEntity driver = new DriverEntity("vasia", "vasia", "vasia");
-
+            DriverStatusEntity status = new DriverStatusEntity(driver);
+            driver.setDriverStatusEntity(status);
 
             when(driverDao.findByPersonalNumber(Mockito.anyString())).thenReturn(driver);
             when(shiftDao.findActiveShiftByDriver(Mockito.any(DriverEntity.class))).thenReturn(null);

@@ -136,7 +136,7 @@ public class TruckManagementServiceTest {
 
             truckManagementService.addTruck(new TruckModel(truck));
 
-        } catch (ServiceLayerException | DataAccessLayerException e) {
+        } catch (DataAccessLayerException e) {
             Assert.fail();
         }
     }
@@ -150,7 +150,7 @@ public class TruckManagementServiceTest {
 
             truckManagementService.updateTruck(new TruckModel(truck), truck.getRegistrationNumber());
 
-        } catch (ServiceLayerException | DataAccessLayerException e) {
+        } catch (DataAccessLayerException e) {
             Assert.fail();
         }
     }
@@ -166,7 +166,7 @@ public class TruckManagementServiceTest {
 
             // truing to change rn "11111" to "22222" for truck 1
             truckManagementService.updateTruck(new TruckModel(truck2), truck1.getRegistrationNumber());
-        } catch (ServiceLayerException | DataAccessLayerException e) {
+        } catch (DataAccessLayerException e) {
             Assert.fail();
         }
     }
@@ -179,7 +179,7 @@ public class TruckManagementServiceTest {
             when(truckDao.findByRegistrationNumber(Mockito.any(String.class))).thenReturn(null);
             TruckEntity truck = new TruckEntity(1, "xx11111", 1000, TruckStatus.INTACT);
             truckManagementService.deleteTruckByRegistrationNumber(truck.getRegistrationNumber());
-        } catch (ServiceLayerException | DataAccessLayerException e) {
+        } catch (DataAccessLayerException e) {
             Assert.fail();
         }
     }
@@ -200,7 +200,7 @@ public class TruckManagementServiceTest {
             when(truckDao.findByRegistrationNumber(truck.getRegistrationNumber())).thenReturn(truck);
 
             truckManagementService.deleteTruckByRegistrationNumber(truck.getRegistrationNumber());
-        } catch (ServiceLayerException | DataAccessLayerException e) {
+        } catch (DataAccessLayerException e) {
             Assert.fail();
         }
     }
