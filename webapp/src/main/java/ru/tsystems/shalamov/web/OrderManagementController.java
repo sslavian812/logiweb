@@ -70,7 +70,7 @@ public class OrderManagementController {
                 orderIdentifier));
         try {
             orderManagementService.createOrderWithCargoes(orderModel, cargoes);
-            return new ModelAndView("redirect:/secure/orders/");
+            return new ModelAndView("redirect:/secure/orders/edit/" + orderIdentifier);
         } catch (ServiceLayerException | NumberFormatException e) {
             return ControllerUtil.fail("fail to add order " + orderModel.getOrderIdentifier(), e.getMessage());
         }

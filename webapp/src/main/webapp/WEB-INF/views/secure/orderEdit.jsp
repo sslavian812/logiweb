@@ -69,6 +69,10 @@
         </tr>
     </form>
 
+    <form method="get" action="/secure/orders/">
+        <button type="submit" class="btn btn-info">OK</button>
+    </form>
+
 </table>
 
 
