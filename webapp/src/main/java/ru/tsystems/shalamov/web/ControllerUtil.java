@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by viacheslav on 19.07.2015.
  */
-public class ColnrollerUtil {
+public class ControllerUtil {
     public static ModelAndView fail(String message, String cause) {
         ModelAndView mav = new ModelAndView("fail");
         mav.addObject("message", message);

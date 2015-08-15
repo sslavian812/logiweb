@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.tsystems.shalamov.entities.statuses.CargoStatus;
+import ru.tsystems.shalamov.entities.statuses.OrderStatus;
 import ru.tsystems.shalamov.model.CargoModel;
 import ru.tsystems.shalamov.model.OrderModel;
 import ru.tsystems.shalamov.services.ServiceLayerException;
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by viacheslav on 09.07.2015.
@@ -32,13 +35,18 @@ public class OrderManagementController {
     public ModelAndView showOrders() {
         try {
             List<OrderModel> orders = orderManagementService.findAllOrders();
+            Stream<OrderModel> stream = Stream.concat(
+                    orders.stream().filter(o -> o.getStatus().equals(OrderStatus.UNASSIGNED)),
+                    Stream.concat(orders.stream().filter(o -> o.getStatus().equals(OrderStatus.IN_PROGRESS)),
+                            orders.stream().filter(o -> o.getStatus().equals(OrderStatus.COMPLETED))));
+            List<OrderModel> sortedOrders = stream.collect(Collectors.toList());
             ModelAndView mav = new ModelAndView("/secure/orders");
-            mav.addObject("orders", orders);
+            mav.addObject("orders", sortedOrders);
             mav.addObject("generated1", Util.generateRandomId());
             mav.addObject("generated2", Util.generateRandomId());
             return mav;
         } catch (ServiceLayerException e) {
-            return ColnrollerUtil.fail("fail list all orders.", e.getMessage());
+            return ControllerUtil.fail("fail list all orders.", e.getMessage());
         }
     }
 
@@ -59,7 +67,7 @@ public class OrderManagementController {
             orderManagementService.createOrderWithCargoes(orderModel, cargoes);
             return new ModelAndView("redirect:/secure/orders/");
         } catch (ServiceLayerException | NumberFormatException e) {
-            return ColnrollerUtil.fail("fail to add order " + orderModel.getOrderIdentifier(), e.getMessage());
+            return ControllerUtil.fail("fail to add order " + orderModel.getOrderIdentifier(), e.getMessage());
         }
     }
 
@@ -69,18 +77,18 @@ public class OrderManagementController {
             orderManagementService.deleteOrderByOrderIdentifierIfNotAssigned(orderIdentifier);
             return new ModelAndView("redirect:/secure/orders/");
         } catch (ServiceLayerException e) {
-            return ColnrollerUtil.fail("fail to delete order " + orderIdentifier, e.getMessage());
+            return ControllerUtil.fail("fail to delete order " + orderIdentifier, e.getMessage());
         }
     }
 
     @RequestMapping(value = "/{order}/cargo/delete/{cargo}", method = RequestMethod.POST)
     public ModelAndView deleteCargo(@PathVariable("order") String orderIdentifier,
-            @PathVariable("cargo") String cargoIdentifier) {
+                                    @PathVariable("cargo") String cargoIdentifier) {
         try {
             orderManagementService.deleteCargo(cargoIdentifier);
             return new ModelAndView("redirect:/secure/orders/edit/" + orderIdentifier);
         } catch (ServiceLayerException e) {
-            return ColnrollerUtil.fail("fail to delete cargo " + cargoIdentifier, e.getMessage());
+            return ControllerUtil.fail("fail to delete cargo " + cargoIdentifier, e.getMessage());
         }
     }
 
@@ -98,7 +106,7 @@ public class OrderManagementController {
             mav.addObject("generated", Util.generateRandomId());
             return mav;
         } catch (ServiceLayerException e) {
-            return ColnrollerUtil.fail("fail to edit order", e.getMessage());
+            return ControllerUtil.fail("fail to edit order", e.getMessage());
         }
     }
 
@@ -122,13 +130,13 @@ public class OrderManagementController {
 
             return new ModelAndView("redirect:/secure/orders/edit/" + orderIdentifier);
         } catch (ServiceLayerException e) {
-            return ColnrollerUtil.fail("fail to edit order", e.getMessage());
+            return ControllerUtil.fail("fail to edit order", e.getMessage());
         }
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ModelAndView updateOrder(HttpServletRequest request) {
-        return ColnrollerUtil.fail("not implemented", "");
+        return ControllerUtil.fail("not implemented", "");
     }
 }
 

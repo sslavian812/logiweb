@@ -13,6 +13,8 @@ import ru.tsystems.shalamov.services.api.TruckManagementService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by viacheslav on 10.07.2015.
@@ -28,11 +30,18 @@ public class TruckManagementController {
     public ModelAndView showTrucks() {
         try {
             List<TruckModel> trucks = truckManagementService.findAllTrucks();
+
+            Stream<TruckModel> stream = Stream.concat(
+                    trucks.stream().filter(t -> t.getStatus().equals(TruckStatus.INTACT)),
+                    Stream.concat(trucks.stream().filter(t -> t.getStatus().equals(TruckStatus.ASSIGNED)),
+                            trucks.stream().filter(t -> t.getStatus().equals(TruckStatus.BROKEN))));
+            List<TruckModel> sortedTrucks = stream.collect(Collectors.toList());
+
             ModelAndView mav = new ModelAndView("/secure/trucks");
-            mav.addObject("trucks", trucks);
+            mav.addObject("trucks", sortedTrucks);
             return mav;
         } catch (ServiceLayerException e) {
-            return ColnrollerUtil.fail("fail list all trucks", e.getMessage());
+            return ControllerUtil.fail("fail list all trucks", e.getMessage());
         }
     }
 
@@ -48,7 +57,7 @@ public class TruckManagementController {
                     capacity, TruckStatus.INTACT));
             return new ModelAndView("redirect:/secure/trucks/");
         } catch (ServiceLayerException e) {
-            return ColnrollerUtil.fail("fail to add truck ", e.getMessage());
+            return ControllerUtil.fail("fail to add truck ", e.getMessage());
         }
     }
 
@@ -58,7 +67,7 @@ public class TruckManagementController {
             truckManagementService.deleteTruckByRegistrationNumber(registrationNumber);
             return new ModelAndView("redirect:/secure/trucks");
         } catch (ServiceLayerException e) {
-            return ColnrollerUtil.fail("fail to delete truck " + registrationNumber, e.getMessage());
+            return ControllerUtil.fail("fail to delete truck " + registrationNumber, e.getMessage());
         }
     }
 
@@ -73,7 +82,7 @@ public class TruckManagementController {
             mav.addObject("truck", truck);
             return mav;
         } catch (ServiceLayerException e) {
-            return ColnrollerUtil.fail("fail to edit truck", e.getMessage());
+            return ControllerUtil.fail("fail to edit truck", e.getMessage());
         }
     }
 
@@ -94,7 +103,7 @@ public class TruckManagementController {
             truckManagementService.updateTruck(truckModel, oldRegistrationNumber);
             return new ModelAndView("redirect:/secure/trucks/");
         } catch (ServiceLayerException e) {
-            return ColnrollerUtil.fail("fail to edit driver", e.getMessage());
+            return ControllerUtil.fail("fail to edit driver", e.getMessage());
         }
     }
 }

@@ -7,14 +7,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import ru.tsystems.shalamov.entities.statuses.OrderStatus;
 import ru.tsystems.shalamov.model.AvailableToAssignModel;
 import ru.tsystems.shalamov.model.DriverAssignmentModel;
 import ru.tsystems.shalamov.services.ServiceLayerException;
-import ru.tsystems.shalamov.services.api.*;
+import ru.tsystems.shalamov.services.api.AssignmentService;
+import ru.tsystems.shalamov.services.api.DriverInfoService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by viacheslav on 10.07.2015.
@@ -34,12 +38,18 @@ public class AssignmentController {
     public ModelAndView showAssignments() {
         try {
             List<DriverAssignmentModel> assignments = driverInfoService.findAllDriverAssignments();
+
+            Stream<DriverAssignmentModel> stream = Stream.concat(
+                    assignments.stream().filter(a -> a.getOrderStatus().equals(OrderStatus.IN_PROGRESS)),
+                    assignments.stream().filter(a -> a.getOrderStatus().equals(OrderStatus.COMPLETED)));
+            List<DriverAssignmentModel> sortedAssignments = stream.collect(Collectors.toList());
+
             ModelAndView mav = new ModelAndView("secure/assignments");
-            mav.addObject("assignments", assignments);
+            mav.addObject("assignments", sortedAssignments);
             return mav;
         } catch (ServiceLayerException e) {
             LOG.warn(e);
-            return ColnrollerUtil.fail("fail to edit driver", e.getMessage());
+            return ControllerUtil.fail("fail to edit driver", e.getMessage());
         }
     }
 
@@ -47,7 +57,7 @@ public class AssignmentController {
     public ModelAndView constructAssignment(@PathVariable("id") String orderIdentifier) {
         try {
             if (orderIdentifier == null || orderIdentifier.isEmpty()) {
-                return ColnrollerUtil.fail("Unable to assign.", "Empty Order Identifier.");
+                return ControllerUtil.fail("Unable to assign.", "Empty Order Identifier.");
             }
 
             AvailableToAssignModel available = assignmentService.findAvailableToAssign(orderIdentifier);
@@ -58,7 +68,7 @@ public class AssignmentController {
             return mav;
         } catch (ServiceLayerException e) {
             LOG.warn(e);
-            return ColnrollerUtil.fail("unable to construct assignment", e.getMessage());
+            return ControllerUtil.fail("unable to construct assignment", e.getMessage());
         }
     }
 
@@ -67,19 +77,19 @@ public class AssignmentController {
         try {
             String orderIdentifier = request.getParameter("orderIdentifier");
             if (orderIdentifier == null || orderIdentifier.isEmpty()) {
-                return ColnrollerUtil.fail("fail to assign", "empty order identifier");
+                return ControllerUtil.fail("fail to assign", "empty order identifier");
             }
 
             String[] driversPN = request.getParameterValues("driver");
             String truckRN = request.getParameter("truck");
 
             if (driversPN == null || driversPN.length == 0) {
-                return ColnrollerUtil.fail("fail to assign", "no drivers provided");
+                return ControllerUtil.fail("fail to assign", "no drivers provided");
             }
 
             if (truckRN == null || truckRN.isEmpty()) {
                 LOG.debug("NOo truck provided.");
-                return ColnrollerUtil.fail("fail to assign", "no truck provided");
+                return ControllerUtil.fail("fail to assign", "no truck provided");
             }
 
             AvailableToAssignModel availableToAssignModel = new AvailableToAssignModel(
@@ -93,7 +103,7 @@ public class AssignmentController {
             return new ModelAndView("redirect:/secure/assignments/");
         } catch (ServiceLayerException e) {
             LOG.warn(e);
-            return ColnrollerUtil.fail("unable to show assignments", e.getMessage());
+            return ControllerUtil.fail("unable to show assignments", e.getMessage());
         }
     }
 }
