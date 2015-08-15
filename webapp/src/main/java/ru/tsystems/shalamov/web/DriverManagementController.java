@@ -40,9 +40,14 @@ public class DriverManagementController {
                             Stream.concat(drivers.stream().filter(d -> d.getDriverStatus().equals(DriverStatus.AUXILIARY)),
                                     drivers.stream().filter(d -> d.getDriverStatus().equals(DriverStatus.PRIMARY)))));
             List<DriverModel> sortedDrivers = stream.collect(Collectors.toList());
+
+            List<String> colors = sortedDrivers.stream()
+                    .map(d -> ControllerUtil.mapDriverStatusToColor(d.getDriverStatus()))
+                    .collect(Collectors.toList());
             mav.setViewName("secure/drivers");
             mav.addObject("drivers", sortedDrivers);
             mav.addObject("generated", Util.generateRandomId());
+            mav.addObject("colors", colors);
             return mav;
         } catch (ServiceLayerException e) {
             return ControllerUtil.fail("fail list all drivers.", e.getMessage());

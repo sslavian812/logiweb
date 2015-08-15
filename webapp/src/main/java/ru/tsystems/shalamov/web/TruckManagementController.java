@@ -37,8 +37,13 @@ public class TruckManagementController {
                             trucks.stream().filter(t -> t.getStatus().equals(TruckStatus.BROKEN))));
             List<TruckModel> sortedTrucks = stream.collect(Collectors.toList());
 
+            List<String> colors = sortedTrucks.stream()
+                    .map(t -> ControllerUtil.mapTruckStatusToColor(t.getStatus()))
+                    .collect(Collectors.toList());
+
             ModelAndView mav = new ModelAndView("/secure/trucks");
             mav.addObject("trucks", sortedTrucks);
+            mav.addObject("colors", colors);
             return mav;
         } catch (ServiceLayerException e) {
             return ControllerUtil.fail("fail list all trucks", e.getMessage());

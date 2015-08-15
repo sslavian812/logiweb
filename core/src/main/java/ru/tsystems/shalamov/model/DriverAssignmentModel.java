@@ -2,13 +2,11 @@ package ru.tsystems.shalamov.model;
 
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 import ru.tsystems.shalamov.entities.statuses.OrderStatus;
-import ru.tsystems.shalamov.services.DriverAssignment;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Simple POJO class, aggregating information about assignment.
@@ -39,7 +37,7 @@ public class DriverAssignmentModel {
     private DriverStatus driverStatus;
 
     public DriverAssignmentModel() {
-        driverPersonalNumber=null;
+        driverPersonalNumber = null;
         coDrivers = new ArrayList<>();
         truckRegistrationNumber = null;
         orderIdentifier = null;
@@ -63,16 +61,6 @@ public class DriverAssignmentModel {
         this.cargoes = cargoModelList;
         this.coDrivers = driverModelList;
 
-    }
-
-    public DriverAssignmentModel(DriverAssignment assignment) {
-        this.driverPersonalNumber = assignment.getDriverPersonalNumber();
-        this.truckRegistrationNumber = assignment.getTruckRegistrationNumber();
-        this.orderIdentifier = assignment.getOrderIdentifier();
-        this.driverStatus = assignment.getDriverStatus();
-
-        this.cargoes = assignment.getCargos().stream().map(c -> new CargoModel(c)).collect(Collectors.toList());
-        this.coDrivers = assignment.getCoDrivers().stream().map(d -> new DriverModel(d)).collect(Collectors.toList());
     }
 
     public OrderStatus getOrderStatus() {

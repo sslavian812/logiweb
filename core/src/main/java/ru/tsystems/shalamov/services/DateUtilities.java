@@ -1,4 +1,4 @@
-package ru.tsystems.shalamov;
+package ru.tsystems.shalamov.services;
 
 import ru.tsystems.shalamov.entities.ShiftEntity;
 

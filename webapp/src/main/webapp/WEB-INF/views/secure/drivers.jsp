@@ -52,8 +52,8 @@
             </tr>
         </form>
 
-        <c:forEach var="driver" items="${drivers}">
-            <tr>
+        <c:forEach var="driver" items="${drivers}" varStatus="loop">
+            <tr class="${colors.get(loop.index)}">
                 <td>${driver.firstName}</td>
                 <td>${driver.lastName}</td>
                 <td>${driver.personalNumber}</td>

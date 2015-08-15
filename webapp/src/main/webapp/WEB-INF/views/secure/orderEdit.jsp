@@ -26,19 +26,21 @@
 
 <table class="table table-striped">
     <tr>
-        <td>cargo identifier</td>
-        <td>cargo denomination</td>
-        <td>cargo weight(kg)</td>
+        <td>identifier</td>
+        <td>denomination</td>
+        <td>weight(kg)</td>
+        <td>status</td>
         <td>
             delete
         </td>
     </tr>
 
-    <c:forEach var="cargo" items="${cargoes}">
-        <tr>
+    <c:forEach var="cargo" items="${cargoes}" varStatus="loop">
+        <tr class="${colors.get(loop.index)}">
             <td>${cargo.cargoIdentifier}</td>
             <td>${cargo.denomination}</td>
             <td>${cargo.weight}</td>
+            <td>${cargo.status}</td>
             <td>
                 <form method="post"
                       action="/secure/orders/${order.orderIdentifier}/cargo/delete/${cargo.cargoIdentifier}">
@@ -60,6 +62,7 @@
             <td>
                 <input required="true" type="text" value="" name="weight">
             </td>
+            <td>PREPARED</td>
             <td>
                 <button type="submit" class="btn btn-success">add</button>
             </td>

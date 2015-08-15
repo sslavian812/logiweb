@@ -1,7 +1,7 @@
 package ru.tsystems.shalamov.dao.impl;
 
 import org.springframework.stereotype.Repository;
-import ru.tsystems.shalamov.DateUtilities;
+import ru.tsystems.shalamov.services.DateUtilities;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.DriverDao;
 import ru.tsystems.shalamov.entities.DriverEntity;

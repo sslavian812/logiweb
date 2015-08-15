@@ -40,8 +40,13 @@ public class OrderManagementController {
                     Stream.concat(orders.stream().filter(o -> o.getStatus().equals(OrderStatus.IN_PROGRESS)),
                             orders.stream().filter(o -> o.getStatus().equals(OrderStatus.COMPLETED))));
             List<OrderModel> sortedOrders = stream.collect(Collectors.toList());
+
+            List<String> colors = sortedOrders.stream()
+                    .map(o -> ControllerUtil.mapOrderStatusToColor(o.getStatus()))
+                    .collect(Collectors.toList());
             ModelAndView mav = new ModelAndView("/secure/orders");
             mav.addObject("orders", sortedOrders);
+            mav.addObject("colors", colors);
             mav.addObject("generated1", Util.generateRandomId());
             mav.addObject("generated2", Util.generateRandomId());
             return mav;
@@ -100,9 +105,15 @@ public class OrderManagementController {
             if (order == null) {
                 throw new ServiceLayerException("No such order");
             }
+
+            List<CargoModel> cargoes = order.getCargoes();
+            List<String> colors = cargoes.stream()
+                    .map(c -> ControllerUtil.mapCargoStatusToColor(c.getStatus()))
+                    .collect(Collectors.toList());
             ModelAndView mav = new ModelAndView("/secure/orderEdit");
             mav.addObject("order", order);
-            mav.addObject("cargoes", order.getCargoes());
+            mav.addObject("cargoes", cargoes);
+            mav.addObject("colors", colors);
             mav.addObject("generated", Util.generateRandomId());
             return mav;
         } catch (ServiceLayerException e) {

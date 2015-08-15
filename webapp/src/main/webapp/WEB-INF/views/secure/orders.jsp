@@ -55,8 +55,8 @@
         </tr>
 
 
-        <c:forEach var="order" items="${orders}">
-            <tr>
+        <c:forEach var="order" items="${orders}" varStatus="loop">
+            <tr class="${colors.get(loop.index)}">
                 <td>${order.orderIdentifier}</td>
                 <td>${order.status}</td>
                 <td>

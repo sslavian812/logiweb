@@ -5,11 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97b6ffa6-d5ad-44c9-a8d8-08dc0a3d0b68" name="Default" comment="">
-      <change type="MOVED" beforePath="C:\TS\logiweb\webapp\src\main\java\ru\tsystems\shalamov\web\ColnrollerUtil.java" afterPath="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/ControllerUtil.java" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\core\src\main\java\ru\tsystems\shalamov\ApplicationContext.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\TS\logiweb\core\src\main\java\ru\tsystems\shalamov\services\DriverAssignment.java" afterPath="" />
+      <change type="MOVED" beforePath="C:\TS\logiweb\core\src\main\java\ru\tsystems\shalamov\DateUtilities.java" afterPath="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/DateUtilities.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/AssignmentController.java" afterPath="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/AssignmentController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/ControllerUtil.java" afterPath="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/ControllerUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/model/DriverAssignmentModel.java" afterPath="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/model/DriverAssignmentModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/dao/impl/DriverDaoImpl.java" afterPath="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/dao/impl/DriverDaoImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/DriverManagementController.java" afterPath="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/DriverManagementController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/OrderManagementController.java" afterPath="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/OrderManagementController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/dao/impl/ShiftDaoImpl.java" afterPath="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/dao/impl/ShiftDaoImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/TruckManagementController.java" afterPath="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/TruckManagementController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/assignments.jsp" afterPath="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/assignments.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/drivers.jsp" afterPath="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/drivers.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/orderEdit.jsp" afterPath="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/orderEdit.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/orders.jsp" afterPath="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/orders.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/trucks.jsp" afterPath="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/trucks.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="logiweb.iws" />
@@ -70,101 +81,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="OrderManagementController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/OrderManagementController.java">
+      <file leaf-file-name="DriverAssignmentModel.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/model/DriverAssignmentModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="99" max-vertical-offset="3302">
-              <caret line="42" column="63" selection-start-line="42" selection-start-column="63" selection-end-line="42" selection-end-column="63" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TruckManagementController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/TruckManagementController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="224" max-vertical-offset="2626">
-              <caret line="36" column="50" selection-start-line="36" selection-start-column="50" selection-end-line="36" selection-end-column="50" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OrderModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/model/OrderModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2366">
-              <caret line="26" column="51" selection-start-line="26" selection-start-column="51" selection-end-line="26" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CargoModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/model/CargoModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="2236">
-              <caret line="35" column="11" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="validation.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/resources/core/js/validation.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3198">
-              <caret line="24" column="60" selection-start-line="24" selection-start-column="60" selection-end-line="24" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DriverManagementController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/DriverManagementController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="156" max-vertical-offset="2574">
-              <caret line="46" column="40" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AssignmentController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/AssignmentController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="328" max-vertical-offset="2522">
-              <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoggerFilter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/LoggerFilter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1196">
-              <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ControllerUtil.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/ControllerUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20357941" vertical-offset="0" max-vertical-offset="894">
-              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="assignments.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/assignments.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1196">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.49943247" vertical-offset="1146" max-vertical-offset="2522">
+              <caret line="70" column="11" selection-start-line="70" selection-start-column="11" selection-end-line="70" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -178,8 +99,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/persistence/src/main/java/ru/tsystems/shalamov/services/impl/DriverInfoServiceImpl.java" />
-        <option value="$PROJECT_DIR$/guide.md" />
         <option value="$PROJECT_DIR$/webapp/pom.xml" />
         <option value="$PROJECT_DIR$/ws/pom.xml" />
         <option value="$PROJECT_DIR$/obu/pom.xml" />
@@ -207,7 +126,6 @@
         <option value="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/TruckManagementServiceImpl.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/api/TruckManagementService.java" />
         <option value="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/truckEdit.jsp" />
-        <option value="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/trucks.jsp" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/core/pom.xml" />
         <option value="$PROJECT_DIR$/core/src/test/java/unit/DriverManagementServiceTest.java" />
@@ -217,18 +135,21 @@
         <option value="$PROJECT_DIR$/core/src/test/java/unit/OrderManagementServiceTest.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/Util.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/OrderManagementServiceImpl.java" />
-        <option value="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/drivers.jsp" />
         <option value="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/driverEdit.jsp" />
         <option value="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/model/CargoModel.java" />
-        <option value="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/orderEdit.jsp" />
-        <option value="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/orders.jsp" />
         <option value="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/model/OrderModel.java" />
         <option value="$PROJECT_DIR$/webapp/src/main/webapp/resources/core/js/validation.js" />
-        <option value="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/DriverManagementController.java" />
-        <option value="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/AssignmentController.java" />
-        <option value="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/TruckManagementController.java" />
-        <option value="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/OrderManagementController.java" />
         <option value="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/ControllerUtil.java" />
+        <option value="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/drivers.jsp" />
+        <option value="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/DriverManagementController.java" />
+        <option value="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/TruckManagementController.java" />
+        <option value="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/AssignmentController.java" />
+        <option value="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/assignments.jsp" />
+        <option value="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/orders.jsp" />
+        <option value="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/trucks.jsp" />
+        <option value="$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/OrderManagementController.java" />
+        <option value="$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/orderEdit.jsp" />
+        <option value="$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/model/DriverAssignmentModel.java" />
       </list>
     </option>
   </component>
@@ -391,272 +312,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="secure" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -724,36 +379,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logiweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shalamov" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -788,6 +413,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logiweb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shalamov" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1715,7 +1370,7 @@
       <workItem from="1438377684016" duration="66906000" />
       <workItem from="1438859734738" duration="42984000" />
       <workItem from="1439201486960" duration="30001000" />
-      <workItem from="1439317058534" duration="69741000" />
+      <workItem from="1439317058534" duration="74971000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1434903633348</created>
@@ -1775,7 +1430,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="730945000" />
+    <option name="totallyTimeSpent" value="736175000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1945,49 +1600,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/api/AssignmentService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3802497" vertical-offset="107" max-vertical-offset="988">
-          <caret line="20" column="102" selection-start-line="20" selection-start-column="83" selection-end-line="20" selection-end-column="102" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/obu/src/main/webapp/WEB-INF/faces-config.xml">
-      <provider editor-type-id="com.intellij.jsf.yfilesGraph.editor.FacesNavigationFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="858">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/obu/src/main/webapp/login.xhtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="8.914286" vertical-offset="312" max-vertical-offset="1196">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/api/DriverActivityService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="149" max-vertical-offset="1768">
-          <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/obu/src/main/java/ru/tsystems/shalamov/ws/DriverActivityWebService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1215" max-vertical-offset="4394">
-          <caret line="64" column="16" selection-start-line="64" selection-start-column="16" selection-end-line="64" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ws/src/main/java/ru/tsystems/shalamov/ws/DriverActivityWebServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="3640">
@@ -2000,14 +1612,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.6285715" vertical-offset="0" max-vertical-offset="650">
           <caret line="17" column="43" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/obu/src/main/webapp/driver.xhtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="25.6" vertical-offset="2170" max-vertical-offset="3016">
-          <caret line="49" column="37" selection-start-line="49" selection-start-column="37" selection-end-line="49" selection-end-column="37" />
           <folding />
         </state>
       </provider>
@@ -2214,14 +1818,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/Util.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="156" max-vertical-offset="676">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/impl/OrderManagementServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="988" max-vertical-offset="5590">
@@ -2229,14 +1825,6 @@
           <folding>
             <element signature="e#9008#9028#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/trucks.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-25.485714" vertical-offset="44" max-vertical-offset="2834">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2264,30 +1852,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/drivers.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.885715" vertical-offset="624" max-vertical-offset="2236">
-          <caret line="40" column="43" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/orderEdit.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.657143" vertical-offset="961" max-vertical-offset="2054">
-          <caret line="54" column="22" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/orders.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.6" vertical-offset="480" max-vertical-offset="2418">
-          <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/model/OrderModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2366">
@@ -2304,66 +1868,232 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/resources/core/js/validation.js">
+    <entry file="file://$PROJECT_DIR$/obu/src/main/webapp/driver.xhtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3198">
-          <caret line="24" column="60" selection-start-line="24" selection-start-column="60" selection-end-line="24" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/assignments.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1196">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/OrderManagementController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="99" max-vertical-offset="3302">
-          <caret line="42" column="63" selection-start-line="42" selection-start-column="63" selection-end-line="42" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/DriverManagementController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="156" max-vertical-offset="2574">
-          <caret line="46" column="40" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/TruckManagementController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="224" max-vertical-offset="2626">
-          <caret line="36" column="50" selection-start-line="36" selection-start-column="50" selection-end-line="36" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/AssignmentController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="328" max-vertical-offset="2522">
-          <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/LoggerFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1196">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        <state vertical-scroll-proportion="9.0" vertical-offset="1589" max-vertical-offset="3016">
+          <caret line="49" column="37" selection-start-line="49" selection-start-column="37" selection-end-line="49" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/ControllerUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20357941" vertical-offset="0" max-vertical-offset="894">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        <state vertical-scroll-proportion="1.2214766" vertical-offset="234" max-vertical-offset="1768">
+          <caret line="57" column="51" selection-start-line="57" selection-start-column="51" selection-end-line="57" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/LoggerFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20658343" vertical-offset="0" max-vertical-offset="1196">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/services/Util.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5816555" vertical-offset="0" max-vertical-offset="894">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/resources/core/js/validation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6979866" vertical-offset="0" max-vertical-offset="3198">
+          <caret line="24" column="60" selection-start-line="24" selection-start-column="60" selection-end-line="24" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/TruckManagementController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="224" max-vertical-offset="2756">
+          <caret line="45" column="44" selection-start-line="45" selection-start-column="44" selection-end-line="45" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/orderEdit.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.857143" vertical-offset="1039" max-vertical-offset="2132">
+          <caret line="64" column="24" selection-start-line="64" selection-start-column="24" selection-end-line="64" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/trucks.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.97788125" vertical-offset="1370" max-vertical-offset="2834">
+          <caret line="85" column="38" selection-start-line="85" selection-start-column="38" selection-end-line="85" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/orders.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22817229" vertical-offset="1312" max-vertical-offset="2418">
+          <caret line="58" column="50" selection-start-line="58" selection-start-column="50" selection-end-line="58" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/assignments.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24330617" vertical-offset="337" max-vertical-offset="1196">
+          <caret line="21" column="59" selection-start-line="21" selection-start-column="59" selection-end-line="21" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/webapp/WEB-INF/views/secure/drivers.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42374855" vertical-offset="1066" max-vertical-offset="2236">
+          <caret line="55" column="50" selection-start-line="54" selection-start-column="51" selection-end-line="55" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/AssignmentController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6219239" vertical-offset="328" max-vertical-offset="2652">
+          <caret line="52" column="44" selection-start-line="52" selection-start-column="44" selection-end-line="52" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/OrderManagementController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.67449665" vertical-offset="1893" max-vertical-offset="3588">
+          <caret line="115" column="44" selection-start-line="115" selection-start-column="44" selection-end-line="115" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/ru/tsystems/shalamov/web/DriverManagementController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6979866" vertical-offset="286" max-vertical-offset="2704">
+          <caret line="50" column="23" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/ru.tsystems.shalamov">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>ru.tsystems.shalamov</OriginalElement>
+          <nodes>
+            <node x="280.0" y="513.0">ru.tsystems.shalamov.services.api.DriverInfoService</node>
+            <node x="107.5" y="531.0">ru.tsystems.shalamov.services.api.AssignmentService</node>
+            <node x="0.0" y="88.0">ru.tsystems.shalamov.services.impl.DriverManagementServiceImpl</node>
+            <node x="0.0" y="601.0">ru.tsystems.shalamov.services.impl.AssignmentServiceImpl</node>
+            <node x="315.0" y="430.0">ru.tsystems.shalamov.services.impl.DriverActivityServiceImpl</node>
+            <node x="0.0" y="430.0">ru.tsystems.shalamov.services.impl.TruckManagementServiceImpl</node>
+            <node x="0.0" y="259.0">ru.tsystems.shalamov.services.impl.OrderManagementServiceImpl</node>
+            <node x="333.0" y="342.0">ru.tsystems.shalamov.services.api.DriverActivityService</node>
+            <node x="18.0" y="0.0">ru.tsystems.shalamov.services.api.DriverManagementService</node>
+            <node x="18.0" y="171.0">ru.tsystems.shalamov.services.api.OrderManagementService</node>
+            <node x="18.0" y="342.0">ru.tsystems.shalamov.services.api.TruckManagementService</node>
+            <node x="262.0" y="601.0">ru.tsystems.shalamov.services.impl.DriverInfoServiceImpl</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="ru.tsystems.shalamov.services.impl.DriverManagementServiceImpl" target="ru.tsystems.shalamov.services.api.DriverManagementService">
+              <point x="0.0" y="-19.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="ru.tsystems.shalamov.services.impl.DriverInfoServiceImpl" target="ru.tsystems.shalamov.services.api.DriverInfoService">
+              <point x="0.0" y="-19.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+            <edge source="ru.tsystems.shalamov.services.impl.AssignmentServiceImpl" target="ru.tsystems.shalamov.services.api.AssignmentService">
+              <point x="0.0" y="-19.0" />
+              <point x="0.0" y="19.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.0" x="196.0" y="388.0" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/ru.tsystems.shalamov.dao">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>ru.tsystems.shalamov.dao</OriginalElement>
+          <nodes>
+            <node x="1800.5" y="116.0">ru.tsystems.shalamov.dao.api.DriverStatusDao</node>
+            <node x="" y="">ru.tsystems.shalamov.services.api.DriverInfoService</node>
+            <node x="2298.0" y="98.0">ru.tsystems.shalamov.dao.api.ShiftDao</node>
+            <node x="927.0" y="98.0">ru.tsystems.shalamov.services.api.DriverActivityService</node>
+            <node x="259.0" y="98.0">ru.tsystems.shalamov.services.ServiceLayerException</node>
+            <node x="2421.333682764604" y="296.0">ru.tsystems.shalamov.services.UserDetailsServiceImpl</node>
+            <node x="1139.0" y="98.0">ru.tsystems.shalamov.services.api.AssignmentService</node>
+            <node x="" y="">ru.tsystems.shalamov.dao.api.OrderDao</node>
+            <node x="0.0" y="98.0">ru.tsystems.shalamov.services.api.DriverManagementService</node>
+            <node x="" y="">ru.tsystems.shalamov.dao.impl</node>
+            <node x="" y="">ru.tsystems.shalamov.dao.api.TruckDao</node>
+            <node x="483.0" y="98.0">ru.tsystems.shalamov.services.api.OrderManagementService</node>
+            <node x="1388.5" y="296.0">ru.tsystems.shalamov.services.impl</node>
+            <node x="1340.0" y="98.0">ru.tsystems.shalamov.services.api.TruckManagementService</node>
+            <node x="2451.833682764604" y="98.0">ru.tsystems.shalamov.dao.api.UserDao</node>
+            <node x="" y="">ru.tsystems.shalamov.dao.api.DriverDao</node>
+            <node x="" y="">ru.tsystems.shalamov.dao.api.CargoDao</node>
+            <node x="" y="">ru.tsystems.shalamov.dao.api.GenericDao</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="0.8" x="1356.375" y="409.875" />
+          <SelectedNodes>
+            <node>ru.tsystems.shalamov.services.api.AssignmentService</node>
+          </SelectedNodes>
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/ru.tsystems.shalamov.services">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>ru.tsystems.shalamov.services</OriginalElement>
+          <nodes>
+            <node x="" y="">ru.tsystems.shalamov.dao.api</node>
+            <node x="" y="">ru.tsystems.shalamov.services.impl.TruckManagementServiceImpl</node>
+            <node x="" y="">ru.tsystems.shalamov.services.impl.OrderManagementServiceImpl</node>
+            <node x="" y="">ru.tsystems.shalamov.services.api.DriverInfoService</node>
+            <node x="" y="">ru.tsystems.shalamov.services.api.DriverActivityService</node>
+            <node x="" y="">ru.tsystems.shalamov.services.ServiceLayerException</node>
+            <node x="" y="">ru.tsystems.shalamov.services.api.AssignmentService</node>
+            <node x="" y="">ru.tsystems.shalamov.services.impl.DriverManagementServiceImpl</node>
+            <node x="" y="">ru.tsystems.shalamov.services.api.DriverManagementService</node>
+            <node x="" y="">ru.tsystems.shalamov.services.api.OrderManagementService</node>
+            <node x="" y="">ru.tsystems.shalamov.services.impl.AssignmentServiceImpl</node>
+            <node x="" y="">ru.tsystems.shalamov.services.api.TruckManagementService</node>
+            <node x="" y="">ru.tsystems.shalamov.services.impl.DriverInfoServiceImpl</node>
+            <node x="" y="">ru.tsystems.shalamov.services.impl.DriverActivityServiceImpl</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="734.0" y="192.5" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ru/tsystems/shalamov/model/DriverAssignmentModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49943247" vertical-offset="1146" max-vertical-offset="2522">
+          <caret line="70" column="11" selection-start-line="70" selection-start-column="11" selection-end-line="70" selection-end-column="11" />
           <folding />
         </state>
       </provider>

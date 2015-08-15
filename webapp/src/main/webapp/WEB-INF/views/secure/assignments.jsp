@@ -19,8 +19,8 @@
 
 <c:if test="${fn:length(assignments) > 0}">
     <table class="table table-striped">
-        <c:forEach var="assignment" items="${assignments}">
-            <tr>
+        <c:forEach var="assignment" items="${assignments}" varStatus="loop">
+            <tr class="${colors.get(loop.index)}">
                 <td>${assignment.orderIdentifier}</td>
                 <td>${assignment.orderStatus}</td>
                 <td>${assignment.truckRegistrationNumber}</td>

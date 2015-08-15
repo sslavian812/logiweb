@@ -44,8 +44,13 @@ public class AssignmentController {
                     assignments.stream().filter(a -> a.getOrderStatus().equals(OrderStatus.COMPLETED)));
             List<DriverAssignmentModel> sortedAssignments = stream.collect(Collectors.toList());
 
+            List<String> colors = sortedAssignments.stream()
+                    .map(a -> ControllerUtil.mapOrderStatusToColor(a.getOrderStatus()))
+                    .collect(Collectors.toList());
+
             ModelAndView mav = new ModelAndView("secure/assignments");
             mav.addObject("assignments", sortedAssignments);
+            mav.addObject("colors", colors);
             return mav;
         } catch (ServiceLayerException e) {
             LOG.warn(e);

@@ -54,8 +54,8 @@
             </tr>
         </form>
 
-        <c:forEach var="truck" items="${trucks}">
-            <tr>
+        <c:forEach var="truck" items="${trucks}" varStatus="loop">
+            <tr class="${colors.get(loop.index)}">
                 <td>${truck.crewSize}</td>
                 <td> ${truck.capacity}</td>
                 <td> ${truck.status}</td>
