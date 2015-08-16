@@ -18,13 +18,19 @@
 <%@include file="/WEB-INF/views/navBar.html" %>
 <script src="/resources/core/js/validation.js"></script>
 
-<legend>Edit order: ${order.orderIdentifier}</legend>
-
-<label>Order identifier:</label>
-<input type="text" name="oldOrderIdentifier" value="${order.orderIdentifier}" readonly>
-<br>
-
-
+<table class="table table-striped">
+    <tr>
+        <td>
+            <legend>Edit order: ${order.orderIdentifier}</legend>
+        </td>
+        <td>
+            <form method="post"
+                  action="/secure/assignments/construct/${order.orderIdentifier}">
+                <button type="submit" class="btn btn-success">assign</button>
+            </form>
+        </td>
+    </tr>
+</table>
 <table class="table table-striped">
     <tr>
         <td>identifier</td>
