@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: viacheslav
@@ -31,7 +32,7 @@
         <td>weight(kg)</td>
         <td>status</td>
         <td>
-            delete
+            action
         </td>
     </tr>
 
@@ -42,32 +43,36 @@
             <td>${cargo.weight}</td>
             <td>${cargo.status}</td>
             <td>
-                <form method="post"
-                      action="/secure/orders/${order.orderIdentifier}/cargo/delete/${cargo.cargoIdentifier}">
-                    <button type="submit" class="btn btn-danger">delete</button>
-                </form>
+                <c:if test="${fn:length(cargoes) > 1 and order.status.toString() == \"UNASSIGNED\"}">
+                    <form method="post"
+                          action="/secure/orders/${order.orderIdentifier}/cargo/delete/${cargo.cargoIdentifier}">
+                        <button type="submit" class="btn btn-danger">delete</button>
+                    </form>
+                </c:if>
             </td>
         </tr>
     </c:forEach>
 
-    <form method="post" id="adder" onsubmit="return validateCargoForm()"
-          action="/secure/orders/add/${order.orderIdentifier}/cargo">
-        <tr>
-            <td>
-                <input type="text" value="${generated}" name="cargoIdentifier">
-            </td>
-            <td>
-                <input required="true" type="text" value="" name="denomination">
-            </td>
-            <td>
-                <input required="true" type="text" value="" name="weight">
-            </td>
-            <td>PREPARED</td>
-            <td>
-                <button type="submit" class="btn btn-success">add</button>
-            </td>
-        </tr>
-    </form>
+    <c:if test="${order.status.toString() == \"UNASSIGNED\"}">
+        <form method="post" id="adder" onsubmit="return validateCargoForm()"
+              action="/secure/orders/add/${order.orderIdentifier}/cargo">
+            <tr>
+                <td>
+                    <input type="text" value="${generated}" name="cargoIdentifier">
+                </td>
+                <td>
+                    <input required="true" type="text" value="" name="denomination">
+                </td>
+                <td>
+                    <input required="true" type="text" value="" name="weight">
+                </td>
+                <td>PREPARED</td>
+                <td>
+                    <button type="submit" class="btn btn-success">add</button>
+                </td>
+            </tr>
+        </form>
+    </c:if>
 </table>
 
 <div align="right">

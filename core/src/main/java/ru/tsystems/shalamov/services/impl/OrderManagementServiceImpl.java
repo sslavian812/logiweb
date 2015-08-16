@@ -42,7 +42,12 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     @Transactional(rollbackOn = ServiceLayerException.class)
     public void createOrderWithCargoes(OrderModel order, List<CargoModel> cargoes) throws ServiceLayerException {
         try {
+            if (cargoes.isEmpty()) {
+                LOG.warn("trying to create order without a single cargo.");
+                throw new ServiceLayerException("There should be at east one cargo");
+            }
             if (orderDao.findByOrderIdentifier(order.getOrderIdentifier()) != null) {
+                LOG.warn("Unable to create order: duplicated order identifier.");
                 throw new ServiceLayerException("Order Identifier already in use");
             }
             OrderEntity orderEntity = new OrderEntity(order.getOrderIdentifier());
@@ -117,6 +122,11 @@ public class OrderManagementServiceImpl implements OrderManagementService {
                 throw new ServiceLayerException("Order is already assigned.");
             }
 
+            if (orderEntity.getCargoEntities().size() == 1) {
+                LOG.warn("Failed deleting cargo [" + cargoIdentifier + "] from order. Order should have at least one cargo.");
+                throw new ServiceLayerException("Order should have at least one cargo.");
+            }
+
             orderEntity.getCargoEntities().remove(cargoEntity);
             orderDao.update(orderEntity);
             cargoDao.delete(cargoEntity);
@@ -138,11 +148,11 @@ public class OrderManagementServiceImpl implements OrderManagementService {
         }
 
         if ((!oldOrderIdentifier.equals(order.getOrderIdentifier()))
-            && findOrderByOrderIdentifier(order.getOrderIdentifier()) != null) {
-                LOG.warn("Fail to change order identifier. [" + order.getOrderIdentifier() + "] already exists.");
-                throw new ServiceLayerException("Fail to update order. "
-                        + "Order with new personal number already exists");
-            }
+                && findOrderByOrderIdentifier(order.getOrderIdentifier()) != null) {
+            LOG.warn("Fail to change order identifier. [" + order.getOrderIdentifier() + "] already exists.");
+            throw new ServiceLayerException("Fail to update order. "
+                    + "Order with new personal number already exists");
+        }
 
 
         orderEntity.setOrderIdentifier(order.getOrderIdentifier());

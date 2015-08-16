@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/resources/core/css/bootstrap.min.css">
 </head>
 <body>
-<%@include  file="/WEB-INF/views/navBar.html" %>
+<%@include file="/WEB-INF/views/navBar.html" %>
 
 <form class="form-control" method="post" action="/secure/assignments/create">
     <legend>Make new assignment</legend>
@@ -46,7 +46,10 @@
             </c:forEach>
         </td>
     </table>
-    <button type="submit" class="btn">Submit</button>
+
+    <div align="right">
+        <button type="submit" class="btn btn-success">Assign</button>
+    </div>
 </form>
 
 

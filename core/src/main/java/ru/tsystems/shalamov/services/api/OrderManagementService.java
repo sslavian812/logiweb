@@ -49,6 +49,7 @@ public interface OrderManagementService {
      * @throws ServiceLayerException if:
      *                               1) there if no such order {@code oldOrderIdentifier}
      *                               2) order has status other than UNASSIGNED
+     *                               3) if trying to delete the last cargo in order
      */
     void updateOrder(OrderModel order, String oldOrderIdentifier) throws ServiceLayerException;
 

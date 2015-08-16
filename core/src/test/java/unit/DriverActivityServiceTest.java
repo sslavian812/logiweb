@@ -20,6 +20,7 @@ import ru.tsystems.shalamov.services.api.DriverActivityService;
 import ru.tsystems.shalamov.services.impl.DriverActivityServiceImpl;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -256,6 +257,9 @@ public class DriverActivityServiceTest {
     public void testCompleteOrder() throws ServiceLayerException {
         try {
             OrderEntity orderEntity = new OrderEntity("order");
+            orderEntity.setCargoEntities(Arrays.asList(
+                    new CargoEntity("", 1, CargoStatus.DELIVERED,
+                            orderEntity,orderEntity.getOrderIdentifier())));
             orderEntity.setStatus(OrderStatus.IN_PROGRESS);
             when(orderDao.findByOrderIdentifier(Mockito.anyString())).thenReturn(orderEntity);
 
