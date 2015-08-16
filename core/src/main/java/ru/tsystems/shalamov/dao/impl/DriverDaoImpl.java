@@ -16,6 +16,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,17 +47,22 @@ public class DriverDaoImpl extends GenericDaoImpl<DriverEntity> implements Drive
 
             TypedQuery<DriverEntity> q = em.createQuery(
                     "SELECT d FROM DriverEntity d JOIN d.driverStatusEntity s " +
-                            "WHERE s.status IN :driverStatuses", DriverEntity.class);
+                            "WHERE s.status IN :driverStatuses AND " +
+                            "(s.workingHours < :hourslimit " +
+                            "OR s.lastMonth != :currentMonth)", DriverEntity.class);
             q.setParameter("driverStatuses", Arrays.asList(DriverStatus.UNASSIGNED));
+            q.setParameter("hourslimit", (float)176);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new Date());
+            q.setParameter("currentMonth", cal.get(Calendar.MONTH));
 
             //todo: test filtering
 
-            // todo: сделать поле в базе и обновлять его при окончании смены. гораздо оптимальней.
-
-            List<DriverEntity> freeDrivers = q.getResultList();
-            freeDrivers = freeDrivers.stream()
-                    .filter(d -> hastime(d)).collect(Collectors.toList());
-            return freeDrivers;
+//            List<DriverEntity> freeDrivers = q.getResultList();
+//            freeDrivers = freeDrivers.stream()
+//                    .filter(d -> hastime(d)).collect(Collectors.toList());
+//            return freeDrivers;
+            return q.getResultList();
         } catch (Exception e) {
             throw new DataAccessLayerException(e);
         }

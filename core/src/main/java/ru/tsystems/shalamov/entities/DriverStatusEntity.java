@@ -4,6 +4,8 @@ import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by viacheslav on 22.06.2015.
@@ -29,6 +31,14 @@ public class DriverStatusEntity implements Serializable {
     @ManyToOne(optional = true)
     @JoinColumn(name = "current_truck", referencedColumnName = "id")
     private TruckEntity truckEntity;
+
+
+
+    @Column(name = "last_working_month", nullable = false)
+    private int lastMonth;
+
+    @Column(name = "working_hours", nullable = false)
+    private float workingHours;
 
     public int getId() {
         return id;
@@ -56,6 +66,10 @@ public class DriverStatusEntity implements Serializable {
         this.driverEntity = driver;
         this.truckEntity = null;
         driver.setDriverStatusEntity(this);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        lastMonth = cal.get(Calendar.MONTH);
+        workingHours = 0;
     }
 
     @Override
@@ -92,5 +106,21 @@ public class DriverStatusEntity implements Serializable {
 
     public void setTruckEntity(TruckEntity truckEntity) {
         this.truckEntity = truckEntity;
+    }
+
+    public int getLastMonth() {
+        return lastMonth;
+    }
+
+    public void setLastMonth(int lastMonth) {
+        this.lastMonth = lastMonth;
+    }
+
+    public float getWorkingHours() {
+        return workingHours;
+    }
+
+    public void setWorkingHours(float workingHours) {
+        this.workingHours = workingHours;
     }
 }

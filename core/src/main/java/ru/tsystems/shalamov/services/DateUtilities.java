@@ -36,7 +36,7 @@ public final class DateUtilities {
 
         Calendar calendar = getFirstDayOfMonthCalendar(date);
         Date result = calendar.getTime();
-        calendar.setTime(new Date());
+//        calendar.setTime(new Date());
         return result;
     }
 
@@ -45,7 +45,7 @@ public final class DateUtilities {
         Calendar calendar = getFirstDayOfMonthCalendar(date);
         calendar.add(Calendar.MONTH, 1);
         Date result = calendar.getTime();
-        calendar.setTime(new Date());
+//        calendar.setTime(new Date());
         return result;
     }
 

@@ -68,13 +68,13 @@
             </td>
         </tr>
     </form>
+</table>
 
+<div align="right">
     <form method="get" action="/secure/orders/">
         <button type="submit" class="btn btn-info">OK</button>
     </form>
-
-</table>
-
+</div>
 
 </body>
 </html>

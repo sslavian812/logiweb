@@ -16,7 +16,6 @@
 <body>
 <script src="/resources/core/js/validation.js"></script>
 <%@include file="/WEB-INF/views/navBar.html" %>
-<c:if test="${fn:length(drivers) > 0}">
 
     <table class="table table-striped">
         <tr>
@@ -74,6 +73,8 @@
         </c:forEach>
     </table>
 
+<c:if test="${fn:length(drivers) == 0}">
+    no drivers yet
 </c:if>
 
 </body>

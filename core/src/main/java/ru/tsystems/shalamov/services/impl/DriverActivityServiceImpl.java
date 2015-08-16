@@ -10,11 +10,13 @@ import ru.tsystems.shalamov.entities.statuses.CargoStatus;
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
 import ru.tsystems.shalamov.entities.statuses.OrderStatus;
 import ru.tsystems.shalamov.entities.statuses.TruckStatus;
+import ru.tsystems.shalamov.services.DateUtilities;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.DriverActivityService;
 
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -95,7 +97,7 @@ public class DriverActivityServiceImpl implements DriverActivityService {
             // in case of unhonest drivers: if order is being set completed while
             // one of assigned drivers is not on shift
             // workaround - if status is REST throw no exception, just exit.
-            if(driver.getDriverStatusEntity().getStatus().equals(DriverStatus.REST))
+            if (driver.getDriverStatusEntity().getStatus().equals(DriverStatus.REST))
                 return;
 
             ShiftEntity shift = shiftDao.findActiveShiftByDriver(driver);
@@ -110,6 +112,24 @@ public class DriverActivityServiceImpl implements DriverActivityService {
 
             DriverStatusEntity statusEntity = driver.getDriverStatusEntity();
             statusEntity.setStatus(DriverStatus.REST);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(shift.getShiftBegin());
+            int startMonth = calendar.get(Calendar.MONTH);
+            calendar.setTime(shift.getShiftEnd());
+            int endMonth = calendar.get(Calendar.MONTH);
+            if (startMonth == endMonth) {
+                statusEntity.setWorkingHours(
+                        statusEntity.getWorkingHours() + DateUtilities.diffInHours(
+                                shift.getShiftBegin(), shift.getShiftEnd()
+                        ));
+            } else {
+                statusEntity.setWorkingHours(
+                        statusEntity.getWorkingHours() + DateUtilities.diffInHours(
+                                DateUtilities.getFirstDayOfMonthDate(shift.getShiftEnd()), shift.getShiftEnd()
+                        ));
+                statusEntity.setLastMonth(endMonth);
+            }
+
             driverStatusDao.update(statusEntity);
             LOG.info("Shift ended for driver [" + personalNumber + "]");
         } catch (DataAccessLayerException e) {

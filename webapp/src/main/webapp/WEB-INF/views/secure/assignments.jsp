@@ -34,7 +34,9 @@
         </c:forEach>
     </table>
 </c:if>
-
+<c:if test="${fn:length(assignments) == 0}">
+    no assignments yet
+</c:if>
 
 </body>
 </html>

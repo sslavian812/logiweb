@@ -16,7 +16,6 @@
 <script src="/resources/core/js/validation.js"></script>
 <%@include file="/WEB-INF/views/navBar.html" %>
 
-<c:if test="${fn:length(trucks) > 0}">
     <table class="table table-striped">
 
         <tr>
@@ -75,7 +74,8 @@
             </tr>
         </c:forEach>
     </table>
-
+<c:if test="${fn:length(trucks) == 0}">
+    no trucks yet
 </c:if>
 
 <%--<hr>--%>

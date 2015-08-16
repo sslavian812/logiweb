@@ -38,6 +38,8 @@ CREATE TABLE `driver_statuses` (
   `status`               VARCHAR(15) NOT NULL,
   `current_truck`        INT(11)              DEFAULT NULL,
   `driver_id_for_status` INT(11)     NOT NULL,
+  `last_working_month`   INT(11)     NOT NULL,
+  `working_hours`        FLOAT     NOT NULL,
   PRIMARY KEY (`id`),
   KEY `current_truck_idx` (`current_truck`),
   KEY `driver_id_idx` (`driver_id_for_status`),
@@ -72,12 +74,12 @@ CREATE TABLE `orders` (
 DROP TABLE IF EXISTS `cargos`;
 
 CREATE TABLE `cargos` (
-  `id`           INT(11)     NOT NULL AUTO_INCREMENT,
-  `order_id`     INT(11)     NOT NULL,
-  `denomination` VARCHAR(45) NOT NULL,
+  `id`               INT(11)     NOT NULL AUTO_INCREMENT,
+  `order_id`         INT(11)     NOT NULL,
+  `denomination`     VARCHAR(45) NOT NULL,
   `cargo_identifier` VARCHAR(45) NOT NULL,
-  `weight`       INT(11)     NOT NULL,
-  `status`       VARCHAR(15) NOT NULL,
+  `weight`           INT(11)     NOT NULL,
+  `status`           VARCHAR(15) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `order_id_idx` (`order_id`),
   CONSTRAINT `order_id` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`)
