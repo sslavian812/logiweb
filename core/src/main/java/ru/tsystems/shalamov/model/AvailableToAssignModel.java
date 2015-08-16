@@ -9,31 +9,16 @@ public class AvailableToAssignModel {
 
     private List<TruckModel> availableTrucks;
     private List<DriverModel> availableDrivers;
+
     private String orderIdentifier;
-
-    public String getChosenTruckRegistrationNumber() {
-        return chosenTruckRegistrationNumber;
-    }
-
-    public void setChosenTruckRegistrationNumber(String chosenTruckRegistrationNumber) {
-        this.chosenTruckRegistrationNumber = chosenTruckRegistrationNumber;
-    }
-
-    public List<String> getChosenDriverPersonalNumbers() {
-        return chosenDriverPersonalNumbers;
-    }
-
-    public void setChosenDriverPersonalNumbers(List<String> chosenDriverPersonalNumbers) {
-        this.chosenDriverPersonalNumbers = chosenDriverPersonalNumbers;
-    }
 
     private String chosenTruckRegistrationNumber;
     private List<String> chosenDriverPersonalNumbers;
 
+
     public AvailableToAssignModel(String orderIdentifier,
                                   String chosenTruckRegistrationNumber,
-                                  List<String> chosenDriverPersonalNumbers)
-    {
+                                  List<String> chosenDriverPersonalNumbers) {
         this.orderIdentifier = orderIdentifier;
         this.chosenTruckRegistrationNumber = chosenTruckRegistrationNumber;
         this.chosenDriverPersonalNumbers = chosenDriverPersonalNumbers;
@@ -70,4 +55,21 @@ public class AvailableToAssignModel {
     public void setOrderIdentifier(String orderIdentifier) {
         this.orderIdentifier = orderIdentifier;
     }
+
+    public String getChosenTruckRegistrationNumber() {
+        return chosenTruckRegistrationNumber;
+    }
+
+    public void setChosenTruckRegistrationNumber(String chosenTruckRegistrationNumber) {
+        this.chosenTruckRegistrationNumber = chosenTruckRegistrationNumber;
+    }
+
+    public List<String> getChosenDriverPersonalNumbers() {
+        return chosenDriverPersonalNumbers;
+    }
+
+    public void setChosenDriverPersonalNumbers(List<String> chosenDriverPersonalNumbers) {
+        this.chosenDriverPersonalNumbers = chosenDriverPersonalNumbers;
+    }
+
 }

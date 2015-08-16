@@ -1,5 +1,6 @@
 package ru.tsystems.shalamov.dao.impl;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.CargoDao;
@@ -19,6 +20,7 @@ import javax.persistence.criteria.Root;
  */
 @Repository
 public class CargoDaoImpl extends GenericDaoImpl<CargoEntity> implements CargoDao {
+    private static final Logger LOG = Logger.getLogger(CargoDaoImpl.class);
 
     public CargoDaoImpl(Class<CargoEntity> type) {
         super(type);
@@ -27,6 +29,7 @@ public class CargoDaoImpl extends GenericDaoImpl<CargoEntity> implements CargoDa
     public CargoDaoImpl() {
         super();
     }
+
 
     @Override
     public CargoEntity findCargoByCargoIdentifier(String cargoIdentifier) throws DataAccessLayerException {
@@ -40,6 +43,7 @@ public class CargoDaoImpl extends GenericDaoImpl<CargoEntity> implements CargoDa
             return em.createQuery(criteriaQuery.select(CargoEntityRoot).where(criteriaBuilder.equal(
                     CargoEntityRoot.get("cargoIdentifier"), cargoIdentifier))).getSingleResult();
         } catch (NoResultException e) {
+            LOG.debug(new Exception("no objects found with cargo identifier [" + cargoIdentifier + "]. null returned.", e));
             return null;
         } catch (Exception e) {
             throw new DataAccessLayerException(e);

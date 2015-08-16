@@ -48,7 +48,7 @@ public class AssignmentServiceTest {
 
     @Before
     public void setup() {
-        assignmentService = new AssignmentServiceImpl(driverDao, orderDao, truckDao, driverStatusDao, cargoDao);
+        assignmentService = new AssignmentServiceImpl(driverDao, orderDao, truckDao, driverStatusDao);
     }
 
     @Test(expected = ServiceLayerException.class)

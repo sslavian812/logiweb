@@ -31,11 +31,6 @@ public class DriverEntity implements Serializable {
             mappedBy = "driverEntity", targetEntity = DriverStatusEntity.class)
     private DriverStatusEntity driverStatusEntity;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "driverEntity", targetEntity = ShiftEntity.class,
-//            fetch = FetchType.LAZY)
-//    private List<ShiftEntity> shiftEntities;
-
-
     public DriverEntity() {
     }
 

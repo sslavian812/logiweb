@@ -6,6 +6,10 @@ import java.util.UUID;
  * Created by viacheslav on 05.08.2015.
  */
 public class Util {
+
+    private Util()
+    {}
+
     public static String generateRandomIdWithTime() {
         UUID uuid = UUID.randomUUID();
         return (new UUID(uuid.getMostSignificantBits(), System.currentTimeMillis())).toString();

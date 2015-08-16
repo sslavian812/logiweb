@@ -1,5 +1,6 @@
 package ru.tsystems.shalamov.web;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,8 @@ public class TruckManagementController {
     @Autowired
     private TruckManagementService truckManagementService;
 
+    private static final Logger LOG = Logger.getLogger(TruckManagementController.class);
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showTrucks() {
@@ -46,6 +49,7 @@ public class TruckManagementController {
             mav.addObject("colors", colors);
             return mav;
         } catch (ServiceLayerException e) {
+            LOG.warn(e);
             return ControllerUtil.fail("fail list all trucks", e.getMessage());
         }
     }
@@ -62,6 +66,7 @@ public class TruckManagementController {
                     capacity, TruckStatus.INTACT));
             return new ModelAndView("redirect:/secure/trucks/");
         } catch (ServiceLayerException e) {
+            LOG.warn(e);
             return ControllerUtil.fail("fail to add truck ", e.getMessage());
         }
     }
@@ -72,6 +77,7 @@ public class TruckManagementController {
             truckManagementService.deleteTruckByRegistrationNumber(registrationNumber);
             return new ModelAndView("redirect:/secure/trucks");
         } catch (ServiceLayerException e) {
+            LOG.warn(e);
             return ControllerUtil.fail("fail to delete truck " + registrationNumber, e.getMessage());
         }
     }
@@ -87,6 +93,7 @@ public class TruckManagementController {
             mav.addObject("truck", truck);
             return mav;
         } catch (ServiceLayerException e) {
+            LOG.warn(e);
             return ControllerUtil.fail("fail to edit truck", e.getMessage());
         }
     }
@@ -108,6 +115,7 @@ public class TruckManagementController {
             truckManagementService.updateTruck(truckModel, oldRegistrationNumber);
             return new ModelAndView("redirect:/secure/trucks/");
         } catch (ServiceLayerException e) {
+            LOG.warn(e);
             return ControllerUtil.fail("fail to edit driver", e.getMessage());
         }
     }

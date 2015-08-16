@@ -2,6 +2,7 @@ package ru.tsystems.shalamov.ws;
 
 
 import javax.xml.ws.WebFault;
+import java.io.Serializable;
 
 /**
  * Created by viacheslav on 11.08.2015.

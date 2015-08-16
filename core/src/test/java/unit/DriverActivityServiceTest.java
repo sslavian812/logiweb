@@ -9,10 +9,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
-import ru.tsystems.shalamov.dao.api.CargoDao;
-import ru.tsystems.shalamov.dao.api.DriverDao;
-import ru.tsystems.shalamov.dao.api.DriverStatusDao;
-import ru.tsystems.shalamov.dao.api.ShiftDao;
+import ru.tsystems.shalamov.dao.api.*;
 import ru.tsystems.shalamov.entities.CargoEntity;
 import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.entities.DriverStatusEntity;
@@ -44,10 +41,12 @@ public class DriverActivityServiceTest {
     private DriverStatusDao driverStatusDao;
     @Mock
     private CargoDao cargoDao;
+    @Mock
+    private OrderDao orderDao;
 
     @Before
     public void setup() {
-        driverActivityService = new DriverActivityServiceImpl(driverDao, shiftDao, driverStatusDao, cargoDao);
+        driverActivityService = new DriverActivityServiceImpl(driverDao, shiftDao, driverStatusDao, cargoDao, orderDao);
     }
 
     @Test(expected = ServiceLayerException.class)

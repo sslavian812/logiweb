@@ -76,13 +76,13 @@ public class TruckManagementServiceImpl implements TruckManagementService {
                 throw new ServiceLayerException("No such truck.");
             }
 
-            if (!oldRegistrationNumber.equals(truck.getRegistrationNumber())) {
-                if (truckDao.findByRegistrationNumber(truck.getRegistrationNumber()) != null) {
-                    LOG.warn("Fail to change registration Number for truck. [" + truck.getRegistrationNumber() + "] already exists.");
-                    throw new ServiceLayerException("Fail to update truck. "
-                            + "Truck with new registration number already exists");
-                }
+            if ((!oldRegistrationNumber.equals(truck.getRegistrationNumber()))
+                    && truckDao.findByRegistrationNumber(truck.getRegistrationNumber()) != null) {
+                LOG.warn("Fail to change registration Number for truck. [" + truck.getRegistrationNumber() + "] already exists.");
+                throw new ServiceLayerException("Fail to update truck. "
+                        + "Truck with new registration number already exists");
             }
+
 
             // todo this if is not covered by tests
             if (truckEntity.getStatus().equals(TruckStatus.ASSIGNED)
@@ -119,7 +119,7 @@ public class TruckManagementServiceImpl implements TruckManagementService {
                 throw exc;
             }
 
-            if (truck.getDriverStatusEntities() != null && truck.getDriverStatusEntities().size() != 0) {
+            if (truck.getDriverStatusEntities() != null && !truck.getDriverStatusEntities().isEmpty()) {
                 ServiceLayerException exc = new ServiceLayerException(
                         "Unable to delete truck with trucks assigned to it. Drivers should be unassigned first.");
                 exc.setStackTrace(Thread.currentThread().getStackTrace());

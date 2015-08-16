@@ -17,6 +17,7 @@ public class DriverStatusDaoImpl extends GenericDaoImpl<DriverStatusEntity> impl
         super(type);
     }
 
-    public DriverStatusDaoImpl()
-    {super();}
+    public DriverStatusDaoImpl() {
+        super();
+    }
 }

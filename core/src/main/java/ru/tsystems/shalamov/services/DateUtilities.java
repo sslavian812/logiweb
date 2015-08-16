@@ -14,8 +14,6 @@ public final class DateUtilities {
     private DateUtilities() {
     }
 
-    public static final float MAX_HOURS = 176;
-
     public static float getWorkingHours(List<ShiftEntity> shifts)
     {
         float acc = 0;
@@ -35,18 +33,14 @@ public final class DateUtilities {
     public static Date getFirstDayOfMonthDate(Date date) {
 
         Calendar calendar = getFirstDayOfMonthCalendar(date);
-        Date result = calendar.getTime();
-//        calendar.setTime(new Date());
-        return result;
+        return calendar.getTime();
     }
 
 
     public static Date getFirstDayOfNextMonth(Date date) {
         Calendar calendar = getFirstDayOfMonthCalendar(date);
         calendar.add(Calendar.MONTH, 1);
-        Date result = calendar.getTime();
-//        calendar.setTime(new Date());
-        return result;
+        return calendar.getTime();
     }
 
 

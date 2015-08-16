@@ -1,5 +1,6 @@
-package ru.tsystems.shalamov.onBoardUnit;
+package ru.tsystems.shalamov.onboardunit;
 
+import org.apache.log4j.Logger;
 import ru.tsystems.shalamov.ws.*;
 
 import javax.ejb.EJB;
@@ -32,19 +33,24 @@ public class DriverInfoBean {
     String failureMessage = "";
     String primaryDriver = "";
 
-//    String firstName = "";
-//    String lastName = "";
+//    todo String firstName = "";
+//    todo String lastName = "";
 
-    final DriverStatus unassigned = DriverStatus.UNASSIGNED;
-    final DriverStatus rest = DriverStatus.REST;
-    final DriverStatus auxiliary = DriverStatus.AUXILIARY;
+    public static final  DriverStatus unassigned = DriverStatus.UNASSIGNED;
+    public static final  DriverStatus rest = DriverStatus.REST;
+    public static final  DriverStatus auxiliary = DriverStatus.AUXILIARY;
+
+    private static final Logger LOG = Logger.getLogger(DriverInfoBean.class);
+
+    private static final String DRIVER = "driver";
+    private static final String FAIL = "fail";
 
 
     public String getAssignmentInformation() {
         try {
             // when called, PN should be already set.
             if (personalNumber == null || personalNumber.isEmpty())
-                return "fail";
+                return FAIL;
 
             DriverAssignmentModel assignment = client.getDriverAssignmentInformation(personalNumber);
 
@@ -71,10 +77,11 @@ public class DriverInfoBean {
                         .collect(Collectors.toList());
             }
 
-            return "driver";
+            return DRIVER;
         } catch (ServiceFault serviceFault) {
             failureMessage = serviceFault.getMessage();
-            return "fail";
+            LOG.warn(serviceFault);
+            return FAIL;
         }
     }
 
@@ -90,10 +97,11 @@ public class DriverInfoBean {
                 getAssignmentInformation();
             }
 
-            return "driver";
+            return DRIVER;
         } catch (ServiceFault serviceFault) {
             failureMessage = serviceFault.getMessage();
-            return "fail";
+            LOG.warn(serviceFault);
+            return FAIL;
         }
     }
 
@@ -107,10 +115,11 @@ public class DriverInfoBean {
                 }
             }
             getAssignmentInformation();
-            return "driver";
+            return DRIVER;
         } catch (ServiceFault serviceFault) {
             failureMessage = serviceFault.getMessage();
-            return "fail";
+            LOG.warn(serviceFault);
+            return FAIL;
         }
     }
 
@@ -125,10 +134,11 @@ public class DriverInfoBean {
                 primaryDriver = personalNumber;
             }
             getAssignmentInformation();
-            return "driver";
+            return DRIVER;
         } catch (ServiceFault serviceFault) {
             failureMessage = serviceFault.getMessage();
-            return "fail";
+            LOG.warn(serviceFault);
+            return FAIL;
         }
     }
 
@@ -137,7 +147,7 @@ public class DriverInfoBean {
             return false;
         return cargoesStatuses.stream()
                 .filter(c -> !c.equals(CargoStatus.DELIVERED))
-                .collect(Collectors.toList()).size() == 0;
+                .collect(Collectors.toList()).isEmpty();
     }
 
     public String completeOrder() {
@@ -148,11 +158,13 @@ public class DriverInfoBean {
             return getAssignmentInformation();
         } catch (ServiceFault serviceFault) {
             failureMessage = serviceFault.getMessage();
-            return "fail";
+            LOG.warn(serviceFault);
+            return FAIL;
         }
     }
 
 
+    // todo split into two methods
     public String switchCargoStatus(String cargoIdentifier) {
         try {
             if (driverStatus.equals(DriverStatus.AUXILIARY)
@@ -175,10 +187,11 @@ public class DriverInfoBean {
                 }
             }
             getAssignmentInformation();
-            return "driver";
+            return DRIVER;
         } catch (ServiceFault serviceFault) {
             failureMessage = serviceFault.getMessage();
-            return "fail";
+            LOG.warn(serviceFault);
+            return FAIL;
         }
     }
 

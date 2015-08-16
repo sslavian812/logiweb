@@ -1,5 +1,6 @@
 package ru.tsystems.shalamov.web;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,8 @@ public class DriverManagementController {
     @Autowired
     private DriverManagementService driverManagementService;
 
+    private static final Logger LOG = Logger.getLogger(DriverManagementController.class);
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showDrivers() {
@@ -50,6 +53,7 @@ public class DriverManagementController {
             mav.addObject("colors", colors);
             return mav;
         } catch (ServiceLayerException e) {
+            LOG.warn(e);
             return ControllerUtil.fail("fail list all drivers.", e.getMessage());
         }
     }
@@ -65,6 +69,7 @@ public class DriverManagementController {
             driverManagementService.addDriver(new DriverModel(firstName, lastName, personalNumber));
             return new ModelAndView("redirect:/secure/drivers/");
         } catch (ServiceLayerException e) {
+            LOG.warn(e);
             return ControllerUtil.fail("fail to add driver " + personalNumber, e.getMessage());
         }
     }
@@ -75,6 +80,7 @@ public class DriverManagementController {
             driverManagementService.deleteDriverByPersonalNumber(personalNumber);
             return new ModelAndView("redirect:/secure/drivers/");
         } catch (ServiceLayerException e) {
+            LOG.warn(e);
             return ControllerUtil.fail("fail to delete driver", e.getMessage());
         }
     }
@@ -90,6 +96,7 @@ public class DriverManagementController {
             mav.addObject("driver", driver);
             return mav;
         } catch (ServiceLayerException e) {
+            LOG.warn(e);
             return ControllerUtil.fail("fail to edit driver", e.getMessage());
         }
     }
@@ -107,6 +114,7 @@ public class DriverManagementController {
             driverManagementService.updateDriver(driverModel, oldPersonalNumber);
             return new ModelAndView("redirect:/secure/drivers/");
         } catch (ServiceLayerException e) {
+            LOG.warn(e);
             return ControllerUtil.fail("fail to edit driver", e.getMessage());
         }
     }

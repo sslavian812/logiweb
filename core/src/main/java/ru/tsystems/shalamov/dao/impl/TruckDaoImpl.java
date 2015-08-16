@@ -1,6 +1,6 @@
 package ru.tsystems.shalamov.dao.impl;
 
-import org.springframework.stereotype.Component;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.TruckDao;
@@ -24,12 +24,15 @@ import java.util.List;
 @Repository
 public class TruckDaoImpl extends GenericDaoImpl<TruckEntity> implements TruckDao {
 
+    private static final Logger LOG = Logger.getLogger(CargoDaoImpl.class);
+
     public TruckDaoImpl(Class<TruckEntity> type) {
         super(type);
     }
 
-    public TruckDaoImpl()
-    {super();}
+    public TruckDaoImpl() {
+        super();
+    }
 
     @Override
     public List<TruckEntity> findAll() throws DataAccessLayerException {
@@ -72,6 +75,7 @@ public class TruckDaoImpl extends GenericDaoImpl<TruckEntity> implements TruckDa
             return em.createQuery(criteriaQuery.select(truckEntityRoot).where(criteriaBuilder.equal(
                     truckEntityRoot.get("registrationNumber"), truckRegistrationNumber))).getSingleResult();
         } catch (NoResultException e) {
+            LOG.debug(new Exception("no objects found with driver registration number [" + truckRegistrationNumber + "]. null returned.", e));
             return null;
         } catch (Exception e) {
             throw new DataAccessLayerException(e);

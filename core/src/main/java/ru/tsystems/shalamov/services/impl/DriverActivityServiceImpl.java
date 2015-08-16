@@ -33,20 +33,16 @@ public class DriverActivityServiceImpl implements DriverActivityService {
     private DriverStatusDao driverStatusDao;
     @Autowired
     private CargoDao cargoDao;
-
     @Autowired
     private OrderDao orderDao;
 
-    public void setOrderDao(OrderDao orderDao) {
-        this.orderDao = orderDao;
-    }
-
     @Autowired
-    public DriverActivityServiceImpl(DriverDao driverDao, ShiftDao shiftDao, DriverStatusDao driverStatusDao, CargoDao cargoDao) {
+    public DriverActivityServiceImpl(DriverDao driverDao, ShiftDao shiftDao, DriverStatusDao driverStatusDao, CargoDao cargoDao, OrderDao orderDao) {
         this.driverDao = driverDao;
         this.shiftDao = shiftDao;
         this.driverStatusDao = driverStatusDao;
         this.cargoDao = cargoDao;
+        this.orderDao = orderDao;
     }
 
 

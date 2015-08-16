@@ -14,6 +14,18 @@ import java.util.stream.Collectors;
  */
 public class OrderModel {
 
+    @NotNull
+    @Pattern(regexp = "[a-zA-Z0-9]+", message = "alphanumeric characters only")
+    private String orderIdentifier;
+
+    @NotNull
+    private OrderStatus status;
+
+    private List<CargoModel> cargoes;
+
+    @Pattern(regexp = "[a-zA-Z0-9]{2}[0-9]{5}]", message = "two letters and five digits")
+    private String truckRegistrationNumber;
+
 
     public OrderModel(String orderIdentifier) {
         if (orderIdentifier == null || orderIdentifier.isEmpty())
@@ -32,18 +44,6 @@ public class OrderModel {
         if (orderEntity.getTruckEntity() != null)
             this.truckRegistrationNumber = orderEntity.getTruckEntity().getRegistrationNumber();
     }
-
-    @NotNull
-    @Pattern(regexp = "[a-zA-Z0-9]+", message = "alphanumeric characters only")
-    private String orderIdentifier;
-
-    @NotNull
-    private OrderStatus status;
-
-    private List<CargoModel> cargoes;
-
-    @Pattern(regexp = "[a-zA-Z0-9]{2}[0-9]{5}]", message = "two letters and five digits")
-    private String truckRegistrationNumber;
 
     /**
      * Provides total weight of all cargoes included int the order.
@@ -102,5 +102,15 @@ public class OrderModel {
         if (orderIdentifier != null ? !orderIdentifier.equals(that.orderIdentifier) : that.orderIdentifier != null)
             return false;
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 0;
+        result = 31 * result + (orderIdentifier != null ? orderIdentifier.hashCode() : 0);
+        result = 31 * result + (truckRegistrationNumber != null ? truckRegistrationNumber.hashCode() : 0);
+        result = 31 * result + (cargoes != null ? cargoes.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
     }
 }

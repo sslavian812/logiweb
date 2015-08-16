@@ -1,7 +1,5 @@
 package ru.tsystems.shalamov.dao.impl;
 
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.stereotype.Component;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.GenericDao;
 
@@ -17,32 +15,31 @@ import java.util.List;
 /**
  * Created by viacheslav on 30.06.2015.
  */
-//@ImportResource("classpath:persistence/src/main/resources/applicationContext.xml")
-//@ImportResource("applicationContext.xml")
 public abstract class GenericDaoImpl<T> implements GenericDao<T> {
-
-    public Class<T> getType() {
-        return type;
-    }
-
-    private Class<T> type;
 
     @PersistenceContext
     private EntityManager em;
 
-    public void setEm(EntityManager em) {
-        this.em = em;
-    }
-
-    public GenericDaoImpl(Class<T> type) {
-        this.type = type;
-    }
+    private Class<T> type;
 
     public GenericDaoImpl() {
         Type t = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) t;
         type = (Class) pt.getActualTypeArguments()[0];
     }
+
+    public GenericDaoImpl(Class<T> type) {
+        this.type = type;
+    }
+
+    public Class<T> getType() {
+        return type;
+    }
+
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
+
 
     @Override
     public void create(T newInstance) throws DataAccessLayerException {
@@ -84,7 +81,6 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
     public List<T> findAll() throws DataAccessLayerException {
 
         try {
-            //EntityManager em = getEntityManager();
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
             CriteriaQuery<T> query = criteriaBuilder.createQuery(type);
             Root<T> tRoot = query.from(type);

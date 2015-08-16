@@ -184,35 +184,12 @@ public class DriverManagementServiceImpl implements DriverManagementService {
         }
     }
 
-
-    @Transactional(rollbackOn = ServiceLayerException.class)
-    private void updateDriverStatus(final DriverStatusEntity driverStatusEntity)
-            throws ServiceLayerException {
-        try {
-            driverStatusDao.update(driverStatusEntity);
-        } catch (DataAccessLayerException e) {
-            LOG.warn(Util.UNEXPECTED, e);
-            throw new ServiceLayerException(e);
-        }
-    }
-
     @Transactional(rollbackOn = ServiceLayerException.class)
     private DriverEntity findDriverByPersonalNumber(final String personalNumber)
             throws ServiceLayerException {
         try {
             return driverDao.findByPersonalNumber(personalNumber);
         } catch (DataAccessLayerException e) {
-            LOG.warn(Util.UNEXPECTED, e);
-            throw new ServiceLayerException(e);
-        }
-    }
-
-    @Transactional(rollbackOn = ServiceLayerException.class)
-    private boolean checkDriverExists(final String personalNumber)
-            throws ServiceLayerException {
-        try {
-            return driverDao.findByPersonalNumber(personalNumber) != null;
-        } catch (Exception e) {
             LOG.warn(Util.UNEXPECTED, e);
             throw new ServiceLayerException(e);
         }

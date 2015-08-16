@@ -1,5 +1,6 @@
 package ru.tsystems.shalamov.web;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,8 @@ public class OrderManagementController {
     @Autowired
     private OrderManagementService orderManagementService;
 
+    private static final Logger LOG = Logger.getLogger(OrderManagementController.class);
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showOrders() {
@@ -51,6 +54,7 @@ public class OrderManagementController {
             mav.addObject("generated2", Util.generateRandomId());
             return mav;
         } catch (ServiceLayerException e) {
+            LOG.warn(e);
             return ControllerUtil.fail("fail list all orders.", e.getMessage());
         }
     }
@@ -72,6 +76,7 @@ public class OrderManagementController {
             orderManagementService.createOrderWithCargoes(orderModel, cargoes);
             return new ModelAndView("redirect:/secure/orders/edit/" + orderIdentifier);
         } catch (ServiceLayerException | NumberFormatException e) {
+            LOG.warn(e);
             return ControllerUtil.fail("fail to add order " + orderModel.getOrderIdentifier(), e.getMessage());
         }
     }
@@ -82,6 +87,7 @@ public class OrderManagementController {
             orderManagementService.deleteOrderByOrderIdentifierIfNotAssigned(orderIdentifier);
             return new ModelAndView("redirect:/secure/orders/");
         } catch (ServiceLayerException e) {
+            LOG.warn(e);
             return ControllerUtil.fail("fail to delete order " + orderIdentifier, e.getMessage());
         }
     }
@@ -93,6 +99,7 @@ public class OrderManagementController {
             orderManagementService.deleteCargo(cargoIdentifier);
             return new ModelAndView("redirect:/secure/orders/edit/" + orderIdentifier);
         } catch (ServiceLayerException e) {
+            LOG.warn(e);
             return ControllerUtil.fail("fail to delete cargo " + cargoIdentifier, e.getMessage());
         }
     }
@@ -117,13 +124,14 @@ public class OrderManagementController {
             mav.addObject("generated", Util.generateRandomId());
             return mav;
         } catch (ServiceLayerException e) {
+            LOG.warn(e);
             return ControllerUtil.fail("fail to edit order", e.getMessage());
         }
     }
 
     @RequestMapping(value = "/add/{id}/cargo", method = RequestMethod.POST)
     public ModelAndView addCargo(@PathVariable("id") String orderIdentifier,
-                                 HttpServletRequest request, HttpServletResponse response) {
+                                 HttpServletRequest request) {
         try {
             OrderModel order = orderManagementService.findOrderModelByOrderIdentifier(orderIdentifier);
             if (order == null) {
@@ -141,13 +149,9 @@ public class OrderManagementController {
 
             return new ModelAndView("redirect:/secure/orders/edit/" + orderIdentifier);
         } catch (ServiceLayerException e) {
+            LOG.warn(e);
             return ControllerUtil.fail("fail to edit order", e.getMessage());
         }
-    }
-
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ModelAndView updateOrder(HttpServletRequest request) {
-        return ControllerUtil.fail("not implemented", "");
     }
 }
 

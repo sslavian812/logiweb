@@ -1,5 +1,6 @@
 package ru.tsystems.shalamov.dao.impl;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.OrderDao;
@@ -24,6 +25,7 @@ import java.util.List;
 @Repository
 public class OrderDaoImpl extends GenericDaoImpl<OrderEntity> implements OrderDao {
 
+    private static final Logger LOG = Logger.getLogger(OrderDaoImpl.class);
 
     public OrderDaoImpl(Class<OrderEntity> type) {
         super(type);
@@ -67,6 +69,7 @@ public class OrderDaoImpl extends GenericDaoImpl<OrderEntity> implements OrderDa
             return em.createQuery(criteriaQuery.select(orderEntityRoot).where(criteriaBuilder.equal(
                     orderEntityRoot.get("orderIdentifier"), orderIdentifier))).getSingleResult();
         } catch (NoResultException e) {
+            LOG.debug(new Exception("no objects found with order identifier [" + orderIdentifier + "]. null returned.", e));
             return null;
         } catch (Exception e) {
             throw new DataAccessLayerException(e);

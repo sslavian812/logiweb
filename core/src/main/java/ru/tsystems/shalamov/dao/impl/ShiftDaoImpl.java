@@ -1,13 +1,14 @@
 package ru.tsystems.shalamov.dao.impl;
 
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
-import ru.tsystems.shalamov.services.DateUtilities;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.ShiftDao;
 import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.entities.ShiftEntity;
 import ru.tsystems.shalamov.entities.ShiftEntity_;
+import ru.tsystems.shalamov.services.DateUtilities;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -26,6 +27,8 @@ import java.util.List;
  */
 @Repository
 public class ShiftDaoImpl extends GenericDaoImpl<ShiftEntity> implements ShiftDao {
+    private static final Logger LOG = Logger.getLogger(ShiftDaoImpl.class);
+
 
     public ShiftDaoImpl(Class<ShiftEntity> type) {
         super(type);
@@ -68,27 +71,6 @@ public class ShiftDaoImpl extends GenericDaoImpl<ShiftEntity> implements ShiftDa
     }
 
     @Override
-    @Deprecated
-    public ShiftEntity findActiveShiftByDriver(String personalNumber) throws DataAccessLayerException {
-        try {
-            EntityManager em = getEntityManager();
-
-            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-            CriteriaQuery<ShiftEntity> criteriaQuery = criteriaBuilder.createQuery(ShiftEntity.class);
-
-            Root<ShiftEntity> shiftEntityRoot = criteriaQuery.from(ShiftEntity.class);
-            return em.createQuery(criteriaQuery.select(shiftEntityRoot).where(criteriaBuilder.and(
-                    criteriaBuilder.equal(shiftEntityRoot.get(ShiftEntity_.driverEntity), personalNumber),
-                    criteriaBuilder.isNull(shiftEntityRoot.get(ShiftEntity_.shiftEnd))
-            ))).getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        } catch (Exception e) {
-            throw new DataAccessLayerException(e);
-        }
-    }
-
-    @Override
     public ShiftEntity findActiveShiftByDriver(DriverEntity driver) throws DataAccessLayerException {
         try {
             EntityManager em = getEntityManager();
@@ -102,6 +84,7 @@ public class ShiftDaoImpl extends GenericDaoImpl<ShiftEntity> implements ShiftDa
                     criteriaBuilder.isNull(shiftEntityRoot.get(ShiftEntity_.shiftEnd))
             ))).getSingleResult();
         } catch (NoResultException e) {
+            LOG.debug(new Exception("no shifts found for driver with personal number [" + driver.getPersonalNumber() + "]. null returned.", e));
             return null;
         } catch (Exception e) {
             throw new DataAccessLayerException(e);

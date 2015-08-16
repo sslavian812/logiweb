@@ -27,10 +27,6 @@ public class DriverModel {
     @NotNull
     private DriverStatus driverStatus;
 
-
-//    @Pattern(regexp = "[a-zA-Z0-9]+", message = "alphanumeric characters only")
-//    private String orderIdentifier;
-
     @Pattern(regexp = "[a-zA-Z0-9]{2}[0-9]{5}]", message = "two letters and five digits")
     private String truckRegistrationNumber;
 
@@ -109,14 +105,6 @@ public class DriverModel {
         this.driverStatus = driverStatus;
     }
 
-//    public String getOrderIdentifier() {
-//        return orderIdentifier;
-//    }
-//
-//    public void setOrderIdentifier(String orderIdentifier) {
-//        this.orderIdentifier = orderIdentifier;
-//    }
-
     public String getTruckRegistrationNumber() {
         return truckRegistrationNumber;
     }
@@ -138,5 +126,16 @@ public class DriverModel {
             return false;
 
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 0;
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (personalNumber != null ? personalNumber.hashCode() : 0);
+        result = 31 * result + (driverStatus != null ? driverStatus.hashCode() : 0);
+        result = 31 * result + (truckRegistrationNumber != null ? truckRegistrationNumber.hashCode() : 0);
+        return result;
     }
 }

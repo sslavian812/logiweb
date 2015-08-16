@@ -41,8 +41,7 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
 
     @Autowired
     public AssignmentServiceImpl(DriverDao driverDao, OrderDao orderDao,
-                                 TruckDao truckDao, DriverStatusDao driverStatusDao,
-                                 CargoDao cargoDao) {
+                                 TruckDao truckDao, DriverStatusDao driverStatusDao) {
         this.driverDao = driverDao;
         this.orderDao = orderDao;
         this.truckDao = truckDao;
@@ -68,7 +67,7 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
             List<TruckModel> availableTrucks = findTrucksForOrder(order).stream()
                     .map(t -> new TruckModel(t)).collect(Collectors.toList());
 
-            List<DriverModel> availableDrivers = findDriversForOrder(order).stream()
+            List<DriverModel> availableDrivers = findDriversForOrder().stream()
                     .map(d -> new DriverModel(d)).collect(Collectors.toList());
 
             availableTrucks = availableTrucks.subList(0, Math.min(MAX, availableTrucks.size()));
@@ -94,7 +93,7 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
                 throw new ServiceLayerException("Unable to assign. No such truck.");
             }
 
-            if (truck.getDriverStatusEntities().size() != 0) {
+            if (!truck.getDriverStatusEntities().isEmpty()) {
                 throw new ServiceLayerException("truck ["
                         + truck.getRegistrationNumber() + "] is already in use");
             }
@@ -144,7 +143,7 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
     }
 
     @Transactional(rollbackOn = ServiceLayerException.class)
-    private List<DriverEntity> findDriversForOrder(OrderEntity order)
+    private List<DriverEntity> findDriversForOrder()
             throws ServiceLayerException {
         try {
             return driverDao.findByMaxWorkingHoursWhereNotAssignedToOrder();

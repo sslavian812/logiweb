@@ -114,4 +114,16 @@ public class TruckModel {
 
         return true;
     }
+
+    @Override
+    public int hashCode() {
+        int result = 0;
+        result = 31 * result + (Integer.hashCode(crewSize));
+        result = 31 * result + (Integer.hashCode(capacity));
+        result = 31 * result + (registrationNumber != null ? registrationNumber.hashCode() : 0);
+        result = 31 * result + (orderIdentifier != null ? orderIdentifier.hashCode() : 0);
+        result = 31 * result + (drivers != null ? drivers.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
+    }
 }
