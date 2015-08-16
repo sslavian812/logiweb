@@ -4,17 +4,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:a4j="http://richfaces.org/a4j"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
+        >
 
 <head>
     <title>Driver Information</title>
     <link rel="stylesheet" href="/resources/core/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/resources/core/css/style.css"/>
     <link rel="stylesheet" href="/resources/core/fonts/*"/>
+
 </head>
 <body>
-<p>failure: #{driverInfoBean.failureMessage} </p>
+<f:view encoding="UTF-8" contentType="text/html">
+    <h1>here should be login page with gray colors</h1>
+    <h:panelGroup layout="block" styleClass="container">
+        <h:panelGroup layout="block" styleClass="login">
+            <h1>Bad news:</h1>
+
+            <p>failure: #{driverInfoBean.failureMessage} </p>
+            <a href="login.xhtml">
+                <button class="btn btn-info" value="HOME"/>
+            </a>
+        </h:panelGroup>
+    </h:panelGroup>
+</f:view>
 </body>
 </html>

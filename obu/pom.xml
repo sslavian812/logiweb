@@ -25,6 +25,13 @@
             <groupId>org.richfaces</groupId>
             <artifactId>richfaces-a4j</artifactId>
         </dependency>
+        <!-- PrimeFaces -->
+
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>5.2</version>
+        </dependency>
 
 
         <dependency>

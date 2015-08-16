@@ -6,6 +6,7 @@ import ru.tsystems.shalamov.ws.*;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.xml.ws.WebServiceException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,21 +37,26 @@ public class DriverInfoBean {
 //    todo String firstName = "";
 //    todo String lastName = "";
 
-    public static final  DriverStatus unassigned = DriverStatus.UNASSIGNED;
-    public static final  DriverStatus rest = DriverStatus.REST;
-    public static final  DriverStatus auxiliary = DriverStatus.AUXILIARY;
+
+    public static final CargoStatus delivered = CargoStatus.DELIVERED;
+    public static final DriverStatus unassigned = DriverStatus.UNASSIGNED;
+    public static final DriverStatus rest = DriverStatus.REST;
+    public static final DriverStatus auxiliary = DriverStatus.AUXILIARY;
 
     private static final Logger LOG = Logger.getLogger(DriverInfoBean.class);
 
     private static final String DRIVER = "driver";
     private static final String FAIL = "fail";
+    private static final String LOGIN = "login";
 
 
     public String getAssignmentInformation() {
         try {
             // when called, PN should be already set.
-            if (personalNumber == null || personalNumber.isEmpty())
+            if (personalNumber == null || personalNumber.isEmpty()) {
+                failureMessage = "no driver's personal number provided. try again.";
                 return FAIL;
+            }
 
             DriverAssignmentModel assignment = client.getDriverAssignmentInformation(personalNumber);
 
@@ -81,8 +87,17 @@ public class DriverInfoBean {
         } catch (ServiceFault serviceFault) {
             failureMessage = serviceFault.getMessage();
             LOG.warn(serviceFault);
+            return LOGIN;
+        } catch (WebServiceException e) {
+            failureMessage = e.getMessage();
+            LOG.error(e);
             return FAIL;
         }
+//        catch (ServletException e) {
+//            failureMessage = e.getMessage();
+//            LOG.warn(e);
+//            return FAIL;
+//        }
     }
 
 
@@ -102,6 +117,10 @@ public class DriverInfoBean {
             failureMessage = serviceFault.getMessage();
             LOG.warn(serviceFault);
             return FAIL;
+        } catch (WebServiceException e) {
+            failureMessage = e.getMessage();
+            LOG.error(e);
+            return FAIL;
         }
     }
 
@@ -112,6 +131,8 @@ public class DriverInfoBean {
                     client.shiftBegin(personalNumber);
                 } else {
                     client.shiftEnd(personalNumber);
+                    if(personalNumber.equals(primaryDriver))
+                        primaryDriver = "";
                 }
             }
             getAssignmentInformation();
@@ -119,6 +140,10 @@ public class DriverInfoBean {
         } catch (ServiceFault serviceFault) {
             failureMessage = serviceFault.getMessage();
             LOG.warn(serviceFault);
+            return FAIL;
+        } catch (WebServiceException e) {
+            failureMessage = e.getMessage();
+            LOG.error(e);
             return FAIL;
         }
     }
@@ -139,6 +164,10 @@ public class DriverInfoBean {
             failureMessage = serviceFault.getMessage();
             LOG.warn(serviceFault);
             return FAIL;
+        } catch (WebServiceException e) {
+            failureMessage = e.getMessage();
+            LOG.error(e);
+            return FAIL;
         }
     }
 
@@ -152,7 +181,7 @@ public class DriverInfoBean {
 
     public String completeOrder() {
         try {
-            if(driverStatus.equals(DriverStatus.AUXILIARY) || driverStatus.equals(DriverStatus.PRIMARY))
+            if (driverStatus.equals(DriverStatus.AUXILIARY) || driverStatus.equals(DriverStatus.PRIMARY))
                 client.completeOrder(orderIdentifier);
             primaryDriver = "";
             return getAssignmentInformation();
@@ -160,30 +189,30 @@ public class DriverInfoBean {
             failureMessage = serviceFault.getMessage();
             LOG.warn(serviceFault);
             return FAIL;
+        } catch (WebServiceException e) {
+            failureMessage = e.getMessage();
+            LOG.error(e);
+            return FAIL;
         }
     }
 
 
-    // todo split into two methods
     public String switchCargoStatus(String cargoIdentifier) {
         try {
-            if (driverStatus.equals(DriverStatus.AUXILIARY)
-                    || driverStatus.equals(DriverStatus.PRIMARY)) {
-                for (int i = 0; i < cargoesList.size(); ++i) {
-                    if (cargoesList.get(i).equals(cargoIdentifier)) {
-                        CargoStatus currentStatus = cargoesStatuses.get(i);
-                        if (currentStatus.equals(CargoStatus.PREPARED)) {
-                            cargoesStatuses.set(i, CargoStatus.SHIPPED);
-                            client.cargoStatusChangedToShipped(cargoIdentifier);
-                        } else if (currentStatus.equals(CargoStatus.SHIPPED)) {
-                            cargoesStatuses.set(i, CargoStatus.DELIVERED);
-                            client.cargoStatusChangedToDelivered(cargoIdentifier);
-                        } else if (currentStatus.equals(CargoStatus.DELIVERED)) {
-                            cargoesStatuses.set(i, CargoStatus.PREPARED);
-                            client.cargoStatusChangedToPrepared(cargoIdentifier);
-                        }
-                    }
+            if (driverStatus.equals(DriverStatus.REST)
+                    || driverStatus.equals(DriverStatus.UNASSIGNED)) {
+                return DRIVER;
+            }
 
+            for (int i = 0; i < cargoesList.size(); ++i) {
+                if (cargoesList.get(i).equals(cargoIdentifier)) {
+                    CargoStatus currentStatus = cargoesStatuses.get(i);
+                    if (currentStatus.equals(CargoStatus.PREPARED)) {
+                        client.cargoStatusChangedToShipped(cargoIdentifier);
+                    } else if (currentStatus.equals(CargoStatus.SHIPPED)) {
+                        client.cargoStatusChangedToDelivered(cargoIdentifier);
+                    }
+                    cargoesStatuses.set(i, getNext(currentStatus));
                 }
             }
             getAssignmentInformation();
@@ -191,6 +220,10 @@ public class DriverInfoBean {
         } catch (ServiceFault serviceFault) {
             failureMessage = serviceFault.getMessage();
             LOG.warn(serviceFault);
+            return FAIL;
+        } catch (WebServiceException e) {
+            failureMessage = e.getMessage();
+            LOG.error(e);
             return FAIL;
         }
     }
@@ -202,7 +235,7 @@ public class DriverInfoBean {
         else if (status.equals(CargoStatus.SHIPPED))
             return CargoStatus.DELIVERED;
         else
-            return CargoStatus.PREPARED;
+            return CargoStatus.DELIVERED;  // workaround
     }
 
     public String mapStatusToColor(CargoStatus status) {
@@ -304,5 +337,9 @@ public class DriverInfoBean {
 
     public DriverStatus getAuxiliary() {
         return auxiliary;
+    }
+
+    public CargoStatus getDelivered() {
+        return delivered;
     }
 }

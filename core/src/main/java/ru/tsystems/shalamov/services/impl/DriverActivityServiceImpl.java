@@ -19,6 +19,7 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by viacheslav on 29.07.2015.
@@ -199,6 +200,15 @@ public class DriverActivityServiceImpl implements DriverActivityService {
 
             if (!order.getStatus().equals(OrderStatus.IN_PROGRESS)) {
                 throw new ServiceLayerException("order has " + order.getStatus() + " status. Unable to set it to " + OrderStatus.COMPLETED);
+            }
+
+            if (order.getCargoEntities().stream()
+                    .filter(c -> c.getStatus().equals(CargoStatus.DELIVERED))
+                    .collect(Collectors.toList()).isEmpty()) {
+                ServiceLayerException e = new ServiceLayerException("unable to complete order, not all cargoes are delivered");
+                e.setStackTrace(Thread.currentThread().getStackTrace());
+                LOG.warn(e);
+                throw e;
             }
 
             TruckEntity truck = order.getTruckEntity();
