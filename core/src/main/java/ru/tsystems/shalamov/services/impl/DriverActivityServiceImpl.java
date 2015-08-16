@@ -192,8 +192,6 @@ public class DriverActivityServiceImpl implements DriverActivityService {
     @Transactional(rollbackOn = ServiceLayerException.class)
     public void completeOrder(String orderIdentifier) throws ServiceLayerException {
         try {
-
-            // todo test this methos
             OrderEntity order = orderDao.findByOrderIdentifier(orderIdentifier);
             if (order == null) {
                 throw new ServiceLayerException("no such order");

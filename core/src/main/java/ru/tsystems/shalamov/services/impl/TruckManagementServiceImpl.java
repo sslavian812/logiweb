@@ -83,8 +83,6 @@ public class TruckManagementServiceImpl implements TruckManagementService {
                         + "Truck with new registration number already exists");
             }
 
-
-            // todo this if is not covered by tests
             if (truckEntity.getStatus().equals(TruckStatus.ASSIGNED)
                     && truck.getStatus() != truckEntity.getStatus()) {
                 throw new ServiceLayerException("Fail to change truck status while processing order");
@@ -119,7 +117,8 @@ public class TruckManagementServiceImpl implements TruckManagementService {
                 throw exc;
             }
 
-            if (truck.getDriverStatusEntities() != null && !truck.getDriverStatusEntities().isEmpty()) {
+            //no need of && !truck.getDriverStatusEntities().isEmpty()
+            if (truck.getDriverStatusEntities() != null ) {
                 ServiceLayerException exc = new ServiceLayerException(
                         "Unable to delete truck with trucks assigned to it. Drivers should be unassigned first.");
                 exc.setStackTrace(Thread.currentThread().getStackTrace());

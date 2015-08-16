@@ -76,7 +76,6 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
     public void addCargoToOrder(String orderIdentifier, CargoModel cargo) throws ServiceLayerException {
-        // todo test this method
         try {
             OrderEntity orderEntity = findOrderByOrderIdentifier(orderIdentifier);
 
@@ -104,7 +103,6 @@ public class OrderManagementServiceImpl implements OrderManagementService {
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
     public void deleteCargo(String cargoIdentifier) throws ServiceLayerException {
-        // todo test this method
         try {
             CargoEntity cargoEntity = cargoDao.findCargoByCargoIdentifier(cargoIdentifier);
 

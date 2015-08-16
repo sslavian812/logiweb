@@ -11,8 +11,11 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.CargoDao;
 import ru.tsystems.shalamov.dao.api.OrderDao;
+import ru.tsystems.shalamov.entities.CargoEntity;
 import ru.tsystems.shalamov.entities.OrderEntity;
+import ru.tsystems.shalamov.entities.statuses.CargoStatus;
 import ru.tsystems.shalamov.entities.statuses.OrderStatus;
+import ru.tsystems.shalamov.model.CargoModel;
 import ru.tsystems.shalamov.model.OrderModel;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.OrderManagementService;
@@ -85,20 +88,21 @@ public class OrderManagementServiceTest {
     public void testCreateFindByOI() {
         try {
             doNothing().when(orderDao).create(Mockito.any(OrderEntity.class));
+            doNothing().when(cargoDao).create(Mockito.any(CargoEntity.class));
             when(orderDao.findByOrderIdentifier(Mockito.any(String.class))).thenReturn(null);
 
-            OrderEntity order = new OrderEntity("myOrder1");
-            order.setCargoEntities(new ArrayList<>());
-            orderManagementService.createOrderWithCargoes(new OrderModel(order), new ArrayList<>());
+            OrderEntity orderEntity = new OrderEntity("myOrder1");
+            List<CargoModel> cargoes = new ArrayList<>();
+            CargoModel cargoModel = new CargoModel("den", 1, CargoStatus.PREPARED, orderEntity.getOrderIdentifier());
+            cargoes.add(cargoModel);
 
-            when(orderDao.findByOrderIdentifier(Mockito.any(String.class))).thenReturn(order);
+            orderManagementService.createOrderWithCargoes(new OrderModel(orderEntity), cargoes);
+            when(orderDao.findByOrderIdentifier(Mockito.any(String.class))).thenReturn(orderEntity);
 
+            OrderModel orderModel = orderManagementService
+                    .findOrderModelByOrderIdentifier(orderEntity.getOrderIdentifier());
 
-            Assert.assertEquals(orderManagementService
-                            .findOrderModelByOrderIdentifier(
-                                    order.getOrderIdentifier()),
-                    new OrderModel(order));
-
+            Assert.assertEquals(orderModel, new OrderModel(orderEntity));
         } catch (ServiceLayerException | DataAccessLayerException e) {
             Assert.fail();
         }
@@ -217,6 +221,100 @@ public class OrderManagementServiceTest {
             when(orderDao.findByOrderIdentifier(order.getOrderIdentifier())).thenReturn(order);
 
             orderManagementService.deleteOrderByOrderIdentifierIfNotAssigned(order.getOrderIdentifier());
+        } catch (ServiceLayerException | DataAccessLayerException e) {
+            Assert.fail();
+        }
+    }
+
+    @Test(expected = ServiceLayerException.class)
+    public void testAddCargoToMissingOrder() throws ServiceLayerException{
+        try {
+            when(orderDao.findByOrderIdentifier(Mockito.anyString())).thenReturn(null);
+            orderManagementService.addCargoToOrder("order", new CargoModel("den", 1, CargoStatus.PREPARED, "order"));
+        } catch (DataAccessLayerException e) {
+            Assert.fail();
+        }
+    }
+
+    @Test(expected = ServiceLayerException.class)
+    public void testAddCargoToAssignedOrder() throws ServiceLayerException{
+        try {
+            OrderEntity orderEntity = new OrderEntity("order");
+            orderEntity.setStatus(OrderStatus.IN_PROGRESS);
+            when(orderDao.findByOrderIdentifier(Mockito.anyString())).thenReturn(orderEntity);
+
+            orderManagementService.addCargoToOrder("order", new CargoModel("den", 1, CargoStatus.PREPARED, "order"));
+
+        } catch (DataAccessLayerException e) {
+            Assert.fail();
+        }
+    }
+
+
+    @Test
+    public void testAddCargoToOrder() {
+        try {
+            doNothing().when(orderDao).update(Mockito.any(OrderEntity.class));
+            doNothing().when(cargoDao).create(Mockito.any(CargoEntity.class));
+
+            OrderEntity orderEntity = new OrderEntity("order");
+            orderEntity.setCargoEntities(new ArrayList<>());
+            when(orderDao.findByOrderIdentifier(Mockito.anyString())).thenReturn(orderEntity);
+            CargoModel cargoModel = new CargoModel("den", 1, CargoStatus.PREPARED, "order");
+            orderManagementService.addCargoToOrder("order", cargoModel);
+
+            Assert.assertEquals(orderEntity.getCargoEntities().get(0).getCargoIdentifier(), cargoModel.getCargoIdentifier());
+        } catch (ServiceLayerException | DataAccessLayerException e) {
+            Assert.fail();
+        }
+    }
+
+
+
+    @Test(expected = ServiceLayerException.class)
+    public void testDeleteMissingCargo() throws ServiceLayerException{
+        try {
+            when(cargoDao.findCargoByCargoIdentifier(Mockito.anyString())).thenReturn(null);
+            orderManagementService.deleteCargo("cargo");
+        } catch (DataAccessLayerException e) {
+            Assert.fail();
+        }
+    }
+
+    @Test(expected = ServiceLayerException.class)
+    public void testDeleteCargoAssignedOrder() throws ServiceLayerException{
+        try {
+            OrderEntity orderEntity = new OrderEntity("order");
+            orderEntity.setStatus(OrderStatus.IN_PROGRESS);
+            CargoEntity cargoEntity = new CargoEntity("den", 1, CargoStatus.PREPARED, orderEntity, "cargo");
+            when(orderDao.findByOrderIdentifier(Mockito.anyString())).thenReturn(orderEntity);
+            when(cargoDao.findCargoByCargoIdentifier(Mockito.anyString())).thenReturn(cargoEntity);
+
+            orderManagementService.deleteCargo(cargoEntity.getCargoIdentifier());
+        } catch (DataAccessLayerException e) {
+            Assert.fail();
+        }
+    }
+
+
+    @Test
+    public void testDeleteCargo() {
+        try {
+            doNothing().when(orderDao).update(Mockito.any(OrderEntity.class));
+            doNothing().when(cargoDao).delete(Mockito.any(CargoEntity.class));
+
+            OrderEntity orderEntity = new OrderEntity("order");
+            CargoEntity cargoEntity = new CargoEntity("den", 1, CargoStatus.PREPARED, orderEntity, "cargo");
+            orderEntity.setCargoEntities(new ArrayList<>());
+            orderEntity.getCargoEntities().add(cargoEntity);
+
+            when(orderDao.findByOrderIdentifier(Mockito.anyString())).thenReturn(orderEntity);
+            when(cargoDao.findCargoByCargoIdentifier(Mockito.anyString())).thenReturn(cargoEntity);
+
+            orderManagementService.deleteCargo(cargoEntity.getCargoIdentifier());
+
+            Assert.assertTrue(orderEntity.getCargoEntities().isEmpty());
+
         } catch (ServiceLayerException | DataAccessLayerException e) {
             Assert.fail();
         }

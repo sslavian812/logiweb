@@ -127,6 +127,58 @@ public class TruckManagementServiceTest {
         }
     }
 
+    @Test
+    public void testUpdateAssigned() {
+        try {
+            doNothing().when(truckDao).create(Mockito.any(TruckEntity.class));
+            doNothing().when(truckDao).update(Mockito.any(TruckEntity.class));
+            when(truckDao.findByRegistrationNumber(Mockito.any(String.class))).thenReturn(null);
+
+            TruckEntity truck = new TruckEntity(1, "xx11111", 1000, TruckStatus.ASSIGNED);
+            truckManagementService.addTruck(new TruckModel(truck));
+            when(truckDao.findByRegistrationNumber(Mockito.any(String.class))).thenReturn(truck);
+
+            String oldRN = truck.getRegistrationNumber();
+            truck.setCapacity(20000);
+
+            truckManagementService.updateTruck(new TruckModel(truck), oldRN);
+
+            Assert.assertEquals(truckManagementService
+                            .findTruckModelByRegistrationNumber(
+                                    truck.getRegistrationNumber()),
+                    new TruckModel(truck));
+
+        } catch (ServiceLayerException | DataAccessLayerException e) {
+            Assert.fail();
+        }
+    }
+
+    @Test(expected = ServiceLayerException.class)
+    public void testUpdateAssignedTruck() throws ServiceLayerException{
+        try {
+            doNothing().when(truckDao).create(Mockito.any(TruckEntity.class));
+            doNothing().when(truckDao).update(Mockito.any(TruckEntity.class));
+
+            TruckEntity truck = new TruckEntity(1, "xx11111", 1000, TruckStatus.ASSIGNED);
+            when(truckDao.findByRegistrationNumber(Mockito.any(String.class))).thenReturn(truck);
+
+            String oldRN = truck.getRegistrationNumber();
+            TruckModel truckModel = new TruckModel(truck);
+            truckModel.setCapacity(2000);
+            truckModel.setStatus(TruckStatus.INTACT);
+
+            truckManagementService.updateTruck(truckModel, oldRN);
+
+            Assert.assertEquals(truckManagementService
+                            .findTruckModelByRegistrationNumber(
+                                    truck.getRegistrationNumber()),
+                    new TruckModel(truck));
+
+        } catch (DataAccessLayerException e) {
+            Assert.fail();
+        }
+    }
+
     @Test(expected = ServiceLayerException.class)
     public void testAlreadyInUse() throws ServiceLayerException {
         try {
@@ -137,6 +189,16 @@ public class TruckManagementServiceTest {
             truckManagementService.addTruck(new TruckModel(truck));
 
         } catch (DataAccessLayerException e) {
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void testFindMissingTruck() throws ServiceLayerException {
+        try {
+            when(truckDao.findByRegistrationNumber(Mockito.anyString())).thenReturn(null);
+            Assert.assertNull(truckManagementService.findTruckModelByRegistrationNumber("truck"));
+        } catch (ServiceLayerException | DataAccessLayerException e) {
             Assert.fail();
         }
     }

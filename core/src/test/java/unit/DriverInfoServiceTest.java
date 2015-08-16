@@ -13,6 +13,7 @@ import ru.tsystems.shalamov.dao.api.OrderDao;
 import ru.tsystems.shalamov.entities.*;
 import ru.tsystems.shalamov.entities.statuses.CargoStatus;
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
+import ru.tsystems.shalamov.entities.statuses.OrderStatus;
 import ru.tsystems.shalamov.entities.statuses.TruckStatus;
 import ru.tsystems.shalamov.model.DriverAssignmentModel;
 import ru.tsystems.shalamov.services.ServiceLayerException;
@@ -180,6 +181,34 @@ public class DriverInfoServiceTest {
             Assert.assertEquals(driverAssignmentModel.getOrderIdentifier(), order.getOrderIdentifier());
             Assert.assertEquals(driverAssignmentModel.getTruckRegistrationNumber(), truck.getRegistrationNumber());
 
+        } catch (ServiceLayerException | DataAccessLayerException e) {
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void testInfoByOrderInProgress() {
+        try {
+            OrderEntity order = new OrderEntity("myOrder");
+            order.setStatus(OrderStatus.IN_PROGRESS);
+            TruckEntity truck = new TruckEntity(1, "xx11111", 2000, TruckStatus.INTACT);
+            order.setTruckEntity(truck);
+            List<CargoEntity> cargoes = new ArrayList<>();
+            cargoes.add(new CargoEntity("bricks", 500, CargoStatus.PREPARED, order, "brickscargo"));
+            order.setCargoEntities(cargoes);
+
+            DriverEntity driver = new DriverEntity("vasia", "ivanov", "vv");
+            List<DriverEntity> codrivers = new ArrayList<>();
+            codrivers.add(driver);
+
+            when(orderDao.findByOrderIdentifier(Mockito.any(String.class))).thenReturn(order);
+            when(driverDao.findByCurrentTruck(Mockito.any(Integer.class))).thenReturn(codrivers);
+            DriverAssignmentModel driverAssignmentModel
+                    = driverInfoService.findDriverAssignmentModelByOrderIdentifier("");
+            Assert.assertNotNull(driverAssignmentModel);
+            Assert.assertEquals(driverAssignmentModel.getOrderIdentifier(), order.getOrderIdentifier());
+            Assert.assertEquals(driverAssignmentModel.getTruckRegistrationNumber(), truck.getRegistrationNumber());
+            Assert.assertEquals(driverAssignmentModel.getCoDrivers().size(), codrivers.size());
         } catch (ServiceLayerException | DataAccessLayerException e) {
             Assert.fail();
         }

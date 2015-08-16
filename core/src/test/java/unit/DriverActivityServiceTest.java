@@ -10,17 +10,17 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
 import ru.tsystems.shalamov.dao.api.*;
-import ru.tsystems.shalamov.entities.CargoEntity;
-import ru.tsystems.shalamov.entities.DriverEntity;
-import ru.tsystems.shalamov.entities.DriverStatusEntity;
-import ru.tsystems.shalamov.entities.ShiftEntity;
+import ru.tsystems.shalamov.entities.*;
 import ru.tsystems.shalamov.entities.statuses.CargoStatus;
 import ru.tsystems.shalamov.entities.statuses.DriverStatus;
+import ru.tsystems.shalamov.entities.statuses.OrderStatus;
+import ru.tsystems.shalamov.entities.statuses.TruckStatus;
 import ru.tsystems.shalamov.services.ServiceLayerException;
 import ru.tsystems.shalamov.services.api.DriverActivityService;
 import ru.tsystems.shalamov.services.impl.DriverActivityServiceImpl;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Date;
 
 import static org.mockito.Mockito.*;
@@ -226,4 +226,57 @@ public class DriverActivityServiceTest {
             Assert.fail();
         }
     }
+
+
+    @Test(expected = ServiceLayerException.class)
+    public void testCompleteMissingOrder() throws ServiceLayerException {
+        try {
+            when(orderDao.findByOrderIdentifier(Mockito.anyString())).thenReturn(null);
+            driverActivityService.completeOrder("order");
+        } catch (DataAccessLayerException e) {
+            Assert.fail();
+        }
+    }
+
+
+    @Test(expected = ServiceLayerException.class)
+    public void testCompleteNotInProgressOrder() throws ServiceLayerException {
+        try {
+            OrderEntity orderEntity = new OrderEntity("order");
+            orderEntity.setStatus(OrderStatus.COMPLETED);
+            when(orderDao.findByOrderIdentifier(Mockito.anyString())).thenReturn(orderEntity);
+            driverActivityService.completeOrder("order");
+        } catch (DataAccessLayerException e) {
+            Assert.fail();
+        }
+    }
+
+
+    @Test(expected = ServiceLayerException.class)
+    public void testCompleteOrder() throws ServiceLayerException {
+        try {
+            OrderEntity orderEntity = new OrderEntity("order");
+            orderEntity.setStatus(OrderStatus.IN_PROGRESS);
+            when(orderDao.findByOrderIdentifier(Mockito.anyString())).thenReturn(orderEntity);
+
+            TruckEntity truckEntity = new TruckEntity(1, "xx11111", 1000, TruckStatus.ASSIGNED);
+            orderEntity.setTruckEntity(truckEntity);
+            DriverEntity driverEntity = new DriverEntity("f", "l", "d");
+            DriverStatusEntity statusEntity = new DriverStatusEntity(driverEntity);
+            statusEntity.setStatus(DriverStatus.AUXILIARY);
+            statusEntity.setTruckEntity(truckEntity);
+            driverEntity.setDriverStatusEntity(statusEntity);
+            truckEntity.setDriverStatusEntities(Arrays.asList(statusEntity));
+
+            DriverActivityService driverActivityServiceSpy = Mockito.spy(driverActivityService);
+            doNothing().when(driverActivityServiceSpy).endShift(Mockito.anyString());
+            driverActivityServiceSpy.completeOrder(orderEntity.getOrderIdentifier());
+
+            driverActivityService.completeOrder("order");
+            Assert.assertEquals(orderEntity.getStatus(), OrderStatus.COMPLETED);
+        } catch (DataAccessLayerException e) {
+            Assert.fail();
+        }
+    }
+
 }
