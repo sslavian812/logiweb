@@ -24,6 +24,10 @@ import java.util.stream.Collectors;
  */
 @Service
 public class DriverInfoServiceImpl implements DriverInfoService {
+
+    /**
+     * String constant indicating absence of an object.
+     */
     public static final String NONE = "NONE";
 
     /**
@@ -59,7 +63,7 @@ public class DriverInfoServiceImpl implements DriverInfoService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public List<DriverAssignmentModel> findAllDriverAssignments() throws ServiceLayerException {
+    public final List<DriverAssignmentModel> findAllDriverAssignments() throws ServiceLayerException {
         try {
             List<OrderEntity> orders = orderDao.findAll();
 
@@ -96,18 +100,19 @@ public class DriverInfoServiceImpl implements DriverInfoService {
      */
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public DriverAssignmentModel findDriverAssignmentModelByPersonalNumber(String driverPersonalNumber)
+    public final DriverAssignmentModel findDriverAssignmentModelByPersonalNumber(final String driverPersonalNumber)
             throws ServiceLayerException {
         DriverAssignmentModel assignmentModel = getPossibleInformationForDriver(driverPersonalNumber);
-        if (assignmentModel.getTruckRegistrationNumber().equals(NONE))
+        if (assignmentModel.getTruckRegistrationNumber().equals(NONE)) {
             return null;
-        else
+        } else {
             return assignmentModel;
+        }
     }
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public DriverAssignmentModel getPossibleInformationForDriver(String driverPersonalNumber)
+    public final DriverAssignmentModel getPossibleInformationForDriver(final String driverPersonalNumber)
             throws ServiceLayerException {
         try {
             DriverAssignmentModel driverAssignment = new DriverAssignmentModel();
@@ -162,7 +167,7 @@ public class DriverInfoServiceImpl implements DriverInfoService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public DriverAssignmentModel findDriverAssignmentModelByOrderIdentifier(
+    public final DriverAssignmentModel findDriverAssignmentModelByOrderIdentifier(
             final String orderIdentifier) throws ServiceLayerException {
         try {
             DriverAssignmentModel driverAssignment = new DriverAssignmentModel();
@@ -185,7 +190,6 @@ public class DriverInfoServiceImpl implements DriverInfoService {
                     .map(c -> new CargoModel(c)).collect(Collectors.toList());
             driverAssignment.setCargoes(cargoes);
 
-            // todo if-else below is not covered properly by unit tests
             if (order.getStatus().equals(OrderStatus.IN_PROGRESS)) {
                 List<DriverEntity> coDrivers = driverDao.findByCurrentTruck(truck.getId());
                 driverAssignment.setCoDrivers(coDrivers.stream()

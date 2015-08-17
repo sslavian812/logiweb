@@ -11,8 +11,6 @@ import java.sql.Timestamp;
 @Table(name = "shifts", schema = "", catalog = "logiweb")
 public class ShiftEntity implements Serializable {
 
-    //todo: checkstyle claims: potential leek of references to mutable objects
-
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)

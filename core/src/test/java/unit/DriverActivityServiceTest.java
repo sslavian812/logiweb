@@ -273,10 +273,12 @@ public class DriverActivityServiceTest {
             truckEntity.setDriverStatusEntities(Arrays.asList(statusEntity));
 
             DriverActivityService driverActivityServiceSpy = Mockito.spy(driverActivityService);
+            when(driverDao.findByPersonalNumber(Mockito.anyString())).thenReturn(driverEntity);
             doNothing().when(driverActivityServiceSpy).endShift(Mockito.anyString());
             driverActivityServiceSpy.completeOrder(orderEntity.getOrderIdentifier());
 
             driverActivityService.completeOrder("order");
+            doNothing().when(driverStatusDao).update(Mockito.any());
             Assert.assertEquals(orderEntity.getStatus(), OrderStatus.COMPLETED);
         } catch (DataAccessLayerException e) {
             Assert.fail();

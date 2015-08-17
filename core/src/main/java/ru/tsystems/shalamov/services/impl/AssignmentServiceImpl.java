@@ -4,7 +4,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.tsystems.shalamov.dao.DataAccessLayerException;
-import ru.tsystems.shalamov.dao.api.*;
+import ru.tsystems.shalamov.dao.api.DriverDao;
+import ru.tsystems.shalamov.dao.api.DriverStatusDao;
+import ru.tsystems.shalamov.dao.api.OrderDao;
+import ru.tsystems.shalamov.dao.api.TruckDao;
 import ru.tsystems.shalamov.entities.DriverEntity;
 import ru.tsystems.shalamov.entities.DriverStatusEntity;
 import ru.tsystems.shalamov.entities.OrderEntity;
@@ -29,19 +32,48 @@ import java.util.stream.Collectors;
 @Service
 public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.AssignmentService {
 
+    /**
+     * DAO object for {@link ru.tsystems.shalamov.entities.DriverEntity}.
+     */
     private DriverDao driverDao;
+
+    /**
+     * DAO object for {@link ru.tsystems.shalamov.entities.TruckEntity}.
+     */
     private TruckDao truckDao;
+
+    /**
+     * DAO object for {@link ru.tsystems.shalamov.entities.DriverStatusEntity}.
+     */
     private DriverStatusDao driverStatusDao;
+
+    /**
+     * DAO object for {@link ru.tsystems.shalamov.entities.OrderEntity}.
+     */
     private OrderDao orderDao;
 
+    /**
+     * Log4j {@link org.apache.log4j.Logger}  for logging.
+     */
     private static final Logger LOG = Logger.getLogger(AssignmentServiceImpl.class);
 
+    /**
+     * Max amount of drivers, displayed on manager's scree when he to choose crew for a truck.
+     */
     public static final int MAX = 10;
 
 
+    /**
+     * Public constructor.
+     *
+     * @param driverDao       driver DAO object
+     * @param orderDao        order DAO object
+     * @param truckDao        truck dao object
+     * @param driverStatusDao driver status dao object
+     */
     @Autowired
-    public AssignmentServiceImpl(DriverDao driverDao, OrderDao orderDao,
-                                 TruckDao truckDao, DriverStatusDao driverStatusDao) {
+    public AssignmentServiceImpl(final DriverDao driverDao, final OrderDao orderDao,
+                                 final TruckDao truckDao, final DriverStatusDao driverStatusDao) {
         this.driverDao = driverDao;
         this.orderDao = orderDao;
         this.truckDao = truckDao;
@@ -51,7 +83,7 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public AvailableToAssignModel findAvailableToAssign(String orderIdentifier) throws ServiceLayerException {
+    public final AvailableToAssignModel findAvailableToAssign(final String orderIdentifier) throws ServiceLayerException {
         try {
             OrderEntity order = orderDao.findByOrderIdentifier(orderIdentifier);
 
@@ -64,11 +96,13 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
                 throw new ServiceLayerException("Order is not available to be assigned. Already Assigned.");
             }
 
-            List<TruckModel> availableTrucks = findTrucksForOrder(order).stream()
-                    .map(t -> new TruckModel(t)).collect(Collectors.toList());
+            List<TruckModel> availableTrucks =
+                    truckDao.findByMinCapacityWhereStatusOkAndNotAssignedToOrder(order.getTotalweight()).stream()
+                            .map(t -> new TruckModel(t)).collect(Collectors.toList());
 
-            List<DriverModel> availableDrivers = findDriversForOrder().stream()
-                    .map(d -> new DriverModel(d)).collect(Collectors.toList());
+            List<DriverModel> availableDrivers =
+                    driverDao.findByMaxWorkingHoursWhereNotAssignedToOrder().stream()
+                            .map(d -> new DriverModel(d)).collect(Collectors.toList());
 
             availableTrucks = availableTrucks.subList(0, Math.min(MAX, availableTrucks.size()));
             availableDrivers = availableDrivers.subList(0, Math.min(MAX, availableDrivers.size()));
@@ -82,7 +116,7 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public void assignDriversAndTruckToOrder(AvailableToAssignModel availableToAssignModel) throws ServiceLayerException {
+    public final void assignDriversAndTruckToOrder(final AvailableToAssignModel availableToAssignModel) throws ServiceLayerException {
         try {
             TruckEntity truck = truckDao.findByRegistrationNumber(
                     availableToAssignModel.getChosenTruckRegistrationNumber());
@@ -111,13 +145,14 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
 
             for (String d : availableToAssignModel.getChosenDriverPersonalNumbers()) {
                 DriverEntity driver = driverDao.findByPersonalNumber(d);
-                if (driver.getDriverStatusEntity().getStatus() == DriverStatus.UNASSIGNED)
+                if (driver.getDriverStatusEntity().getStatus() == DriverStatus.UNASSIGNED) {
                     drivers.add(driver);
+                }
             }
 
-            if(drivers.size() < truck.getCrewSize()) {
-                LOG.warn("Insufficient crew for truck provided: " +
-                        drivers.size() + " instead of at least " + truck.getCrewSize());
+            if (drivers.size() < truck.getCrewSize()) {
+                LOG.warn("Insufficient crew for truck provided: "
+                        + drivers.size() + " instead of at least " + truck.getCrewSize());
                 throw new ServiceLayerException("not enough drivers provided to assign as crew");
             }
 
@@ -131,31 +166,40 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
     }
 
 
-    @Transactional(rollbackOn = ServiceLayerException.class)
-    private List<TruckEntity> findTrucksForOrder(OrderEntity order)
-            throws ServiceLayerException {
-        try {
-            return truckDao.findByMinCapacityWhereStatusOkAndNotAssignedToOrder(order.getTotalweight());
-        } catch (DataAccessLayerException e) {
-            LOG.warn(Util.UNEXPECTED, e);
-            throw new ServiceLayerException(e);
-        }
-    }
+//    @Transactional(rollbackOn = ServiceLayerException.class)
+//    private final List<TruckEntity> findTrucksForOrder(final OrderEntity order)
+//            throws ServiceLayerException {
+//        try {
+//            return truckDao.findByMinCapacityWhereStatusOkAndNotAssignedToOrder(order.getTotalweight());
+//        } catch (DataAccessLayerException e) {
+//            LOG.warn(Util.UNEXPECTED, e);
+//            throw new ServiceLayerException(e);
+//        }
+//    }
+//
+//    @Transactional(rollbackOn = ServiceLayerException.class)
+//    private List<DriverEntity> findDriversForOrder()
+//            throws ServiceLayerException {
+//        try {
+//            return driverDao.findByMaxWorkingHoursWhereNotAssignedToOrder();
+//        } catch (DataAccessLayerException e) {
+//            LOG.warn(Util.UNEXPECTED, e);
+//            throw new ServiceLayerException(e);
+//        }
+//    }
 
+    /**
+     * Private method for internal use. Directly assigns
+     * given driver entities and truck entity to the order entity.
+     *
+     * @param drivers driver entities
+     * @param truck   truck entities
+     * @param order   order entities
+     * @throws ServiceLayerException if something unexpected occur in database.
+     */
     @Transactional(rollbackOn = ServiceLayerException.class)
-    private List<DriverEntity> findDriversForOrder()
-            throws ServiceLayerException {
-        try {
-            return driverDao.findByMaxWorkingHoursWhereNotAssignedToOrder();
-        } catch (DataAccessLayerException e) {
-            LOG.warn(Util.UNEXPECTED, e);
-            throw new ServiceLayerException(e);
-        }
-    }
-
-    @Transactional(rollbackOn = ServiceLayerException.class)
-    private void assignDriversAndTruckToOrder(List<DriverEntity> drivers,
-                                              TruckEntity truck, OrderEntity order)
+    private void assignDriversAndTruckToOrder(final List<DriverEntity> drivers,
+                                              final TruckEntity truck, final OrderEntity order)
             throws ServiceLayerException {
         try {
 

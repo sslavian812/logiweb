@@ -22,20 +22,30 @@ import java.util.stream.Collectors;
  */
 @Service
 public class TruckManagementServiceImpl implements TruckManagementService {
-
-    @Autowired
-    public TruckManagementServiceImpl(TruckDao truckDao) {
-        this.truckDao = truckDao;
-    }
-
+    /**
+     * DAO object for {@link ru.tsystems.shalamov.entities.TruckEntity}.
+     */
     private TruckDao truckDao;
 
+    /**
+     * Log4j {@link org.apache.log4j.Logger}  for logging.
+     */
     private static final Logger LOG = Logger.getLogger(
             TruckManagementService.class);
 
+    /**
+     * Public constructor
+     *
+     * @param truckDao truck DAO object.
+     */
+    @Autowired
+    public TruckManagementServiceImpl(final TruckDao truckDao) {
+        this.truckDao = truckDao;
+    }
+
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public List<TruckModel> findAllTrucks() throws ServiceLayerException {
+    public final List<TruckModel> findAllTrucks() throws ServiceLayerException {
         try {
             return truckDao.findAll().stream()
                     .map(t -> new TruckModel(t))
@@ -48,7 +58,7 @@ public class TruckManagementServiceImpl implements TruckManagementService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public void addTruck(TruckModel truck) throws ServiceLayerException {
+    public final void addTruck(final TruckModel truck) throws ServiceLayerException {
         try {
             if (truckDao.findByRegistrationNumber(truck.getRegistrationNumber()) != null) {
                 throw new ServiceLayerException("truck registration number already in use!");
@@ -67,7 +77,7 @@ public class TruckManagementServiceImpl implements TruckManagementService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public void updateTruck(TruckModel truck, String oldRegistrationNumber) throws ServiceLayerException {
+    public final void updateTruck(final TruckModel truck, final String oldRegistrationNumber) throws ServiceLayerException {
         try {
             TruckEntity truckEntity = truckDao.findByRegistrationNumber(oldRegistrationNumber);
 
@@ -104,7 +114,7 @@ public class TruckManagementServiceImpl implements TruckManagementService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public void deleteTruckByRegistrationNumber(String truckRegistrationNumber)
+    public final void deleteTruckByRegistrationNumber(final String truckRegistrationNumber)
             throws ServiceLayerException {
         try {
             TruckEntity truck = truckDao.findByRegistrationNumber(truckRegistrationNumber);
@@ -118,7 +128,7 @@ public class TruckManagementServiceImpl implements TruckManagementService {
             }
 
             //no need of && !truck.getDriverStatusEntities().isEmpty()
-            if (truck.getDriverStatusEntities() != null ) {
+            if (truck.getDriverStatusEntities() != null) {
                 ServiceLayerException exc = new ServiceLayerException(
                         "Unable to delete truck with trucks assigned to it. Drivers should be unassigned first.");
                 exc.setStackTrace(Thread.currentThread().getStackTrace());
@@ -137,11 +147,12 @@ public class TruckManagementServiceImpl implements TruckManagementService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public TruckModel findTruckModelByRegistrationNumber(String registrationNumber) throws ServiceLayerException {
+    public final TruckModel findTruckModelByRegistrationNumber(final String registrationNumber) throws ServiceLayerException {
         try {
             TruckEntity truckEntity = truckDao.findByRegistrationNumber(registrationNumber);
-            if (truckEntity == null)
+            if (truckEntity == null) {
                 return null;
+            }
             return new TruckModel(truckEntity);
         } catch (DataAccessLayerException e) {
             LOG.warn(Util.UNEXPECTED, e);

@@ -25,21 +25,6 @@ import java.util.stream.Collectors;
 public class DriverManagementServiceImpl implements DriverManagementService {
 
     /**
-     * Public constructor.
-     *
-     * @param driverDao       DAO object for
-     *                        {@link ru.tsystems.shalamov.entities.DriverEntity}.
-     * @param driverStatusDao DAO object for
-     *                        {@link ru.tsystems.shalamov.entities.DriverStatusEntity}.
-     */
-    @Autowired
-    public DriverManagementServiceImpl(final DriverDao driverDao,
-                                       final DriverStatusDao driverStatusDao) {
-        this.driverDao = driverDao;
-        this.driverStatusDao = driverStatusDao;
-    }
-
-    /**
      * DAO object for {@link ru.tsystems.shalamov.entities.DriverEntity}.
      */
     private DriverDao driverDao;
@@ -55,10 +40,25 @@ public class DriverManagementServiceImpl implements DriverManagementService {
     private static final Logger LOG =
             Logger.getLogger(DriverManagementServiceImpl.class);
 
+    /**
+     * Public constructor.
+     *
+     * @param driverDao       DAO object for
+     *                        {@link ru.tsystems.shalamov.entities.DriverEntity}.
+     * @param driverStatusDao DAO object for
+     *                        {@link ru.tsystems.shalamov.entities.DriverStatusEntity}.
+     */
+    @Autowired
+    public DriverManagementServiceImpl(final DriverDao driverDao,
+                                       final DriverStatusDao driverStatusDao) {
+        this.driverDao = driverDao;
+        this.driverStatusDao = driverStatusDao;
+    }
+
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public List<DriverModel> findAllDrivers() throws ServiceLayerException {
+    public final List<DriverModel> findAllDrivers() throws ServiceLayerException {
         try {
             return driverDao.findAll().stream()
                     .map(d -> new DriverModel(d)).collect(Collectors.toList());
@@ -70,7 +70,7 @@ public class DriverManagementServiceImpl implements DriverManagementService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public void addDriver(DriverModel driver) throws ServiceLayerException {
+    public final void addDriver(final DriverModel driver) throws ServiceLayerException {
         DriverEntity driverEntity = new DriverEntity(driver.getFirstName(),
                 driver.getLastName(), driver.getPersonalNumber());
         validateForEmptyFields(driverEntity);
@@ -101,26 +101,27 @@ public class DriverManagementServiceImpl implements DriverManagementService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public void updateDriver(DriverModel driver, String oldPersonalNumber) throws ServiceLayerException {
-        DriverEntity driverEntity = findDriverByPersonalNumber(oldPersonalNumber);
-
-        if (driverEntity == null) {
-            LOG.warn("Failed update of driver + [" + oldPersonalNumber + "]. Driver does not exists.");
-            throw new ServiceLayerException("No such driver.");
-        }
-
-        if ((!oldPersonalNumber.equals(driver.getPersonalNumber()))
-                && findDriverByPersonalNumber(driver.getPersonalNumber()) != null) {
-            LOG.warn("Fail to change personal number for driver. [" + driver.getPersonalNumber() + "] already exists.");
-            throw new ServiceLayerException("Fail to update driver. "
-                    + "Driver with new personal number already exists");
-        }
-
-        driverEntity.setFirstName(driver.getFirstName());
-        driverEntity.setLastName(driver.getLastName());
-        driverEntity.setPersonalNumber(driver.getPersonalNumber());
-
+    public final void updateDriver(final DriverModel driver, final String oldPersonalNumber) throws ServiceLayerException {
         try {
+            DriverEntity driverEntity = driverDao.findByPersonalNumber(oldPersonalNumber);
+
+            if (driverEntity == null) {
+                LOG.warn("Failed update of driver + [" + oldPersonalNumber + "]. Driver does not exists.");
+                throw new ServiceLayerException("No such driver.");
+            }
+
+            if ((!oldPersonalNumber.equals(driver.getPersonalNumber()))
+                    && driverDao.findByPersonalNumber(driver.getPersonalNumber()) != null) {
+                LOG.warn("Fail to change personal number for driver. [" + driver.getPersonalNumber() + "] already exists.");
+                throw new ServiceLayerException("Fail to update driver. "
+                        + "Driver with new personal number already exists");
+            }
+
+            driverEntity.setFirstName(driver.getFirstName());
+            driverEntity.setLastName(driver.getLastName());
+            driverEntity.setPersonalNumber(driver.getPersonalNumber());
+
+
             driverDao.update(driverEntity);
 
             LOG.info("Driver updated. " + driver.getFirstName() + " "
@@ -134,7 +135,7 @@ public class DriverManagementServiceImpl implements DriverManagementService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public void deleteDriverByPersonalNumber(final String driverPersonalNumber)
+    public final void deleteDriverByPersonalNumber(final String driverPersonalNumber)
             throws ServiceLayerException {
         try {
             DriverEntity driver =
@@ -172,11 +173,12 @@ public class DriverManagementServiceImpl implements DriverManagementService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public DriverModel findDriverModelByPersonalNumber(String personalNumber) throws ServiceLayerException {
+    public final DriverModel findDriverModelByPersonalNumber(final String personalNumber) throws ServiceLayerException {
         try {
             DriverEntity driverEntity = driverDao.findByPersonalNumber(personalNumber);
-            if (driverEntity == null)
+            if (driverEntity == null) {
                 return null;
+            }
             return new DriverModel(driverEntity);
         } catch (DataAccessLayerException e) {
             LOG.warn(Util.UNEXPECTED, e);
@@ -184,16 +186,6 @@ public class DriverManagementServiceImpl implements DriverManagementService {
         }
     }
 
-    @Transactional(rollbackOn = ServiceLayerException.class)
-    private DriverEntity findDriverByPersonalNumber(final String personalNumber)
-            throws ServiceLayerException {
-        try {
-            return driverDao.findByPersonalNumber(personalNumber);
-        } catch (DataAccessLayerException e) {
-            LOG.warn(Util.UNEXPECTED, e);
-            throw new ServiceLayerException(e);
-        }
-    }
 
     /**
      * Checks given {@link ru.tsystems.shalamov.entities.DriverEntity} fields

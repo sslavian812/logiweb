@@ -25,22 +25,39 @@ import java.util.stream.Collectors;
 @Service
 public class OrderManagementServiceImpl implements OrderManagementService {
 
+    /**
+     * DAO object for {@link ru.tsystems.shalamov.entities.OrderEntity}.
+     */
+    private OrderDao orderDao;
+
+    /**
+     * DAO object for {@link ru.tsystems.shalamov.entities.CargoEntity}.
+     */
+    private CargoDao cargoDao;
+
+    /**
+     * Log4j {@link org.apache.log4j.Logger}  for logging.
+     */
+    private static final Logger LOG = Logger.getLogger(OrderManagementServiceImpl.class);
+
+
+    /**
+     * Public constructor.
+     *
+     * @param orderDao order DAO object.
+     * @param cargoDao cargo DAO object.
+     */
     @Autowired
-    public OrderManagementServiceImpl(OrderDao orderDao,
-                                      CargoDao cargoDao) {
+    public OrderManagementServiceImpl(final OrderDao orderDao,
+                                      final CargoDao cargoDao) {
         this.orderDao = orderDao;
         this.cargoDao = cargoDao;
     }
 
-    private OrderDao orderDao;
-    private CargoDao cargoDao;
-
-    private static final Logger LOG = Logger.getLogger(OrderManagementServiceImpl.class);
-
-
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public void createOrderWithCargoes(OrderModel order, List<CargoModel> cargoes) throws ServiceLayerException {
+    public final void createOrderWithCargoes(
+            final OrderModel order, final List<CargoModel> cargoes) throws ServiceLayerException {
         try {
             if (cargoes.isEmpty()) {
                 LOG.warn("trying to create order without a single cargo.");
@@ -63,14 +80,16 @@ public class OrderManagementServiceImpl implements OrderManagementService {
             orderEntity.setCargoEntities(cargoEntities);
             orderDao.create(orderEntity);
 
-            for (CargoEntity e : cargoEntities)
+            for (CargoEntity e : cargoEntities) {
                 cargoDao.create(e);
+            }
 
             LOG.info("Order created. Order Identifier: " + order.getOrderIdentifier());
 
-            for (CargoEntity e : cargoEntities)
+            for (CargoEntity e : cargoEntities) {
                 LOG.info("Cargo for order [" + order.getOrderIdentifier()
                         + "] created: [" + e.getDenomination() + "]");
+            }
 
         } catch (DataAccessLayerException e) {
             LOG.warn(Util.UNEXPECTED, e);
@@ -80,9 +99,10 @@ public class OrderManagementServiceImpl implements OrderManagementService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public void addCargoToOrder(String orderIdentifier, CargoModel cargo) throws ServiceLayerException {
+    public final void addCargoToOrder(final String orderIdentifier, final CargoModel cargo)
+            throws ServiceLayerException {
         try {
-            OrderEntity orderEntity = findOrderByOrderIdentifier(orderIdentifier);
+            OrderEntity orderEntity = orderDao.findByOrderIdentifier(orderIdentifier);
 
             if (orderEntity == null) {
                 LOG.warn("Failed adding Cargo To order [" + orderIdentifier + "]. Order does not exists.");
@@ -107,7 +127,7 @@ public class OrderManagementServiceImpl implements OrderManagementService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public void deleteCargo(String cargoIdentifier) throws ServiceLayerException {
+    public final void deleteCargo(final String cargoIdentifier) throws ServiceLayerException {
         try {
             CargoEntity cargoEntity = cargoDao.findCargoByCargoIdentifier(cargoIdentifier);
 
@@ -138,26 +158,25 @@ public class OrderManagementServiceImpl implements OrderManagementService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public void updateOrder(OrderModel order, String oldOrderIdentifier) throws ServiceLayerException {
-
-        OrderEntity orderEntity = findOrderByOrderIdentifier(oldOrderIdentifier);
-
-        if (orderEntity == null) {
-            LOG.warn("Failed update of order [" + oldOrderIdentifier + "]. Order does not exists.");
-            throw new ServiceLayerException("No such order.");
-        }
-
-        if ((!oldOrderIdentifier.equals(order.getOrderIdentifier()))
-                && findOrderByOrderIdentifier(order.getOrderIdentifier()) != null) {
-            LOG.warn("Fail to change order identifier. [" + order.getOrderIdentifier() + "] already exists.");
-            throw new ServiceLayerException("Fail to update order. "
-                    + "Order with new personal number already exists");
-        }
-
-
-        orderEntity.setOrderIdentifier(order.getOrderIdentifier());
-
+    public final void updateOrder(final OrderModel order, final String oldOrderIdentifier) throws ServiceLayerException {
         try {
+            OrderEntity orderEntity = orderDao.findByOrderIdentifier(oldOrderIdentifier);
+
+            if (orderEntity == null) {
+                LOG.warn("Failed update of order [" + oldOrderIdentifier + "]. Order does not exists.");
+                throw new ServiceLayerException("No such order.");
+            }
+
+            if ((!oldOrderIdentifier.equals(order.getOrderIdentifier()))
+                    && orderDao.findByOrderIdentifier(order.getOrderIdentifier()) != null) {
+                LOG.warn("Fail to change order identifier. [" + order.getOrderIdentifier() + "] already exists.");
+                throw new ServiceLayerException("Fail to update order. "
+                        + "Order with new personal number already exists");
+            }
+
+            orderEntity.setOrderIdentifier(order.getOrderIdentifier());
+
+
             orderDao.update(orderEntity);
 
             LOG.info("Order updated. [" + order.getOrderIdentifier() + "] ");
@@ -169,7 +188,7 @@ public class OrderManagementServiceImpl implements OrderManagementService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public List<OrderModel> findAllOrders() throws ServiceLayerException {
+    public final List<OrderModel> findAllOrders() throws ServiceLayerException {
         try {
             return orderDao.findAll().stream()
                     .map(o -> new OrderModel(o))
@@ -182,19 +201,19 @@ public class OrderManagementServiceImpl implements OrderManagementService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public void deleteOrderByOrderIdentifierIfNotAssigned(String orderIdentifier)
+    public final void deleteOrderByOrderIdentifierIfNotAssigned(final String orderIdentifier)
             throws ServiceLayerException {
         try {
             OrderEntity order = orderDao.findByOrderIdentifier(orderIdentifier);
             if (order == null) {
-                throw new ServiceLayerException("There are no orders with" +
-                        " order identifier: [" + orderIdentifier + "]");
+                throw new ServiceLayerException("There are no orders with"
+                        + " order identifier: [" + orderIdentifier + "]");
             }
-            if (order.getStatus() == OrderStatus.UNASSIGNED)
+            if (order.getStatus() == OrderStatus.UNASSIGNED) {
                 orderDao.delete(order);
-            else {
-                throw new ServiceLayerException("cant delete order " +
-                        order.getOrderIdentifier() + ". There is a truck assigned to it.");
+            } else {
+                throw new ServiceLayerException("cant delete order "
+                        + order.getOrderIdentifier() + ". There is a truck assigned to it.");
             }
             LOG.info("Order deleted. Order Identifier: " + order.getOrderIdentifier());
         } catch (DataAccessLayerException e) {
@@ -205,24 +224,13 @@ public class OrderManagementServiceImpl implements OrderManagementService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public OrderModel findOrderModelByOrderIdentifier(String orderIdentifier) throws ServiceLayerException {
+    public final OrderModel findOrderModelByOrderIdentifier(final String orderIdentifier) throws ServiceLayerException {
         try {
             OrderEntity orderEntity = orderDao.findByOrderIdentifier(orderIdentifier);
-            if (orderEntity == null)
+            if (orderEntity == null) {
                 return null;
+            }
             return new OrderModel(orderEntity);
-        } catch (DataAccessLayerException e) {
-            LOG.warn(Util.UNEXPECTED, e);
-            throw new ServiceLayerException(e);
-        }
-    }
-
-
-    @Transactional(rollbackOn = ServiceLayerException.class)
-    private OrderEntity findOrderByOrderIdentifier(String orderIdentifier)
-            throws ServiceLayerException {
-        try {
-            return orderDao.findByOrderIdentifier(orderIdentifier);
         } catch (DataAccessLayerException e) {
             LOG.warn(Util.UNEXPECTED, e);
             throw new ServiceLayerException(e);

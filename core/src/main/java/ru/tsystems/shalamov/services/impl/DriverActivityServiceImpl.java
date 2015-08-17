@@ -26,19 +26,50 @@ import java.util.stream.Collectors;
  */
 @Service
 public class DriverActivityServiceImpl implements DriverActivityService {
+
+    /**
+     * DAO object for {@link ru.tsystems.shalamov.entities.DriverEntity}.
+     */
     @Autowired
     private DriverDao driverDao;
+
+    /**
+     * DAO object for {@link ru.tsystems.shalamov.entities.ShiftEntity}.
+     */
     @Autowired
     private ShiftDao shiftDao;
+
+    /**
+     * DAO object for {@link ru.tsystems.shalamov.entities.DriverStatusEntity}.
+     */
     @Autowired
     private DriverStatusDao driverStatusDao;
+
+    /**
+     * DAO object for {@link ru.tsystems.shalamov.entities.CargoEntity}.
+     */
     @Autowired
     private CargoDao cargoDao;
+
+    /**
+     * DAO object for {@link ru.tsystems.shalamov.entities.OrderEntity}.
+     */
     @Autowired
     private OrderDao orderDao;
 
+    /**
+     * Public constructor.
+     *
+     * @param driverDao       driver DAO object
+     * @param shiftDao        shift DAO object
+     * @param driverStatusDao driver status DAO object
+     * @param cargoDao        cargo DAO object
+     * @param orderDao        order DAO object
+     */
     @Autowired
-    public DriverActivityServiceImpl(DriverDao driverDao, ShiftDao shiftDao, DriverStatusDao driverStatusDao, CargoDao cargoDao, OrderDao orderDao) {
+    public DriverActivityServiceImpl(final DriverDao driverDao, final ShiftDao shiftDao,
+                                     final DriverStatusDao driverStatusDao,
+                                     final CargoDao cargoDao, final OrderDao orderDao) {
         this.driverDao = driverDao;
         this.shiftDao = shiftDao;
         this.driverStatusDao = driverStatusDao;
@@ -55,16 +86,18 @@ public class DriverActivityServiceImpl implements DriverActivityService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public void beginShift(String personalNumber) throws ServiceLayerException {
+    public final void beginShift(final String personalNumber) throws ServiceLayerException {
         try {
             DriverEntity driver = driverDao.findByPersonalNumber(personalNumber);
-            if (driver == null)
+            if (driver == null) {
                 throw new ServiceLayerException("no such driver found");
+            }
 
 
             ShiftEntity shift = shiftDao.findActiveShiftByDriver(driver);
-            if (shift != null)
+            if (shift != null) {
                 throw new ServiceLayerException("this driver is already on the shift.");
+            }
 
             shift = new ShiftEntity();
             shift.setDriverEntity(driver);
@@ -85,21 +118,24 @@ public class DriverActivityServiceImpl implements DriverActivityService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public void endShift(String personalNumber) throws ServiceLayerException {
+    public void endShift(final String personalNumber) throws ServiceLayerException {
         try {
             DriverEntity driver = driverDao.findByPersonalNumber(personalNumber);
-            if (driver == null)
+            if (driver == null) {
                 throw new ServiceLayerException("no such driver found");
+            }
 
             // in case of unhonest drivers: if order is being set completed while
             // one of assigned drivers is not on shift
             // workaround - if status is REST throw no exception, just exit.
-            if (driver.getDriverStatusEntity().getStatus().equals(DriverStatus.REST))
+            if (driver.getDriverStatusEntity().getStatus().equals(DriverStatus.REST)) {
                 return;
+            }
 
             ShiftEntity shift = shiftDao.findActiveShiftByDriver(driver);
-            if (shift == null)
+            if (shift == null) {
                 throw new ServiceLayerException("this driver has no active shift now!");
+            }
 
 
             Date date = new Date();
@@ -136,26 +172,28 @@ public class DriverActivityServiceImpl implements DriverActivityService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public void driverStatusChanged(
-            String personalNumber, DriverStatus driverStatus)
+    public final void driverStatusChanged(
+            final String personalNumber, final DriverStatus driverStatus)
             throws ServiceLayerException {
         try {
-            if (driverStatus == DriverStatus.REST)
-                throw new ServiceLayerException("status REST is " +
-                        "not allowed to manipulate directly. End you shift first.");
-
+            if (driverStatus == DriverStatus.REST) {
+                throw new ServiceLayerException("status REST is "
+                        + "not allowed to manipulate directly. End you shift first.");
+            }
 
             DriverEntity driver =
                     driverDao.findByPersonalNumber(personalNumber);
-            if (driver == null)
+            if (driver == null) {
                 throw new ServiceLayerException("no such driver found");
+            }
 
             DriverStatusEntity statusEntity = driver.getDriverStatusEntity();
 
 
-            if (statusEntity.getStatus() == DriverStatus.REST)
+            if (statusEntity.getStatus() == DriverStatus.REST) {
                 throw new ServiceLayerException("status REST is not allowed to manipulate directly."
                         + " Begin your shift first.");
+            }
 
             String oldStatus = statusEntity.getStatus().toString();
             statusEntity.setStatus(driverStatus);
@@ -170,13 +208,14 @@ public class DriverActivityServiceImpl implements DriverActivityService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public void cargoStatusChanged(
-            String cargoIdentifier, CargoStatus cargoStatus)
+    public final void cargoStatusChanged(
+            final String cargoIdentifier, final CargoStatus cargoStatus)
             throws ServiceLayerException {
         try {
             CargoEntity cargoEntity = cargoDao.findCargoByCargoIdentifier(cargoIdentifier);
-            if (cargoEntity == null)
+            if (cargoEntity == null) {
                 throw new ServiceLayerException("no such cargo found");
+            }
 
             String oldStatus = cargoEntity.getStatus().toString();
             cargoEntity.setStatus(cargoStatus);
@@ -191,7 +230,7 @@ public class DriverActivityServiceImpl implements DriverActivityService {
 
     @Override
     @Transactional(rollbackOn = ServiceLayerException.class)
-    public void completeOrder(String orderIdentifier) throws ServiceLayerException {
+    public final void completeOrder(final String orderIdentifier) throws ServiceLayerException {
         try {
             OrderEntity order = orderDao.findByOrderIdentifier(orderIdentifier);
             if (order == null) {
@@ -199,7 +238,8 @@ public class DriverActivityServiceImpl implements DriverActivityService {
             }
 
             if (!order.getStatus().equals(OrderStatus.IN_PROGRESS)) {
-                throw new ServiceLayerException("order has " + order.getStatus() + " status. Unable to set it to " + OrderStatus.COMPLETED);
+                throw new ServiceLayerException("order has " + order.getStatus()
+                        + " status. Unable to set it to " + OrderStatus.COMPLETED);
             }
 
             if (order.getCargoEntities().stream()
@@ -224,7 +264,8 @@ public class DriverActivityServiceImpl implements DriverActivityService {
             truck.setStatus(TruckStatus.INTACT);
             order.setStatus(OrderStatus.COMPLETED);
 
-            LOG.info("Order [" + orderIdentifier + "] has been completed. All drivers statuses set to UNASSIGNED");
+            LOG.info("Order [" + orderIdentifier
+                    + "] has been completed. All drivers statuses set to UNASSIGNED");
         } catch (DataAccessLayerException e) {
             throw new ServiceLayerException(e);
         }

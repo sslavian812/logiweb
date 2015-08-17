@@ -37,12 +37,9 @@ public class TruckEntity implements Serializable {
             fetch = FetchType.LAZY)
     private List<OrderEntity> orderEntities;
 
-    // todo force eager load collection jpa
-
     @OneToMany(mappedBy = "truckEntity", targetEntity = DriverStatusEntity.class,
             fetch = FetchType.LAZY)
     private List<DriverStatusEntity> driverStatusEntities;
-
 
     @PreRemove
     private void preRemove() {
