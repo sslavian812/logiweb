@@ -34,7 +34,7 @@
 
     <authentication-manager>
         <authentication-provider user-service-ref="userDetailsServiceImpl" >
-            <!--<password-encoder ref="encoder" />-->
+            <password-encoder ref="encoder" />
         </authentication-provider>
     </authentication-manager>
 
@@ -53,10 +53,10 @@
         <beans:constructor-arg ref="roleHierarchy" />
     </beans:bean>
 
-    <!--<beans:bean id="encoder"-->
-                <!--class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">-->
-        <!--<beans:constructor-arg value="256" />-->
-    <!--</beans:bean>-->
+    <beans:bean id="encoder"
+                class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
+        <beans:constructor-arg value="256" />
+    </beans:bean>
 
 
 

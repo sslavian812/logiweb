@@ -72,12 +72,6 @@
       <exported-key name="truck" table="orders" schema="" catalog="logiweb" columns="truck"/>
       <index name="registration_number" unique="true" columns="registration_number"/>
     </table>
-    <table name="users" schema="" catalog="logiweb" type="TABLE">
-      <column name="username" sqlType="VARCHAR" precision="12" scale="0" nullable="false" jdbcType="12"/>
-      <column name="password" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
-      <column name="enabled" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
-      <column name="authority" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="username"/>
-    </table>
+    <table name="users" schema="" catalog="logiweb" type="TABLE"/>
   </data-source>
 </component>
