@@ -39,9 +39,9 @@ public class CargoDaoImpl extends GenericDaoImpl<CargoEntity> implements CargoDa
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
             CriteriaQuery<CargoEntity> criteriaQuery = criteriaBuilder.createQuery(CargoEntity.class);
 
-            Root<CargoEntity> CargoEntityRoot = criteriaQuery.from(CargoEntity.class);
-            return em.createQuery(criteriaQuery.select(CargoEntityRoot).where(criteriaBuilder.equal(
-                    CargoEntityRoot.get("cargoIdentifier"), cargoIdentifier))).getSingleResult();
+            Root<CargoEntity> cargoEntityRoot = criteriaQuery.from(CargoEntity.class);
+            return em.createQuery(criteriaQuery.select(cargoEntityRoot).where(criteriaBuilder.equal(
+                    cargoEntityRoot.get("cargoIdentifier"), cargoIdentifier))).getSingleResult();
         } catch (NoResultException e) {
             LOG.debug(new Exception("no objects found with cargo identifier [" + cargoIdentifier + "]. null returned.", e));
             return null;

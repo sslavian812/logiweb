@@ -78,7 +78,7 @@ public class DriverInfoServiceImpl implements DriverInfoService {
                     assignments.add(assignment);
                 }
             }
-
+            LOG.info("Driver assignment information returned for all possible orders.");
             return assignments;
         } catch (DataAccessLayerException e) {
             LOG.warn("Unexpected: ", e);
@@ -197,6 +197,7 @@ public class DriverInfoServiceImpl implements DriverInfoService {
             } else {
                 driverAssignment.setCoDrivers(new ArrayList<>());
             }
+            LOG.info("Driver assignment information returned for order [" + orderIdentifier + "].");
             return driverAssignment;
         } catch (DataAccessLayerException e) {
             LOG.warn("Unexpected: ", e);

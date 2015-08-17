@@ -118,6 +118,9 @@ public class OrderManagementServiceImpl implements OrderManagementService {
             cargoDao.create(cargoEntity);
             orderEntity.getCargoEntities().add(cargoEntity);
             orderDao.update(orderEntity);
+            LOG.info("Cargo for order [" + orderEntity.getOrderIdentifier()
+                    + "] created: [" +cargoEntity.getCargoIdentifier() + " - "
+                    + cargoEntity.getDenomination() + "]");
         } catch (DataAccessLayerException e) {
             LOG.warn(Util.UNEXPECTED, e);
             throw new ServiceLayerException(e);
@@ -150,6 +153,11 @@ public class OrderManagementServiceImpl implements OrderManagementService {
             orderEntity.getCargoEntities().remove(cargoEntity);
             orderDao.update(orderEntity);
             cargoDao.delete(cargoEntity);
+
+            LOG.info("Cargo for order [" + orderEntity.getOrderIdentifier()
+                    + "] deleted: [" +cargoEntity.getCargoIdentifier() + " - "
+                    + cargoEntity.getDenomination() + "]");
+
         } catch (DataAccessLayerException e) {
             LOG.warn(Util.UNEXPECTED, e);
             throw new ServiceLayerException(e);

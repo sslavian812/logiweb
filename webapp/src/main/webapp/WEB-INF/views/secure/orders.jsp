@@ -48,7 +48,7 @@
         <tr>
             <td><label>order identifier</label></td>
             <td><label>order status</label></td>
-            <td><label>edit</label></td>
+            <td><label>edit or view</label></td>
             <td><label>delete if possible</label></td>
             <td><label>assign</label></td>
         </tr>
@@ -59,22 +59,36 @@
                 <td>${order.orderIdentifier}</td>
                 <td>${order.status}</td>
                 <td>
+                    <c:if test="${order.status.toString() == \"UNASSIGNED\"}">
                     <form method="get"
                           action="/secure/orders/edit/${order.orderIdentifier}">
                         <button type="submit" class="btn btn-warning">edit</button>
                     </form>
+                    </c:if>
+                    <c:if test="${order.status.toString() != \"UNASSIGNED\"}">
+                        <form method="get"
+                              action="/secure/orders/edit/${order.orderIdentifier}">
+                            <button type="submit" class="btn btn-info">view</button>
+                        </form>
+                    </c:if>
+
                 </td>
                 <td>
+                    <c:if test="${order.status.toString() == \"UNASSIGNED\"}">
                     <form method="post"
                           action="/secure/orders/delete/${order.orderIdentifier}">
                         <button type="submit" class="btn btn-danger">delete</button>
                     </form>
+                    </c:if>
                 </td>
                 <td>
+                    <c:if test="${order.status.toString() == \"UNASSIGNED\"}">
+
                     <form method="post"
                           action="/secure/assignments/construct/${order.orderIdentifier}">
                         <button type="submit" class="btn btn-success">assign</button>
                     </form>
+                    </c:if>
                 </td>
             </tr>
         </c:forEach>

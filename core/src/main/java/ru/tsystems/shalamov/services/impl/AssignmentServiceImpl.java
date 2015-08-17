@@ -165,29 +165,6 @@ public class AssignmentServiceImpl implements ru.tsystems.shalamov.services.api.
         }
     }
 
-
-//    @Transactional(rollbackOn = ServiceLayerException.class)
-//    private final List<TruckEntity> findTrucksForOrder(final OrderEntity order)
-//            throws ServiceLayerException {
-//        try {
-//            return truckDao.findByMinCapacityWhereStatusOkAndNotAssignedToOrder(order.getTotalweight());
-//        } catch (DataAccessLayerException e) {
-//            LOG.warn(Util.UNEXPECTED, e);
-//            throw new ServiceLayerException(e);
-//        }
-//    }
-//
-//    @Transactional(rollbackOn = ServiceLayerException.class)
-//    private List<DriverEntity> findDriversForOrder()
-//            throws ServiceLayerException {
-//        try {
-//            return driverDao.findByMaxWorkingHoursWhereNotAssignedToOrder();
-//        } catch (DataAccessLayerException e) {
-//            LOG.warn(Util.UNEXPECTED, e);
-//            throw new ServiceLayerException(e);
-//        }
-//    }
-
     /**
      * Private method for internal use. Directly assigns
      * given driver entities and truck entity to the order entity.

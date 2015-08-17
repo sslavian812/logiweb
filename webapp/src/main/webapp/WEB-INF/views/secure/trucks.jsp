@@ -16,64 +16,69 @@
 <script src="/resources/core/js/validation.js"></script>
 <%@include file="/WEB-INF/views/navBar.html" %>
 
-    <table class="table table-striped">
+<table class="table table-striped">
 
+    <tr>
+        <td>crew size</td>
+        <td>capacity</td>
+        <td>status</td>
+        <td>registration number</td>
+        <td>edit</td>
+        <td>delete</td>
+    </tr>
+
+    <form class="form-control" id="adder" method="post" onsubmit="return validateTruckForm()"
+          action="/secure/trucks/add">
         <tr>
-            <td>crew size</td>
-            <td>capacity</td>
-            <td>status</td>
-            <td>registration number</td>
-            <td>edit</td>
-            <td>delete is possible</td>
-        </tr>
+            <td>
+                <input type="text" placeholder="Ex.: 1" name="crewSize">
+            </td>
 
-        <form class="form-control" id="adder" method="post" onsubmit="return validateTruckForm()"
-              action="/secure/trucks/add">
-            <tr>
-                <td>
-                    <input type="text" placeholder="Ex.: 1" name="crewSize">
-                </td>
+            <td>
+                <input type="text" placeholder="Ex.: 5000" name="capacity">
+            </td>
 
-                <td>
-                    <input type="text" placeholder="Ex.: 5000" name="capacity">
-                </td>
+            <td>INTACT</td>
 
-                <td>INTACT</td>
+            <td>
+                <input type="text" placeholder="Ex.: xx77777" name="registrationNumber">
+            </td>
 
-                <td>
-                    <input type="text" placeholder="Ex.: xx77777" name="registrationNumber">
-                </td>
-
-                <td>
+            <td>
                 <button type="submit" class="btn btn-success">add</button>
-                    </td>
-                <td>
-                <button class="btn btn-danger" disabled>delete</button>
-                </td>
-            </tr>
-        </form>
+            </td>
+            <td>
+                <%--<button class="btn btn-danger" disabled>delete</button>--%>
+            </td>
+        </tr>
+    </form>
 
-        <c:forEach var="truck" items="${trucks}" varStatus="loop">
-            <tr class="${colors.get(loop.index)}">
-                <td>${truck.crewSize}</td>
-                <td> ${truck.capacity}</td>
-                <td> ${truck.status}</td>
-                <td>${truck.registrationNumber}</td>
-                <td>
+    <c:forEach var="truck" items="${trucks}" varStatus="loop">
+        <tr class="${colors.get(loop.index)}">
+            <td>${truck.crewSize}</td>
+            <td> ${truck.capacity}</td>
+            <td> ${truck.status}</td>
+            <td>${truck.registrationNumber}</td>
+            <td>
+                <c:if test="${truck.status.toString() != \"ASSIGNED\"}">
+
                     <form method="get"
                           action="/secure/trucks/edit/${truck.registrationNumber}">
                         <button type="submit" class="btn btn-warning">edit</button>
                     </form>
-                </td>
-                <td>
+                </c:if>
+            </td>
+            <td>
+                <c:if test="${truck.status.toString() != \"ASSIGNED\"}">
                     <form method="post"
                           action="/secure/trucks/delete/${truck.registrationNumber}">
                         <button type="submit" class="btn btn-danger">delete</button>
                     </form>
-                </td>
-            </tr>
-        </c:forEach>
-    </table>
+                </c:if>
+            </td>
+        </tr>
+    </c:forEach>
+</table>
 <c:if test="${fn:length(trucks) == 0}">
     no trucks yet
 </c:if>

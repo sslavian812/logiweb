@@ -93,11 +93,6 @@ public class DriverInfoBean {
             LOG.error(e);
             return FAIL;
         }
-//        catch (ServletException e) {
-//            failureMessage = e.getMessage();
-//            LOG.warn(e);
-//            return FAIL;
-//        }
     }
 
 

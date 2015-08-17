@@ -129,6 +129,7 @@ public class DriverActivityServiceImpl implements DriverActivityService {
             // one of assigned drivers is not on shift
             // workaround - if status is REST throw no exception, just exit.
             if (driver.getDriverStatusEntity().getStatus().equals(DriverStatus.REST)) {
+                LOG.warn("Truing to end shift for driver [" + personalNumber + "]. No shift exists.");
                 return;
             }
 
